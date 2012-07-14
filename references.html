@@ -55,9 +55,11 @@ var techno = function (nb)
         <div class="item-sub-container">
             <h2>{{ ref.title }}</h2>
             <div class="subitem">
-                <img src="/img/{{ ref.page.image }}" alt="{{ ref.title }}" />
+                <a href="{{ ref.url }}">
+                    <img src="/img/{{ ref.page.image }}" alt="{{ ref.title }}" />
+                </a>
                 <ul>
-                    {% for detail in ref.details %}
+                    {% for detail in ref.details limit:4 %}
                     <li>
                         <span>{{ detail.label }}</span>
                         <strong>{{ detail.value | textilize }}</strong>
