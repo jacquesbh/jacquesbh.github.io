@@ -416,3 +416,11 @@ body {
     letter-spacing:     1px;
     margin-right:       10px;
 }
+
+
+#contentWrap blockquote {
+    padding-left: 10px;
+    margin-left: 10px;
+    border-left: 3px solid $border-color;
+    color: lighten(#292E10, 15%);
+}
