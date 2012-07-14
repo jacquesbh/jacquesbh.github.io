@@ -6,11 +6,11 @@ title: Jacques Bodin-Hullin - Magento developer
 {% capture sidebar %}
 <h2>A propos</h2>
 <p>
-    <img src="/img/visage_edito.png" alt="le visage de Jacques Bodin-Hullin" />
-    Texte d’intro : drerit in vulputate velit esse molestie consequat, vel illum dolore eu
-    feugiat nulla facilisis at vero eros et accumsan.<br />
-    Qui suis-je ? vel illum dolore eu feugiat <a href="#">nulla facilisis</a> at vero eros
-    et accumsan et iusto zzril Services delenit augue duis dolore te feugait nulla facilisi.
+    <img src="/img/visage_edito.png" alt="" />
+    <p>Bienvenue sur mon blog !</p>
+    <p>J'espère que vous y trouverez l'information que vous cherchez.</p>
+    <p>Je suis Jacques Bodin-Hullin, développeur PHP confirmé, <em>amateur</em> sur Magento à mes heures perdues...</p>
+    <p>Ce blog est dédié au développement, PHP essentiellement, Javascript un peu, et tout le reste, évidemment !</p>
 </p>
 
 <hr />
