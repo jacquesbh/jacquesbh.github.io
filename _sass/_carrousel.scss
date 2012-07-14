@@ -7,18 +7,16 @@
 .carrousel {
     border:             1px solid $border-color;
     padding:            5px;
-    height:             157px;
     .content {
         background:         $bg-color;
         padding-top:        5px;
         padding-bottom:     5px;
         overflow:           hidden;
-        height:             147px;
     }
     .goLeft, .goRight {
         display:            block;
-        height:             157px;
-        line-height:        157px;
+        height:             170px;
+        line-height:        170px;
         text-align:         center;
         width:              20px;
         span {
