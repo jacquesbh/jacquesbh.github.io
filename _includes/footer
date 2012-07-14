@@ -17,7 +17,7 @@
                     <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
                 </p>
                 <p class="send">
-                    <input type="hidden" name="redirect_to" value="{{ BASE_PATH }}/contact/thanks.html" />
+                    <input type="hidden" name="redirect_to" value="{{ SITE_URL }}/contact/thanks.html" />
                     <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
                 </p>
             </form>
