@@ -1,22 +1,25 @@
 # This is the default format. 
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink: /:categories/:year/:month/:day/:title 
+permalink: /:categories/:year/:month/:day/:title.html
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "CNAME"]
 auto: true
 pygments: true
+markdown: rdiscount
+
+lang: fr
+
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
-tagline: Site Tagline
+title : Jacques Bodin-Hullin
+tagline: Magento developer
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
-  twitter : username
-  feedburner : feedname
+  name : Jacques Bodin-Hullin
+  email : jacques@bodin-hullin.net
+  github : jacquesbh
+  twitter : jacquesbh
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -26,7 +29,7 @@ author :
 # Else if you are pushing to username.github.com, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://username.github.com
+production_url : http://jacques.sh
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -73,6 +76,7 @@ JB :
   archive_path: /archive.html
   categories_path : /categories.html
   tags_path : /tags.html
+  references_path : /references.html
 
   # Settings for comments helper
   # Set 'provider' to the comment provider you want to use.
@@ -81,7 +85,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : jekyllbootstrap
+      short_name : jacquesbh
     livefyre :
       site_id : 123
     intensedebate :
@@ -99,7 +103,7 @@ JB :
   analytics :
     provider : google 
     google : 
-        tracking_id : 'UA-123-12'
+        tracking_id : 'UA-27192340-2'
     getclicky :
       site_id : 
     mixpanel :
@@ -123,4 +127,6 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  
+
+getsimpleform:
+  token: '4ba030c3b67553e1ccb25710aee63bd6'

@@ -1,0 +1,47 @@
+{% include header %}
+
+<script type="text/javascript" charset="utf-8">
+// <![CDATA[
+var techno = function (nb)
+{
+    for (var i = 1; i <= 5; i++) {
+        if (i <= nb) {
+            document.write('<img src="/img/etoile_pleine.png" alt="X" />');
+        } else {
+            document.write('<img src="/img/etoile_vide.png" alt="0" />');
+        }
+    }
+}
+// ]]>
+</script>
+
+{% capture sidebar %}
+<h2>Plus d'infos</h2>
+<ul class="infos">
+    {% for detail in page.details %}
+    <li>
+        <span>{{ detail.label }}</span>
+        <strong>{{ detail.value | textilize }}</strong>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Technologies</h2>
+<div class="service">
+    <ul>
+{% for techno in page.technologies %}
+<li>
+    <span>{{ techno | split:'|' | first }}</span>
+    <script type="text/javascript" charset="utf-8">techno({{ techno | split:'|' | last }});</script>
+</li>
+{% endfor %}
+    </ul>
+</div>
+{% endcapture %}
+{% include sidebar %}
+
+<div id="contentWrap">
+{{ content }}
+</div>
+
+{% include footer %}

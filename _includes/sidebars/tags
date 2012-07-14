@@ -1,0 +1,7 @@
+<h2>Tags</h2>
+
+{% for tag in site.tags %}
+<span style="font-size:{{ tag[1].size | times:1.6 | plus:12 }}px">{{ tag[0] }}</span>
+{% endfor %}
+
+<hr />

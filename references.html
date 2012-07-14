@@ -1,0 +1,77 @@
+---
+layout: empty
+title: Références
+group: navigation
+competences:
+- PHP|5
+- SQL|5
+- Javascript|5
+- XML|5
+- HTML|4
+- CSS|3
+- Script système|3
+- Liquid|2
+---
+
+<script type="text/javascript" charset="utf-8">
+// <![CDATA[
+var techno = function (nb)
+{
+    for (var i = 1; i <= 5; i++) {
+        if (i <= nb) {
+            document.write('<img src="/img/etoile_pleine.png" alt="X" />');
+        } else {
+            document.write('<img src="/img/etoile_vide.png" alt="0" />');
+        }
+    }
+}
+// ]]>
+</script>
+
+{% capture sidebar %}
+<h2>Compétences</h2>
+<div class="service">
+    <ul>
+
+{% for techno in page.competences %}
+<li>
+    <span>{{ techno | split:'|' | first }}</span>
+    <script type="text/javascript" charset="utf-8">techno({{ techno | split:'|' | last }});</script>
+</li>
+{% endfor %}
+    </ul>
+</div>
+{% endcapture %}
+{% include sidebar %}
+
+<div id="contentWrap">
+
+<h1>Mes références</h1>
+
+<div id="references">
+    {% for ref in site.pages %}
+    {% if ref.group == 'reference' %}
+    <div class="item">
+        <div class="item-sub-container">
+            <h2>{{ ref.title }}</h2>
+            <div class="subitem">
+                <img src="/img/{{ ref.page.image }}" alt="{{ ref.title }}" />
+                <ul>
+                    {% for detail in ref.details %}
+                    <li>
+                        <span>{{ detail.label }}</span>
+                        <strong>{{ detail.value | textilize }}</strong>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p class="detail">
+                    <a href="{{ ref.url }}">Voir le détail &gt;&gt;</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+</div>

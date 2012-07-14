@@ -1,0 +1,72 @@
+$b-color:       lighten($border-color, 15%);
+$lines: 4;
+$f-color: lighten(#000, 20%);
+
+#references {
+    color: $f-color;
+    .item {
+        width: 610px;
+        border: 1px solid $border-color;
+        padding: 5px;
+        margin-bottom: 10px;
+        .item-sub-container {
+            background-color: $bg-color;
+            h2 {
+                border: none;
+                // border-bottom: 1px solid $b-color;
+                background-color: $bg-color;
+                color: $f-color;
+                font-weight: normal;
+                margin: 0;
+                font-size: 1.8em;
+                padding: 5px 10px 5px 15px;
+            }
+            .subitem {
+                background-color: $bg-color;
+                border-top: 1px solid $b-color;
+                margin: 0 15px;
+                img {
+                    padding: 5px;
+                    float: left;
+                    background: #fff;
+                    border: 1px solid $border-color;
+                    margin-top: 10px;
+                }
+                ul {
+                    list-style-type: none;
+                    height: $lines*30px;
+                    width: 290px;
+                    float: right;
+                    font-size: 1.1em;
+                    li {
+                        float: right;
+                        width: 290px;
+                        border-bottom: 1px solid lighten($border-color, 10%);
+                        line-height: 30px;
+                        span {
+                            font-weight: bold;
+                        }
+                        strong {
+                            font-weight: normal;
+                            float: right;
+                        }
+                    }
+                }
+                .detail {
+                    clear: both;
+                    text-align: right;
+                    line-height: 35px;
+                    a {
+                        font-weight: bold;
+                        color: $f-color;
+                        font-size: 1.1em;
+                        :hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

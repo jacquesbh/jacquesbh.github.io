@@ -1,0 +1,82 @@
+/**
+ * @author        Jacques Bodin-Hullin <http://www.bodin-hullin.net>
+ * @copyright     (C) 2009 Jacques Bodin-Hullin
+ * @license       All rights reserved
+ */
+
+.carrousel {
+    border:             1px solid $border-color;
+    padding:            5px;
+    height:             157px;
+    .content {
+        background:         $bg-color;
+        padding-top:        5px;
+        padding-bottom:     5px;
+        overflow:           hidden;
+        height:             147px;
+    }
+    .goLeft, .goRight {
+        display:            block;
+        height:             157px;
+        line-height:        157px;
+        text-align:         center;
+        width:              20px;
+        span {
+            display:            none;
+        }
+    }
+    .goLeft {
+        float:              left;
+        background-color:   $bg-color;
+    }
+    a.goLeft {
+        background:         url(../img/fleche_gauche_carrousel.png) no-repeat center $bg-color;
+    }
+    .goRight {
+        float:              right;
+        background-color:   $bg-color;
+    }
+    a.goRight {
+        background:         url(../img/fleche_droite_carrousel.png) no-repeat center $bg-color;
+    }
+}
+
+.carrousel,
+.references {
+    .item {
+        float:              left;
+        width:              50%;
+        text-align:         right;
+        .subitem {
+            width:              273px;
+            margin:             0 auto;
+            .detail {
+                color:              #292e10;
+                font-size:          1em;
+                :hover {
+                    text-decoration:    underline;
+                }
+            }
+        }
+        h3 {
+            color:              #292e10;
+            font-size:          1.5em;
+            font-weight:        normal;
+            letter-spacing:     1px;
+            width:              270px;
+            margin:             0 auto 2px auto;
+            text-align:         left;
+        }
+        img {
+            display:            block;
+            border:             1px solid #aac841;
+            padding:            5px;
+            background:         #FFFFFF;
+            margin:             0 auto 3px auto;
+        }
+    }
+}
+
+
+
+

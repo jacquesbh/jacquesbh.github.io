@@ -1,0 +1,46 @@
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="http://getsimpleform.com/messages?form_api_token={{ site.getsimpleform.token }}" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="{{ BASE_PATH }}/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            {% assign pages_list = site.pages %}
+            {% include footer_links %}
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; {{ site.author.name }} 2012
+        </div>
+    </div>
+
+</div>
+
+{% include JB/analytics %}
+
+</body>
+</html>

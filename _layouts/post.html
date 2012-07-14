@@ -1,5 +1,45 @@
----
-layout: default
----
-{% include JB/setup %}
-{% include themes/twitter/post.html %}
+{% include header %}
+
+    {% capture sidebar %}
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            {% if page.author %}<strong>{{ page.author }}</strong>
+            {% else %}<strong>{{ site.author.name }}</strong>
+            {% endif %}
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>{{ page.date | date_to_long_string }}</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>{{ page.tags | join:", " }}</strong>
+        </li>
+    </ul>
+
+    {% endcapture %}
+    {% include sidebar %}
+
+    <div id="contentWrap" class="post">
+
+        <h1>{{ page.title }}</h1>
+
+        <div class="author">
+            {% if page.author %}Par {{ page.author }}, le {{ page.date | date_to_long_string }}
+            {% else %}Par {{ site.author.name }}, le {{ page.date | date_to_long_string }}
+            {% endif %}
+        </div>
+
+        {{ content }}
+
+        <hr />
+
+        {% if page.comments %}
+        <h2 id="comments">Commentaires</h2>
+        {% include JB/comments %}
+        {% endif %}
+    </div>
+
+{% include footer %}

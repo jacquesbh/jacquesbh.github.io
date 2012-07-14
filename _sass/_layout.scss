@@ -1,0 +1,411 @@
+/**
+ * @author        Jacques Bodin-Hullin <http://www.bodin-hullin.net>
+ * @copyright     (C) 2009 Jacques Bodin-Hullin
+ * @license       All rights reserved
+ */
+
+/**
+ * Body
+ */
+body {
+    font-family:        'Times New Roman', Verdana, Helvetica, Arial, Sans-serif;
+    color:              #292e10;
+    background-color:   #fffcf3;
+}
+
+/**
+ * Tooltik
+ */
+#tooltip {
+    position:           absolute;
+    display:            none;
+}
+
+/**
+ * Enveloppe principale
+ */
+#mainWrap {
+    width:              950px;
+    margin:             0 auto 0 auto;
+    text-align:         left;
+}
+
+/**
+ * Header
+ * & Espace client
+ */
+#headerWrap {
+    width:              100%;
+    background:         url(../img/header.png) no-repeat 1px 15px;
+    height:             95px;
+    border-bottom:      5px solid #292e10;
+}
+
+#headerWrap h1 {
+    display:            none;
+}
+
+/*
+#loginWrap {
+    background:         url(../img/espace_client.png) left bottom no-repeat #454d1b;
+    width:              280px;
+    float:              right;
+    text-align:         right;
+    height:             auto !important;
+    height:             30px;
+    min-height:         30px;
+    padding-right:      20px;
+    position:           absolute;
+    margin-left:        650px;
+    z-index:            20;
+}
+
+#loginWrap h5 {
+    font-size:          1em;
+    float:              left;
+    font-style:         italic;
+    font-weight:        bold;
+    line-height:        25px;
+    margin-left:        20px;
+    letter-spacing:     1px;
+    color:              #FFFFFF;
+}
+
+#loginWrap a {
+    color:              #FFFFFF;
+    line-height:        25px;
+}
+
+#loginWrap form {
+    text-align:         left;
+    padding-left:       30px;
+    padding-bottom:     10px;
+    display:            none;
+}
+
+#loginWrap form p {
+}
+
+#loginWrap form label {
+    display:            block;
+    color:              #FFFFFF;
+    font-style:         italic;
+    font-size:          1.2em;
+    margin-top:         15px;
+    letter-spacing:     1px;
+    padding:            0 0 5px 10px;
+}
+
+#loginWrap form input.text {
+    border:             1px solid #3b4217;
+    padding:            2px;
+    font-size:          13px;
+    font-family:        'Times New Roman', Verdana, Helvetica, Arial, Sans-serif;
+    height:             17px;
+    line-height:        17px;
+    width:              225px;
+}
+
+#loginWrap form p.send {
+    text-align:         center;
+    margin-top:         15px;
+}
+
+#loginWrap form p.send input {
+    background:         url(../img/login_send.png) no-repeat top left;
+    width:              80px;
+    height:             30px;
+    color:              #444c1a;
+    border:             none;
+    font-family:        'Times New Roman', Verdana, Helvetica, Arial, Sans-serif;
+    font-size:          1.2em;
+}
+
+#loginWrap p.close {
+    text-align:         right;
+    padding-top:        15px;
+}
+*/
+
+/**
+ * Citation
+ */
+#quoteWrap {
+    background:         url(../img/banniere.png) top left no-repeat;
+    height:             85px;
+    border-bottom:      1px solid #25290e;
+    padding:            15px 0 0 250px;
+}
+
+#quoteWrap p {
+    font-weight:        bold;
+    font-style:         italic;
+    font-size:          1.3em;
+    color:              #444c1a;
+    width:              450px;
+    letter-spacing:     1px;
+}
+
+#quoteWrap p:before {
+    content:            "“";
+}
+
+#quoteWrap p:after {
+    content:            "”";
+}
+
+#quoteWrap cite {
+    font-style:         italic;
+    font-size:          1.3em;
+    color:              #444c1a;
+    padding-left:       10px;
+}
+
+/**
+ * Menu
+ */
+#menu, #menuLava {
+    height:             45px;
+    background:         url(../img/menu_fond.png) top left repeat-x;
+    padding-left:       20px;
+    margin-bottom:      20px;
+    overflow:           hidden;
+}
+
+#menu li, #menuLava li {
+    line-height:        45px;
+    font-style:         italic;
+    font-size:          1.3em;
+    float:              left;
+    list-style:         none;
+    letter-spacing:     1px;
+}
+
+#menu li a, #menuLava li a {
+    color:              #FFFFFF;
+    display:            block;
+    float:              left;
+    padding:            0 25px 0 0;
+    outline:            none;
+}
+
+#menu li a span {
+    display:            block;
+    float:              left;
+    width:              3px;
+    height:             45px;
+    margin-right:       22px;
+}
+
+/*#menu li.current a,*/
+#menu li.current a,
+#menu li a:hover {
+    background:         url(../img/bord_droit_menu_hover.png) right 8px no-repeat;
+    text-decoration:    none;
+}
+
+/*#menu li.current a span,*/
+#menu li.current a span,
+#menu li a:hover span {
+    background:         url(../img/bord_gauche_menu_hover.png) left 8px no-repeat;
+}
+
+/* Menu Javascript */
+#menuLava {
+    position:           relative;
+}
+
+#menuLava li.back {
+    background:         url(../img/bord_droit_menu_hover.png) right 8px no-repeat;
+    z-index:            8;
+    position:           absolute;
+}
+
+#menuLava li.back .left {
+    background:         url(../img/bord_gauche_menu_hover.png) left 8px no-repeat;
+    width:              3px;
+    height:             45px;
+    margin-right:       22px;
+}
+
+#menuLava li a {
+    z-index:            10;
+    height:             45px;
+    position:           relative;
+    overflow:           hidden;
+    margin:             auto 10px;
+    padding:            0 10px 0 10px;
+    padding:            0 15px 0 15px;
+}
+
+#menuLava li a:hover, #menuLava li a:active, #menuLava li a:visited {
+    border:             none;
+    text-decoration:    none;
+}
+
+/**
+ * Sidebar
+ */
+#sideWrap {
+    width:              290px;
+    float:              right;
+    color:              #292e10;
+    text-align:         justify;
+    margin-bottom:      40px;
+    p {
+        font-size:          1.1em;
+    }
+    img {
+        display:            block;
+        padding:            5px;
+        border:             1px solid #bbd367;
+        margin:             0 auto 5px;
+    }
+    .service {
+        width:              265px;
+        float: none;
+        clear: both;
+        img {
+            display:            block;
+            padding:            0;
+            border:             none;
+            margin:             0 2px 0 0;
+        }
+    }
+    ul {
+        padding-left:       15px;
+        li {
+            line-height: 20px;
+        }
+    }
+    .infos {
+        strong {
+            float: right;
+            font-weight: normal;
+        }
+    }
+}
+
+/**
+ * Contenu
+ */
+#contentWrap {
+    width:              620px;
+    float:              left;
+    margin-bottom:      40px;
+    ul {
+        padding-left:       15px;
+        li {
+            line-height: 20px;
+        }
+    }
+}
+
+/**
+ * Bas de page
+ */
+#bottomWrap {
+    height: 390px;
+    clear: both;
+}
+
+/**
+ * Contact
+ */
+#contactWrap {
+    clear:              both;
+    background:         url(../img/fleur_footer.png) 420px bottom no-repeat #f5f5d6;
+    height:             260px;
+    padding:            0 20px 0;
+    margin-top:         20px;
+    border-top:         5px solid #000000;
+    width:              910px;
+    overflow:           visible;
+}
+
+#contactWrap form {
+    width:              390px;
+    float:              left;
+}
+
+#contactWrap form h3 {
+    margin-bottom:      10px;
+}
+
+#contactWrap form p {
+    padding-bottom:     2px;
+}
+
+#contactWrap form label {
+    display:            block;
+    width:              75px;
+    float:              left;
+    line-height:        21px;
+    font-size:          1.1em;
+}
+
+#contactWrap form input.text, #contactWrap form textarea {
+    border:             1px solid #d9d9c5;
+    padding:            2px;
+    font-size:          13px;
+    font-family:        'Times New Roman', Verdana, Helvetica, Arial, Sans-serif;
+}
+
+#contactWrap form input.text {
+    height:             17px;
+    line-height:        17px;
+    width:              221px;
+}
+
+#contactWrap form textarea {
+    width:              306px;
+    height:             100px;
+}
+
+#contactWrap form p.send {
+    text-align:         center;
+    padding-left:       75px;
+    padding-top:        5px;
+}
+
+#contactWrap form p.send input {
+    background:         url(../img/contact_send.png) no-repeat top left;
+    width:              104px;
+    height:             30px;
+    color:              white;
+    border:             none;
+    font-family:        'Times New Roman', Verdana, Helvetica, Arial, Sans-serif;
+    font-size:          1.2em;
+}
+
+#contactWrap div.qrcode {
+    width:              270px;
+    float:              right;
+}
+
+#contactWrap div.qrcode p {
+    text-align:         center;
+}
+
+/**
+ * Footer
+ */
+#footerWrap {
+    clear:              both;
+    background:         #444c1a;
+    height:             60px;
+    line-height:        60px;
+    text-align:         right;
+    font-size:          1.1em;
+    color:              #FFFFFF;
+    letter-spacing:     10px;
+    padding-right:      20px;
+    margin-bottom:      50px;
+}
+
+#footerWrap a {
+    color:              #FFFFFF;
+    font-style:         italic;
+    letter-spacing:     1px;
+    margin-right:       10px;
+}

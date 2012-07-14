@@ -1,0 +1,9 @@
+---
+---
+{
+    "posts": [{% for post in site.posts %}{"title":"{{ post.title }}", "subtitle":"{{ post.subtitle }}", "url":"{{ post.url }}", "date":"{{ post.date | date: "%B %e, %Y" }}"}{% if forloop.last != true %},{% endif %}{% endfor %}],
+    "categories": [{% for category in site.categories %}{% for post in category[1] %}{"category":"{{ category[0] }}", "title":"{{ post.title }}", "subtitle":"{{ post.subtitle }}", "url":"{{ post.url }}", "date":"{{ post.date | date: "%B %e, %Y" }}"}{% if forloop.last != true %},{% endif %}{% endfor %}{% if forloop.last != true %},{% endif %}{% endfor %}],
+    "tags": [{% for tag in site.tags %}{% for post in tag[1] %}{"tag":"{{ tag[0] }}", "title":"{{ post.title }}", "subtitle":"{{ post.subtitle }}", "url":"{{ post.url }}", "date":"{{ post.date | date: "%B %e, %Y" }}"}{% if forloop.last != true %},
+{% endif %}{% endfor %}{% if forloop.last != true %},{% endif %}{% endfor %}],
+    "pages": [{% for page in site.pages %}{"title":"{{ page.title }}", "url":"{{ page.url }}"{% if forloop.last != true %},{% endif %}{% endfor %}]
+]

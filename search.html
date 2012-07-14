@@ -1,0 +1,21 @@
+---
+layout: empty
+title: Recherche
+---
+
+<script type="text/javascript" charset="utf-8">
+// <![CDATA[
+(function ($) {
+    $(document).ready(function () {
+        var reg = new RegExp("[\\?&]q=([^&#]*)");
+        var q = null;
+        if (reg.test(window.location.search)) {
+            q = reg.exec(window.location.search)[1];
+        }
+        if (q != null) {
+            // We do the search in the JSON file ;)
+        }
+    });
+})(jQuery);
+// ]]>
+</script>

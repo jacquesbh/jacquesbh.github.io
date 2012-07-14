@@ -1,0 +1,61 @@
+{% include JB/setup %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+</head>
+<body>
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <h1>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </h1>
+        </div>
+
+        <blockquote id="quoteWrap">
+            {% if page.quote %}
+            <p>
+                {{ page.quote.content }}
+            </p>
+            {% if page.quote.author %}
+            <div><cite>{{ page.quote.author }}</cite></div>
+            {% endif %}
+            {% else %}
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            {% endif %}
+        </blockquote>
+
+        <ul id="menu">
+            {% if page.url == '/index.html' %}
+            <li class="current"><a href="{{ HOME_PATH }}"><span></span>Accueil</a></li>
+            {% else %}
+            <li><a href="{{ HOME_PATH }}"><span></span>Accueil</a></li>
+            {% endif %}
+            {% assign pages_list = site.pages %}
+            {% include navigation %}
+        </ul>
+    </div>
+
+    <div id="globalWrap">

@@ -1,0 +1,15 @@
+{% comment %}
+
+<h2>Catégories</h2>
+
+<ul>
+{% for category in site.categories %}
+<li><a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category[0] }}-ref">
+    {{ category[0] | join: "/" }} <span>{{ category[1].size }}</span>
+</a></li>
+{% endfor %}
+</ul>
+
+<hr />
+
+{% endcomment %}

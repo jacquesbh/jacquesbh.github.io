@@ -1,0 +1,34 @@
+/**
+ * @author        Jacques Bodin-Hullin <http://www.bodin-hullin.net>
+ * @copyright     (C) 2009 Jacques Bodin-Hullin
+ * @license       All rights reserved
+ */
+
+/**
+ * En voir/savoir plus
+ */
+p.voirPlus {
+    text-align:         right;
+    border-bottom:      1px solid #474f1f;
+    height:             30px;
+    line-height:        30px;
+    clear:              both;
+}
+
+p.voirPlus a {
+    color:              #444c1a;
+}
+
+p.voirPlus a:hover {
+    text-decoration:    underline;
+}
+
+/**
+ * HR
+ */
+hr {
+    height:             19px;
+    border:             none;
+    background:         url(../img/hr.png) center no-repeat;
+    margin:             15px 0;
+}
