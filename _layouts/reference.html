@@ -31,8 +31,8 @@ var techno = function (nb)
     <ul>
 {% for techno in page.technologies %}
 <li>
-    <span>{{ techno | split:'|' | first }}</span>
-    <script type="text/javascript" charset="utf-8">techno({{ techno | split:'|' | last }});</script>
+    <span>{{ techno.label }}</span>
+    <script type="text/javascript" charset="utf-8">techno({{ techno.value }});</script>
 </li>
 {% endfor %}
     </ul>

@@ -13,8 +13,8 @@ details:
 - {label: License,      value: LGPL v3}
 - {label: github,       value: '"jacquesbh/jbhslider":https://github.com/jacquesbh/jbhslider'}
 technologies:
-- JS|5
-- Bootstrap Twitter|2
+- {label: Javascript, value: 5}
+- {label: Bootstrap Twitter, value: 2}
 ---
 
 ![La documentation du slider][main_image]

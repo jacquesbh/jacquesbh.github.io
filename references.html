@@ -2,7 +2,15 @@
 layout: empty
 title: Références
 group: navigation
-competences: [[PHP,5], [SQL,5], [Javascript,5], [XML,5], [HTML,4], [CSS,3], [Script système,3], [Liquid,2]]
+competences:
+- {label: PHP, value: 5}
+- {label: SQL, value: 5}
+- {label: Javascript, value: 5}
+- {label: XML, value: 5}
+- {label: HTML, value: 4}
+- {label: CSS, value: 3}
+- {label: Script système, value: 3}
+- {label: Liquid, value: 2}]
 ---
 
 <script type="text/javascript" charset="utf-8">
@@ -27,8 +35,8 @@ var techno = function (nb)
 
 {% for techno in page.competences %}
 <li>
-    <span>{{ techno[0] }}</span>
-    <script type="text/javascript" charset="utf-8">techno({{ techno[1] }});</script>
+    <span>{{ techno.label }}</span>
+    <script type="text/javascript" charset="utf-8">techno({{ techno.value }});</script>
 </li>
 {% endfor %}
     </ul>
