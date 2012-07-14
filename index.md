@@ -56,7 +56,7 @@ title: Jacques Bodin-Hullin - Magento developer
     <hr />
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <div class="content post">
-        {{ post.content | split:'<!-- **END** -->' | first }}
+        {{ post.content | split:'<!-- END -->' | first }}
     </div>
     <p class="voirPlus">
         {% if post.comments %}

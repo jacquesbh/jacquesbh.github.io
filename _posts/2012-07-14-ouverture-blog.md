@@ -16,7 +16,7 @@ Il me fallait _juste_ le temps de déterminer la plateforme la plus intéressant
 
 D'ailleurs à ce propos...
 
-<!-- **END** -->
+<!-- END -->
 
 ## Mes articles
 
