@@ -60,7 +60,7 @@ title: Jacques Bodin-Hullin - Magento developer
     </div>
     <p class="voirPlus">
         {% if post.comments %}
-        <a href="{{ post.url }}#disqus_thread">Commentaires</a> -
+        <a href="{{ site.production_url }}{{ post.url }}#disqus_thread" data-disqus-identifier="blog_{{ post.slug }}">Commentaires</a> -
         {% endif %}
 {% if post.type == 'howto' %}
         <a href="{{ post.url }}">Lire la suite du tutoriel</a>
