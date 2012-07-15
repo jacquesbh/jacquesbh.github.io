@@ -39,11 +39,14 @@ body {
     background:         url(../img/header.png) no-repeat 1px 15px;
     height:             95px;
     border-bottom:      5px solid #292e10;
+    h1,
+    p {
+        text-indent:    -999999px;
+        position:       absolute;
+        top:            -999999px;
+    }
 }
 
-#headerWrap h1 {
-    display:            none;
-}
 
 /*
 #loginWrap {
