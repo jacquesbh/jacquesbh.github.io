@@ -16,7 +16,7 @@ Il me fallait _juste_ le temps de déterminer la plateforme la plus intéressant
 
 D'ailleurs à ce propos...
 
-<!-- END -->
+<!-- more start -->
 
 ## Mes articles
 
@@ -64,6 +64,8 @@ NOTE: Ah oui aussi... le design, c'est [Laurent Demontiers][laurent].
 Merci à toi Laurent.
 
 Merci aussi aux développeurs du Chan IRC #magento-fr sur freenode qui ont supporté mon _débat_ sur quelle plateforme utiliser pour ce blog !
+
+<!-- more end -->
 
 
 [md]: http://daringfireball.net/projects/markdown "Markdown is a text-to-HTML conversion tool for web writers"
