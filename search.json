@@ -1,4 +1,5 @@
 ---
+searchable: false
 ---
 {
     "posts": [{% for post in site.posts %}{"title":"{{ post.title }}", "subtitle":"{{ post.subtitle }}", "url":"{{ post.url }}", "date":"{{ post.date | date: "%B %e, %Y" }}"}{% if forloop.last != true %},{% endif %}{% endfor %}],
