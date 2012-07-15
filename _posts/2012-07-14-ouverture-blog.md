@@ -3,7 +3,6 @@ title: Un début à tout
 layout: post
 category : Jekyll 
 tags : [jekyll, markdown, github]
-slug: ouverture-blog
 published: 2012-07-15 12:00:00
 comments: true
 permalink: /un-debut-a-tout.html
