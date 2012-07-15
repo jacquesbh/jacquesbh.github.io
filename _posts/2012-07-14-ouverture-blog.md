@@ -2,7 +2,7 @@
 title: Un début à tout
 layout: post
 category : Jekyll 
-tags : [jekyll, markdown, github]
+tags : [Jekyll, Markdown, GitHub]
 published: 2012-07-15 12:00:00
 comments: true
 permalink: /un-debut-a-tout.html

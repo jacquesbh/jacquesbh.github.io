@@ -26,12 +26,6 @@
 
         <h1>{{ page.title }}</h1>
 
-        <div class="author">
-            {% if page.author %}Par {{ page.author }}, le {{ page.date | date_to_long_string }}
-            {% else %}Par {{ site.author.name }}, le {{ page.date | date_to_long_string }}
-            {% endif %}
-        </div>
-
         {{ content }}
 
         <hr />
