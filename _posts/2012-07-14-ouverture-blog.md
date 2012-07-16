@@ -9,8 +9,6 @@ published: 2012-07-15 12:00:00
 comments: true
 permalink: /un-debut-a-tout.html
 ---
-{% include JB/setup %}
-
 Il faut bien commencer un jour...
 
 En réalité, ce blog est en attente depuis environ 3 ans.
