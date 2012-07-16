@@ -29,6 +29,7 @@
                 Jacques Bodin-Hullin
                 <span class="baseline">Développeur d'applications Web</span>
             {% if page.url == '/index.html' %}</h1>{% else %}</p>{% endif %}
+            <a href="{{ site.production_url }}"></a>
         </div>
 
         <blockquote id="quoteWrap">
