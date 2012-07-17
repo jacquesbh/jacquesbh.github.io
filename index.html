@@ -52,11 +52,12 @@ title: Jacques Bodin-Hullin - Magento developer
         <a href="{{ site.JB.references_path }}">Voir toutes mes références &gt;&gt;</a>
     </p>
 
-{% for post in site.posts limit:3 %}
+{% for post in paginator.posts %}
     <hr />
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <div class="content post">
         {{ post.content | replace:'more start -->','' | replace:'<!-- more end','' }}
+{% comment %}-->{% endcomment %}
     </div>
     <p class="voirPlus">
         {% if post.comments %}
@@ -69,6 +70,27 @@ title: Jacques Bodin-Hullin - Magento developer
 {% endif %}
     </p>
 {% endfor %}
+
+<div class="pagination">
+    <hr/>
+    {% if paginator.total_pages > 1 %}
+    {% if paginator.previous_page %}
+    {% if paginator.previous_page == 1 %}
+    <a href="/" class="previous">Précédent</a>
+    {% else %}
+    <a href="/page{{paginator.previous_page}}" class="previous">Précédent</a>
+    {% endif %}
+    –
+    {% endif %}
+    {% endif %}
+    <span class="page_number">Page {{paginator.page}} sur {{paginator.total_pages}}</span>
+    {% if paginator.total_pages > 1 %}
+    {% if paginator.next_page and paginator.total_pages > 1 %}
+    –
+    <a href="/page{{paginator.next_page}}" class="next">Suivant</a>
+    {% endif %}
+    {% endif %}
+</div>
 
 {% comment %}
     <hr />
