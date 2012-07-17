@@ -8,6 +8,7 @@ type: howto
 published: 2012-07-17 23:35:00
 comments: true
 permalink: /creer-un-email-transactionnel-sur-magento.html
+gist: 3132212
 ---
 
 Qui n'a pas voulu envoyer un email personnalisé rapidement via Magento ?
@@ -33,7 +34,7 @@ On va donc envoyer un email comprenant quelques informations sur le client (son 
 
 ## Le mail
 
-Sans trop se prendre la tête, voici le mail que nous voulons envoyé :
+Sans trop se prendre la tête, voici le mail que nous voulons envoyer :
 
     Bonjour {name},
 
