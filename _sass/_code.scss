@@ -7,4 +7,5 @@ pre {
     @include border-radius(5px);
     padding: 10px;
     margin: 5px;
+    overflow: auto;
 }

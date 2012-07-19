@@ -17,6 +17,12 @@
             <span>Les tags</span>
             <strong>{{ page.tags | join:", " }}</strong>
         </li>
+        {% if page.github %}
+        <li>
+            <span>Dépôt GitHub</span>
+            <strong><a href="https://github.com/{{ page.github }}">{{ page.github }}</a></strong>
+        </li>
+        {% endif %}
         {% if page.gist %}
         <li>
             <span>Gist associé</span>
