@@ -5,7 +5,7 @@ description: Obtenez un bouton pour accéder au compte d'un client, pour payer p
 keywords: php, connect as, magento
 tags: [Magento]
 type: howto
-published:
+published: 2012-07-20 01:00:00
 comments: true
 permalink: /connectez-vous-sur-un-compte-client-sur-magento.html
 github: jacquesbh/jbh_connectas
@@ -15,7 +15,7 @@ Par défaut sur la Magento Community, nous n'avons pas de fonctionnalité pour s
 
 Autant vous dire que parfois c'est quand même la _loose_. Bah ouais... le client a un problème et impossible de reproduire. De plus, lui demander de nous faire un screen pour voir comment ça se passe pour lui c'est juste... bah non en fait.
 
-Alors la solution c'est de se connecter sur son compte, même si ça n'est pas toujours la solution mirable, souvent ça aide un peu.
+Alors la solution c'est de se connecter sur son compte, même si ça n'est pas toujours la solution miracle, souvent ça aide un peu.
 
 Et puis on obtient d'un coup une autre fonctionnalité : on peut payer une commande pour le client par téléphone. Pratique non ?
 
