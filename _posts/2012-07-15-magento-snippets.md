@@ -3,7 +3,7 @@ title: Quelques snippets Magento
 layout: post
 category : Magento
 tags : [Magento, Snippets, Vim, Netbeans]
-published: 2012-07-15 16:20:00
+date: 2012-07-15 16:20:00
 comments: true
 description: De nos jours quand on est développeur, on ne peut plus se passer de ces petits bouts de code !
 keywords: magento, snippet, vim, netbeans

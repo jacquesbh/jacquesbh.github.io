@@ -5,7 +5,7 @@ description: Apprenez à créer un slider simple avec le JbhSlider.
 keywords: slider, jbh, jbhslider, css, jquery
 tags: [jQuery, Javascript]
 type: howto
-published: 2012-07-16 23:03:00
+date: 2012-07-16 23:03:00
 comments: true
 permalink: /un-slider-avec-le-jbhslider.html
 ---

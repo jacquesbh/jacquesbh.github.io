@@ -12,6 +12,8 @@ lang: fr
 lsi: true
 paginate: 3
 
+future: false
+
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #

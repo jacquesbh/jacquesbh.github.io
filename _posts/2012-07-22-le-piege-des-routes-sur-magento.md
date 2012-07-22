@@ -5,7 +5,7 @@ description: Une contrôleur frontal accessible par une route admin... Si si... 
 keywords: php, router, url, magento
 tags: [Magento, URL, "Bonne pratiques"]
 type: howto
-published: 2012-07-23 00:55:00
+date: 2012-07-23 00:55:00
 comments: true
 permalink: /le-piege-des-routes-sur-magento.html
 ---

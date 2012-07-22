@@ -5,7 +5,7 @@ description: Réalisez vos propres scripts PHP sur Magento.
 keywords: php, script, shell, magento
 tags: [Magento, PHP]
 type: howto
-published: 2012-07-19 01:20:00
+date: 2012-07-19 01:20:00
 comments: true
 permalink: /realisez-vos-propres-scripts-php-sur-magento.html
 gist: 3139595

@@ -5,7 +5,7 @@ description: Apprenez à créer un email custom sur Magento.
 keywords: php, email transactionnel, magento
 tags: [Magento, PHP]
 type: howto
-published: 2012-07-17 23:35:00
+date: 2012-07-17 23:35:00
 comments: true
 permalink: /creer-un-email-transactionnel-sur-magento.html
 gist: 3132212

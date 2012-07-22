@@ -5,7 +5,7 @@ description: Obtenez un bouton pour accéder au compte d'un client, pour payer p
 keywords: php, connect as, magento
 tags: [Magento]
 type: howto
-published: 2012-07-20 01:00:00
+date: 2012-07-20 01:00:00
 comments: true
 permalink: /connectez-vous-sur-un-compte-client-sur-magento.html
 github: jacquesbh/jbh_connectas

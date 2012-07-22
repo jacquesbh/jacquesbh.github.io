@@ -5,7 +5,7 @@ category : Blog
 tags : [Jekyll, Markdown, GitHub]
 keywords: blog, jekyll, markdown, github
 description: Il est temps pour moi d'avoir un blog, sur Jekyll et GitHub, en Markdown. Quoi de mieux ?
-published: 2012-07-15 12:00:00
+date: 2012-07-15 12:00:00
 comments: true
 permalink: /un-debut-a-tout.html
 ---
