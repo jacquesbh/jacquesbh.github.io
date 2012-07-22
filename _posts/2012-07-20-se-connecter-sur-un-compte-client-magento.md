@@ -109,8 +109,13 @@ N'oubliez pas que les droits sont gérés et que vous pouvez par conséquent aut
 
 Il est également possible de rajouter des traductions puisque le PHP a été prévu pour. Il manque juste un peu de config et les fichiers CSV de traductions.
 
+Merci à [Benjion pour l'article original][benjion] que j'ai eu l'occasion d'améliorer/corriger.
+
 Well done :)
+
+
 
 <!-- more end -->
 
 [jbh_connectas]: http://github.com/jacquesbh/jbh_connectas "Le module Jbh_ConnectAs sur GitHub"
+[benjion]: http://benjion.wordpress.com/2011/04/29/magento-se-connecter-en-tant-que-client-depuis-ladmin/
