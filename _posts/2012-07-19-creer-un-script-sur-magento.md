@@ -41,6 +41,9 @@ require_once __DIR__ . '/../app/Mage.php';
 
 // Init Magento
 Mage::app('admin');
+
+// Init store (needed for save products for example)
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 {% endhighlight %}
 
 Peut-être qu'avant ça il serait préférable de tester la validiter de notre ligne de commande ?
