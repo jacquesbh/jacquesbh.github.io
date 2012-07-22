@@ -36,7 +36,7 @@ var data = false;
 
         var r = new RegExp(q, 'gi');
 
-        $.get('/search.json', function (resp) {
+        $.get('/search.json?' + parseInt(Math.random() * 10000000), function (resp) {
             // parse data
             for (i in resp.posts) {
                 for (inf in resp.posts[i]) {
