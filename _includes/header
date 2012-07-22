@@ -57,6 +57,13 @@
             {% endif %}
             {% assign pages_list = site.pages %}
             {% include navigation %}
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
         </ul>
     </div>
 

@@ -4,19 +4,15 @@ title: Recherche
 searchable: false
 ---
 
-<script type="text/javascript" charset="utf-8">
-// <![CDATA[
-(function ($) {
-    $(document).ready(function () {
-        var reg = new RegExp("[\\?&]q=([^&#]*)");
-        var q = null;
-        if (reg.test(window.location.search)) {
-            q = reg.exec(window.location.search)[1];
-        }
-        if (q != null) {
-            // We do the search in the JSON file ;)
-        }
-    });
-})(jQuery);
-// ]]>
-</script>
+<h1 class="search-title">Les résultats de votre recherche</h1>
+
+<div id="loader">
+    loader...
+</div>
+
+<div id="results" style="display: none;">
+    Aucun résultat.
+</div>
+
+<script type="text/javascript" src="/js/mustache.js" ></script>
+<script type="text/javascript" src="/js/search.js" ></script>

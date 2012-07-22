@@ -181,6 +181,11 @@ body {
     overflow:           hidden;
 }
 
+#menu .search {
+    float: right;
+    padding-right: 12px;
+}
+
 #menu li, #menuLava li {
     line-height:        45px;
     font-style:         italic;
@@ -285,6 +290,14 @@ body {
         padding-left:       15px;
         li {
             line-height: 20px;
+        }
+    }
+    .tags {
+        a {
+            color: #292E10;
+            :hover {
+                text-decoration: underline;
+            }
         }
     }
     .infos {
