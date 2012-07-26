@@ -38,6 +38,12 @@ Le but de cet article n'est pas de vous expliquer comment fonctionnent les snipp
 
 <script src="https://gist.github.com/2987266.js?file=netbeans_magento_snippets.xml"></script>
 
+## Pour PhpStorm
+
+Merci à [Laurent](http://jacques.sh/quelques-snippets-magento.html#comment-598945986) pour son gist !
+
+<script src="https://gist.github.com/3184638.js?file=PHP.xml"></script>
+
 <!-- more end -->
 
 [snipmate]: http://www.vim.org/scripts/script.php?script_id=2540 "TextMate-style snippets for Vim "
