@@ -25,6 +25,7 @@ searchable: false
 
 <div id="contentWrap">
 
+    {% if paginator.page == 1 %}
     <h2>Sélection de références</h2>
     <div class="carrousel">
         <div class="goLeft">
@@ -52,6 +53,7 @@ searchable: false
     <p class="voirPlus">
         <a href="{{ site.JB.references_path }}">Voir toutes mes références &gt;&gt;</a>
     </p>
+    {% endif %}
 
 {% for post in paginator.posts %}
     <hr />
