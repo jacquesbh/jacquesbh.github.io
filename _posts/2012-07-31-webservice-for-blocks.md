@@ -76,6 +76,10 @@ Faites-vous plaisir !
 
 Ces scripts sont sous la [WTFPL][wtfpl].
 
+P.S. Le fichier `app/etc/modules/Jbh_Webservice.xml` est [sur github ;)][config]
+
 <!-- more end -->
 
 [wtfpl]: http://sam.zoy.org/wtfpl/
+[config]: https://gist.github.com/3210926#file_jbh_webservice.xml
+
