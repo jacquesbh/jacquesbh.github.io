@@ -315,9 +315,10 @@ body {
     width:              620px;
     float:              left;
     margin-bottom:      40px;
-    ul {
-        padding-left:       15px;
+    ul, ol {
+        padding-left:       35px;
         li {
+            font-size: 1.1em;
             line-height: 20px;
             p {
                 padding: 0;
