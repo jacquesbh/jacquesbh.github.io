@@ -8,7 +8,7 @@ type: howto
 published: 2012-08-04 21:35:00
 date: 2012-08-04 21:35:00
 comments: true
-gist:
+github: jacquesbh/jbh_homepage
 permalink: /une-nouvelle-homepage.html
 ---
 
@@ -64,9 +64,12 @@ En soi rien de bien compliqué :
 
 Have fun !
 
+Le module est [dispo sur github][jbh_homepage]. Vous pouvez aussi le [télécharger en tar.gz][tgz] directement.
 
 <!-- more end -->
 
 [internim]: http://www.internim.com "Créateur de solutions OpenSource"
+[jbh_homepage]: https://github.com/jacquesbh/jbh_homepage
+[tgz]: https://github.com/jacquesbh/jbh_homepage/tarball/master
 
 [homepage_cms]: images/posts/une-nouvelle-home/homepage_cms.png "La homepage dans la liste des pages CMS en admin"
