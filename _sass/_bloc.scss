@@ -7,20 +7,24 @@
 /**
  * En voir/savoir plus
  */
-p.voirPlus {
+.voirPlus {
     text-align:         right;
     border-bottom:      1px solid #474f1f;
     height:             30px;
     line-height:        30px;
     clear:              both;
-}
-
-p.voirPlus a {
-    color:              #444c1a;
-}
-
-p.voirPlus a:hover {
-    text-decoration:    underline;
+    a {
+        color:              #444c1a;
+        :hover {
+            text-decoration:    underline;
+        }
+    }
+    .social {
+        float: left;
+        .twitter-share-button {
+            margin-bottom: -5px;
+        }
+    }
 }
 
 /**

@@ -62,7 +62,10 @@ searchable: false
         {{ post.content | replace:'more start -->','' | replace:'<!-- more end','' }}
 {% comment %}-->{% endcomment %}
     </div>
-    <p class="voirPlus">
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ site.production_url }}{{ post.url }}" data-text="{{ post.title }}" data-via="{{ site.author.twitter }}">Tweet</a>
+        </div>
         {% if post.comments %}
         <a href="{{ post.url }}#disqus_thread">Commentaires</a> -
         {% endif %}
@@ -71,7 +74,7 @@ searchable: false
 {% else %}
         <a href="{{ post.url }}">Lire l'article</a>
 {% endif %}
-    </p>
+    </div>
 {% endfor %}
 
 <div class="pagination">
@@ -171,5 +174,7 @@ searchable: false
     {% endcomment %}
 
 </div>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 {% include comments_count_js %}
