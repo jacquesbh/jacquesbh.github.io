@@ -435,14 +435,18 @@ body {
     letter-spacing:     10px;
     padding-right:      20px;
     margin-bottom:      50px;
+    a {
+        color:              #FFFFFF;
+        font-style:         italic;
+        letter-spacing:     1px;
+        margin-right:       10px;
+    }
+    .social {
+        float: left;
+        margin: 5px 20px;
+    }
 }
 
-#footerWrap a {
-    color:              #FFFFFF;
-    font-style:         italic;
-    letter-spacing:     1px;
-    margin-right:       10px;
-}
 
 
 #contentWrap blockquote {
