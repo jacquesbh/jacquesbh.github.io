@@ -26,14 +26,3 @@ Amusez-vous !
     For professional or commercial use, ask.<br/>
     <a href="https://github.com/jacquesbh/Installer/tree/v1" title="The Installer" style="font-size: 30px;">The Installer - v1</a>
 </p>
-
-<!-- more start -->
-
-<hr />
-
-The README:
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/Installer/raw/v1/README.md"></script>
-
-<!-- more end -->
-
