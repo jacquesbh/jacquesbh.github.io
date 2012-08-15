@@ -22,6 +22,8 @@ A vos marques...
 
 <hr />
 
+Ce tutoriel utilise l'**Installer** : [En savoir plus sur l'Installer pour Magento](http://jacques.sh/the-installer-v1.html)
+
 Tout d'abord on commence par déterminer ce dont nous avons besoin :
 
 1.  Un module `Jbh_Grid`
