@@ -219,6 +219,12 @@ Vos avis sont les bienvenus !
 
 Vous pouvez [télécharger ce module][download].
 
+### Astuce
+
+Pour avoir une licence personnalisée dans le haut de mes fichiers voici la commande que j'ai réellement lancée :
+
+    $ LICENSE='WTFPL (http://sam.zoy.org/wtfpl/COPYING)' jbh jbh grid local
+
 <!-- more end -->
 
 [readme_function]: https://github.com/jacquesbh/Installer/tree/v1#bash-function-required
