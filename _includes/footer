@@ -24,7 +24,7 @@
             <div class="qrcode">
                 <h3>Mon QRcode</h3>
                 <p>
-                    <img src="/img/qrcode.png" alt="le QRcode" />
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
                 </p>
             </div>
         </div>
