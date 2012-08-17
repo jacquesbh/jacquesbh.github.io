@@ -17,7 +17,7 @@ Tout a commencé à Berlin en 2011...
 
 Si vous trouvez des bugs, si vous souhaitez améliorer.... n'hésitez pas c'est sur GitHub !
 
-Ah aussi... je prépare une v2, mais je ne sais pas encore comment l'organisée... probablement avec un système modulaire permettant d'ajouter des commandes à volonté.
+Ah aussi... je prépare une v2, mais je ne sais pas encore comment l'organiser... probablement avec un système modulaire permettant d'ajouter des commandes à volonté.
 
 Amusez-vous !
 
