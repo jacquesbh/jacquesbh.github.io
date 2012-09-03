@@ -9,6 +9,7 @@ published: 2012-09-03 02:00:00
 date: 2012-09-03 02:00:00
 comments: true
 permalink: /git-en-entreprise.html
+gist: 3607757
 ---
 
 Je suis actuellement en poste dans deux entreprises :
