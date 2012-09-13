@@ -125,7 +125,7 @@ Le _Développeur 2_ veut merger sa branche sur la `dev` car il a terminé ses d�
 
 	$ git checkout dev
 	$ git merge --no-ff dev2
-	$ git push
+	$ git push origin dev
 
 Et voici ce que ça donne :
 
@@ -145,7 +145,7 @@ Il se trouve que le _Développeur 2_ se trouve sur la dernière révision de la 
 
 	$ git checkout dev2
 	[quelques commits...]
-	$ git push
+	$ git push origin dev2
 
 On remarque que le merge de `dev2` sur `dev` n'a impacté que la branche `dev`.
 Il faut savoir que __le merge n'impacte QUE la branche courante__.
@@ -172,7 +172,7 @@ Maintenant c'est au tour du _Développeur 1_ de vouloir merger sur la `dev`.
 	$ git fetch
 	$ git merge origin/dev
 	$ git merge --no-ff dev1
-	$ git push
+	$ git push origin dev
 
 Le résultat : La branche `dev` est à jour avec les commits des développeurs 1 et 2. Cependant le _Développeur 1_ n'a pas dans sa branche `dev1` les commits de la branche `dev2` et le _Développeur 2_ n'a pas ceux de la branche `dev1` dans sa branche `dev2`.
 
@@ -182,8 +182,14 @@ Pour ça il décide de replacer sa branche `dev1` à l'identique de la branche `
 
 	$ git checkout dev1
 	$ git reset --hard dev
-	$ git push -f
-	
+	$ git push -f origin dev1
+
+D'après un collègue chez [Internim][internim] on peut aussi faire un pull/push de la branche sur laquelle on veut se placer : _(testé et approuvé)_
+
+    $ git checkout dev1
+    $ git pull origin dev
+    $ git push origin dev1
+
 Le _Développeur 1_ est maintenant précisément au même endroit que la branche `dev`, il peut donc continuer ses développements avec deux nouveaux commits :
 
 	* Added j  (HEAD, origin/dev1, dev1)
@@ -212,7 +218,7 @@ Vient le tour du _Développeur 3_ de faire son merge sur la branche `dev` (rapid
 	$ git fetch
 	$ git merge origin/dev
 	$ git merge --no-ff dev3
-	$ git push
+	$ git push origin dev
 	$ git checkout dev3
 
 On remarque que la branche `dev` ne contient __QUE__ des merges. C'est super car c'est exactement ce que nous voulons !
@@ -245,7 +251,13 @@ Au tour du _Développeur 3_ de replacer sa branche pour continuer ses développe
 
 	$ git checkout dev3
 	$ git reset --hard dev
-	$ git push -f
+	$ git push -f origin dev3
+
+On peut aussi faire un pull de la branche `dev` :
+
+    $ git checkout dev3
+    $ git pull origin dev
+    $ git push origin dev3
 
 __Bien sûr un `reset --hard` suivi d'un `push -f` implique que votre environnement de travail soit vraiment propre avant toute manipulation.__
 
@@ -261,7 +273,7 @@ On merge la branche `origin/dev` pour être certain de prendre la dernière vers
 	$ git fetch
 	$ git merge origin/recette
 	$ git merge --no-ff origin/dev
-	$ git push
+	$ git push origin recette
 	
 La branche `recette` contient bien nos derniers développements.
 
@@ -319,7 +331,7 @@ Pour ça vous pouvez procéder comme suit :
 	$ git fetch
 	$ git merge origin/recette
 	$ git commit -m "[hotfix] Added k"
-	$ git push
+	$ git push origin recette
 	
 Il nous faut maintenant appliquer le commit sur toutes les _principales_ branches du projet au dessus dans la hiérarchie des merges.
 
@@ -339,7 +351,7 @@ Il vous faut au préalable le SHA1 du hotfix (au moins les premiers caractères)
 	$ git fetch
 	$ git merge origin/dev
 	$ git cherry-pick 461c1ca
-	$ git pull
+	$ git push origin dev
 
 ## Conclusion
 
