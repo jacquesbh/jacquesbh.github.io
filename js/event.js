@@ -22,7 +22,8 @@
 
         // Sidebar
         if ($('.post').length) {
-            var timer = 1000;
+            var timer = 100;
+            var transitionTimer = 250;
             var sideWrapTop = $('#sideWrap')
                 .css('position', 'relative')
                 .offset()
@@ -35,12 +36,15 @@
                 var scroll = $('html').scrollTop();
                 if (scroll > sideWrapTop) {
                     if (scroll > commentsTop) {
-                        $('#sideWrap').animate({'top': commentsTop - sideWrapTop}, 200);
+                        $('#sideWrap').stop();
+                        $('#sideWrap').animate({'top': commentsTop - sideWrapTop}, transitionTimer);
                     } else {
-                        $('#sideWrap').animate({'top': scroll - sideWrapTop}, 200);
+                        $('#sideWrap').stop();
+                        $('#sideWrap').animate({'top': scroll - sideWrapTop}, transitionTimer);
                     }
                 } else if (scroll < sideWrapTop && pos.top != sideWrapTop) {
-                    $('#sideWrap').animate({'top': 0}, 200);
+                    $('#sideWrap').stop();
+                    $('#sideWrap').animate({'top': 0}, transitionTimer);
                 }
                 setTimeout(sidebarScroll, timer);
             }
