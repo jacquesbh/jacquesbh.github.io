@@ -21,23 +21,31 @@
         });
 
         // Sidebar
-        if ($('.post').length) {
+        if ($('.post').length || $('.reference').length) {
             var timer = 100;
             var transitionTimer = 250;
             var sideWrapTop = $('#sideWrap')
                 .css('position', 'relative')
                 .offset()
                 .top;
-            var commentsTop = $('#comments')
-                .position()
+            var bottomWrapTop = $('#bottomWrap')
+                .offset()
                 .top;
+
+            setTimeout(function () {
+                bottomWrapTop = $('#bottomWrap')
+                    .offset()
+                    .top;
+            }, 200);
+
             var sidebarScroll = function () {
                 var pos = $('#sideWrap').offset();
+                var h = $('#sideWrap').height();
                 var scroll = $('html').scrollTop();
                 if (scroll > sideWrapTop) {
-                    if (scroll > commentsTop) {
+                    if ((scroll + h) > bottomWrapTop) {
                         $('#sideWrap').stop();
-                        $('#sideWrap').animate({'top': commentsTop - sideWrapTop}, transitionTimer);
+                        $('#sideWrap').animate({'top': sideWrapTop + h - 70}, transitionTimer);
                     } else {
                         $('#sideWrap').stop();
                         $('#sideWrap').animate({'top': scroll - sideWrapTop}, transitionTimer);
