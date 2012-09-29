@@ -4,7 +4,7 @@ title: JbhSlider
 group: reference
 slider:
     image: references/260x90/jbhslider.png
-    homepage: true
+    homepage: false
 page:
     image: references/260x90/jbhslider.png
 details:
