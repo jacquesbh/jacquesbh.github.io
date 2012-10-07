@@ -19,3 +19,8 @@ code {
     @include border-radius(3px);
     padding: 1px 3px;
 }
+
+pre code {
+    background: none;
+    padding: 0;
+}
