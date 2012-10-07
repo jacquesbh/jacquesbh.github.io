@@ -71,7 +71,7 @@ __Les valeurs de `cache_lifetime`__ :
 
 Tagguer un cache... _Wait... WHAT?_
 
-En toute logique quand on veut vider un cache on indique sa clé et on supprimer le cache concerné.
+En toute logique quand on veut vider un cache on indique sa clé et on supprime le cache concerné.
 
 Sauf qu'en pratique... bah c'est franchement la merde. Et c'est là que les tags font leur entrée !
 
