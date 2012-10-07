@@ -1,6 +1,10 @@
-pre, .code {
-    font-family: Consolas, "Liberation Mono", Courier, monospace;
+
+pre, code, .code {
+    font-family: Consolas, "Liberation Mono", Monaco, Andale Mono, Courier New, Courier, monospace;
     font-size: 12px;
+}
+
+pre, .code {
     border: 1px solid $border-color;
     background: #fff;
     overflow: hidden;
@@ -8,4 +12,10 @@ pre, .code {
     padding: 10px;
     margin: 5px;
     overflow: auto;
+}
+
+code {
+    background-color: #FEE9CC;
+    @include border-radius(3px);
+    padding: 1px 3px;
 }
