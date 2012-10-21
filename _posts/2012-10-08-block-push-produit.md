@@ -132,7 +132,7 @@ La première méthode fera juste une petite vérification : Notre variable `$pro
 
 Pour utiliser notre block rien de plus simple !
 
-Appelons simplement la méthode `getBlockHtml` de notre helper :
+Appelons simplement la méthode `getPushHtml` de notre helper :
 
 {% highlight php %}
 <?php
