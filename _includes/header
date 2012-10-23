@@ -57,6 +57,7 @@
             {% else %}
             <li><a href="{{ HOME_PATH }}"><span></span>Accueil</a></li>
             {% endif %}
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
             {% assign pages_list = site.pages %}
             {% include navigation %}
             <li class="search">
