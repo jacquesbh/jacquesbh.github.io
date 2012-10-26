@@ -24,5 +24,5 @@ Amusez-vous !
 <p style="text-align: center;" class="code">
     PERSONNAL USAGE ONLY<br/>
     For professional or commercial use, ask.<br/>
-    <a href="https://github.com/jacquesbh/Installer/tree/v1" title="The Installer" style="font-size: 30px;">The Installer - v1</a>
+    <a href="https://github.com/jacquesbh/Installer/tree/master" title="The Installer" style="font-size: 30px;">The Installer - v1</a>
 </p>
