@@ -32,6 +32,11 @@
                 <span class="baseline">Développeur d'applications Web</span>
             {% if page.url == '/index.html' %}</h1>{% else %}</p>{% endif %}
             <a href="{{ site.production_url }}"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+            </div>
+
         </div>
 
         <blockquote id="quoteWrap">
