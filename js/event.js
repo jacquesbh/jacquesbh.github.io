@@ -17,6 +17,7 @@
                 alert(messages.join("\n"));
                 return false;
             }
+            $(this).attr('action', $(this).find('.url').html());
             return true;
         });
 

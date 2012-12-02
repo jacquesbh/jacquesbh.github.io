@@ -2,7 +2,7 @@
 
     <div id="bottomWrap">
         <div id="contactWrap">
-            <form action="http://getsimpleform.com/messages?form_api_token={{ site.getsimpleform.token }}" method="post" id="contact_form">
+            <form action="#" method="post" id="contact_form">
                 <h3>Contact</h3>
                 <p>
                     <label for="contactNom">Votre nom</label>
@@ -20,6 +20,7 @@
                     <input type="hidden" name="redirect_to" value="{{ SITE_URL }}/contact/thanks.html" />
                     <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
                 </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token={{ site.getsimpleform.token }}</div>
             </form>
             <div class="qrcode">
                 <h3>Mon QRcode</h3>
