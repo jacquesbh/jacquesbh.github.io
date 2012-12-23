@@ -61,8 +61,8 @@ body {
     height: 80px;
     position: absolute;
     top: 8px;
-    left: 900px;
-    width: 44px;
+    left: 851px;
+    width: 93px;
     a {
         display: block;
         height: 80px;
@@ -71,6 +71,10 @@ body {
     }
     .developer {
         background: url(../img/magento_developer.png) top left no-repeat transparent;
+        margin-right: 5px;
+    }
+    .developer-plus {
+        background: url(../img/magento_developer_plus.png) top left no-repeat transparent;
     }
 }
 
