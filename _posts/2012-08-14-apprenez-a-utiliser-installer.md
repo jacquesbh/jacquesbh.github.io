@@ -228,4 +228,4 @@ Pour avoir une licence personnalisée dans le haut de mes fichiers voici la comm
 <!-- more end -->
 
 [readme_function]: https://github.com/jacquesbh/Installer/tree/v1#bash-function-required
-[download]: https://gist.github.com/gists/3344499/download
+[download]: https://gist.github.com/3344499/download
