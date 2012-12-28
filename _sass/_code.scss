@@ -14,13 +14,23 @@ pre, .code {
     overflow: auto;
 }
 
+.gist pre {
+    font-size: 1em;
+    @include border-radius(0px);
+}
+
 code {
     background-color: #FEE9CC;
     @include border-radius(3px);
     padding: 1px 3px;
 }
 
+h2 code {
+    font-size: 80%;
+}
+
 pre code {
     background: none;
     padding: 0;
 }
+
