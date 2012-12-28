@@ -95,11 +95,11 @@ On actualise ! Et pof ! (tout en bas..)
 
 ## En mieux ?
 
-Si vous devez faire un event sur plein de modules car vous avez assez souvent de faire de l'affichage personnalisé (c'est super pratique...) et bien je vous propose de faire plutôt ceci : lancer un évènement un peu plus personnalisé !
+Si vous devez faire un event sur plein de modules car vous avez souvent besoin de faire de l'affichage personnalisé (c'est super pratique il faut l'avouer !) et bien je vous propose de faire plutôt ceci : lancer un évènement un peu plus personnalisé !
 
 Vous vous souvenez, on a un évènement "global". Mais cet évènement nous donne le nom de l'action (via `$observer->getAction()->getFullActionName()`).
 
-On peut donc lancer un évènement précis pour notre page :
+On peut donc lancer un évènement précis pour chaque page sur notre e-commerce :
 
 <script type="text/javascript">gist({{page.gist}}, 'observer_dispatch.php', '13-16');</script>
 
