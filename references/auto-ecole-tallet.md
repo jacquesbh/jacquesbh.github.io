@@ -12,7 +12,7 @@ details:
 - {label: Année,        value: "2010"}
 - {label: Mission,      value: Site vitrine}
 - {label: Poste,        value: Freelance}
-- {label: Visiter le site, value: "[L'Auto-Ecole](http://auto-ecole-tallet.fr)"}
+- {label: Visiter le site, value: '"L&rsquo;Auto-Ecole":http://auto-ecole-tallet.fr'}
 technologies:
 - {label: PHP, value: 2}
 - {label: JS, value: 2}
