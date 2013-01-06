@@ -15,15 +15,14 @@ Je recherche un appartement :
 
 -   Deux pièces ou plus
 -   En location
--   Non meublé
 -   À proximité des zones suivantes :
     -   Proche d'une station de la ligne 3
     -   Proche d'une station de la ligne 2, entre Porte Dauphine et Stalingrad
-    -   1er, 2ème, 3ème, 8ème, 18ème (ligne 12)
+    -   1er, 2ème, 3ème, 8ème, 9ème, 10ème, 11ème, 17ème ou 18ème (ligne 12)
 
 Bien sûr ces zones ne sont pas figées !
 
-Loyer max : 900€ CC
+Loyer max : 900€ (cc ou pas, à voir !)
 
 Je serais très heureux d'avoir de vos nouvelles !
 
