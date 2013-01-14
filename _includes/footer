@@ -35,7 +35,8 @@
                 <a href="https://twitter.com/{{ site.author.twitter }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.author.twitter }}</a>
             </div>
             {% assign pages_list = site.pages %}
-            {% include footer_links %}
+            <a href="/recipes">Recettes</a>
+            | {% include footer_links %}
             | <a href="/atom.xml">RSS</a>
             | <a href="#" id="toplink">Haut de page</a>
             <br />
