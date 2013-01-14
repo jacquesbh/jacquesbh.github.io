@@ -4,7 +4,7 @@
  */
 var gist = function (gistNumber, file, lines)
 {
-    document.write('<script src="https://gist.github.com/'+gistNumber+'.js?file='+file+'"></script>');
+    document.write('<script src="https://gist.github.com/'+gistNumber+'.js?file='+encodeURIComponent(file)+'"></script>');
 
     if (lines != undefined && lines != null) {
         var id = '#gist' + gistNumber + ' #file-' + file.replace('.', '-') + '-LC%d';
