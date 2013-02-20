@@ -35,4 +35,4 @@ Le système était basé sur le Zend Framework 1.10.6.
 
 J'ai développé cet outil sous la direction de The Roxane Company, via mon employeur de l'époque (ATAFOTO.studio).
 
-[main_image]: /img/references/cms_sofitel.png "Capture d'écran de l'application"
+[main_image]: /images/references/cms_sofitel.png "Capture d'écran de l'application"

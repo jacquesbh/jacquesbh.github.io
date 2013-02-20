@@ -43,4 +43,4 @@ De plus il est vite apparu que les développements devaient être rapidement ex�
 Je suis parti de JolieBox le 25 septembre 2012. J'y suis donc resté environ 10 mois.
 
 
-[main_image]: /img/references/joliebox.png "JolieBox Espagne & UK"
+[main_image]: /images/references/joliebox.png "JolieBox Espagne & UK"

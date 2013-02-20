@@ -31,5 +31,5 @@ J'ai planché un week-end dessus à l'origine, pour fournir un slider configurab
 
 Depuis il y a eu quelques améliorations, et surtout, [une documentation]({{ BASE_PATH }}/jbhslider)
 
-[main_image]: /img/references/jbhslider.png "La documentation du slider"
+[main_image]: /images/references/jbhslider.png "La documentation du slider"
 

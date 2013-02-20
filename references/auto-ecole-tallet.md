@@ -32,5 +32,5 @@ Réaliser un site vitrine permettant aux visiteurs, souvent des étudiants, de t
 
 Le site est en fait un double site car il propose une page principale où le visiteur doit choisir entre deux auto-écoles.
 
-[main_image]: /img/references/auto-ecole-tallet.png "Capture d'écran du site internet"
+[main_image]: /images/references/auto-ecole-tallet.png "Capture d'écran du site internet"
 

@@ -37,4 +37,4 @@ Réaliser une administration déconnectée du Back Office de l'application princ
 - De la facturation : génération et téléchargement des factures par les clients
 - ...
 
-[main_image]: /img/references/gerantdesarl.png "Capture d'écran de l'application"
+[main_image]: /images/references/gerantdesarl.png "Capture d'écran de l'application"
