@@ -480,3 +480,36 @@ body {
     border-left: 3px solid $border-color;
     color: lighten(#292E10, 15%);
 }
+
+/**
+ * 404
+ */
+.notfound {
+    #headerWrap {
+        border-bottom: none;
+    }
+    #menu {
+        margin-bottom: 0;
+    }
+    #bottomWrap {
+        height: 60px;
+    }
+    #lost {
+        background: transparent url(../img/lost.png) center center no-repeat;
+        width: 950px;
+        height: 382px;
+        position: relative;
+        .msg {
+            display: block;
+            font-weight: bold;
+            font-size: 2em;
+            position: absolute;
+            top: 227px;
+            left: 155px;
+        }
+    }
+
+    #quoteWrap, #contactWrap {
+        display: none;
+    }
+}
