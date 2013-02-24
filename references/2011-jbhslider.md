@@ -2,6 +2,7 @@
 layout: reference
 title: JbhSlider
 group: reference
+permalink: jbhslider.html
 slider:
     image: references/260x90/jbhslider.png
     homepage: false

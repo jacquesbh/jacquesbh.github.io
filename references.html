@@ -49,7 +49,7 @@ var techno = function (nb)
 <h1>Mes références</h1>
 
 <div id="references">
-    {% for ref in site.pages %}
+    {% for ref in site.pages reversed %}
     {% if ref.group == 'reference' %}
     <div class="item">
         <div class="item-sub-container">

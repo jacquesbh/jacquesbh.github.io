@@ -1,6 +1,7 @@
 ---
 layout: reference
 title: Kinder Chocolat
+permalink: kinderchocolat.html
 group: reference
 slider:
     image: references/260x90/kinderchocolat.png

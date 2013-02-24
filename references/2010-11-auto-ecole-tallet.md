@@ -2,6 +2,7 @@
 layout: reference
 title: Auto-école de la Gare
 group: reference
+permalink: auto-ecole-tallet.html
 slider:
     image: references/260x90/auto-ecole-tallet.png
     homepage: false

@@ -2,6 +2,7 @@
 layout: reference
 title: JolieBox
 group: reference
+permalink: joliebox.html
 slider:
     image: references/260x90/joliebox.png
     homepage: true
