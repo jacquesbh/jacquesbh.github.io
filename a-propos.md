@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: a-propos
 title: A propos
 group: navigation
 quote:
