@@ -5,8 +5,8 @@ description: "On a toujours envie que notre attribut s'affiche correctement dans
 keywords: attribute, magento, phtml, product, page, catalog
 tags: [Magento, Attributes, Product]
 type: article
-#published:
-#date: 
+published: 2013-02-25 23:15:00
+date: 2013-02-25 23:15:00
 comments: true
 gist: jacquesbh/5033402
 ---
