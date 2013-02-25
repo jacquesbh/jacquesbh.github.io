@@ -7,7 +7,11 @@ var gist = function (gistNumber, file, lines)
     document.write('<script src="https://gist.github.com/'+gistNumber+'.js?file='+encodeURIComponent(file)+'"></script>');
 
     if (lines != undefined && lines != null) {
-        var id = '#gist' + gistNumber + ' #file-' + file.replace('.', '-') + '-LC%d';
+        var gistNumberParts = gistNumber.split('/');
+        if (gistNumberParts.length == 2) {
+            gistNumber = gistNumberParts[1];
+        }
+        var id = '#gist' + gistNumber + ' #file-' + file.replace('.', '-').toLowerCase() + '-LC%d';
         var style = $('style[for=gists]');
         parts = lines.split(',');
         for (var i in parts) {
