@@ -2,7 +2,7 @@
 title: "Un attribut dynamique"
 layout: post
 description: "Il est temps de ne pas perdre de temps avec les attributs à valeur multiple !"
-keywords: eav, magento, attribute,
+keywords: eav, magento, attribute
 tags: [Magento, Attributes, Product, EAV, Module]
 type: article
 published: 2013-02-17 19:20:00
