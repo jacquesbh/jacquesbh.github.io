@@ -83,7 +83,7 @@ Et notre helper alors ? Il fait quoi ?
 Vu que notre attribut (que nous nommerons ici `out_attribute_code`) est l'identifiant d'un block CMS, il faut que nous affichions le contenu de ce block !  
 Pour faire simple et sans rentrer dans des histoires de cache (car oui le block `Mage_Cms_Block_Block` ne gère aucun cache !) et bien nous pouvons faire ça :
 
-<script type="text/javascript">gist('{{page.gist}}', 'Helper.php', '16-29');</script>
+<script type="text/javascript">gist('{{page.gist}}', 'Helper.php', '16-43');</script>
 
 ## Conclusion
 
