@@ -3,7 +3,7 @@ title: Le piège des routeurs sur Magento
 layout: post
 description: Une contrôleur frontal accessible par une route admin... Si si... C'est possible ! #fail
 keywords: php, router, url, magento
-tags: [Magento, URL, "Bonne pratiques"]
+tags: [Magento, URL, "Bonnes pratiques"]
 type: howto
 date: 2012-07-23 00:55:00
 comments: true
