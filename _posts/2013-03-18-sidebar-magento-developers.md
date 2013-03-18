@@ -20,7 +20,6 @@ Sont ensuite passées quelques semaines et ce soir j'ai pris mon clavier et j'ai
 
 --------
 
-
 Je vous propose donc de tester cette sidebar __et de me faire vos retours !__
 
 > Mais ta sidebar elle fait quoi ?
@@ -32,7 +31,7 @@ Le plus pratique c'est les aides de vue ;).
     <a href="/images/posts/sidebar-magento-developers/tools_full.png" class="fancy"><img src="/images/posts/sidebar-magento-developers/tools.png" alt="Sidebar screenshot" /></a>
 </div>
 
-Le script est [disponible sur GitHub](https://github.com/{{page.github}}).
+Le script est [disponible sur GitHub](https://github.com/jacquesbh/magento-sidebar).
 
 <!-- more end -->
 
