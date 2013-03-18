@@ -22,7 +22,7 @@
         });
 
         // Sidebar
-        if ($('.post').length) {
+        if ($('#comments').length) {
             var timer = 100;
             var transitionTimer = 250;
             var sideWrapTop = $('#sideWrap')
@@ -52,5 +52,7 @@
             setTimeout(sidebarScroll, timer);
         }
 
+        // Fancybox
+        $(".fancy").fancybox();
     });
 })(jQuery);
