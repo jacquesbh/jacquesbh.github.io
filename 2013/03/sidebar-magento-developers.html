@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Une sidebar pour les développeurs - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Vider le cache, activer les aides de vue, réindexer... Tout ça rapidement !">
+    <meta name="keywords" content="reindex, cache, hints">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Une sidebar pour les développeurs</h1>
+
+        <p>Un soir j'ai eu envie de développer un petit outil un peu plus sympa que ce que je fais d'habitude pour m'aider dans mes développements.<br/>
+Et ce soir là, <a href="https://twitter.com/jacquesbh/status/306909582926700545">j'ai twitté</a>.</p>
+
+<p>Sont ensuite passées quelques semaines et ce soir j'ai pris mon clavier et j'ai enfin terminé le boulot.</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<p>Je vous propose donc de tester cette sidebar <strong>et de me faire vos retours !</strong></p>
+
+<blockquote><p>Mais ta sidebar elle fait quoi ?</p></blockquote>
+
+<p>Elle permet de changer les aides de vue sur tous les stores en un clic, d'activer/désactiver les différents caches et de lancer les différents index.<br/>
+Le plus pratique c'est les aides de vue ;).</p>
+
+<div class="center">
+    <a href="/images/posts/sidebar-magento-developers/tools_full.png" class="fancy"><img src="/images/posts/sidebar-magento-developers/tools.png" alt="Sidebar screenshot" /></a>
+</div>
+
+
+<p>Le script est <a href="https://github.com/jacquesbh/magento-sidebar">disponible sur GitHub</a>.</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>18 March 2013</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Cache">Cache</a>, 
+                
+                <a href="/search.html?tag=Images">Images</a>, 
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=EAV">EAV</a>, 
+                
+                <a href="/search.html?tag=Aides de vue">Aides de vue</a>
+                
+            </strong>
+        </li>
+        
+        <li>
+            <span>Dépôt GitHub</span>
+            <strong><a href="https://github.com/jacquesbh/magento-sidebar">jacquesbh/magento-sidebar</a></strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/03/sidebar-magento-developers.html" data-text="Une sidebar pour les développeurs" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

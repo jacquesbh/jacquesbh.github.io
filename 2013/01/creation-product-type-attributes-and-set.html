@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Créez votre type de produit, ses attributs et son jeu - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Appenez à créer votre type de produit sans vous tromper. Créez également votre jeu d'attributs et vos attributs personnalisés.">
+    <meta name="keywords" content="magento, attributes, set">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Créez votre type de produit, ses attributs et son jeu</h1>
+
+        <p>Quand on démarre un projet on a souvent besoin de créer nos propres types de produits.</p>
+
+<p>Bien souvent on en profite aussi pour créer un ou deux jeux d'attributs et quelques attributs particuliers.</p>
+
+<p>Le problème dans tout ça c'est qu'on ne sait jamais quoi faire et on oublie bien souvent un ou deux fichiers dans l'histoire...</p>
+
+<p>On va commencer par créer notre type (ou nos types) de produit : soyons <code>Foo</code>.</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<h2>La création du type de produit <code>Foo</code></h2>
+
+<p>Notre type est identique au niveau fonctionnel du type <code>Simple</code>.</p>
+
+<p>Nous avons donc deux solutions : la sale, et la propre.</p>
+
+<h3>La méthode « sale »</h3>
+
+<p>La sale consiste à dupliquer, simplement, le XML de configuration du type <code>simple</code> avec notre propre balise <code>foo</code> :</p>
+
+<script type="text/javascript">gist(4582238, 'bad.xml', '11');</script>
+
+
+<p>Vous remarquerez la ligne surlignée. Et bah oui ! Si notre type se comporte comme un produit <code>simple</code>, pourquoi créer un modèle personnalisé ?</p>
+
+<h3>La méthode « un peu plus propre »</h3>
+
+<p>L'idée c'est de dupliquer les modèles. Pourquoi ? Et bien parce que de cette manière notre type est totalement indépendant.</p>
+
+<p>Et puis ça permet de prévoir les évolutions ;)</p>
+
+<script type="text/javascript">gist(4582238, 'good.xml', '11,12,15,16');</script>
+
+
+<p>Vous remarquez cette fois que nous avons quatre modèles personnalisés.</p>
+
+<p>Pas de panique, ils font tous un <code>extends</code> sur le même modèle pour le type <code>simple</code>.</p>
+
+<h4>Le modèle principal</h4>
+
+<p>Ce modèle contient la constante qui vaut le code du type : <code>foo</code>.</p>
+
+<script type="text/javascript">gist(4582238, 'type.php');</script>
+
+
+<h4>Le modèle de prix</h4>
+
+<script type="text/javascript">gist(4582238, 'price.php');</script>
+
+
+<h4>Le modèle d'index des prix</h4>
+
+<script type="text/javascript">gist(4582238, 'indexer.php');</script>
+
+
+<h4>Le data retreiver</h4>
+
+<p>Ce modèle a une méthode qui permet de récupérer le code du type. On utilise donc la constante disponible.</p>
+
+<script type="text/javascript">gist(4582238, 'retreiver.php');</script>
+
+
+<h3>Le layout</h3>
+
+<p>Comme tout nouveau type de produit pensez à ajouter le bout de layout qui va avec ! Sinon pas de prix dans la fiche produit par exemple !</p>
+
+<script type="text/javascript">gist(4582238, 'layout.xml');</script>
+
+
+<h3>Les attributs de type « Prix »</h3>
+
+<p>Notre nouveau type de produit va nous permettre de créer de beaux produits... mais sans prix !</p>
+
+<p>Pour avoir une gestion du prix comme le produit simple, il faut ajouter les attributs nécessaires à notre nouveau type !</p>
+
+<p>Dans un setup de votre module, mettez ceci : (c'est plutôt facile à comprendre)</p>
+
+<script type="text/javascript">gist(4582238, 'setup_price.php');</script>
+
+
+<h2>La création du jeu d'attributs <code>Bar</code></h2>
+
+<p>Pour créer un jeu d'attribut, rien de plus simple !</p>
+
+<p>On considérera que notre nouveau jeu se base sur les mêmes attributs que le jeu par défaut.</p>
+
+<script type="text/javascript">gist(4582238, 'set.php', '11');</script>
+
+
+<p>Il faut savoir que si on fait un <code>addAttributeSet</code> d'un jeu d'attributs existant alors celui-ci est mis à jour, tout simplement.</p>
+
+<p>C'est pour cette raison qu'on peut se dispenser de faire un <code>try/catch</code> dans notre installeur.</p>
+
+<h2>La création d'un attribut <code>baz</code></h2>
+
+<p>Dans notre installeur ou dans un update il nous suffit d'ajouter notre attribut, tout simplement, comme ceci :</p>
+
+<script type="text/javascript">gist(4582238, 'attribute.php');</script>
+
+
+<h2>Conclusion</h2>
+
+<p>Vous pouvez maintenant ajouter rapidement un type de produit, un jeu d'attributs et des attributs !</p>
+
+<p>Cet article n'est pas complet car il ne présente pas comment ajouter un attribut à deux groupes qui sont utilisés par deux types de produits différents etc.</p>
+
+<p>Néanmoins vous trouverez beaucoup de méthode dans le modèle EAV ;)</p>
+
+<script type="text/javascript">gist(4582238, 'eav_setup.php');</script>
+
+
+
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>21 January 2013</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Attributes">Attributes</a>, 
+                
+                <a href="/search.html?tag=Product">Product</a>, 
+                
+                <a href="/search.html?tag=Product type">Product type</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/4582238">4582238</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/01/creation-product-type-attributes-and-set.html" data-text="Créez votre type de produit, ses attributs et son jeu" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

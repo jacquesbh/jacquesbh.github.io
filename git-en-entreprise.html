@@ -1,0 +1,814 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Git en entreprise - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Git à plusieurs... Quelles branches ? Quelles commandes ? Comment ?">
+    <meta name="keywords" content="git, workflow">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Git en entreprise</h1>
+
+        <p>Je suis actuellement en poste dans deux entreprises :</p>
+
+<ol>
+<li>Lead développeur chez <a href="http://joliebox.com">JolieBox</a>, où je passe mes connaissances car mon départ est prévu pour le 1er octobre 2012.</li>
+<li>Lead développeur chez <a href="http://www.internim.com">Internim</a> où j'arrive petit à petit pour prendre en main tout ou partie du Lead sur certains projets et pour animer un peu les développeurs.</li>
+</ol>
+
+
+<p>J'ai une problématique qui se présente à la fois chez JolieBox et à la fois chez Internim : <strong>Notre workflow git</strong>.</p>
+
+<p>L'idée de cet article est de permettre aux développeurs de savoir quelles commandes utiliser, et dans quels cas !</p>
+
+<p>Rien de mieux qu'un bon exemple. Vous allez avoir du concret !</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<h2>Les branches</h2>
+
+<p>Avant mon arrivée chez Internim nous avons décidé, chez JolieBox, de travailler avec une branche par développeur.</p>
+
+<p>Chaque développeur a donc une branche qui lui est propre, nommée le plus souvent par son pseudo ou son nom : <code>jbh</code> pour moi !</p>
+
+<p>A ce moment là nous avons établi le fonctionnement :</p>
+
+<ul>
+<li>Une branche par développeur.</li>
+<li>Une branche <code>master</code>.</li>
+<li>Une branche <code>dev</code> si besoin.</li>
+<li>Une branche supplémentaire par gros lot de développements.</li>
+</ul>
+
+
+<p>A mon arrivée chez Internim j'ai découvert que le fonctionnement était le même sur les projets sous <em>Git</em>, avec quelques branches en plus :</p>
+
+<ul>
+<li>Une branche <code>integration</code> qui contient donc l'intégration du projet (agence web oblige).</li>
+<li>Une branche <code>recette</code> qui contient la dernière release du projet.</li>
+<li>Une branche <code>demo</code> qui permet surtout d'avoir une environnement adapté.</li>
+</ul>
+
+
+<p>Nous sommes donc sur un schéma assez complexe car nous avons un minimum de 3 branches chez JolieBox et 6 branches chez Internim.</p>
+
+<p>Si à cela on ajoute au moins 3 ou 4 branches pour les développeurs, ça devient rapidement un beau bordel. Et nous ne sommes pas dans des process de releases comme <em>Debian</em> ou autre.</p>
+
+<h2>Les développements</h2>
+
+<p>J'ai lu <a href="http://nvie.com/posts/a-successful-git-branching-model/">un très bon article</a> qui résume bien le fonctionnement que je vais vous expliquer ici.</p>
+
+<h3>git commit</h3>
+
+<p>On ne vous la présente pas ! Comment faire nos commits sans cette ligne de commande ?</p>
+
+<p>La meilleure.</p>
+
+<h3>git checkout</h3>
+
+<p>La commande <code>git checkout</code> permet donc de changer de branche.
+Elle est utilisée dans le cas où on doit se placer dans l'état d'une autre branche (la <code>master</code> pour un <em>hotfix</em> par exemple).
+Elle est aussi utilisée avant de faire un <code>git merge</code>.</p>
+
+<h3>git merge</h3>
+
+<p>La commande <code>git merge</code> permet de <em>merger</em> une branche sur la branche courante.</p>
+
+<p>Imaginez que vous êtes sur la branche <code>jbh</code> et que vous devez merger cette branche <code>jbh</code> sur la <code>master</code> :</p>
+
+<pre><code>$ git checkout master
+$ git merge jbh
+</code></pre>
+
+<p>Rien de plus.</p>
+
+<p>L'option <code>--no-ff</code> permet de ne pas faire de <em>fast-forward</em> et de forcer la création d'un commit.</p>
+
+<h3>git cherry-pick</h3>
+
+<p>J'adore cette commande. Elle permet de récupérer un commit...</p>
+
+<blockquote><p>(RTFM)</p>
+
+<p>git-cherry-pick - Apply the changes introduced by some existing commits</p></blockquote>
+
+<p>Je l'utilise quand je dois appliquer un hotfix sur ma branche par exemple. Plutôt qu'un merge...</p>
+
+<h2>Par l'exemple</h2>
+
+<p>Rien ne vaut un exemple pour bien comprendre tout ça.</p>
+
+<p>Prenons les branche suivantes :</p>
+
+<ul>
+<li>master</li>
+<li>dev</li>
+<li>recette</li>
+<li>demo</li>
+<li>dev1 (développeur 1)</li>
+<li>dev2 (développeur 2)</li>
+<li>dev3 (développeur 3)</li>
+</ul>
+
+
+<p>Et établissons l'historique suivant : (Espace de travail du <em>Développeur 2</em>)</p>
+
+<pre><code>* Added f  (origin/dev3)
+* Added e 
+| * Added d  (HEAD, origin/dev2, dev2)
+| * Added c 
+|/  
+| * Added b  (origin/dev1)
+|/  
+* Added a  (origin/recette, origin/master, origin/dev, origin/demo, origin/HEAD, master)
+</code></pre>
+
+<p>On peut voir que les développeurs on avancé chacun de leur côté au départ de la master.</p>
+
+<h3>La branche <code>dev</code></h3>
+
+<p>Le <em>Développeur 2</em> veut merger sa branche sur la <code>dev</code> car il a terminé ses développements :</p>
+
+<pre><code>$ git checkout dev
+$ git merge --no-ff dev2
+$ git push origin dev
+</code></pre>
+
+<p>Et voici ce que ça donne :</p>
+
+<pre><code>*   Merge branch 'dev2' into dev  (HEAD, origin/dev, dev)
+|\  
+| * Added d  (origin/dev2, dev2)
+| * Added c 
+|/  
+| * Added f  (origin/dev3)
+| * Added e 
+|/  
+| * Added b  (origin/dev1)
+|/  
+* Added a  (origin/recette, origin/master, origin/demo, origin/HEAD, master)
+</code></pre>
+
+<p>Il se trouve que le <em>Développeur 2</em> se trouve sur la dernière révision de la <code>dev</code>, il peut donc reprendre ses développements.</p>
+
+<pre><code>$ git checkout dev2
+[quelques commits...]
+$ git push origin dev2
+</code></pre>
+
+<p>On remarque que le merge de <code>dev2</code> sur <code>dev</code> n'a impacté que la branche <code>dev</code>.
+Il faut savoir que <strong>le merge n'impacte QUE la branche courante</strong>.</p>
+
+<pre><code>* Added h  (HEAD, origin/dev2, dev2)
+* Added g 
+| *   Merge branch 'dev2' into dev  (origin/dev, dev)
+| |\  
+| |/  
+|/|   
+* | Added d 
+* | Added c 
+|/  
+| * Added f  (origin/dev3)
+| * Added e 
+|/  
+| * Added b  (origin/dev1)
+|/  
+* Added a  (origin/recette, origin/master, origin/demo, origin/HEAD, master)
+</code></pre>
+
+<p>Maintenant c'est au tour du <em>Développeur 1</em> de vouloir merger sur la <code>dev</code>.</p>
+
+<pre><code>$ git checkout dev
+$ git fetch
+$ git merge origin/dev
+$ git merge --no-ff dev1
+$ git push origin dev
+</code></pre>
+
+<p>Le résultat : La branche <code>dev</code> est à jour avec les commits des développeurs 1 et 2. Cependant le <em>Développeur 1</em> n'a pas dans sa branche <code>dev1</code> les commits de la branche <code>dev2</code> et le <em>Développeur 2</em> n'a pas ceux de la branche <code>dev1</code> dans sa branche <code>dev2</code>.</p>
+
+<p>Le <em>Développeur 1</em> sait que sa branche n'est pas totalement à jour. Il décide donc de faire en sorte qu'elle le soit pour pouvoir continuer ses développements.</p>
+
+<p>Pour ça il décide de replacer sa branche <code>dev1</code> à l'identique de la branche <code>dev</code>. On reset :</p>
+
+<pre><code>$ git checkout dev1
+$ git reset --hard dev
+$ git push -f origin dev1
+</code></pre>
+
+<p>D'après un collègue chez <a href="http://www.internim.com">Internim</a> on peut aussi faire un pull/push de la branche sur laquelle on veut se placer : <em>(testé et approuvé)</em></p>
+
+<pre><code>$ git checkout dev1
+$ git pull origin dev
+$ git push origin dev1
+</code></pre>
+
+<p>Le <em>Développeur 1</em> est maintenant précisément au même endroit que la branche <code>dev</code>, il peut donc continuer ses développements avec deux nouveaux commits :</p>
+
+<pre><code>* Added j  (HEAD, origin/dev1, dev1)
+* Added i 
+*   Merge branch 'dev1' into dev  (origin/dev, dev)
+|\  
+| * Added b 
+* |   Merge branch 'dev2' into dev 
+|\ \  
+| |/  
+|/|   
+| | * Added h  (origin/dev2)
+| | * Added g 
+| |/  
+| * Added d 
+| * Added c 
+|/  
+| * Added f  (origin/dev3)
+| * Added e 
+|/  
+* Added a  (origin/recette, origin/master, origin/demo, origin/HEAD, master)
+</code></pre>
+
+<p>Vient le tour du <em>Développeur 3</em> de faire son merge sur la branche <code>dev</code> (rapidement) :</p>
+
+<pre><code>$ git checkout dev
+$ git fetch
+$ git merge origin/dev
+$ git merge --no-ff dev3
+$ git push origin dev
+$ git checkout dev3
+</code></pre>
+
+<p>On remarque que la branche <code>dev</code> ne contient <strong>QUE</strong> des merges. C'est super car c'est exactement ce que nous voulons !</p>
+
+<pre><code>*   Merge branch 'dev3' into dev  (origin/dev, dev)
+|\  
+| * Added f  (HEAD, origin/dev3, dev3)
+| * Added e 
+| | * Added j  (origin/dev1)
+| | * Added i 
+| |/  
+|/|   
+* |   Merge branch 'dev1' into dev 
+|\ \  
+| * | Added b 
+| |/  
+* |   Merge branch 'dev2' into dev 
+|\ \  
+| |/  
+|/|   
+| | * Added h  (origin/dev2)
+| | * Added g 
+| |/  
+| * Added d 
+| * Added c 
+|/  
+* Added a  (origin/recette, origin/master, origin/demo, origin/HEAD, master)
+</code></pre>
+
+<p>Au tour du <em>Développeur 3</em> de replacer sa branche pour continuer ses développements correctement :</p>
+
+<pre><code>$ git checkout dev3
+$ git reset --hard dev
+$ git push -f origin dev3
+</code></pre>
+
+<p>On peut aussi faire un pull de la branche <code>dev</code> :</p>
+
+<pre><code>$ git checkout dev3
+$ git pull origin dev
+$ git push origin dev3
+</code></pre>
+
+<p><strong>Bien sûr un <code>reset --hard</code> suivi d'un <code>push -f</code> implique que votre environnement de travail soit vraiment propre avant toute manipulation.</strong></p>
+
+<h3>La branche <code>recette</code></h3>
+
+<p>On ne merge sur la <code>recette</code> que quand les développements sont validés. C'est à ce moment là que le chef de projets fait ses vérifications par rapport aux spécifications techniques générales et détaillées.</p>
+
+<p>N'importe qui peut faire le merge de la <code>dev</code> sur la <code>recette</code> car on sait que seule la branche courante est impactée.</p>
+
+<p>On merge la branche <code>origin/dev</code> pour être certain de prendre la dernière version :</p>
+
+<pre><code>$ git checkout recette
+$ git fetch
+$ git merge origin/recette
+$ git merge --no-ff origin/dev
+$ git push origin recette
+</code></pre>
+
+<p>La branche <code>recette</code> contient bien nos derniers développements.</p>
+
+<pre><code>*   Merge remote-tracking branch 'origin/dev' into recette  (HEAD, recette)
+|\  
+| *   Merge branch 'dev3' into dev  (origin/dev3, origin/dev, dev3, dev)
+| |\  
+| | * Added f 
+| | * Added e 
+| |/  
+|/|   
+| | * Added j  (origin/dev1)
+| | * Added i 
+| |/  
+| *   Merge branch 'dev1' into dev 
+| |\  
+| | * Added b 
+| |/  
+|/|   
+| *   Merge branch 'dev2' into dev 
+| |\  
+|/ /  
+| | * Added h  (origin/dev2)
+| | * Added g 
+| |/  
+| * Added d 
+| * Added c 
+|/  
+* Added a  (origin/recette, origin/master, origin/demo, origin/HEAD, master)
+</code></pre>
+
+<h3>La branche <code>demo</code></h3>
+
+<p>Le principe est identique à la branche <code>recette</code> sauf que c'est bien la branche <code>recette</code> que l'on merge sur la <code>demo</code>.</p>
+
+<h3>La branche <code>master</code></h3>
+
+<p>C'est un peu la branche de <em>prod</em>...</p>
+
+<p>Même principe, on merge la branche <code>demo</code> sur la <code>master</code>.</p>
+
+<h3>Les hotfixes ?</h3>
+
+<p>C'est le dernier point important !</p>
+
+<p>A un moment il est fort possible que vous ayez à faire un <em>hotfix</em> sur la branche <code>recette</code> par exemple.</p>
+
+<p>Faites-le ! Et appliquez la modification sur la branche <code>dev</code> pour être certain que les développeurs récupèrerons la modification à un moment.</p>
+
+<p>Pour ça vous pouvez procéder comme suit :</p>
+
+<h4>Appliquer le hotfix</h4>
+
+<pre><code>$ git checkout recette
+[...fix...]
+$ git fetch
+$ git merge origin/recette
+$ git commit -m "[hotfix] Added k"
+$ git push origin recette
+</code></pre>
+
+<p>Il nous faut maintenant appliquer le commit sur toutes les <em>principales</em> branches du projet au dessus dans la hiérarchie des merges.</p>
+
+<p>Dans ce cas au dessus de <code>recette</code> : c'est <code>dev</code>.</p>
+
+<h4>Appliquer le hotfix sur la branche <code>dev</code></h4>
+
+<p>Les branches <code>dev1</code>, <code>dev2</code> et <code>dev3</code> ne sont pas à impacter. Si votre équipe est bien organisée elle verra passer le <em>hotfix</em> et le récupèrera.</p>
+
+<p>Soit de la manière que je vais vous montrer, soit via un reset comme nous l'avons vu plus haut.</p>
+
+<p>Appliquez donc le hotfix sur la branche <code>dev</code> via la commande <code>git cherry-pick</code> !</p>
+
+<p>Il vous faut au préalable le SHA1 du hotfix (au moins les premiers caractères) :</p>
+
+<pre><code>$ git checkout dev
+$ git fetch
+$ git merge origin/dev
+$ git cherry-pick 461c1ca
+$ git push origin dev
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>Je ne suis pas certain que ce workflow soit le meilleur mais il a le mérite de fonctionner. Il permet de garder une arborescence propre.</p>
+
+<p>Le fait de <code>reset --hard</code> la branche du développeur est assez particulier, mais c'est la seule manière que j'ai trouvé pour ne pas faire de duplicats de commits (comme on peut le voir avec <code>rebase</code>)
+C'est essentiellement à cause de ces <code>reset</code> que je force le commit lors des merges avec l'option <code>--no-ff</code>. De cette manière mon historique indique bien qu'il y a eu un merge de tel développeur à tel moment.</p>
+
+<p>Vos avis sont les bienvenus !</p>
+
+<!-- more end -->
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>03 September 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Git">Git</a>, 
+                
+                <a href="/search.html?tag=Workflow">Workflow</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/3607757">3607757</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/git-en-entreprise.html" data-text="Git en entreprise" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

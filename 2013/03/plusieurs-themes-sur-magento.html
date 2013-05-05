@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Le multi-thèmes en développement - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="On a toujours besoin de regarder le thème par défaut en même temps que notre propre thème pendant nos développements !">
+    <meta name="keywords" content="magento, theme, development, package">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Le multi-thèmes en développement</h1>
+
+        <p>Quand on développe sur un nouveau projet (ou pas d'ailleurs) on est obligé de modifier le fonctionnement de manière plus ou moins poussée des pages par défaut.<br/>
+Par exemple on a souvent besoin de modifier la page catégorie, le compte, etc.</p>
+
+<p>Il y a plusieurs manières ensuite pour bosser sur un nouveau thème.<br/>
+Certains modifient directement le thème par défaut (très déconseillé), d'autres le dupliquent et éditent le thème dupliqué, d'autres encore dupliquent le thème par défaut pour le mettre dans leur package et font un troisième thème vide qui va venir surcharger...</p>
+
+<p>Je n'ai jamais vraiment sû quelle méthode utiliser (entre les deux dernières bien sûr).</p>
+
+<p>Mais au final on se retrouve toujours devant un dilemne. On bosse sur notre nouveau thème mais on a besoin de voir ce que le thème par défaut faisait.<br/>
+Car oui... on veut garder le fonctionnel et on veut être sûr de ne rien oublier !</p>
+
+<p>Et là ça devient vite emmerdant de switcher de thème toutes les 10 minutes "juste pour vérifier".</p>
+
+<p>Solution !</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<p>Sur Magento on a un système de gestion des thèmes qui est plutôt poussé.</p>
+
+<p>Et dans le genre poussé... on a un truc super : le choix du thème suivant le <code>User-Agent</code> de votre navigateur.</p>
+
+<p>Voyons voir un peu l'administration... Dans <code>System &gt; Configuration</code> puis <code>GÉNÉRAL &gt; Design</code> :</p>
+
+<p><img src="/images/posts/plusieurs-themes-sur-magento/default.png" alt="Configuration par défaut" /></p>
+
+<p>Par défaut le système cherche le thème <code>base/default</code> sur toutes les versions de Magento.<br/>
+Sur une version <em>Community</em> le thème réglé à l'install est <code>default/default</code> et sur une version <em>Enterprise</em> le thème à l'install est <code>enterprise/default</code>.</p>
+
+<p>Pour bien faire notre boulot on change le thème de notre applicatif et on met par exemple <code>jacquesbh/foo</code>.</p>
+
+<blockquote><p>Et si on faisait en sorte que sur <em>Google Chrome</em> le thème soit toujours celui par défaut ?</p></blockquote>
+
+<p>Parce que oui ! Je bosse sur Firefox ! Alors Chrome c'est parfait pour regarder le site sur le thème par défaut.</p>
+
+<p><img src="/images/posts/plusieurs-themes-sur-magento/perform.png" alt="Configuration améliorée" /></p>
+
+<p>Dans cette nouvelle configuration on a bien le thème de changé.<br/>
+Cependant pour les navigateurs qui contiennent <code>Chrome</code> dans leur <code>User-Agent</code> on a le thème par défaut (ici d'une version Enterprise).</p>
+
+<p>La regex à utiliser est la suivante : <code>.*Chrome.*</code></p>
+
+<p><img src="/images/posts/plusieurs-themes-sur-magento/regex.png" alt="Regex" /></p>
+
+<p>A partir de maintenant vous avez votre thème sur votre navigateur préféré (Firefox pour moi) et le thème par défaut (ou un autre) sur votre navigateur secondaire (Chrome pour moi).</p>
+
+<p>Evidemment on n'utilisera pas cette technique en production !</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>07 March 2013</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Thème">Thème</a>, 
+                
+                <a href="/search.html?tag=Bonnes pratiques">Bonnes pratiques</a>
+                
+            </strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/03/plusieurs-themes-sur-magento.html" data-text="Le multi-thèmes en développement" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

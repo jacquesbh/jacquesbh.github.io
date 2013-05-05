@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Bien afficher un attribut personnalisé - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="On a toujours envie que notre attribut s'affiche correctement dans notre page produit ou notre catalogue sans créer de dépendances... Explication !">
+    <meta name="keywords" content="attribute, magento, phtml, product, page, catalog">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Bien afficher un attribut personnalisé</h1>
+
+        <p>Je me souviens de la galère, à mes débuts sur Magento, pour afficher un attribut un peu personnalisé...</p>
+
+<p>Si l'attribut est l'identifiant d'un bloc CMS, un chiffre sans unité, une clé qui détermine une image... ou que sais-je encore !<br/>
+Pour l'exemple nous prendrons l'identifiant d'un bloc CMS, ça me plait bien !</p>
+
+<p>Là tout de suite le problème c'est de garder un template clair...</p>
+
+<blockquote><p>Il faut faire ton traitement dans le <code>phtml</code> !</p></blockquote>
+
+<p>Heu... <strong>Non !</strong></p>
+
+<blockquote><p>Il faut faire un helper pour afficher ton attribut !</p></blockquote>
+
+<p>Là oui. Mais pas que !</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<p>Vous connaissez la partie « Additional Information » dans une fiche produit n'est-ce pas ?<br/>
+Et vous ne savez pas comment faire pour que votre attribut, qui, je le rappelle est un identifiant de block CMS, s'affiche correctement ?</p>
+
+<p>Regardons-y d'un peu plus près. Voici le template <code>frontend/base/default/template/catalog/product/view/attributes.phtml</code> :</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'attributes.phtml', '15');</script>
+
+
+<p>Ce template est donc celui qui affiche nos attributs.</p>
+
+<p>A la ligne surlignée on peut remarquer un appel étrange à notre helper <code>Mage_Catalog_Helper_Output</code>... Mais concrêtement il se passe quoi ?<br/>
+Allez, on remonte !</p>
+
+<p>Le helper a une méthode <code>productAttribute</code> assez particulière comme on peut le voir ci-dessous :</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'Output_productAttribute.php', '17-38');</script>
+
+
+<p>Si on lis cette méthode on comprend que si notre attribut a un <code>frontend_input</code> qui vaut <code>price</code> ou <code>textarea</code> alors il y aura un petit traitement de faveur pour la valeur de notre attribut.<br/>
+Même chose si notre attribut a l'éditeur WYSIWYG d'activé ou que le HTML est autorisé en front pour celui-ci.</p>
+
+<p>Par contre dans tous les autres cas c'est la méthode <code>process</code> qui prend la main...</p>
+
+<p>Bon ok, et cette méthode elle fait quoi ? Voyons-voir ça :</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'Output_process.php', '17-22');</script>
+
+
+<p>Notre helper récupère des "handlers" et effectue un traitement particulier : il vérifie que la méthode passée en argument (<code>productAttribute</code> dans notre cas) existe pour le "handler" courant dans la boucle...<br/>
+Si la méthode existe alors elle est appelée.</p>
+
+<p>Bon, et ces handlers, ils viennent d'où ? La méthode <code>addHandler</code> est là pour nous l'expliquer, enfin... plus ou moins :</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'Output_addHandler.php', '16-26');</script>
+
+
+<p>En gros on peut ajouter pour une méthode données un helper personnalisé via cette méthode. Et puis bon comme les helpers sont des singletons rien ne nous empêche de le faire quand bon nous semble tant que c'est fait avant l'affichage de notre attribut.</p>
+
+<p>Bon, donc, qu'est-ce qui nous empêche de créer un helper avec la méthode <code>productAttribute($outputHelper, $result, $params)</code> afin de personnaliser l'affichage de notre attribut ?</p>
+
+<p>Vous me suivez ?</p>
+
+<p>Ouais ok... mais bon, comment on fait pour ajouter notre "handler" personnalisé ?</p>
+
+<p>Avec un peu de chance il y a bien un évènement qui est lancé dans les environs... Ah tiens, il fait quoi le constructeur ?? Comme quoi... faut pas chercher bien loin !</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'Output_construct.php', '12');</script>
+
+
+<p>Bon, on a notre <em>event</em>, alors on observe et on fait en sorte que notre observeur ajoute notre helper !</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'Observer.php', '14');</script>
+
+
+<p>Et notre helper alors ? Il fait quoi ?</p>
+
+<p>Vu que notre attribut (que nous nommerons ici <code>out_attribute_code</code>) est l'identifiant d'un block CMS, il faut que nous affichions le contenu de ce block !<br/>
+Pour faire simple et sans rentrer dans des histoires de cache (car oui le block <code>Mage_Cms_Block_Block</code> ne gère aucun cache !) et bien nous pouvons faire ça :</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'Helper.php', '16-43');</script>
+
+
+<h2>Conclusion</h2>
+
+<p>Certains me diront que c'est compliqué pour faire simple...</p>
+
+<p>Bah moi j'ai envie de dire... c'est super pratique. Car au final quand je veux afficher un attribut j'ai juste à faire ça :</p>
+
+<script type="text/javascript">gist('jacquesbh/5033402', 'call.php');</script>
+
+
+<p>De cette manière mes modules sont indépendant les uns des autres et je n'ai qu'une seule manière de faire pour afficher mes attributs.</p>
+
+<p>Et en plus ils s'affichent parfaitement dans notre template de départ ! Et tout ça « sans rien faire » !</p>
+
+<blockquote><p>Bah moi si j'ai envie de filtrer le contenu de mon attribut et bah je peux ! Et en plus s'trop facile !</p></blockquote>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>26 February 2013</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Attributes">Attributes</a>, 
+                
+                <a href="/search.html?tag=Product">Product</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/jacquesbh/5033402">jacquesbh/5033402</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/02/afficher-un-attribut.html" data-text="Bien afficher un attribut personnalisé" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

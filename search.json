@@ -1,0 +1,292 @@
+{
+    "posts": [
+        
+        {
+            "title": "Une sidebar pour les développeurs",
+            "subtitle": "",
+            "keywords": "reindex, cache, hints",
+            "tags": ["Cache","Images","Magento","EAV","Aides de vue"],
+            "categories": [],
+            "description": "Vider le cache, activer les aides de vue, réindexer... Tout ça rapidement !",
+            "url": "/2013/03/sidebar-magento-developers.html",
+            "date": "18 March 2013"
+        },
+        
+        {
+            "title": "Merci MySQL pour tes loyaux services",
+            "subtitle": "",
+            "keywords": "mariadb mysq",
+            "tags": ["MariaDB","MySQL"],
+            "categories": [],
+            "description": "Allez, on remplace notre MySQL par MariaDB !",
+            "url": "/2013/03/remplacer-mysql-par-mariadb.html",
+            "date": "16 March 2013"
+        },
+        
+        {
+            "title": "Le multi-thèmes en développement",
+            "subtitle": "",
+            "keywords": "magento, theme, development, package",
+            "tags": ["Magento","Thème","Bonnes pratiques"],
+            "categories": [],
+            "description": "On a toujours besoin de regarder le thème par défaut en même temps que notre propre thème pendant nos développements !",
+            "url": "/2013/03/plusieurs-themes-sur-magento.html",
+            "date": "07 March 2013"
+        },
+        
+        {
+            "title": "Bien afficher un attribut personnalisé",
+            "subtitle": "",
+            "keywords": "attribute, magento, phtml, product, page, catalog",
+            "tags": ["Magento","Attributes","Product"],
+            "categories": [],
+            "description": "On a toujours envie que notre attribut s'affiche correctement dans notre page produit ou notre catalogue sans créer de dépendances... Explication !",
+            "url": "/2013/02/afficher-un-attribut.html",
+            "date": "26 February 2013"
+        },
+        
+        {
+            "title": "Un attribut dynamique",
+            "subtitle": "",
+            "keywords": "eav, magento, attribute",
+            "tags": ["Magento","Attributes","Product","EAV","Module"],
+            "categories": [],
+            "description": "Il est temps de ne pas perdre de temps avec les attributs à valeur multiple !",
+            "url": "/2013/02/un-attribut-dynamique-sur-magento.html",
+            "date": "17 February 2013"
+        },
+        
+        {
+            "title": "Créez votre type de produit, ses attributs et son jeu",
+            "subtitle": "",
+            "keywords": "magento, attributes, set",
+            "tags": ["Magento","Attributes","Product","Product type"],
+            "categories": [],
+            "description": "Appenez à créer votre type de produit sans vous tromper. Créez également votre jeu d'attributs et vos attributs personnalisés.",
+            "url": "/2013/01/creation-product-type-attributes-and-set.html",
+            "date": "21 January 2013"
+        },
+        
+        {
+            "title": "Un blog avec Jekyll et GitHub",
+            "subtitle": "",
+            "keywords": "jekyll, github",
+            "tags": ["Jekyll","GitHub"],
+            "categories": [],
+            "description": "Voici comment faire un blog rapide avec Jekyll et Github",
+            "url": "/2013/01/un-site-avec-jekyll-rapidement.html",
+            "date": "14 January 2013"
+        },
+        
+        {
+            "title": "Ajouter un handle au layout sur Magento",
+            "subtitle": "",
+            "keywords": "layout, magento, handle, events",
+            "tags": ["Magento","Layout","Handle","Events"],
+            "categories": [],
+            "description": "Il est très utile d'avoir des handles personnalisés dans notre layout pour certaines pages.",
+            "url": "/ajouter-un-handle-personnalise-sur-une-page-sur-magento.html",
+            "date": "29 December 2012"
+        },
+        
+        {
+            "title": "Ajouter un script externe au header sur Magento",
+            "subtitle": "",
+            "keywords": "magento, script, head, css, js, externe",
+            "tags": ["Magento","Layout"],
+            "categories": [],
+            "description": "Vous souhaitez charger un script Google ? Facebook ? ou Twitter dans le header de votre site ? Apprennez ici comment faire !",
+            "url": "/ajouter-un-script-externe-au-header-sur-magento.html",
+            "date": "24 December 2012"
+        },
+        
+        {
+            "title": "Supprimer le merge des paniers",
+            "subtitle": "",
+            "keywords": "magento, catalog, catalogue, product, produit, block",
+            "tags": ["Magento","Cart","Customer"],
+            "categories": [],
+            "description": "N'avez-vous jamais voulu supprimer le merge entre le panier sauvegardé du client et le panier du visiteur lorsque celui-ci se connecte ?",
+            "url": "/supprimer-le-merge-des-paniers.html",
+            "date": "21 October 2012"
+        },
+        
+        {
+            "title": "Un push pour vos produits",
+            "subtitle": "",
+            "keywords": "magento, catalog, catalogue, product, produit, block",
+            "tags": ["Magento","Block","Module"],
+            "categories": [],
+            "description": "Apprennez comment avoir des pushs pour vos produits.",
+            "url": "/un-push-pour-vos-produits-sur-magento.html",
+            "date": "08 October 2012"
+        },
+        
+        {
+            "title": "Le Layout sur Magento",
+            "subtitle": "",
+            "keywords": "magento, layout",
+            "tags": ["Magento","Layout"],
+            "categories": [],
+            "description": "Apprenez tout sur le Layout Magento !",
+            "url": "/le-layout-sur-magento.html",
+            "date": "15 September 2012"
+        },
+        
+        {
+            "title": "Le cache des blocks sur Magento",
+            "subtitle": "",
+            "keywords": "magento, cache",
+            "tags": ["Magento","Cache"],
+            "categories": [],
+            "description": "Vous voulez savoir comment est géré le cache des blocks sur Magento ?",
+            "url": "/le-cache-des-blocks-sur-magento.html",
+            "date": "06 September 2012"
+        },
+        
+        {
+            "title": "Git en entreprise",
+            "subtitle": "",
+            "keywords": "git, workflow",
+            "tags": ["Git","Workflow"],
+            "categories": [],
+            "description": "Git à plusieurs... Quelles branches ? Quelles commandes ? Comment ?",
+            "url": "/git-en-entreprise.html",
+            "date": "03 September 2012"
+        },
+        
+        {
+            "title": "Android + Proxy = HTTP en clair",
+            "subtitle": "",
+            "keywords": "android, proxy, http",
+            "tags": ["Android","Proxy","HTTP"],
+            "categories": [],
+            "description": "C'est fou le nombre de développeurs qui pensent que les requêtes HTTP sont invisibles !",
+            "url": "/utiliser-un-proxy-sur-android.html",
+            "date": "17 August 2012"
+        },
+        
+        {
+            "title": "Utiliser l'Installer - Créer un grid en admin",
+            "subtitle": "",
+            "keywords": "magento, installer",
+            "tags": ["Magento","The Installer"],
+            "categories": [],
+            "description": "L'Installer est très pratique et permet de gagner un temps fou ! Apprenez à l'utiliser.",
+            "url": "/apprendre-a-utiliser-magento-installer.html",
+            "date": "14 August 2012"
+        },
+        
+        {
+            "title": "Je dévoile l'Installer",
+            "subtitle": "",
+            "keywords": "[\"magento\", \"installer\"]",
+            "tags": ["Magento","The Installer"],
+            "categories": [],
+            "description": "L'Installer, version 1.",
+            "url": "/the-installer-v1.html",
+            "date": "07 August 2012"
+        },
+        
+        {
+            "title": "Changeons notre homepage !",
+            "subtitle": "",
+            "keywords": "[\"magento\", \"homepage\", \"layout\", \"cms\"]",
+            "tags": ["Magento","Homepage","Layout","CMS"],
+            "categories": [],
+            "description": "Il y a plusieurs façons de faire pour changer de Homepage, en voici une !",
+            "url": "/une-nouvelle-homepage.html",
+            "date": "04 August 2012"
+        },
+        
+        {
+            "title": "Vos blocs en ajax ?",
+            "subtitle": "",
+            "keywords": "[\"magento\", \"ajax\", \"header\"]",
+            "tags": ["Magento","Ajax"],
+            "categories": [],
+            "description": "Vous souhaitez afficher uniquement le header de votre page via une requête ajax ? Easy :)",
+            "url": "/vos-blocs-en-ajax-via-webservice.html",
+            "date": "31 July 2012"
+        },
+        
+        {
+            "title": "Le piège des routeurs sur Magento",
+            "subtitle": "",
+            "keywords": "php, router, url, magento",
+            "tags": ["Magento","URL","Bonnes pratiques"],
+            "categories": [],
+            "description": "Une contrôleur frontal accessible par une route admin... Si si... C'est possible !",
+            "url": "/le-piege-des-routes-sur-magento.html",
+            "date": "23 July 2012"
+        },
+        
+        {
+            "title": "Se connecter sur le compte d'un client",
+            "subtitle": "",
+            "keywords": "php, connect as, magento",
+            "tags": ["Magento"],
+            "categories": [],
+            "description": "Obtenez un bouton pour accéder au compte d'un client, pour payer par carte pour lui ou en cas de problème technique avec son compte...",
+            "url": "/connectez-vous-sur-un-compte-client-sur-magento.html",
+            "date": "20 July 2012"
+        },
+        
+        {
+            "title": "Les scripts Magento",
+            "subtitle": "",
+            "keywords": "php, script, shell, magento",
+            "tags": ["Magento","PHP"],
+            "categories": [],
+            "description": "Réalisez vos propres scripts PHP sur Magento.",
+            "url": "/realisez-vos-propres-scripts-php-sur-magento.html",
+            "date": "19 July 2012"
+        },
+        
+        {
+            "title": "Les emails customs sur Magento",
+            "subtitle": "",
+            "keywords": "php, email transactionnel, magento",
+            "tags": ["Magento","PHP"],
+            "categories": [],
+            "description": "Apprenez à créer un email custom sur Magento.",
+            "url": "/creer-un-email-transactionnel-sur-magento.html",
+            "date": "18 July 2012"
+        },
+        
+        {
+            "title": "Un slider avec le JbhSlider",
+            "subtitle": "",
+            "keywords": "slider, jbh, jbhslider, css, jquery",
+            "tags": ["jQuery","Javascript"],
+            "categories": [],
+            "description": "Apprenez à créer un slider simple avec le JbhSlider.",
+            "url": "/un-slider-avec-le-jbhslider.html",
+            "date": "17 July 2012"
+        },
+        
+        {
+            "title": "Quelques snippets Magento",
+            "subtitle": "",
+            "keywords": "magento, snippet, vim, netbeans",
+            "tags": ["Magento","Snippets","Vim","Netbeans"],
+            "categories": ["Magento"],
+            "description": "De nos jours quand on est développeur, on ne peut plus se passer de ces petits bouts de code !",
+            "url": "/quelques-snippets-magento.html",
+            "date": "15 July 2012"
+        },
+        
+        {
+            "title": "Un début à tout",
+            "subtitle": "",
+            "keywords": "blog, jekyll, markdown, github",
+            "tags": ["Jekyll","Markdown","GitHub"],
+            "categories": ["Blog"],
+            "description": "Il est temps pour moi d'avoir un blog, sur Jekyll et GitHub, en Markdown. Quoi de mieux ?",
+            "url": "/un-debut-a-tout.html",
+            "date": "15 July 2012"
+        }
+        
+    ]
+    
+}

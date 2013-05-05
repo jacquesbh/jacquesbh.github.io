@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Un slider avec le JbhSlider - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Apprenez à créer un slider simple avec le JbhSlider.">
+    <meta name="keywords" content="slider, jbh, jbhslider, css, jquery">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Un slider avec le JbhSlider</h1>
+
+        <p>Il n'est pas rare de nos jours de voir un slider, le plus souvent en Javascript, sur une homepage, ou encore une fiche produit, etc.</p>
+
+<p>Sauf que le développeur est confronté à un problème : L'intégrateur.
+Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le même que son collègue.</p>
+
+<p>Et le développeur lui, il veut un truc pratique et il a pas envie de se prendre la tête, pour un slider.</p>
+
+<!-- more start -->
+
+
+
+
+<hr/>
+
+
+<p>On veut un slider pratique, mais c'est quasiment introuvable.</p>
+
+<p>Quasiment, parce qu'en fait... j'en ai développé un rien que pour vous. Pour moi en fait.</p>
+
+<p style="text-align:center;"><strong><a href="http://jacques.sh/jbhslider/" title="Simple way to slide">Le JbhSlider</a></strong></p>
+
+<h2>Le HTML</h2>
+
+<p>Plusieurs choix s'offrent à nous :</p>
+
+<ul>
+<li>Les <code>div</code> dans des <code>div</code> :</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div&gt;</span>Slide 1<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>Slide 2<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>Slide 3<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+
+<p style="text-align:center;">Exemple 1</p>
+
+<ul>
+<li>La liste à puces :</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Slide 1<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Slide 2<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Slide 3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div>
+
+
+<p style="text-align:center;">Exemple 2</p>
+
+<p>Par défaut nous sommes dans une liste à puce... entourée d'une <code>div</code> :</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span> <span class="na">style=</span><span class="s">&quot;margin: 0 auto;&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/26c877/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/d53221/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/47c8f3/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+
+<p style="text-align:center;">Exemple 3</p>
+
+<h2>Le Javascript</h2>
+
+<p>Tout d'abord il nous faut inclure notre fichier slider javascript dans le <code>head</code> de notre page ou entre les balises <code>body</code> directement :</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;jbhslider.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+
+
+<p>Ensuite il suffit d'appeler ce petit bout de code pour activer notre exemple numéro 3.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// La closure et le &quot;document ready&quot; ne sont pas toujours nécessaires</span>
+<span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mon_slider&#39;</span><span class="p">).</span><span class="nx">jbhSlider</span><span class="p">({</span>
+            <span class="c1">// Par défaut la taille est de 500 par 250</span>
+            <span class="nx">css</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">width</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
+                <span class="nx">height</span><span class="o">:</span> <span class="mi">125</span>
+            <span class="p">},</span>
+            <span class="c1">// Par défaut il y a une navigation précédent/suivant qui est générée</span>
+            <span class="nx">navigation</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">active</span><span class="o">:</span> <span class="kc">false</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</code></pre></div>
+
+
+
+
+<hr/>
+
+
+
+
+<div id="mon_slider" style="margin: 0 auto;">
+    <ul>
+        <li><img src="http://placehold.it/250x125/26c877/ffffff" /></li>
+        <li><img src="http://placehold.it/250x125/d53221/ffffff" /></li>
+        <li><img src="http://placehold.it/250x125/47c8f3/ffffff" /></li>
+    </ul>
+</div>
+
+
+
+
+<script type="text/javascript" src="http://jacques.sh/jbhslider/js/jbh_slider.min.js"></script>
+
+
+<script type="text/javascript">
+// <![CDATA[
+(function ($) {
+    $(document).ready(function () {
+        $('#mon_slider').jbhSlider({
+            css: {
+                width: 250,
+                height: 125
+            },
+            navigation: {
+                active: false
+            }
+        });
+    });
+})(jQuery);
+// ]]>
+</script>
+
+
+
+
+<hr />
+
+
+<p>Je vous invite vraiment à aller lire la <a href="http://jacques.sh/jbhslider/#documentation" title="Une documentation complète">documentation du slider</a> !</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>17 July 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=jQuery">jQuery</a>, 
+                
+                <a href="/search.html?tag=Javascript">Javascript</a>
+                
+            </strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/un-slider-avec-le-jbhslider.html" data-text="Un slider avec le JbhSlider" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

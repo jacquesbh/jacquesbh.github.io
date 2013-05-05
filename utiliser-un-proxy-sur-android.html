@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Android + Proxy = HTTP en clair - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="C'est fou le nombre de développeurs qui pensent que les requêtes HTTP sont invisibles !">
+    <meta name="keywords" content="android, proxy, http">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Android + Proxy = HTTP en clair</h1>
+
+        <p>Ce soir j'ai joué à un jeu (dont je ne donnerai pas le nom) sur mon téléphone, sous Android 4.1.1 (Jelly Bean).</p>
+
+<p>Et il m'est venue l'idée de voir les requêtes envoyées par l'application pour enregistrer mon score...</p>
+
+<p>Procédure très facile à réaliser !</p>
+
+<!-- more start -->
+
+
+
+
+<hr />
+
+
+<p>Ok tout d'abord je me suis dit que je pouvais peut-être sniffer les requêtes TCP depuis mon Mac à condition que le téléphone soit sur le même réseau... Pas possible.</p>
+
+<p>Ensuite je me suis dit que j'allais simplement utiliser <a href="http://www.charlesproxy.com/">Charles</a>, un proxy HTTP très sympa. J'ai donc pensé à mettre en place le proxy directement sur mon téléphone. Sauf que oui, mais non... Le proxy en place sur la connexion WiFi du téléphone n'est utilisé que par le navigateur. Enfin c'est ce qu'Android m'annonce quand je change le proxy.</p>
+
+<p>Soit.</p>
+
+<p>Je décide donc de récupérer le APK de mon application (via <a href="http://airdroid.com">AirDroid</a>) et d'utiliser une machine virtuelle android.</p>
+
+<p>Pour la machine virtuelle c'est simple... je prends le <a href="http://developer.android.com/sdk/index.html">SDK Android</a>.</p>
+
+<h2>Installer un <code>Android Virtual Device</code></h2>
+
+<p>Avant tout il nous faut donc une machine tournant sur Android. Pour ça on va simplement utiliser l'émulateur fourni avec le SDK.</p>
+
+<p>Le SDK est fraîchement téléchargé et pas complet, on remédie au problème en lançant la jolie interface <code>;)</code> :</p>
+
+<pre><code>~ $ cd Developper/android-sdk-macosx/tools/
+~/Developper/android-sdk-macosx/tools $ ./android
+</code></pre>
+
+<p><img src="/images/posts/android-http-proxy/charles.png" alt="Android SDK Manager" /></p>
+
+<p>On sélectionne l'API 16 (Android 4.1) et on installe tout ça !</p>
+
+<p>Maintenant nous avons donc tout ce qu'il faut pour créer notre <code>AVD</code>.</p>
+
+<p>On commence donc par lister les systèmes Android disponibles :</p>
+
+<pre><code>~/Developper/android-sdk-macosx/tools $ ./android list targets
+Available Android targets:
+----------
+id: 1 or "android-16"
+     Name: Android 4.1
+     Type: Platform
+     API level: 16
+     Revision: 2
+     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in
+     ABIs : armeabi-v7a
+</code></pre>
+
+<p>Ensuite il nous faut créer notre <code>AVD</code> :</p>
+
+<pre><code>~/Developper/android-sdk-macosx/tools $ ./android create avd -n android_4.1 -a -c 100M -t android-16
+Auto-selecting single ABI armeabi-v7a
+Android 4.1 is a basic Android platform.
+Do you wish to create a custom hardware profile [no]
+Created AVD 'android_4.1' based on Android 4.1, ARM (armeabi-v7a) processor,
+with the following hardware config:
+hw.lcd.density=240
+vm.heapSize=48
+hw.ramSize=512
+</code></pre>
+
+<p>Tapez <code>[enter]</code> ou <code>no</code> à la question sur le <code>hardware profile</code>.</p>
+
+<h2>Lancer Charles et notre <code>AVD</code></h2>
+
+<p>Avant de lancer notre nouvelle machine sous Android, nous devons lancer Charles.</p>
+
+<pre><code>clic clic
+</code></pre>
+
+<p>Voilà qui est fait.</p>
+
+<p>Et maintenant ? On lance notre émulateur !</p>
+
+<p>Attention : nous devons dire à notre émulateur que toutes les requêtes TCP passent par notre proxy, pour se faire rien de bien compliqué, nous devons ajouter l'argument <code>-http-proxy localhost:8888</code> à la ligne de commande permettant de lancer l'émulateur :</p>
+
+<pre><code>~/Developper/android-sdk-macosx/tools $ ./emulator @android_4.1 -http-proxy localhost:8888
+</code></pre>
+
+<p>Pourquoi <code>localhost:8888</code> ? Simplement parce que par défaut Charles est actif sur le port 8888 et que nous sommes donc en local (car notre machine virtuelle est... virtuelle).</p>
+
+<p>Maintenant que nous avons une machine sous Android qui tourne et un proxy qui nous donne les informations sur toutes les requêtes TCP non chiffrées qui passent...</p>
+
+<h2>Installer notre <code>APK</code> téléchargé sur notre <code>AVD</code></h2>
+
+<p>Nous avons téléchargez notre <code>.apk</code> via <a href="http://airdroid.com">AirDroid</a> et nous devons maintenant l'installer sur notre machine Android :</p>
+
+<p>On se déplace dans le dossier <code>platform-tools</code> où se situe le fameux <code>adb</code> :</p>
+
+<pre><code>~/Developper/android-sdk-macosx/tools $ cd ../platform-tools/
+</code></pre>
+
+<p>On installe notre <code>apk</code> téléchargé :</p>
+
+<pre><code>~/Developper/android-sdk-macosx/platform-tools $ ./adb install ~/Downloads/SuperApplication.apk
+780 KB/s (1392781 bytes in 1.743s)
+    pkg: /data/local/tmp/SuperApplication.apk
+Success
+</code></pre>
+
+<p>Et maintenant on lance l'application sur la machine virtuelle (via le menu graphique... normal quoi) et on regarde ce que nous affiche Charles (qui enregistre ce qu'il se passe par défaut au lancement du logiciel).</p>
+
+<h2>Conclusion</h2>
+
+<p>On se rend compte que certaines applications (des jeux ? avec des scores ?) font transiter les informations en clair (connexion non sécurisée) et qu'il est donc très facile de reproduire un fonctionnement standard, avec de fausses valeurs (comment ça il a fait un score plus grand que le score maxi ???).</p>
+
+<blockquote><p>Ca s'appelle tricher ça ! Oui MONSIEUR !</p></blockquote>
+
+<p>En même temps... il existe un <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">standard qui s'appelle TLS</a>.</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>17 August 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Android">Android</a>, 
+                
+                <a href="/search.html?tag=Proxy">Proxy</a>, 
+                
+                <a href="/search.html?tag=HTTP">HTTP</a>
+                
+            </strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/utiliser-un-proxy-sur-android.html" data-text="Android + Proxy = HTTP en clair" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

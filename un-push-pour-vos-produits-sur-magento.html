@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Un push pour vos produits - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Apprennez comment avoir des pushs pour vos produits.">
+    <meta name="keywords" content="magento, catalog, catalogue, product, produit, block">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Un push pour vos produits</h1>
+
+        <p>Ne vous êtes-vous jamais retrouvé à créer un block dédié au fameux « push produit » sur votre projet ?</p>
+
+<p>Vous savez, le block qui affiche le produit et qu'on a envie de mettre partout, sur la homepage, sur une mise en avant ou que sais-je !</p>
+
+<p>Cet article va vous montrer la meilleure manière de gérer ce problème en prenant en compte, je l'espère, une bonne partie des contraintes.</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<div style="text-align: center;">
+    <img alt="Push produit Magento EE" src="/images/posts/block-push-produit/push_produit_ee.png" height="272" width="161" style="border: 1px dashed gray;" />
+</div>
+
+
+<p>Pour bien faire nous allons créer le module <code>Jbh_Catalog</code>.</p>
+
+<h2>De quoi avons-nous besoin ?</h2>
+
+<p>Pour commencer, comme je l'explique souvent, nous devons déterminer vers quoi nous allons, et ce que nous allons faire. Il s'agit d'une partie d'analyse importante avant de développer.</p>
+
+<p>On liste.</p>
+
+<p>Nous devons :</p>
+
+<ul>
+<li> Créer un block <code>Jbh_Catalog_Block_Product_Push</code> pour afficher notre produit. Nous devons prévoir que notre block puisse s'ajuster au type de produit via des templates spécifiques. On poussera un peu la chose et pour cela nous aurons besoin d'un peu de config. Nous ne gérerons pas le cache de notre block (par défaut sur Magento).</li>
+<li> Créer un helper <code>Jbh_Catalog_Helper_Product</code> pour récupérer notre block. Via la méthode <code>getPush($product)</code>.</li>
+<li> Créer un modèle <code>Jbh_Catalog_Model_Product_Push_Config</code> pour gérer notre configuration.</li>
+</ul>
+
+
+<p>Maintenant que nous savons ce que nous devons faire, faisons-le par étape.</p>
+
+<h2>La configuration</h2>
+
+<p>Pourquoi avons-nous besoin d'un peu de config ?</p>
+
+<p>Comme tout projet e-commerce j'imagine que votre boutique comprend plusieurs types de produits.</p>
+
+<p>Par défaut Magento en comprend 6 types de produits différents (+ le type <code>Gift Card</code> en EE).</p>
+
+<p>L'idée c'est que bien souvent chaque type de produit a un push un peu différent. Bien souvent on affiche des infos pour un type, par pour l'autre.</p>
+
+<p>Une première solution pour gérer ça est de conditionner simplement notre <code>phtml</code> avec de simples <code>if ($_product-&gt;getTypeId() == Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE)</code> par exemple.</p>
+
+<p>La seconde consiste à gérer un template par type, avec un template par défaut. Si le template pour le type du produit est défini alors on l'utilise, sinon on prend celui par défaut.</p>
+
+<p>Voici un exemple de configuration que nous pouvons mettre en place :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;jbh&gt;</span>
+    <span class="nt">&lt;catalog&gt;</span>
+        <span class="nt">&lt;product&gt;</span>
+            <span class="nt">&lt;push&gt;</span>
+                <span class="nt">&lt;modes&gt;</span>
+                    <span class="nt">&lt;default&gt;</span>
+                        <span class="nt">&lt;templates&gt;</span>
+                            <span class="nt">&lt;default&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/default&gt;</span>
+                            <span class="nt">&lt;simple&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/simple&gt;</span>
+                            <span class="nt">&lt;giftcard&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/giftcard&gt;</span>
+                        <span class="nt">&lt;/templates&gt;</span>
+                    <span class="nt">&lt;/default&gt;</span>
+                    <span class="nt">&lt;list&gt;</span>
+                        <span class="nt">&lt;templates&gt;</span>
+                            <span class="nt">&lt;default&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/default&gt;</span>
+                            <span class="nt">&lt;simple&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/simple&gt;</span>
+                            <span class="nt">&lt;giftcard&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/giftcard&gt;</span>
+                        <span class="nt">&lt;/templates&gt;</span>
+                    <span class="nt">&lt;/list&gt;</span>
+                <span class="nt">&lt;/modes&gt;</span>
+            <span class="nt">&lt;/push&gt;</span>
+        <span class="nt">&lt;/product&gt;</span>
+    <span class="nt">&lt;/catalog&gt;</span>
+<span class="nt">&lt;/jbh&gt;</span>
+</code></pre></div>
+
+
+<p>De cette manière il devient très facile de changer le template pour chaque mode ou chaque type de produit. Et pourquoi pas ajouter un <em>mode</em> ou encore un <em>type</em> fictif ? Après tout rien ne nous empêche d'inventer un mode, par exemple <code>homepage_mea</code>, pour changer les templates de tous les produits qui sont sur la mise en avant sur notre page d'accueil...</p>
+
+<h3>Notre modèle</h3>
+
+<p>Notre modèle <code>Jbh_Catalog_Model_Product_Push_Config</code> comprend les méthodes suivantes :</p>
+
+<ul>
+<li> <code>getModes()</code> qui retourne le tableau de tous les modes possibles.</li>
+<li> <code>getTemplates($mode)</code> qui retourne un tableau des templates par types, suivant le mode.</li>
+</ul>
+
+
+<p>Bien sûr les <code>path</code> de la configuration sont dans des constantes.</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Model/Product/Push/Config.php"></script>
+
+
+<h2>Le block</h2>
+
+<p>Notre block dépend surtout du produit et du mode que nous voulons utiliser pour l'affichage.</p>
+
+<p>Pour cela nous indiquons dans notre fichier PHP que notre classe comprend les méthodes implicites suivantes :</p>
+
+<ul>
+<li> <code>@method Jbh_Catalog_Block_Product_Push setProduct(Mage_Catalog_Model_Product $product)</code></li>
+<li> <code>@method Mage_Catalog_Model_Product getProduct()</code></li>
+<li> <code>@method Jbh_Catalog_Block_Product_Push setMode(string $mode)</code></li>
+<li> <code>@method string getMode()</code></li>
+</ul>
+
+
+<p>Ces méthodes sont utilisées lors de l'affichage dans la méthode <code>_toHtml</code>.</p>
+
+<p>Si un template a déjà été défini (si jamais il a été forcé par exemple) alors nous ne le changeons pas.</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Block/Product/Push.php"></script>
+
+
+<h2>Le helper</h2>
+
+<p>Notre helper est la clé de ce module car c'est lui qui va nous retourner notre block pour le produit que nous lui donnons.</p>
+
+<p>Nous développons donc deux méthodes :</p>
+
+<ul>
+<li> <code>getPush($product, $mode = null)</code> qui retournera le block instancié.</li>
+<li> <code>getPushHtml($product, $mode = null)</code> qui retournera le HTML du block.</li>
+</ul>
+
+
+<p>La première méthode fera juste une petite vérification : Notre variable <code>$product</code> est-elle bien un objet du type <code>Mage_Catalog_Model_Product</code> ? Si ça n'est pas le cas alors on considère que c'est un identifiant entier, et on <code>load</code> le produit. Ensuite on retourne notre nouveau block avec le produit et le mode dans ses données (via le <code>Varien_Object</code> hérité).</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Helper/Product.php"></script>
+
+
+<h2>Comment ça marche ?</h2>
+
+<p>Pour utiliser notre block rien de plus simple !</p>
+
+<p>Appelons simplement la méthode <code>getPushHtml</code> de notre helper :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;jbh_catalog/product&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getPushHtml</span><span class="p">(</span><span class="nv">$product</span><span class="p">,</span> <span class="nv">$mode</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Le <code>$mode</code> n'est pas obligatoire.</p>
+
+<p>Le <code>$product</code> peut être un produit instancié ou un entier (identifiant du produit).</p>
+
+<h2>Conclusion</h2>
+
+<p>Il vous est maintenant très facile, via un peu de configuration, de changer les différents affichages de vos produits sans vous prendre la tête.</p>
+
+<p>Rien ne vous empêche comme vous pouvez le voir de créer un mode didié à une page en particulier.</p>
+
+<p>Vous pouvez <a href="https://github.com/jacquesbh/jbh_catalog">retrouver le module <code>Jbh_Catalog</code> sur Github</a>.</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>08 October 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Block">Block</a>, 
+                
+                <a href="/search.html?tag=Module">Module</a>
+                
+            </strong>
+        </li>
+        
+        <li>
+            <span>Dépôt GitHub</span>
+            <strong><a href="https://github.com/jacquesbh/jbh_catalog">jacquesbh/jbh_catalog</a></strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/un-push-pour-vos-produits-sur-magento.html" data-text="Un push pour vos produits" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

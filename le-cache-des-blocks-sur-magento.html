@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Le cache des blocks sur Magento - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Vous voulez savoir comment est géré le cache des blocks sur Magento ?">
+    <meta name="keywords" content="magento, cache">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Le cache des blocks sur Magento</h1>
+
+        <p>Le cache block sur Magento... Quelle galère !</p>
+
+<p>Enfin... à ce qu'on dit.</p>
+
+<blockquote><p>Je comprends rien... c'est quoi <code>cache_tags</code> ?</p>
+
+<p>C'est comme <code>cache_key</code> ?</p></blockquote>
+
+<p>Je ne suis pas de cet avis en fait. Le cache c'est <em>easy</em>, il suffit <em>juste</em> de savoir où on met les pieds !</p>
+
+<p>Vous me suivez ?</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<h2>Les bases du cache sur Magento</h2>
+
+<p>Avant d'attaquer le cache sur les blocks il vous faut savoir quelques petites choses sur le cache en général sur Magento.</p>
+
+<h3>La clé, ou <code>cache_key</code></h3>
+
+<p>Une clé le plus souvent c'est <strong>unique</strong> ! Bah là, c'est pareil.</p>
+
+<p>Un cache est identifié par sa clé. Un changement minime dans le contenu de votre cache doit faire varier sa clé !</p>
+
+<p>Sauf bien sûr si vous ne souhaitez pas avoir les deux versions.</p>
+
+<p>Par exemple on peut mettre en cache la réponse d'une requête SQL, à condition de faire en sorte que la clé soit liée à l'identifiant dans la clause <code>WHERE</code> de votre requête !</p>
+
+<p>Sinon c'est la <em>loose</em>... Prenons un exemple <em>bidon</em> :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_01.php"></script>
+
+
+<p>On peut voir que la clé ne change pas car elle dépend de la variable <code>$_cacheKey</code> qui ne change pas entre le premier et le second appel à la méthode <code>getCountLessThan</code>.</p>
+
+<p>Maintenant si on change la valeur de <code>$_cacheKey</code> à <code>jbh_counter_sql_result_%d</code> le résultat n'est plus le même !</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_02.php"></script>
+
+
+<p><strong>La clé est donc vraiment importante dans la gestion du cache !</strong></p>
+
+<h3>La durée de vie, ou <code>cache_lifetime</code></h3>
+
+<p>Là c'est simple ! On peut décider de donner une durée de vie à notre cache (en secondes).</p>
+
+<p>En gros si notre cache est vieux de plus de <code>cache_lifetime</code> secondes, alors on le supprime et il est généré à nouveau.</p>
+
+<p><strong>Les valeurs de <code>cache_lifetime</code></strong> :</p>
+
+<ul>
+<li><code>null</code> : pas de cache</li>
+<li><code>false</code> : 7200 secondes de cache, soit 2 heures</li>
+<li><code>(int)</code> : nombre de secondes de cache</li>
+<li><code>-(int)</code> : équivaut à pas de cache (date d'expiration du cache dépassée dès la prochaine demande)</li>
+</ul>
+
+
+<h3>Les tags, ou <code>cache_tags</code></h3>
+
+<p>Tagguer un cache... <em>Wait... WHAT?</em></p>
+
+<p>En toute logique quand on veut vider un cache on indique sa clé et on supprime le cache concerné.</p>
+
+<p>Sauf qu'en pratique... bah c'est franchement la merde. Et c'est là que les tags font leur entrée !</p>
+
+<p>Imaginons plusieurs caches avec chacun une liste de tags :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_03.txt"></script>
+
+
+<p>Maintenant, si on veut vider les caches <code>A</code> et <code>B</code> on fait tout simplement :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_04.php"></script>
+
+
+<p>Par défaut Magento fait en sorte que si un tag <em>match</em> un cache celui-ci soit supprimé. Si vous avez renseigné plusieurs tags à vider, <strong>tous</strong> les cache concernés par <strong>un ou plusieurs</strong> de ces tags seront supprimés.</p>
+
+<p>Si vous souhaitez supprimer un cache (sur le cache <code>frontend</code>, pas le cache <code>backend</code>) qui <em>match</em> tous les tags renseignés il faut faire :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_05.php"></script>
+
+
+<p>Ici on a vidé le cache du <code>C</code>.</p>
+
+<h2>Le cache sur les blocks</h2>
+
+<p>Par défaut un block n'a pas de cache car la méthode <code>getCacheLifetime</code> du block <code>Mage_Core_Block_Abstract</code> retourne <code>null</code> si aucune <em>data</em> <code>cache_lifetime</code> n'est renseignée.</p>
+
+<p>La gestion du cache sur les blocks utilise le fait que chaque block est un <code>Varien_Object</code> pour stocker les valeurs de <code>cache_key</code>, <code>cache_lifetime</code> et <code>cache_tags</code>.</p>
+
+<p>Sauf que qui dit <code>Varien_Object</code> dit <code>__call</code>... non ?</p>
+
+<p>Donc en fait les variables du cache sont récupérées de la manière suivante :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_06.php"></script>
+
+
+<p>Donc ? Bah donc on peut surcharger sur nos blocks. Et oui !</p>
+
+<h3>La clé avec <code>getCacheKey()</code></h3>
+
+<p>Comme on le sait la clé doit être unique et dépendre du contexte. On a donc plusieurs paramètres à prendre en compte :</p>
+
+<ul>
+<li>Le store (donc la locale en passant)</li>
+<li>Le design (package &amp; thème)</li>
+<li>Le template <code>phtml</code> utilisé</li>
+<li>Le nom du block dans le Layout</li>
+<li>Un identifiant (identifiant d'un produit par exemple)</li>
+</ul>
+
+
+<p>On peut bien sûr ajouter des paramètres dans notre clé.</p>
+
+<p>Bon, mais en gros, quand on a un tableau de paramètres et qu'on veut une chaîne de caractères on fait comment ? <code>implode</code> ? Avec un <em>hash</em> ?</p>
+
+<p>Soyons fous !</p>
+
+<p>Mais en fait... Magento le fait pour nous ; avec l'appel à <code>getCacheKeyInfo()</code> dans <code>getCacheKey()</code> :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_07.php"></script>
+
+
+<p>Si on y regarde de plus près on remarque que la méthode <code>getCacheKeyInfo()</code> retourne un tableau qui contient une seule valeur : le nom du block dans le Layout :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_08.php"></script>
+
+
+<p>Dans notre block, on surcharge cette méthode !</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_09.php"></script>
+
+
+<h3>Les tags avec <code>getCacheTags()</code></h3>
+
+<p>Par défaut on essaiera toujours de donner une constante <code>CACHE_TAG</code> à un modèle concocté par nos soins par exemple. A nous de ne pas oublier de l'utiliser !</p>
+
+<p>L'intérêt de définir une constante <code>CACHE_TAG</code> à nos modèles qui sont utilisés dans nos blocks c'est de pouvoir vider le cache de tous les blocks concernés par nos objets lorsqu'on les sauvegarde par exemple !</p>
+
+<p>Il suffit de modifier la méthode <code>_afterSave</code> de nos modèles pour y ajouter le clean du cache !</p>
+
+<p>Revenons à nos moutons et voyons à quoi ressemble la méthode <code>getCacheTags</code> par défaut de Magento :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_10.php"></script>
+
+
+<p>Allez, on surcharge dans notre block !</p>
+
+<p>J'ajoute ici un exemple <em>vite fait</em> d'un modèle avec une constante <code>CACHE_TAG</code> bien utilisée :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_11.php"></script>
+
+
+<p>Vous noterez qu'on peut ajouter n'importe quels tags. Attention cependant à ne pas oublier les tags par défaut récupérés grâce au <code>parent</code> !</p>
+
+<h3>La durée de vie avec <code>getCacheLifetime()</code></h3>
+
+<p>Rien de plus simple !</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_12.php"></script>
+
+
+<h2>Pensez à vider le cache !</h2>
+
+<p>Utilisez bien les tags enregistrés avec le cache de vos blocks pour vider tout ça !</p>
+
+<p>Vous pouvez aussi enregistrer tous les tags utilisés sur les blocks par défaut d'une page de cette manière :</p>
+
+<p>Dans le fichier <code>/app/code/core/Mage/Core/Model/App.php</code>, ajoutez un log dans la méthode <code>saveCache</code> :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_13.php"></script>
+
+
+<p>Vous aurez ici les tags utilisés ! Mais pas ceux qui ne sont pas utilisés, mais vidés !</p>
+
+<p>Dans le fichier <code>/app/code/core/Mage/Core/Model/App.php</code>, ajoutez un log dans la méthode <code>cleanCache</code> :</p>
+
+<script src="https://gist.github.com/3646203.js?file=example_14.php"></script>
+
+
+<h2>Conclusion</h2>
+
+<p>Gérer le cache des blocks n'est pas une mince affaire mais on s'y retrouve !</p>
+
+<p>Il faut juste savoir s'y prendre.</p>
+
+<p>Vous pouvez également utiliser la méthode <code>addData</code> dans la surcharge du constructeur secondaire <code>protected function _construct()</code> de votre block pour y assigner les valeurs de <code>cache_key</code>, <code>cache_tags</code> et <code>cache_lifetime</code> mais je le déconseille.</p>
+
+<p>Bon cache !</p>
+
+<!-- more end -->
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>06 September 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Cache">Cache</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/3646203">3646203</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/le-cache-des-blocks-sur-magento.html" data-text="Le cache des blocks sur Magento" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

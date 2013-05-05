@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Ajouter un script externe au header sur Magento - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Vous souhaitez charger un script Google ? Facebook ? ou Twitter dans le header de votre site ? Apprennez ici comment faire !">
+    <meta name="keywords" content="magento, script, head, css, js, externe">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Ajouter un script externe au header sur Magento</h1>
+
+        <p>On a toujours besoin d'ajouter un bout de script ou un script externe complet dans le header de nos pages mais on ne sait jamais comment s'y prendre ! Doit-on préférer la solution simple qui consiste à modifier le template <code>head.phtml</code> ? Devons-nous ajouter ce bout de code en dur ? Le rendre dynamique ?</p>
+
+<p>Quoiqu'il en soit il y a plusieurs façons de faire et cet article a pour but de vous expliquer celle qui est la plus élégante.</p>
+
+<p>L'idée de cet article est dûe au <a href="http://jacques.sh/le-layout-sur-magento.html#comment-743437791">commentaire de Frédéric Martinez</a> sur mon <a href="http://jacques.sh/le-layout-sur-magento.html">article sur le Layout</a>.</p>
+
+<p>Ouvrez-donc votre éditeur de texte préféré et allons faire un tour dans le Layout...</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<h2>Le block <code>core/text</code></h2>
+
+<p>Vous connaissez tous le block <code>core/text</code> n'est-ce pas ? Ce petit block bien sympathique sur Magento auquel il suffit de donner un texte pour qu'il puisse s'afficher !</p>
+
+<p>Par exemple si on devait initialiser un tel block voici ce qu'on ferait :</p>
+
+<script src="https://gist.github.com/4365871.js?file=create_block.php"></script>
+
+
+<p>Vous voyez peut-être déjà où je veux en venir ?</p>
+
+<p>Et si maintenant notre texte était <code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;</code> ?</p>
+
+<script src="https://gist.github.com/4365871.js?file=jquery.php"></script>
+
+
+<p>Ok mais dans le layout ça donne quoi ?</p>
+
+<script src="https://gist.github.com/4365871.js?file=core_text.xml"></script>
+
+
+<p><em>Note : N'oubliez pas le <code>&lt;![CDATA[ ]]&gt;</code> !</em></p>
+
+<h2>Direction le <code>&lt;head/&gt;</code> !</h2>
+
+<p>Quand on regarde un peu les templates de base sur Magento on remarque que le <code>page/html/head.phtml</code> contient une ligne fort pratique :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getChildHtml</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+
+
+<p>Cette ligne affiche tous les enfants du block <code>head</code>.</p>
+
+<p>Donc si on ajoute un block comme celui que nous avons créé à priori son contenu sera affiché à la place de cette ligne.</p>
+
+<p>Pour ajouter notre block voici les options possibles :</p>
+
+<ul>
+<li>dans le fichier <code>local.xml</code> : ce fichier est chargé après tous les fichiers XML du Layout.</li>
+<li>dans le fichier <code>module.xml</code> d'un module existant ou créé pour l'occasion.</li>
+</ul>
+
+
+<p>Afin de nous éviter la création d'un module rien que pour un fichier de layout nous passerons par le <code>local.xml</code>.</p>
+
+<p>Afin d'ajouter un block à notre <code>head</code> nous devons en faire une référence au préalable.</p>
+
+<p>Voici à quoi ressemble notre <code>local.xml</code> :</p>
+
+<script src="https://gist.github.com/4365871.js?file=local.xml"></script>
+
+
+<p>A partir de maintenant notre jQuery en provenance de Google est directement chargé dans notre <code>head</code>.</p>
+
+<p>Bien sûr vous pouvez mettre le script d'initialisation d'une librairie par exemple à la place de jQuery.</p>
+
+<h2>Astuce pour vos javascripts</h2>
+
+<p>Lorsqu'on développe sur Magento on est souvent amené à créer des scripts bien à nous.</p>
+
+<p>Et dans ces scripts on a besoin de l'URL du projet dans certains cas.</p>
+
+<p>Voici comment ajouter la "constante" <code>BASE_URL</code> dans le <code>head</code> de vos projets, dans votre local.xml :</p>
+
+<script src="https://gist.github.com/4365871.js?file=local_base_url.xml"></script>
+
+
+
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>24 December 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Layout">Layout</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/4365871">4365871</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/ajouter-un-script-externe-au-header-sur-magento.html" data-text="Ajouter un script externe au header sur Magento" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

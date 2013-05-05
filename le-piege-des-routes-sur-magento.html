@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Le piège des routeurs sur Magento - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Une contrôleur frontal accessible par une route admin... Si si... C'est possible !">
+    <meta name="keywords" content="php, router, url, magento">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Le piège des routeurs sur Magento</h1>
+
+        <p>Magento a un système de routes assez complexe...</p>
+
+<p>Entre les routes <code>frontend</code>, les routes <code>admin</code>, le catalogue et son <code>URL rewriting</code> et les pages CMS... On a vite fait de s'y perdre !</p>
+
+<p>Cet article est là pour vous montrer que Magento reste une application très permissive. Attention !</p>
+
+<!-- more start -->
+
+
+
+
+<hr />
+
+
+<p>Je me suis longtemps trompé sur la manière de créer mes routes... surtout celles destinées à mes contrôleurs d'admin.</p>
+
+<h2>Le front</h2>
+
+<p>Pour ajouter une routes simple pour le front il y a un bout de XML à connaître. Rien de bien compliqué :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;frontend&gt;</span>
+    <span class="nt">&lt;routers&gt;</span>
+        <span class="nt">&lt;name_of_my_route&gt;</span>
+            <span class="nt">&lt;use&gt;</span>standard<span class="nt">&lt;/use&gt;</span>
+            <span class="nt">&lt;args&gt;</span>
+                <span class="nt">&lt;module&gt;</span>My_Module<span class="nt">&lt;/module&gt;</span>
+                <span class="nt">&lt;frontName&gt;</span>foo<span class="nt">&lt;/frontName&gt;</span>
+            <span class="nt">&lt;/args&gt;</span>
+        <span class="nt">&lt;/name_of_my_route&gt;</span>
+    <span class="nt">&lt;/routers&gt;</span>
+<span class="nt">&lt;/frontend&gt;</span>
+</code></pre></div>
+
+
+<p>Quelques explications :</p>
+
+<ul>
+<li><code>name_of_my_route</code> c'est le nom de la route... vraiment. Par exemple si je veux générer une URL via notre nouvelle route je fais :</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">&#39;name_of_my_route/bar/baz&#39;</span><span class="p">);</span> <span class="c1">// =&gt; http://example.com/foo/bar/baz</span>
+</code></pre></div>
+
+
+<ul>
+<li><code>&lt;use&gt;standard&lt;/use&gt;</code> c'est pour dire que c'est une route en front.</li>
+<li><code>&lt;module&gt;My_Module&lt;/module&gt;</code> c'est le nom de votre module. Si vous mettez <code>Super_Foo</code> alors le contrôleur <code>index</code> aura pour nom : <code>Super_Foo_IndexController</code>.</li>
+<li><code>&lt;frontName&gt;foo&lt;/frontName&gt;</code> c'est le "final" de la route : http://example.com/<strong>foo</strong>/bar/baz.</li>
+</ul>
+
+
+<h2>L'admin</h2>
+
+<p>En admin c'est exactement pareil... ou presque.</p>
+
+<p>En réalité les routes de l'admin sont « parsées » avant celles du front. Ce qui fait que si votre route admin permet d'accéder à un contrôleur frontal... bah ça fonctionnera.</p>
+
+<h2>Exemple « bad practices »</h2>
+
+<p>L'architecture :</p>
+
+<pre><code>app/code/local/Jbh/Blog
+└── controllers
+    ├── Adminhtml
+    │   └── ManageController.php
+    └── IndexController.php
+</code></pre>
+
+<p><code>controllers/IndexController.php</code> :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Jbh_Blog_IndexController</span> <span class="k">extends</span> <span class="nx">Mage_Core_Controller_Front_Action</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;front&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p><code>controllers/Adminhtml/MagnageController.php</code> :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Jbh_Blog_Adminhtml_ManageController</span> <span class="k">extends</span> <span class="nx">Mage_Adminhtml_Controller_Action</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Maintenant regardez bien ce fichier de config :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;config&gt;</span>
+    <span class="nt">&lt;modules&gt;</span>
+        <span class="nt">&lt;Jbh_Blog&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/Jbh_Blog&gt;</span>
+    <span class="nt">&lt;/modules&gt;</span>
+    <span class="nt">&lt;frontend</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;admin&gt;</span>
+        <span class="nt">&lt;routers&gt;</span>
+            <span class="nt">&lt;jbh_blog&gt;</span>
+                <span class="nt">&lt;use&gt;</span>admin<span class="nt">&lt;/use&gt;</span>
+                <span class="nt">&lt;args&gt;</span>
+                    <span class="nt">&lt;module&gt;</span>Jbh_Blog<span class="nt">&lt;/module&gt;</span>
+                    <span class="nt">&lt;frontName&gt;</span>blog<span class="nt">&lt;/frontName&gt;</span>
+                <span class="nt">&lt;/args&gt;</span>
+            <span class="nt">&lt;/jbh_blog&gt;</span>
+        <span class="nt">&lt;/routers&gt;</span>
+    <span class="nt">&lt;/admin&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</code></pre></div>
+
+
+<p>Vous remarquerez que nous n'avons rien dans la balise <code>frontend</code>, que notre routeur est bien dans <code>&lt;admin/&gt;</code> et a bien une balise <code>&lt;use&gt;</code> qui vaut <code>admin</code> également.</p>
+
+<p>On est donc en droit de penser que notre contrôleur front : <code>Jbh_Blog_IndexController</code> qui étend <code>Mage_Core_Controller_</code><strong>Front</strong><code>_Action</code> ne peut pas être accessible via cette route dédiée à l'admin.</p>
+
+<p>Que neni !</p>
+
+<pre><code>http://example.com/blog/index/index =&gt; « front »
+http://example.com/blog/adminhtml_manage/index =&gt; « admin »
+</code></pre>
+
+<p>WTF ?!</p>
+
+<p>[ Faites le test ;) ]</p>
+
+<h2>Bonnes pratiques</h2>
+
+<p>La manière de créer un routeur en front ne change pas car dans ce sens tout est bon. Impossible d'accéder à un contrôleur admin depuis un routeur frontal.</p>
+
+<p>Par contre voici comment éviter que nos routeurs d'admin ne soient utilisés pour afficher des contrôleurs front :</p>
+
+<div class="highlight"><pre><code class="diff"><span class="gd">--- a/config.xml</span>
+<span class="gi">+++ b/config.xml</span>
+<span class="gu">@@ -8,13 +8,13 @@</span>
+     &lt;frontend /&gt;
+     &lt;admin&gt;
+         &lt;routers&gt;
+<span class="gd">-            &lt;jbh_blog&gt;</span>
+<span class="gi">+            &lt;jbh_blog_adminhtml&gt;</span>
+                 &lt;use&gt;admin&lt;/use&gt;
+                 &lt;args&gt;
+<span class="gd">-                    &lt;module&gt;Jbh_Blog&lt;/module&gt;</span>
+<span class="gd">-                    &lt;frontName&gt;blog&lt;/frontName&gt;</span>
+<span class="gi">+                    &lt;module&gt;Jbh_Blog_Adminhtml&lt;/module&gt;</span>
+<span class="gi">+                    &lt;frontName&gt;blog_adminhtml&lt;/frontName&gt;</span>
+                 &lt;/args&gt;
+<span class="gd">-            &lt;/jbh_blog&gt;</span>
+<span class="gi">+            &lt;/jbh_blog_adminhtml&gt;</span>
+         &lt;/routers&gt;
+     &lt;/admin&gt;
+ &lt;/config&gt;
+</code></pre></div>
+
+
+<p>Ce que ça donne :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;config&gt;</span>
+    <span class="nt">&lt;modules&gt;</span>
+        <span class="nt">&lt;Jbh_Blog&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/Jbh_Blog&gt;</span>
+    <span class="nt">&lt;/modules&gt;</span>
+    <span class="nt">&lt;frontend</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;admin&gt;</span>
+        <span class="nt">&lt;routers&gt;</span>
+            <span class="nt">&lt;jbh_blog_adminhtml&gt;</span>
+                <span class="nt">&lt;use&gt;</span>admin<span class="nt">&lt;/use&gt;</span>
+                <span class="nt">&lt;args&gt;</span>
+                    <span class="nt">&lt;module&gt;</span>Jbh_Blog_Adminhtml<span class="nt">&lt;/module&gt;</span>
+                    <span class="nt">&lt;frontName&gt;</span>blog_adminhtml<span class="nt">&lt;/frontName&gt;</span>
+                <span class="nt">&lt;/args&gt;</span>
+            <span class="nt">&lt;/jbh_blog_adminhtml&gt;</span>
+        <span class="nt">&lt;/routers&gt;</span>
+    <span class="nt">&lt;/admin&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</code></pre></div>
+
+
+<blockquote><p>Tu peux nous expliquer ce que ça change ?</p></blockquote>
+
+<p>Le plus important c'est la balise <code>&lt;module&gt;</code> qui vaut maintenant <code>Jbh_Blog_Adminhtml</code>.</p>
+
+<p>Ceci a pour effet d'automatiquement préfixer les contrôleurs demandés par cette route de <code>Jbh_Blog_Adminhtml_</code>.</p>
+
+<p>La route admin a également un nom différent pour pouvoir la différencer de la route front :)</p>
+
+<h3>Exemple</h3>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">&#39;jbh_blog_adminhtml/manage/index&#39;</span><span class="p">);</span>
+<span class="c1">// =&gt; http://example.com/blog_adminhtml/manage/index</span>
+<span class="c1">// =&gt; controller: Jbh_Blog_Adminhtml_ManageController</span>
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+
+<p>Nous avons donc forcément besoin d'une route front pour accéder à notre <code>Jbh_Blog_IndexControler</code>. Inévitable.</p>
+
+<p>Problème résolu.</p>
+
+<ul>
+<li>Suffixez vos routeurs d'admin par quelque chose (<code>_adminhtml</code> tout simplement, ou <code>_admin</code> à la limite ;)).</li>
+<li>Pensez à la balise <code>&lt;module/&gt;</code> pour forcer l'utilisation d'un sous répertoire dans les <code>controllers</code>.</li>
+</ul>
+
+
+<p>En espérant que vous y verrez plus clair dans vos routes et que vous ne ferez pas (plus ?) cette erreur !</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>23 July 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=URL">URL</a>, 
+                
+                <a href="/search.html?tag=Bonnes pratiques">Bonnes pratiques</a>
+                
+            </strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/le-piege-des-routes-sur-magento.html" data-text="Le piège des routeurs sur Magento" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

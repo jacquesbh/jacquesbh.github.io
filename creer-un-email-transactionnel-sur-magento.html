@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Les emails customs sur Magento - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Apprenez à créer un email custom sur Magento.">
+    <meta name="keywords" content="php, email transactionnel, magento">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Les emails customs sur Magento</h1>
+
+        <p>Qui n'a pas voulu envoyer un email personnalisé rapidement via Magento ?</p>
+
+<p>Les utilisations sont variées :</p>
+
+<ul>
+<li>Offrir un code promo à l'inscription</li>
+<li>Informer le visiteur que son inscription à votre jeu concours est prise en compte</li>
+<li>Annoncer au client que vous venez de lui offrir un produit pour sa prochaine commande car c'est son anniversaire</li>
+<li>...</li>
+</ul>
+
+
+<p>Vous voulez faire ça ? Allez.. je vous aide :)</p>
+
+<!-- more start -->
+
+
+
+
+<hr/>
+
+
+<p>Le but de ce tutoriel est de vous montrer comment envoyer un email simplement depuis votre application.</p>
+
+<p>Il s'agit d'envoyer un email transactionnel, pas une newsletter !</p>
+
+<p>On va donc envoyer un email comprenant quelques informations sur le client (son nom par exemple) ainsi qu'un petit message.</p>
+
+<h2>Le mail</h2>
+
+<p>Sans trop se prendre la tête, voici le mail que nous voulons envoyer :</p>
+
+<pre><code>Bonjour {name},
+
+Aujourd'hui est un jour spécial.
+
+Toute l'équipe de {nom de la boutique} vous souhaite un joyeux anniversaire !
+
+A bientôt sur notre boutique,
+
+L'équipe de {nom de la boutique}
+</code></pre>
+
+<p>En soit rien de compliqué, si ?</p>
+
+<p>Nous utiliserons un email au format <em>texte</em>. Vous verrez qu'il ne sera pas bien compliqué de transformer ce mail dans une version colorée en HTML.</p>
+
+<h3>C'est quoi son nom ?</h3>
+
+<p>Pour bien comprendre le truc, il faut que nous donnions un nom à notre email.</p>
+
+<p>On va donc prendre le nom de notre module (<em>Jbh_Demo</em>) et y ajouter le mot <em>email</em> avec à la fin le nom "réel" de notre email : <em>happyday</em>.</p>
+
+<pre><code>    jbh_demo
+             email
+                   happyday
+==&gt; jbh_demo/email/happyday
+==&gt; jbh_demo_email_happyday
+</code></pre>
+
+<p>Ok... Mais l'identifiant qu'on vient de créer, il sert à quoi ?</p>
+
+<p>Le premier c'est l'identifiant de la configuration qui permettra d'échanger l'email en dur (dans le fichier html) avec un email créé manuellement (via l'admin).</p>
+
+<p>Le second c'est l'identifiant de notre email, en général.</p>
+
+<h2>La config</h2>
+
+<p>Editons notre fichier <code>/app/code/local/Jbh/Demo/etc/config.xml</code>.</p>
+
+<script src="https://gist.github.com/3132212.js?file=app-code-local-Jbh-Demo-etc-config.xml"></script>
+
+
+<p>Une partie <code>template</code> dans <code>global</code> consiste à indiquer à Magento que nous avons un nouvel email transactionnel dans l'application.</p>
+
+<p>La partie <code>default</code> permet d'avoir en config l'identifiant de notre email. Vous remarquerez que la hiérarchie de la configuration par défaut suit parfaitement le schéma expliqué un peu plus haut : <code>jolie_demo &gt; email &gt; happyday</code>.</p>
+
+<p>N'oubliez pas le fichier <code>/app/etc/modules/Jbh_Demo.xml</code> :)</p>
+
+<script src="https://gist.github.com/3132212.js?file=app-etc-modules-Jbh_Demo.xml"></script>
+
+
+<h2>Notre fichier email</h2>
+
+<p>Editons notre fichier <code>/app/locale/fr_FR/template/email/jbh_demo/happyday.html</code> :</p>
+
+<p>Nous avons besoin de respecter la syntaxe des emails sur Magento :</p>
+
+<ul>
+<li>Un titre avec la balise <code>&lt;!--@subject Jouyeux anniversaire ! @--&gt;</code></li>
+<li>Un style optionnel avec la balise <code>&lt;!--@styles ... ici mon css ... @--&gt;</code></li>
+<li>Un contenu avec ou sans variables</li>
+</ul>
+
+
+<p>Je vous laisse le soin de regarder les autres emails pour comprendre l'utilisation des variables. Ici nous feront juste en sorte que nos textes soient protégés.</p>
+
+<script src="https://gist.github.com/3132212.js?file=app-locale-fr_FR-template-email-jbh_demo-happyday.html"></script>
+
+
+<h2>Notre modèle</h2>
+
+<p>Editons maintenant notre fichier <code>/app/code/local/Jbh/Demo/Model/Email.php</code> :</p>
+
+<p>Il s'agit d'un simple modèle avec une méthode qui envoie un email au client passé en paramètre.</p>
+
+<p>On notera la présence de deux constantes. Comme on le fait dans Magento, on utilise des constantes pour indiquer les chemins vers les variables de configuration. Ici nous avons les chemins vers le template et l'expéditeur du mail.</p>
+
+<script src="https://gist.github.com/3132212.js?file=app-code-local-Jbh-Demo-Model-Email.php"></script>
+
+
+<h2>Et ensuite ?</h2>
+
+<p>Bah ensuite... il faut utiliser notre modèle !</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="cm">/* @var $customer Mage_Customer_Model_Customer */</span>
+
+<span class="nx">Mage</span><span class="o">::</span><span class="na">getSingleton</span><span class="p">(</span><span class="s1">&#39;jbh_demo/email&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">happyday</span><span class="p">(</span><span class="nv">$customer</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Voilà ! Vous savez maintenant créer des emails rapidement.
+Rien de bien compliqué en fait !</p>
+
+<p>Vous avez des questions ? Des remarques ? Les commentaires sont là pour ça.</p>
+
+<!-- more end -->
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>18 July 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=PHP">PHP</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/3132212">3132212</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/creer-un-email-transactionnel-sur-magento.html" data-text="Les emails customs sur Magento" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

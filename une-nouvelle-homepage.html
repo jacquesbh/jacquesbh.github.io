@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Changeons notre homepage ! - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Il y a plusieurs façons de faire pour changer de Homepage, en voici une !">
+    <meta name="keywords" content="magentohomepagelayoutcms">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Changeons notre homepage !</h1>
+
+        <p>J'en ai parlé récemment avec un collègue chez <a href="http://www.internim.com" title="Créateur de solutions OpenSource">Internim</a> :</p>
+
+<blockquote><p>« Quelle est la meilleure manière de <strong>personnaliser la homepage d'un site sous Magento</strong> ? »</p></blockquote>
+
+<p>Je n'ai sans doute pas la meilleure... mais en tout cas elle est simple et pratique :)</p>
+
+<!-- more start -->
+
+
+
+
+<hr />
+
+
+<p>Pour commencer il faut savoir que la <em>Homepage</em> est une <strong>page CMS</strong> et qu'à ce titre elle est administrable dans l'admin de Magento.</p>
+
+<p><img src="images/posts/une-nouvelle-home/homepage_cms.png" title="La homepage dans la liste des pages CMS en admin" alt="La Homepage dans les pages CMS" /></p>
+
+<p>L'idée c'est que nous allons simplement changer le layout de notre page. Par défaut la <em>home</em> est sur <code>2 columns with right bar</code>. Faisons en sorte que son layout soit <code>homepage</code>.</p>
+
+<p>Notre module <code>Jbh_Homepage</code> va juste ajouter un <em>layout</em> pour toutes les pages CMS. Il nous suffira de changer celui de la home !</p>
+
+<p>Pour ajouter un layout au niveau des pages CMS il suffit d'ajouter un peu de XML à notre configuration.</p>
+
+<p>On commence par déclarer notre module qui dépendra de <code>Mage_Cms</code> et <code>Mage_Page</code> :</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_homepage/raw/master/app/etc/modules/Jbh_Homepage.xml"></script>
+
+
+<p>Ensuite on passe au <code>config.xml</code> dans lequel on indique notre nouveau layout dans le path <code>global/page/layout</code>.
+A noter qu'on peut aussi utiliser le path <code>global/cms/layouts</code>.</p>
+
+<p>J'en profite pour créer un layout update, histoire d'avoir un <code>handle</code> bien à nous : <code>page_homepage</code>.</p>
+
+<blockquote><p>Quel intérêt ? On a déjà le handle <code>cms_index_index</code> pour la homepage non ?</p></blockquote>
+
+<p>Exact ! Sauf que le handle <code>cms_index_index</code> s'appliquera dans tous les cas à votre homepage, quelque soit son layout.
+Notre handle à nous ne sera appliqué que si c'est notre layout qui est utilisé, vous voyez la nuance ? ;)</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_homepage/raw/master/app/code/community/Jbh/Homepage/etc/config.xml"></script>
+
+
+<p>Ensuite il ne nous reste plus quand chose... Créons notre page <code>phtml</code> : (J'ai copié le <code>1column.phtml</code>)</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_homepage/raw/master/app/design/frontend/base/default/template/page/homepage.phtml"></script>
+
+
+<p>Et on termine par le fichier de mise à jour des layouts :</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_homepage/raw/master/app/design/frontend/base/default/layout/jbh_homepage.xml"></script>
+
+
+<p>En soi rien de bien compliqué :</p>
+
+<ol>
+<li>On ajoute un layout possible pour nos pages CMS</li>
+<li>On ajoute un <code>handle</code> pour pouvoir faire appel rapidement à notre homepage dans nos layouts</li>
+<li>On met tout notre HTML dans notre template <code>page/homepage.phtml</code></li>
+</ol>
+
+
+<p>Have fun !</p>
+
+<p>Le module est <a href="https://github.com/jacquesbh/jbh_homepage">dispo sur github</a>. Vous pouvez aussi le <a href="https://github.com/jacquesbh/jbh_homepage/tarball/master">télécharger en tar.gz</a> directement.</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>04 August 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>, 
+                
+                <a href="/search.html?tag=Homepage">Homepage</a>, 
+                
+                <a href="/search.html?tag=Layout">Layout</a>, 
+                
+                <a href="/search.html?tag=CMS">CMS</a>
+                
+            </strong>
+        </li>
+        
+        <li>
+            <span>Dépôt GitHub</span>
+            <strong><a href="https://github.com/jacquesbh/jbh_homepage">jacquesbh/jbh_homepage</a></strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/une-nouvelle-homepage.html" data-text="Changeons notre homepage !" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

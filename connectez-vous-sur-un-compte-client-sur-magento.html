@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Se connecter sur le compte d'un client - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Obtenez un bouton pour accéder au compte d'un client, pour payer par carte pour lui ou en cas de problème technique avec son compte...">
+    <meta name="keywords" content="php, connect as, magento">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Se connecter sur le compte d'un client</h1>
+
+        <p>Par défaut sur la Magento Community, nous n'avons pas de fonctionnalité pour se connecter sur le compte du client.</p>
+
+<p>Autant vous dire que parfois c'est quand même la <em>loose</em>. Bah ouais... le client a un problème et impossible de reproduire. De plus, lui demander de nous faire un screen pour voir comment ça se passe pour lui c'est juste... bah non en fait.</p>
+
+<p>Alors la solution c'est de se connecter sur son compte, même si ça n'est pas toujours la solution miracle, souvent ça aide un peu.</p>
+
+<p>Et puis on obtient d'un coup une autre fonctionnalité : on peut payer une commande pour le client par téléphone. Pratique non ?</p>
+
+<!-- more start -->
+
+
+
+
+<hr />
+
+
+<p>Le module que nous allons développer nous allons l'appeler <code>Jbh_ConnectAs</code> et il sera dans community.</p>
+
+<p>Pourquoi dans community ? Parce qu'il est <a href="http://github.com/jacquesbh/jbh_connectas" title="Le module Jbh_ConnectAs sur GitHub">dispo en ligne</a>, pour la communauté.</p>
+
+<h2>Posons les bases</h2>
+
+<p>Nous avons besoin de :</p>
+
+<ul>
+<li>Un event pour ajouter le bouton « Connect As » sur la fiche client</li>
+<li>Un observer qui va attraper l'event</li>
+<li>Un contrôleur pour <em>se connecter sur le compte du client</em></li>
+<li>Une gestion de droits pour ne pas afficher ce bouton à tout le monde</li>
+</ul>
+
+
+<p>Avec ça nous avons bien sûr besoin d'un <em>Helper Data</em>, mais d'aucun block.</p>
+
+<h2>Notre event</h2>
+
+<p>Quand on regarde bien on voit qu'on peut mettre des boutons au niveau du block <code>Mage_Adminhtml_Block_Customer_Edit</code>.
+Après tout, pourquoi ne pourrions-nous pas avoir notre petit bouton orange à côté des autres ?</p>
+
+<p>Ils utilisent dans le constructeur secondaire (<code>protected function _construct</code> sur tous les <code>Varien_Object</code>) la méthode <code>_addButton</code>. Pas de bol, elle est protégée... Pas super pratique pour nous ça. Pas grave, on regarde ce qu'elle fait... et là c'est le petit bonheur...</p>
+
+<p>En fait il existe dans le container <code>Mage_Adminhtml_Block_Widget_Container</code> un alias public pour un certain nombre de méthodes protégées, dont notre <code>_addButton</code> :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$sortOrder</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$area</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span><span class="p">,</span> <span class="nv">$sortOrder</span><span class="p">,</span> <span class="nv">$area</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Donc si on réfléchi bien... il nous suffit de récupérer ce block avant qu'il n'affiche la fiche du client pour pouvoir y ajouter notre bouton dynamiquement.
+On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. Chaque action a un <code>event</code> qui annonce le début du rendu. Pour nous, c'est ça :</p>
+
+<pre><code>controller_action_layout_render_before_adminhtml_customer_edit
+</code></pre>
+
+<p>Op, on a notre event :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
+    <span class="nt">&lt;observers&gt;</span>
+        <span class="nt">&lt;add_connectas_button&gt;</span>
+            <span class="nt">&lt;class&gt;</span>jbh_connectas/observer<span class="nt">&lt;/class&gt;</span>
+            <span class="nt">&lt;method&gt;</span>addOurCoolButton<span class="nt">&lt;/method&gt;</span>
+        <span class="nt">&lt;/add_connectas_button&gt;</span>
+    <span class="nt">&lt;/observers&gt;</span>
+<span class="nt">&lt;/controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
+</code></pre></div>
+
+
+<p>Comme on le voit dans cet event l'observer sera <code>Jbh_ConnectAs_Model_Observer</code> et la méthode <code>addOurCoolButton</code>. Ce bout de xml sera à placer dans le tag <code>adminhtml</code> de notre <code>config.xml</code> car nous sommes sur un event lancé en partie admin.</p>
+
+<h2>Les fichiers</h2>
+
+<h3>La config : <code>/app/code/community/Jbh/ConnectAs/etc/config.xml</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/etc/config.xml"></script>
+
+
+<h3>Bien sûr notre fichier <em>etc/modules</em> : <code>/app/etc/modules/Jbh_ConnectAs.xml</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/etc/modules/Jbh_ConnectAs.xml"></script>
+
+
+<h3>Notre fichier pour les droits en admin : <code>/app/code/community/Jbh/ConnectAs/etc/adminhtml.xml</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/etc/adminhtml.xml"></script>
+
+
+<h3>Notre contrôleur d'admin : <code>/app/code/community/Jbh/ConnectAs/controllers/Adminhtml/IndexController.php</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/controllers/Adminhtml/IndexController.php"></script>
+
+
+<h3>Notre observeur : <code>/app/code/community/Jbh/ConnectAs/Model/Observer.php</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/Model/Observer.php"></script>
+
+
+<h3>Notre helper <code>Data</code> : <code>/app/code/community/Jbh/ConnectAs/Helper/Data.php</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/Helper/Data.php"></script>
+
+
+<h2>Et au final ça fonctionne comment ?</h2>
+
+<p>A priori vous devriez voir apparaître au niveau des boutons d'actions de la fiche du client un nouveau bouton "Connect As".</p>
+
+<p>N'oubliez pas que les droits sont gérés et que vous pouvez par conséquent autoriser certains rôles à utiliser cette fonctionnalité.</p>
+
+<p>Il est également possible de rajouter des traductions puisque le PHP a été prévu pour. Il manque juste un peu de config et les fichiers CSV de traductions.</p>
+
+<p>Merci à <a href="http://benjion.wordpress.com/2011/04/29/magento-se-connecter-en-tant-que-client-depuis-ladmin/">Benjion pour l'article original</a> que j'ai eu l'occasion d'améliorer/corriger.</p>
+
+<p>Well done :)</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>20 July 2012</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=Magento">Magento</a>
+                
+            </strong>
+        </li>
+        
+        <li>
+            <span>Dépôt GitHub</span>
+            <strong><a href="https://github.com/jacquesbh/jbh_connectas">jacquesbh/jbh_connectas</a></strong>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/connectez-vous-sur-un-compte-client-sur-magento.html" data-text="Se connecter sur le compte d'un client" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+
