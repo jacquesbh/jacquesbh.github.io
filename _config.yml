@@ -9,7 +9,7 @@ markdown: rdiscount
 
 lang: fr
 
-lsi: true
+lsi: false
 paginate: 5
 
 # Themes are encouraged to use these universal variables 
