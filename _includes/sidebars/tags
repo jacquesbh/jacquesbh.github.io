@@ -1,9 +1,0 @@
-<h2>Tags</h2>
-
-<p class="tags">
-{% for tag in site.tags %}
-    <span style="font-size:{{ tag[1].size | times:1.2 | plus:12 }}px"><a href="/search.html?tag={{ tag[0] }}">{{ tag[0] }}</a></span>
-{% endfor %}
-</p>
-
-<hr />
