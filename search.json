@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Utiliser Fluid avec Zimbra sur OSX",
+            "subtitle": "",
+            "keywords": "osx, mac",
+            "tags": ["OS X","Astuces"],
+            "categories": [],
+            "description": "Oubliez votre client mail habituel et utilisez Zimbra avec Fluid sur Mac OS X.",
+            "url": "/2013/05/fluid-et-zimbra-sur-mac-osx.html",
+            "date": "05 May 2013"
+        },
+        
+        {
             "title": "Une sidebar pour les développeurs",
             "subtitle": "",
             "keywords": "reindex, cache, hints",

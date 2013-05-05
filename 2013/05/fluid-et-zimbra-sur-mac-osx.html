@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Utiliser Fluid avec Zimbra sur OSX - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Oubliez votre client mail habituel et utilisez Zimbra avec Fluid sur Mac OS X.">
+    <meta name="keywords" content="osx, mac">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Utiliser Fluid avec Zimbra sur OSX</h1>
+
+        <p>Avez-vous déjà eu l'occasion d'utiliser <a href="http://www.zimbra.com/">Zimbra</a> ?</p>
+
+<p>Il s'agit d'un outil de collaboration. En gros on peut y gérer des mails, des documents, des rendez-vous, un carnet d'adresse plutôt poussé etc.<br/>
+Le logiciel est surtout intéressant côté serveur. Cependant il a un client web, moche mais plutôt bien fichu.</p>
+
+<p>Et quand on utilise souvent son client mail et bien on a envie d'utiliser un client desktop (comme Outlook par exemple).<br/>
+Sauf que Outlook j'aime pas (<em>Microsoft</em> est l'argument premier).<br/>
+Je suis sous OS X et le client Zimbra Desktop pour Mac... disons qu'il va faire exploser l'ordi. Il doit y avoir une fuite mémoire... enfin j'imagine.</p>
+
+<p>Bref, j'utilise Zimbra. Le client web est moche mais fonctionnel. Le client desktop est inutilisable et il n'y a pas d'alternative à part Outlook.<br/>
+On fait quoi dans ce cas ?</p>
+
+<p>Perso j'utilise <a href="http://fluidapp.com/">Fluid.app</a> et un peu de JavaScript.</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<p><a href="http://fluidapp.com/">Fluid</a> permet de créer des "Web App" comme on le dit si bien.<br/>
+En gros on clique sur l'application et ça lance un navigateur web sans fioritures, juste le site.</p>
+
+<p>Donc si vous avez suivi il suffit de créer une « App » avec l'adresse de notre client web Zimbra.<br/>
+Jusque là rien de bien compliqué.</p>
+
+<p>Mais voià qu'on a un faux client desktop. C'est un client desktop au sens où c'est une application. Mais c'est un faux client car un vrai client va venir se greffer à votre système d'exploitation.</p>
+
+<p>Et là j'apprends que Fluid propose une version payante. Pour quelques euros on peut avoir quelques fonctionnalités intéressantes en sus :</p>
+
+<ul>
+<li>Les <strong>scripts utilisateur</strong>.</li>
+<li>Les <strong>styles utilisateur</strong>.</li>
+<li>Le <strong>Drag and Drop</strong>.</li>
+<li>Une <strong>API JavaScript</strong> permettant d'effectuer quelques actions sur le système.</li>
+</ul>
+
+
+<p>Pensez à regarder le <a href="http://fluidapp.com/changelog.html">changelog</a> de temps en temps. Il y a des éléments intéressants.</p>
+
+<p>Quand j'ai vu ça je me suis dit...</p>
+
+<blockquote><p>Qu'est-ce qui m'empêche de faire en sorte que Fluid m'indique quand j'ai un nouveau mail ?</p></blockquote>
+
+<p>J'achète et je bosse un peu mon JS.</p>
+
+<h2>Un peu de Javascript</h2>
+
+<p>Avant tout j'ai tenté de vérifier la présence d'un nouveau mail et d'afficher le nombre de non lus dans mon dock.<br/>
+En bonus j'ai fait en sorte que l'icône du dock saute de temps en temps et qu'elle saute de manière continue au bout d'un certain temps.</p>
+
+<script type="text/javascript">gist('jacquesbh/1353873b8c13970af60d', 'zimbra.js');</script>
+
+
+<p>Le script s'installe via le menu "Window > Userscripts". Il suffit d'ajouter un nouveau script avec la bonne recherche d'URL.</p>
+
+<p>Au final ça fonctionne super bien. Vu que Zimbra actualise la vue assez souvent (toutes les 5 à 10mn je dirais) et bien on peut garder toutes les fonctionnalités du client web, le tout dans application desktop.</p>
+
+<p>Pratique.</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>05 May 2013</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html?tag=OS X">OS X</a>, 
+                
+                <a href="/search.html?tag=Astuces">Astuces</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/jacquesbh/1353873b8c13970af60d">jacquesbh/1353873b8c13970af60d</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/05/fluid-et-zimbra-sur-mac-osx.html" data-text="Utiliser Fluid avec Zimbra sur OSX" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="/recipes">Recettes</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            &copy; Jacques Bodin-Hullin 2012
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+
