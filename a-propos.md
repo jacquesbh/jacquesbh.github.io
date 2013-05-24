@@ -13,7 +13,7 @@ Les articles de ce blog sont rédigés par Jacques Bodin-Hullin, c'est-à-dire m
 
 Je suis un développeur PHP confirmé qui a su apprendre dès son plus jeune âge les techniques du web.
 
-Fort de mon expérience, aussi bien personnelle avec mon activité de freelance de 2009 à 2011 que dans des agences telles que [ATAFOTO.studio][atafoto], [Colorz][clrz] ou encore [Internim][internim], je suis maintenant Lead Développeur chez [Capkod][capkod] (groupe [InovenAltenor][inoven], 11M de CA) depuis mars 2013.
+Fort de mon expérience, aussi bien personnelle avec mon activité de freelance de 2009 à 2011 que dans des agences telles que [ATAFOTO.studio][atafoto], [Colorz][clrz] ou encore Internim, je suis maintenant Lead Développeur chez [Capkod][capkod] (groupe [InovenAltenor][inoven], 11M de CA) depuis mars 2013.
 
 A l'origine simple amateur en PHP, je fini par trouver une réelle passion en développement web. En 2008 je décide d'obtenir un Dipôme Universitaire et Technologique en Informatique à l'IUT de la ville d'Orsay, en Essonne.
 
@@ -23,7 +23,7 @@ C'est en décembre 2010, quand j'arrive chez [Colorz][clrz] en tant que dévelop
 
 Je mets les mains dedans grâce à [Emoi-Emoi][emoiemoi], [Jimmy Fairly][jimmy], [Megalithes Montres][megalithes], [The Beautyst][beautyst], Vinobest ou encore [Soubis][soubis].
 
-L'envie de mouvement m'attire ensuite vers la startup [JolieBox][joliebox] en novembre 2011 où j'interviendrais sur la mise en place de la plateforme e-commerce basée sur Magento pour les sites anglais et espagnol. Avant de continuer chez [Internim][internim], je réalise une migration des deux sites de la version _community 1.6.1.0_ vers la version _enterprise 1.12.0.2_.
+L'envie de mouvement m'attire ensuite vers la startup [JolieBox][joliebox] en novembre 2011 où j'interviendrais sur la mise en place de la plateforme e-commerce basée sur Magento pour les sites anglais et espagnol. Avant de continuer chez Internim, je réalise une migration des deux sites de la version _community 1.6.1.0_ vers la version _enterprise 1.12.0.2_.
 
 Je suis [certifié _développeur_ et _développeur plus_ sur Magento][certif] depuis respectivement novembre et décembre 2012.
 
@@ -38,7 +38,6 @@ On peut considérer que je suis expert Magento, même si je n'aime pas ce terme 
 [atafoto]: http://atafotostudio.com/
 [clrz]: http://colorz.fr/
 [joliebox]: http://joliebox.com/
-[internim]: http://internim.com/
 [capkod]: http://capkod.com/
 [inoven]: http://www.inovenaltenor.com/
 [certif]: http://www.magentocommerce.com/certification/directory/dev/69536/
