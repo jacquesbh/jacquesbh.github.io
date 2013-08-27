@@ -20,7 +20,8 @@
   -->
     <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script> -->
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js" ></script>
     <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
     <script type="text/javascript" src="/js/event.js" ></script>
     <script type="text/javascript" src="/js/functions.js" ></script>
@@ -947,6 +948,14 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
 
     
         
+        
+        
+        
+        
+        
+        
+        
+        
     
 
     
@@ -980,28 +989,38 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
         </div>
     </div>
 
+    <script type="text/javascript" src="/js/jquery/cookies.js"></script>
+    <div id="popin" class="monsieurbiz-popin" style="display: none;">
+        <img src="/img/monsieurbiz.png" alt="" height="250" />
+        <h2><span class="lines">Un projet, Une agence</span></h2>
+        <div class="action">
+            <p>
+                Monsieur Biz, une agence spécialisée Magento pour votre projet.
+            </p>
+            <a href="http://monsieurbiz.com">
+                <div class="button1">C'est par ici que ça se passe !</div>
+            </a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+(function ($) {
+    $(document).ready(function () {
+        var cookieId = 'monsieurbizPopinDisplayed';
+        if (true || $.cookie(cookieId) == null) {
+            $.fancybox.open('#popin');
+            $.cookie(cookieId, 'true');
+        }
+    });
+ })(jQuery);
+    </script>
+
 </div>
 
 
 
 
-  <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27192340-2']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
-
-
-
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 </body>
 </html>
