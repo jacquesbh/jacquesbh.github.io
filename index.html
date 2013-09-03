@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1007,7 +1006,7 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
 (function ($) {
     $(document).ready(function () {
         var cookieId = 'monsieurbizPopinDisplayed';
-        if (true || $.cookie(cookieId) == null) {
+        if ($.cookie(cookieId) == null) {
             $.fancybox.open('#popin');
             $.cookie(cookieId, 'true');
         }
