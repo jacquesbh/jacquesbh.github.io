@@ -20,7 +20,7 @@
   -->
     <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js" ></script>
     <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
     <script type="text/javascript" src="/js/event.js" ></script>
     <script type="text/javascript" src="/js/functions.js" ></script>
@@ -40,9 +40,9 @@
             <a href="http://jacques.sh"></a>
 
             <div id="magento_certified">
-                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer" target="_blank"></a>
-                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="developer-plus" target="_blank"></a>
-                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" class="frontend-developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="Jacques Bodin-Hullin, développeur certifié Magento Developer" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="L'Agence Monsieur Biz est certifiée Magento Developer Plus" class="developer-plus" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="Jacques Bodin-Hullin est développeur certifié Magento Front End Developer" class="frontend-developer" target="_blank"></a>
             </div>
 
         </div>
@@ -50,9 +50,10 @@
         <blockquote id="quoteWrap">
             
             <p>
-                Les détails font la perfection, et la perfection n'est pas un détail.
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
             </p>
-            <div><cite>Léonard de Vinci</cite></div>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
             
         </blockquote>
 
@@ -184,6 +185,15 @@
                 </form>
             </li>
         </ul>
+
+        <div class="mbiz">
+            <p>
+                <a href="http://monsieurbiz.com" title="Découvrez l'agence Monsieur Biz, spécialiste Magento">
+                    <img src="/img/monsieurbiz_bg.png" title="L'Agence Monsieur Biz" />
+                    <span>Vous cherchez une agence à taille humaine spécialisée sur la solution e-commerce Magento ? L'agence Monsieur Biz est faite pour vous.</span>
+                </a>
+            </p>
+        </div>
     </div>
 
     <div id="globalWrap">
@@ -497,7 +507,7 @@
                 <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
             </div>
             
-            <a href="/recipes">Recettes</a>
+            <a href="http://monsieurbiz.com">Monsieur Biz, une agence spécialisée Magento</a>
             | 
 
     
@@ -621,23 +631,31 @@
 
 </div>
 
+<script type="text/javascript" src="/js/jquery/cookies.js"></script>
+    <div id="popin" class="monsieurbiz-popin" style="display: none;">
+        <img src="/img/monsieurbiz.png" alt="" height="250" style="height: 250px;" />
+        <h2><span class="lines">Un projet, Une agence</span></h2>
+        <div class="action">
+            <p>
+                Monsieur Biz, une agence spécialisée Magento pour votre projet.
+            </p>
+            <a href="http://monsieurbiz.com">
+                <div class="button1">C'est par ici que ça se passe !</div>
+            </a>
+        </div>
+    </div>
 
-
-
-  <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27192340-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
-
-
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+                var cookieId = 'monsieurbizPopinDisplayed';
+                if ($.cookie(cookieId) == null) {
+                    $.fancybox.open('#popin');
+                    $.cookie(cookieId, 'true');
+                }
+            });
+         })(jQuery);
+    </script>
 
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
