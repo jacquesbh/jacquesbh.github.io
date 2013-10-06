@@ -35,12 +35,12 @@
                 <a href="https://twitter.com/{{ site.author.twitter }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.author.twitter }}</a>
             </div>
             {% assign pages_list = site.pages %}
-            <a href="http://monsieurbiz.com">Monsieur Biz, une agence spécialisée Magento</a>
+            <a href="http://monsieurbiz.com" title="Découvrez Monsieur Biz, une agence spécialisée sur Magento, solution e-commerce">Agence Magento</a>
             | {% include footer_links %}
             | <a href="/atom.xml">RSS</a>
             | <a href="#" id="toplink">Haut de page</a>
             <br />
-            &copy; {{ site.author.name }} 2012
+            <span class="copy">&copy; {{ site.author.name }} - 2013</span>
         </div>
     </div>
 
