@@ -10,6 +10,18 @@ var data = false;
             q = $.trim(tab[2]);
         }
 
+        if (q == null) {
+            // We try to get the query with the hash
+            var hash = window.location.hash;
+            reg = new RegExp("#([^=]*)=([^&#]*)");
+            type = null;
+            if (reg.test(hash)) {
+                var tab = reg.exec(hash);
+                type = tab[1];
+                q = $.trim(tab[2]);
+            }
+        }
+
         if (q != null) {
             q = decodeURIComponent(q).replace(new RegExp('\\+', 'gi'), ' ');
             search(q, type);

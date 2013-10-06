@@ -17,7 +17,7 @@
             <span>Les tags</span>
             <strong>
                 {% for tag in page.tags %}
-                <a href="/search.html?tag={{ tag }}">{{ tag }}</a>{% if forloop.last != true %}, {% endif %}
+                <a href="/search.html#!tag={{ tag }}">{{ tag }}</a>{% if forloop.last != true %}, {% endif %}
                 {% endfor %}
             </strong>
         </li>
