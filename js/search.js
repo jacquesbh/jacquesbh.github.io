@@ -1,6 +1,7 @@
 var data = false;
+var start_search = null;
 (function ($) {
-    $(document).ready(function () {
+    start_search = function () {
         var reg = new RegExp("[\\?&]([^=]*)=([^&#]*)");
         var q = null;
         var type = null;
@@ -33,7 +34,8 @@ var data = false;
                 $('.search-title').html('Catégorie : ' + q);
             }
         }
-    });
+    }
+    $(document).ready(start_search);
 
     var spanize = function (q, txt)
     {
@@ -58,7 +60,6 @@ var data = false;
                         case 'subtitle':
                         case 'description':
                         //case 'keywords':
-                        console.log(post[inf].match(r));
                             if (post[inf].match(r) != null) {
                                 post[inf] = spanize(q, post[inf]);
                                 posts[post.url] = post;
@@ -134,6 +135,8 @@ var data = false;
             $('#results').show();
             if (outputs.length) {
                 $('#results').html('<ul>' + outputs.join("\n") + '</ul>');
+            } else {
+                $('#results').html('Aucun résultat.');
             }
         }, 'json');
     }
