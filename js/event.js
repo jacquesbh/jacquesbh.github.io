@@ -52,6 +52,28 @@
             setTimeout(sidebarScroll, timer);
         }
 
+        // Search form
+        var search_form = $('#search_form');
+        search_form.submit(function () {
+            // No value?
+            var val = $('#search_form input').val();
+            if (!val) {
+                return false;
+            }
+
+            // Get the URL
+            var url = search_form.attr('action') + '#!q=' + val;
+
+            // Redirect without send the form
+            window.location.href = url;
+
+            return false;
+        });
+
+        if ($('body.search-results').length) {
+            $(window).on('hashchange', start_search);
+        }
+
         // Fancybox
         $(".fancy").fancybox();
     });
