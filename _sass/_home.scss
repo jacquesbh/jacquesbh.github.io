@@ -61,3 +61,62 @@
 .service.qui h3 {
     background:         url(../img/icone_droite.png) no-repeat 145px center #f5f5d6;
 }
+
+/* Monsieur Biz */
+
+.monsieurbiz-popin {
+    color: #434343;
+    font-family: 'Oswald', sans-serif;
+    img {
+        margin-top: -20px;
+    }
+    h2 {
+        font-size: 30px;
+        color: #434343;
+        font-family: 'Oswald', sans-serif;
+        border: none;
+        font-weight: bold;
+        margin-top: -10px;
+        span.lines {
+            border-bottom: 1px solid #AEAEAE;
+            border-top: 1px solid #AEAEAE;
+        }
+    }
+    .action p {
+        color: #515151;
+        font-size: 22px;
+        font-weight: 600;
+        font-family: 'Source Sans Pro', sans-serif;
+        line-height: 23px;
+        margin-bottom: 20px;
+    }
+    a:hover, a:focus {
+        color: #000000;
+    }
+    a, a:visited {
+        color: #333333;
+        outline: 0 none;
+        text-decoration: underline;
+    }
+    .button1,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"]
+    {
+        background: none repeat scroll 0 0 #3A3A3A;
+        border: 0 none;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Source Sans Pro',sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 20px;
+        padding: 6px 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}
+
+

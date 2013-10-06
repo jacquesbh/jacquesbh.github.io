@@ -35,7 +35,7 @@
                 <a href="https://twitter.com/{{ site.author.twitter }}" class="twitter-follow-button" data-show-count="false">Follow @{{ site.author.twitter }}</a>
             </div>
             {% assign pages_list = site.pages %}
-            <a href="/recipes">Recettes</a>
+            <a href="http://monsieurbiz.com">Monsieur Biz, une agence spécialisée Magento</a>
             | {% include footer_links %}
             | <a href="/atom.xml">RSS</a>
             | <a href="#" id="toplink">Haut de page</a>
@@ -46,7 +46,32 @@
 
 </div>
 
-{% include JB/analytics %}
+<script type="text/javascript" src="/js/jquery/cookies.js"></script>
+    <div id="popin" class="monsieurbiz-popin" style="display: none;">
+        <img src="/img/monsieurbiz.png" alt="" height="250" style="height: 250px;" />
+        <h2><span class="lines">Un projet, Une agence</span></h2>
+        <div class="action">
+            <p>
+                Monsieur Biz, une agence spécialisée Magento pour votre projet.
+            </p>
+            <a href="http://monsieurbiz.com">
+                <div class="button1">C'est par ici que ça se passe !</div>
+            </a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+                var cookieId = 'monsieurbizPopinDisplayed';
+                if ($.cookie(cookieId) == null) {
+                    $.fancybox.open('#popin');
+                    $.cookie(cookieId, 'true');
+                }
+            });
+         })(jQuery);
+    </script>
+
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
