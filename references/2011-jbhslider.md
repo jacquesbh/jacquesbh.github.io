@@ -20,7 +20,7 @@ technologies:
 
 ![La documentation du slider][main_image]
 
-<hr />
+--------------
 
 # JbhSlider
 

@@ -26,7 +26,7 @@ technologies:
 
 # CMS Sofitel
 
-Développement d'un système « CMS » permettant aux hôteliers Sofitel de créer une ou plusieurs pages complètement dynamiques, en français et/ou anglais, avec une intégration rapide sur la page Facebook officielle de chaque hôtel.
+Développement d'un système « CMS » permettant aux hôteliers Sofitel de créer une ou plusieurs [pages complètement dynamiques][mbiz], en français et/ou anglais, avec une intégration rapide sur la page Facebook officielle de chaque hôtel.
 
 Le système est complexe puisqu'il permet la création de 6 pages pour chaque hôtel avec une gestion des utilisateurs. Chaque page est éditable de façon complètement transparente pour avoir un aperçu direct du rendu final (AJAX uniquement) et est ensuite intégrable via un processus de validation sur la page Facebook de l'hôtel.
 
@@ -34,6 +34,8 @@ Il faut noter qu'à l'époque les applications Facebook étaient en `FBML` et no
 
 Le système était basé sur le Zend Framework 1.10.6.
 
-J'ai développé cet outil sous la direction de The Roxane Company, via mon employeur de l'époque (ATAFOTO.studio).
+J'ai développé cet outil sous [la direction de The Roxane Company, via mon employeur de l'époque (ATAFOTO.studio)][a-propos].
 
 [main_image]: /images/references/cms_sofitel.png "Capture d'écran de l'application"
+
+[a-propos]: /a-propos.html

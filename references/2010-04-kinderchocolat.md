@@ -30,7 +30,7 @@ technologies:
 
 J'ai commencé chez _ATAFOTO.studio_ en 2010 par un projet de grande envergure : Réorganiser totalement le site des Petits Créatifs.
 
-A la fin de mes études je suis arrivé pour réorganiser/factoriser ce site internet basé sur le Zend Framework.  
+A la fin de mes études je suis arrivé pour réorganiser/factoriser ce [site internet basé sur le Zend Framework][mbiz].  
 Un énorme projet à refaire en quelque sorte. Il m'a fallu restructurer toute l'architecture en modules afin de respecter un peu plus les conventions du Zend Framework.  
 Il faut noter que ce projet était une reprise d'une autre agence et que la deadline de mise en ligne était largement dépassée. Le challenge était là.
 
@@ -41,6 +41,8 @@ La maintenance du site aura ensuite été une de mes tâches récurrentes une fo
 Ce site a été réalisé pour permettre aux enfants de s'occuper avec des coloriages, des points à relier (puis à colorier), des « papertoys » et des _CDTO_ (_Comment dessine-t-on ?_).  
 On y trouve également un concours mensuel de dessin sur un thème sélectionné et de multiples coloriages à thèmes (Noël, Vacances...).
 
-Il s'agissait d'un projet en sous-marin car j'ai été seul pendant toute la période avant la mise en ligne, et après pour la maintenance.
+Il s'agissait d'un projet en sous-marin car j'ai été seul pendant toute la période avant la mise en ligne, et après pour la [maintenance du site][mbiz].
 
 [main_image]: /images/references/kinderchocolat.png "Quelques pages de Kinder Chocolat"
+
+[mbiz]: http://monsieurbiz.com/

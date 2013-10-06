@@ -26,16 +26,18 @@ technologies:
 
 # Gérant de SARL
 
-> La Sarl DPE, éditrice du site gerantdesarl.com, est une société de presse et d’édition qui existe depuis 22 ans et qui est spécialisée, depuis sa création, dans l’information et la documentation des Gérants de Sarl et d’Eurl… exclusivement.
+> La Sarl DPE, éditrice du site gerantdesarl.com, est une société de presse et d’édition qui existe depuis 22 ans et qui est spécialisée, depuis sa création, dans l’information et la documentation des Gérants de Sarl et d’Eurl... exclusivement.
 
 ## La mission
 
-Réaliser une administration déconnectée du Back Office de l'application principale (site e-commerce) permettant la gestion :
+Réaliser une administration déconnectée du Back Office de l'application principale ([site e-commerce][mbiz]) permettant la gestion :
 
 - Des clients
-- Des produits (simples, packagés, virtuels, packagés virtuels...)
+- Des [produits (simples, packagés, virtuels, packagés virtuels...)][mbiz]
 - Des commandes
 - De la facturation : génération et téléchargement des factures par les clients
 - ...
 
 [main_image]: /images/references/gerantdesarl.png "Capture d'écran de l'application"
+
+[mbiz]: http://monsieurbiz.com/
