@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "La MageConf pour la première fois en France !",
+            "subtitle": "",
+            "keywords": "mageconf",
+            "tags": ["MageConf"],
+            "categories": [],
+            "description": "C'est avec un grand plaisir que Monsieur Biz participe au financement de la première MageConf 2013 à Paris !",
+            "url": "/2013/11/mageconf-en-novembre.html",
+            "date": "02 November 2013"
+        },
+        
+        {
             "title": "Utiliser Fluid avec Zimbra sur OSX",
             "subtitle": "",
             "keywords": "osx, mac",

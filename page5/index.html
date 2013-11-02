@@ -305,6 +305,8 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Astuces">Astuces</a></span>
 
+    <span style="font-size:13.2px"><a href="/search.html#!tag=MageConf">MageConf</a></span>
+
 </p>
 
 <hr />
@@ -318,6 +320,104 @@
 
     
 
+
+    <hr />
+    <h2><a href="/vos-blocs-en-ajax-via-webservice.html">Vos blocs en ajax ?</a></h2>
+    <div class="content post">
+        <p>C'est une demande récurrente...</p>
+
+<blockquote><p>Comment afficher le footer de mon site sur mon blog ?</p></blockquote>
+
+<p>C'est un exemple... Mais le footer est souvent dynamique et nous avons souvent un intérêt à pouvoir ressortir juste le contenu HTML du footer via une simple requête HTTP.</p>
+
+<!-- 
+
+
+
+
+<hr />
+
+
+<p>Comme j'ai commencé par parler du footer... on va prendre cet exemple !</p>
+
+<h2>L'astuce ?</h2>
+
+<p>En fait par défaut quand vous chargez le <code>layout</code> sur votre page, c'est le block <code>root</code> qui s'affiche automatiquement.</p>
+
+<blockquote><p>Savez-vous pourquoi ?</p></blockquote>
+
+<p>Simplement parce qu'on lui a dit de le faire !</p>
+
+<blockquote><p>Comment ?</p></blockquote>
+
+<p>Comme ça : <code>output="toHtml"</code> dans le layout <code>page.xml</code>.</p>
+
+<h2>Notre module</h2>
+
+<p>Il nous faut bien sûr faire un module... Nous l'appellerons <code>Jbh_Webservice</code>. J'ai très peu d'imagination :)</p>
+
+<p>Nous aurons juste besoin d'un contrôleur (et donc d'une route front) :</p>
+
+<script src="https://gist.github.com/3210926.js?file=config.xml"></script>
+
+
+<p>Dans le contrôleur, rien de bien compliqué :</p>
+
+<ul>
+<li>Une action <code>footerAction</code> qui va retirer le output du block <code>root</code> et afficher directement le block <code>footer</code>.</li>
+<li>Une méthode <code>postDispatch</code> qui va modifier le contenu de la réponse si on a besoin d'un callback (pour du JSONP par exemple).</li>
+</ul>
+
+
+<script src="https://gist.github.com/3210926.js?file=PageController.php"></script>
+
+
+<p>L'idée c'est que c'est à vous d'ajouter vos propres actions par la suite !</p>
+
+<h2>Bonus : un appel via jQuery</h2>
+
+<p>Voici comment appeler notre footer en ajax via jQuery :</p>
+
+<script src="https://gist.github.com/3210926.js?file=demo.js"></script>
+
+
+<p>Sachez qu'un simple appel en php tel que :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nv">$footer</span> <span class="o">=</span> <span class="nx">file_get_content</span><span class="p">(</span><span class="s1">&#39;http://example.org/webservice/page/footer&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Suffit largement pour récupérer le footer ! Faire du javascript n'a d'intérêt que si on souhaite récupérer la session utilisateur (pour lui afficher son panier par exemple !).</p>
+
+<h2>Conclusion</h2>
+
+<p>Il devient assez simple de faire des appels de blocks via une instance Magento pour un blog ou tout autre plateforme indirectement liée à votre e-commerce.</p>
+
+<p>Faites-vous plaisir !</p>
+
+<p>Ces scripts sont sous la <a href="http://sam.zoy.org/wtfpl/">WTFPL</a>.</p>
+
+<p>P.S. Le fichier <code>app/etc/modules/Jbh_Webservice.xml</code> est <a href="https://gist.github.com/3210926#file_jbh_webservice.xml">sur github ;)</a></p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/vos-blocs-en-ajax-via-webservice.html" data-text="Vos blocs en ajax ?" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/vos-blocs-en-ajax-via-webservice.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/vos-blocs-en-ajax-via-webservice.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/le-piege-des-routes-sur-magento.html">Le piège des routeurs sur Magento</a></h2>
@@ -1010,173 +1110,6 @@ Rien de bien compliqué en fait !</p>
         
 
         <a href="/creer-un-email-transactionnel-sur-magento.html">Lire la suite du tutoriel</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/un-slider-avec-le-jbhslider.html">Un slider avec le JbhSlider</a></h2>
-    <div class="content post">
-        <p>Il n'est pas rare de nos jours de voir un slider, le plus souvent en Javascript, sur une homepage, ou encore une fiche produit, etc.</p>
-
-<p>Sauf que le développeur est confronté à un problème : L'intégrateur.
-Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le même que son collègue.</p>
-
-<p>Et le développeur lui, il veut un truc pratique et il a pas envie de se prendre la tête, pour un slider.</p>
-
-<!-- 
-
-
-
-
-<hr/>
-
-
-<p>On veut un slider pratique, mais c'est quasiment introuvable.</p>
-
-<p>Quasiment, parce qu'en fait... j'en ai développé un rien que pour vous. Pour moi en fait.</p>
-
-<p style="text-align:center;"><strong><a href="http://jacques.sh/jbhslider/" title="Simple way to slide">Le JbhSlider</a></strong></p>
-
-<h2>Le HTML</h2>
-
-<p>Plusieurs choix s'offrent à nous :</p>
-
-<ul>
-<li>Les <code>div</code> dans des <code>div</code> :</li>
-</ul>
-
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div&gt;</span>Slide 1<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div&gt;</span>Slide 2<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div&gt;</span>Slide 3<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
-
-
-<p style="text-align:center;">Exemple 1</p>
-
-<ul>
-<li>La liste à puces :</li>
-</ul>
-
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;li&gt;</span>Slide 1<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li&gt;</span>Slide 2<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li&gt;</span>Slide 3<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span>
-</code></pre></div>
-
-
-<p style="text-align:center;">Exemple 2</p>
-
-<p>Par défaut nous sommes dans une liste à puce... entourée d'une <code>div</code> :</p>
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span> <span class="na">style=</span><span class="s">&quot;margin: 0 auto;&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;ul&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/26c877/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/d53221/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/47c8f3/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
-    <span class="nt">&lt;/ul&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
-
-
-<p style="text-align:center;">Exemple 3</p>
-
-<h2>Le Javascript</h2>
-
-<p>Tout d'abord il nous faut inclure notre fichier slider javascript dans le <code>head</code> de notre page ou entre les balises <code>body</code> directement :</p>
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;jbhslider.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div>
-
-
-<p>Ensuite il suffit d'appeler ce petit bout de code pour activer notre exemple numéro 3.</p>
-
-<div class="highlight"><pre><code class="javascript"><span class="c1">// La closure et le &quot;document ready&quot; ne sont pas toujours nécessaires</span>
-<span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mon_slider&#39;</span><span class="p">).</span><span class="nx">jbhSlider</span><span class="p">({</span>
-            <span class="c1">// Par défaut la taille est de 500 par 250</span>
-            <span class="nx">css</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">width</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
-                <span class="nx">height</span><span class="o">:</span> <span class="mi">125</span>
-            <span class="p">},</span>
-            <span class="c1">// Par défaut il y a une navigation précédent/suivant qui est générée</span>
-            <span class="nx">navigation</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">active</span><span class="o">:</span> <span class="kc">false</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-    <span class="p">});</span>
-<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
-</code></pre></div>
-
-
-
-
-<hr/>
-
-
-
-
-<div id="mon_slider" style="margin: 0 auto;">
-    <ul>
-        <li><img src="http://placehold.it/250x125/26c877/ffffff" /></li>
-        <li><img src="http://placehold.it/250x125/d53221/ffffff" /></li>
-        <li><img src="http://placehold.it/250x125/47c8f3/ffffff" /></li>
-    </ul>
-</div>
-
-
-
-
-<script type="text/javascript" src="http://jacques.sh/jbhslider/js/jbh_slider.min.js"></script>
-
-
-<script type="text/javascript">
-// <![CDATA[
-(function ($) {
-    $(document).ready(function () {
-        $('#mon_slider').jbhSlider({
-            css: {
-                width: 250,
-                height: 125
-            },
-            navigation: {
-                active: false
-            }
-        });
-    });
-})(jQuery);
-// ]]>
-</script>
-
-
-
-
-<hr />
-
-
-<p>Je vous invite vraiment à aller lire la <a href="http://jacques.sh/jbhslider/#documentation" title="Une documentation complète">documentation du slider</a> !</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/un-slider-avec-le-jbhslider.html" data-text="Un slider avec le JbhSlider" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/un-slider-avec-le-jbhslider.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/un-slider-avec-le-jbhslider.html">Lire la suite du tutoriel</a>
 
     </div>
 

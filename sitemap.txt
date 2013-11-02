@@ -26,6 +26,7 @@ http://jacques.sh/page4/index.html
 http://jacques.sh/page5/index.html
 http://jacques.sh/page6/index.html
 
+http://jacques.sh/2013/11/mageconf-en-novembre.html
 http://jacques.sh/2013/05/fluid-et-zimbra-sur-mac-osx.html
 http://jacques.sh/2013/03/sidebar-magento-developers.html
 http://jacques.sh/2013/03/remplacer-mysql-par-mariadb.html

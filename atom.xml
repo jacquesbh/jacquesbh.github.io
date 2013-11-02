@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2013-10-06T19:45:04+02:00</updated>
+ <updated>2013-11-02T20:10:09+01:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>La MageConf pour la première fois en France !</title>
+   <link href="http://jacques.sh/2013/11/mageconf-en-novembre.html"/>
+   <updated>2013-11-02T20:00:00+01:00</updated>
+   <id>http://jacques.sh/2013/11/mageconf-en-novembre</id>
+   <content type="html"><![CDATA[C'est avec un grand plaisir que Monsieur Biz participe au financement de la première MageConf 2013 à Paris !]]></content>
+ </entry>
  
  <entry>
    <title>Utiliser Fluid avec Zimbra sur OSX</title>
@@ -82,14 +90,6 @@
    <updated>2012-12-29T00:30:00+01:00</updated>
    <id>http://jacques.sh/ajouter-un-handle-au-layout</id>
    <content type="html"><![CDATA[Il est très utile d'avoir des handles personnalisés dans notre layout pour certaines pages.]]></content>
- </entry>
- 
- <entry>
-   <title>Ajouter un script externe au header sur Magento</title>
-   <link href="http://jacques.sh/ajouter-un-script-externe-au-header-sur-magento.html"/>
-   <updated>2012-12-24T00:30:00+01:00</updated>
-   <id>http://jacques.sh/add-external-script-in-header</id>
-   <content type="html"><![CDATA[Vous souhaitez charger un script Google ? Facebook ? ou Twitter dans le header de votre site ? Apprennez ici comment faire !]]></content>
  </entry>
  
  
