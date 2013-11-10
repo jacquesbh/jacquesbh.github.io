@@ -19,7 +19,6 @@ http://jacques.sh/references.html
 http://jacques.sh/search.html
 http://jacques.sh/search.json
 http://jacques.sh/sitemap.txt
-http://jacques.sh/tags.html
 http://jacques.sh/page2/index.html
 http://jacques.sh/page3/index.html
 http://jacques.sh/page4/index.html
