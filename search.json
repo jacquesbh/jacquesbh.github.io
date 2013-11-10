@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Et si on émulait un store ?",
+            "subtitle": "",
+            "keywords": "magento, store, emulator",
+            "tags": ["Magento","Émulation"],
+            "categories": [],
+            "description": "Il est parfois nécessaire de faire croire à Magento qu'il est sur un store en particulier pendant l'exécution d'un bout de code.",
+            "url": "/2013/11/et-si-on-emulait.html",
+            "date": "10 November 2013"
+        },
+        
+        {
             "title": "La MageConf pour la première fois en France !",
             "subtitle": "",
             "keywords": "mageconf",
