@@ -14,7 +14,7 @@ var start_search = null;
         if (q == null) {
             // We try to get the query with the hash
             var hash = window.location.hash;
-            reg = new RegExp("#([^=]*)=([^&#]*)");
+            reg = new RegExp("#!([^=]*)=([^&#]*)");
             type = null;
             if (reg.test(hash)) {
                 var tab = reg.exec(hash);
@@ -28,6 +28,7 @@ var start_search = null;
             search(q, type);
             if (type == 'q') {
                 $('#search_form input').val(q);
+                $('.search-title').html('Les résultats de votre recherche');
             } else if (type == 'tag') {
                 $('.search-title').html('Tag : ' + q);
             } else if (type == 'cat') {
