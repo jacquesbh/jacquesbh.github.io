@@ -46,6 +46,8 @@
 
 </div>
 
+{% include JB/analytics %}
+
 <script type="text/javascript" src="/js/jquery/cookies.js"></script>
     <div id="popin" class="monsieurbiz-popin" style="display: none;">
         <img src="/img/monsieurbiz.png" alt="" height="250" style="height: 250px;" />
