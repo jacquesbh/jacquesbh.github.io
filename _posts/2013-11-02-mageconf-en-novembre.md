@@ -11,7 +11,7 @@ comments: true
 ---
 
 <p class="center">
-    <a href="http://mageconf.org/" title="Aller sur le site de MageConf"><img src="/images/posts/mageconf2013/mageconf.jpg" alt="MageConf 2013" /></a>
+    <a href="http://jacques.sh/2013/11/mageconf-en-novembre.html" title="Aller sur le site de MageConf"><img src="/images/posts/mageconf2013/mageconf.jpg" alt="MageConf 2013" /></a>
 </p>
 
 **Ça n'est pas tous les jours que la communauté Magento se bouge pour organiser quelque chose 100% développeurs !**
