@@ -5,7 +5,7 @@ group: reference
 permalink: cms-sofitel.html
 slider:
     image: references/260x90/cms_sofitel.png
-    homepage: false
+    homepage: true
 page:
     image: references/260x90/cms_sofitel.png
 details:

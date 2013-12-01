@@ -5,7 +5,7 @@ group: reference
 permalink: gerantdesarl.html
 slider:
     image: references/260x90/gerantdesarl.png
-    homepage: false
+    homepage: true
 page:
     image: references/260x90/gerantdesarl.png
 details:

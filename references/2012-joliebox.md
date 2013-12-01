@@ -5,7 +5,7 @@ group: reference
 permalink: joliebox.html
 slider:
     image: references/260x90/joliebox.png
-    homepage: true
+    homepage: false
 page:
     image: references/260x90/joliebox.png
 details:

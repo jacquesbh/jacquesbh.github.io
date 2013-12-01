@@ -5,7 +5,7 @@ permalink: kinderchocolat.html
 group: reference
 slider:
     image: references/260x90/kinderchocolat.png
-    homepage: true
+    homepage: false
 page:
     image: references/260x90/kinderchocolat.png
 details:
