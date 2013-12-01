@@ -12,6 +12,11 @@ permalink: /git-en-entreprise.html
 gist: 3607757
 ---
 
+
+_Mise à jour du 1er décembre 2013 : Sinon [git flow][gitflow] c'est pas mal aussi ;)_
+
+[gitflow]: https://github.com/nvie/gitflow
+
 Je suis actuellement en poste dans deux entreprises :
 
 1.	Lead développeur chez [JolieBox][joliebox], où je passe mes connaissances car mon départ est prévu pour le 1er octobre 2012.
