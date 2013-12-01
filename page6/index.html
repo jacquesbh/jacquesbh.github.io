@@ -301,7 +301,7 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Astuces">Astuces</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=MageConf">MageConf</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=MageConf">MageConf</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Émulation">Émulation</a></span>
 
@@ -318,6 +318,171 @@
 
     
 
+
+    <hr />
+    <h2><a href="/realisez-vos-propres-scripts-php-sur-magento.html">Les scripts Magento</a></h2>
+    <div class="content post">
+        <p>Nous sommes tous confrontés à un moment ou à un autre à devoir palier un problème rapidement sur un site en production.</p>
+
+<p>Le problème le plus souvent doit se régler avec un script shell. Un script shell ok... mais en PHP !
+Hors de question de se taper le script bash/python ou autre alors qu'on a besoin de charger Magento, d'accéder à la base etc.</p>
+
+<p>Et surtout... il faut bien l'avouer, pouvoir accéder à la config, aux modèles et autres collections... bah c'est quand même bien pratique !</p>
+
+<!-- 
+
+
+
+
+<hr />
+
+
+<p>Tout d'abord il faut déterminer un endroit où nous pouvons stocker nos scripts...</p>
+
+<p>J'ai pour habitude de faire un répertoire <code>/misc</code>. Alors je vais la garder et c'est dans ce répertoire que nous allons créer nos fichiers.</p>
+
+<pre><code>$ mkdir misc
+$ vim misc/change_admin_password.php
+</code></pre>
+
+<p>Tant qu'à faire... autant réaliser un script pratique :)</p>
+
+<p>On commence donc par charger Magento :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// Mage !</span>
+<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../app/Mage.php&#39;</span><span class="p">;</span>
+
+<span class="c1">// Init Magento</span>
+<span class="nx">Mage</span><span class="o">::</span><span class="na">app</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+
+<span class="c1">// Init store (needed for save products for example)</span>
+<span class="nx">Mage</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setCurrentStore</span><span class="p">(</span><span class="nx">Mage_Core_Model_App</span><span class="o">::</span><span class="na">ADMIN_STORE_ID</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Peut-être qu'avant ça il serait préférable de tester la validiter de notre ligne de commande ?</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// Usage function :)</span>
+<span class="k">function</span> <span class="nf">usage</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Usage: php -f &quot;</span> <span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot; &lt;username&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">exit</span><span class="p">(</span><span class="mi">65</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Check command line</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">usage</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Une fois qu'on a notre utilisateur, on le charge et on vérifie qu'il existe bien :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// We get the user</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;admin/user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
+
+<span class="c1">// User exists?</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Bad username.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="nx">usage</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Ensuite on demande le mot de passe et on met à jour l'utilisateur :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// We ask for the password</span>
+<span class="k">do</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Which password? &quot;</span><span class="p">;</span>
+    <span class="nv">$password</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nb">fgets</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">));</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nv">$password</span><span class="p">);</span>
+
+<span class="c1">// We change the user password :)</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setNewPassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="s2">&quot;User updated</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="k">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>On exécute :</p>
+
+<pre><code>$ php misc/change_admin_password.php jacques
+Which password? monSuperPassword      
+User updated
+$
+</code></pre>
+
+<hr />
+
+
+<p>Voilà ce que ça donne :</p>
+
+<script src="https://gist.github.com/3139595.js?file=misc-change_admin_password.php"></script>
+
+
+
+
+<hr />
+
+
+<p>Sauf qu'on a un problème... Là le script est super simple.</p>
+
+<p>Et pour régler votre urgence vous avez besoin de vous mettre dans un environnement de "setup". En gros vous voulez être comme dans le fameux <code>mysql4-install-0.1.0.php</code> ;)</p>
+
+<p>Pour récupérer un setup de l'EAV par exemple (pour pouvoir faire des <code>getAttributeId</code>) :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nv">$setup</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;eav/entity_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;eav&#39;</span><span class="p">);</span>
+
+<span class="c1">// Op le SQL !</span>
+<span class="c1">// $setup-&gt;run($sql);</span>
+</code></pre></div>
+
+
+<p>Pour récupérer une connection et une ressource :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getSingleton</span><span class="p">(</span><span class="s1">&#39;core/resource&#39;</span><span class="p">);</span>
+<span class="nv">$cn</span> <span class="o">=</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">(</span><span class="s1">&#39;core_write&#39;</span><span class="p">);</span>
+
+<span class="c1">// Nom d&#39;une table ?</span>
+<span class="c1">// $res-&gt;getTableName(&#39;foo&#39;);</span>
+
+<span class="c1">// Un select ? (Zend_Db_Select)</span>
+<span class="c1">// $select = $cn-&gt;select();</span>
+</code></pre></div>
+
+
+<p>Voilà, à vous de jouer ! Et n'hésitez pas à partager vos scripts dans les commentaires, c'est toujours bon à prendre :)</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/realisez-vos-propres-scripts-php-sur-magento.html" data-text="Les scripts Magento" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/realisez-vos-propres-scripts-php-sur-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/realisez-vos-propres-scripts-php-sur-magento.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/creer-un-email-transactionnel-sur-magento.html">Les emails customs sur Magento</a></h2>

@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2013-11-10T20:03:44+01:00</updated>
+ <updated>2013-12-01T23:17:27+01:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>La première MageConf, l'événement Magento de l'année ?</title>
+   <link href="http://jacques.sh/2013/12/la-premiere-mageconf-terminee.html"/>
+   <updated>2013-12-01T23:00:00+01:00</updated>
+   <id>http://jacques.sh/2013/12/la-premiere-mageconf-terminee</id>
+   <content type="html"><![CDATA[]]></content>
+ </entry>
  
  <entry>
    <title>Et si on émulait un store ?</title>
@@ -82,14 +90,6 @@
    <updated>2013-01-21T01:30:00+01:00</updated>
    <id>http://jacques.sh/2013/01/creation-product-type-attributes-and-set</id>
    <content type="html"><![CDATA[Appenez à créer votre type de produit sans vous tromper. Créez également votre jeu d'attributs et vos attributs personnalisés.]]></content>
- </entry>
- 
- <entry>
-   <title>Un blog avec Jekyll et GitHub</title>
-   <link href="http://jacques.sh/2013/01/un-site-avec-jekyll-rapidement.html"/>
-   <updated>2013-01-14T02:00:00+01:00</updated>
-   <id>http://jacques.sh/2013/01/un-site-avec-jekyll-rapidement</id>
-   <content type="html"><![CDATA[Voici comment faire un blog rapide avec Jekyll et Github]]></content>
  </entry>
  
  

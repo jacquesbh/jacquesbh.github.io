@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "La première MageConf, l'événement Magento de l'année ?",
+            "subtitle": "",
+            "keywords": "mageconf",
+            "tags": ["MageConf"],
+            "categories": [],
+            "description": "",
+            "url": "/2013/12/la-premiere-mageconf-terminee.html",
+            "date": "01 December 2013"
+        },
+        
+        {
             "title": "Et si on émulait un store ?",
             "subtitle": "",
             "keywords": "magento, store, emulator",

@@ -301,7 +301,7 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Astuces">Astuces</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=MageConf">MageConf</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=MageConf">MageConf</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Émulation">Émulation</a></span>
 
@@ -318,6 +318,85 @@
 
     
 
+
+    <hr />
+    <h2><a href="/2013/03/remplacer-mysql-par-mariadb.html">Merci MySQL pour tes loyaux services</a></h2>
+    <div class="content post">
+        <p>Il est temps de dire <em>Au revoir</em> à <a href="http://www.mysql.com/">MySQL</a> !</p>
+
+<div class="center"><img src="/images/posts/remplacer-mysql-par-mariadb/sealstar.png" alt="MariaDB Captains Logo" title="MariaDB Captains Logo" /></div>
+
+
+<blockquote><p>Phoque you Oracle!</p></blockquote>
+
+<p>Allez, <em>rapidos</em>, voici les étapes pour installer <a href="https://mariadb.org/en/">MariaDB</a> sur une <a href="http://www.debian.org/releases/squeeze/">Debian Squeeze</a>.</p>
+
+<!-- 
+
+
+<hr />
+
+<h2>Pour une Debian Squeeze</h2>
+
+<p><em><a href="#other-distro">Plus bas vous trouverez ce qu'il faut</a> si vous n'êtes pas sur la même distribution.</em></p>
+
+<p>On commence par ajouter la signature des dépôts :</p>
+
+<script type="text/javascript">gist('jacquesbh/5176248', 'add_keys.sh');</script>
+
+
+<p>Ensuite on édite notre fichier <code>/etc/apt/sources.list</code> :</p>
+
+<script type="text/javascript">gist('jacquesbh/5176248', 'add_repos.sh');</script>
+
+
+<p>On y ajoute les lignes des dépôts :</p>
+
+<script type="text/javascript">gist('jacquesbh/5176248', 'sources.list');</script>
+
+
+<p>Et on installe :</p>
+
+<script type="text/javascript">gist('jacquesbh/5176248', 'install.sh');</script>
+
+
+<p>Suivez les étapes de l'installation normalement. Si possible mettez le même mot de passe <code>root</code> que celui qui était sur <em>MySQL</em> afin de ne pas perdre vos connexions enregistrés (par exemple).</p>
+
+<p>Et voilà ! Rien de plus simple !</p>
+
+<p>A présent si vous tapez la commande <code>mysql</code> vous tomberez sur le serveur <a href="https://mariadb.org/en/">MariaDB</a>.</p>
+
+<blockquote><p>Hey c'est trop cool ! Même pas besoin de migrer les bases ! C'est totalement transparent !</p></blockquote>
+
+<p>Eh ouais ! &lt;3</p>
+
+<div id="other-distro"></div>
+
+
+<h2>Les autres distrib</h2>
+
+<p>Voici la page qui vous permettra d'installer MariaDB sur une autre distribution :</p>
+
+<p><a href="https://downloads.mariadb.org/mariadb/repositories/">https://downloads.mariadb.org/mariadb/repositories/</a></p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/03/remplacer-mysql-par-mariadb.html" data-text="Merci MySQL pour tes loyaux services" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2013/03/remplacer-mysql-par-mariadb.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2013/03/remplacer-mysql-par-mariadb.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2013/03/plusieurs-themes-sur-magento.html">Le multi-thèmes en développement</a></h2>
@@ -776,242 +855,6 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
         
 
         <a href="/2013/01/creation-product-type-attributes-and-set.html">Lire la suite du tutoriel</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/2013/01/un-site-avec-jekyll-rapidement.html">Un blog avec Jekyll et GitHub</a></h2>
-    <div class="content post">
-        <p>L'occasion de faire un petit blog ou un site un poil dynamique n'est pas rare dans notre métier.</p>
-
-<p>Voici une manière rapide de faire un blog simple :</p>
-
-<ul>
-<li>interface d'administration
-
-<ul>
-<li>gestion des utilisateurs</li>
-</ul>
-</li>
-<li>blog statique
-
-<ul>
-<li>versionnement des articles</li>
-<li>commentaires (avec <a href="http://disqus.com/">Disqus</a>)</li>
-<li>catégories</li>
-<li>tags</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Pour le rendu du blog, c'est <a href="http://jekyllrb.com/">Jekyll</a>.</p>
-
-<p>Pour l'interface d'administration, c'est <a href="https://github.com/">GitHub</a>.</p>
-
-<!-- 
-
-
-<hr />
-
-<p><a href="http://jekyllrb.com/">Jekyll</a> est un générateur de blog statique.</p>
-
-<p><a href="https://github.com/">GitHub</a> permet à un utilisateur d'avoir des URL telles que <em>http://utilisateur.github.com/projet</em> avec ses fameuses <a href="http://pages.github.com/">Pages Github</a>.</p>
-
-<p>Et comme tout projet sur GitHub, on peut y avoir une gestion des collaborateurs. Un collaborateur devient donc un utilisateur dans notre cas.</p>
-
-<p>Les <em>Pages</em> sur GitHub peuvent fonctionner avec Jekyll. C'est d'ailleurs le cas par défaut.</p>
-
-<p>Il nous suffit donc de créer un projet sur GitHub, de créer la branche <code>gh-pages</code> et d'y mettre à l'intérieur : notre blog.</p>
-
-<p>Je vous laisse créer votre projet, le cloner, et vous déplacer sur la branche <code>gh-pages</code>.</p>
-
-<h2>Configuration</h2>
-
-<p>Il nous faut initialiser notre blog :</p>
-
-<script type="text/javascript">gist(4526322, 'misc/init.sh');</script>
-
-
-<p>La <a href="https://github.com/mojombo/jekyll/wiki/Configuration">configuration de Jekyll</a> est contenu dans le fichier <code>_config.yml</code>.</p>
-
-<p>Par défaut GitHub force les valeurs suivantes :</p>
-
-<pre><code>safe: true
-source: &lt;your pages repo&gt;
-destination: &lt;the build dir&gt;
-lsi: false
-pygments: true
-</code></pre>
-
-<p>A partir de là vous n'avez pas le choix de la source et de la destination de vos pages. Vous ne pouvez pas non plus utiliser de plugins personnalisés ; Et la coloration syntaxique avec le tag <code>highlight</code> est possible et elle utilise <a href="http://pygments.org/">Pygments</a>.</p>
-
-<p>Mais nous pouvons tout de même personnaliser quelques éléments :</p>
-
-<script type="text/javascript">gist(4526322, '_config.yml');</script>
-
-
-<p>La configuration n'est pas bien compliquée à comprendre. Il s'agit d'un fichier en <code>YAML</code>, c'est donc une liste de clés/valeurs, tout simplement.</p>
-
-<h2>Le format d'une page avec Jekyll</h2>
-
-<p>Tout fichier texte peut-être transformé par Jekyll. Il suffit d'y inclure le "header" qui va bien, exemple :</p>
-
-<script type="text/javascript">gist(4526322, 'misc/header_example.txt', 4);</script>
-
-
-<p>La date de publication permet de décider de la date de parution de notre article, à condition que la configuration <code>future</code> soit à <code>false</code>.</p>
-
-<p>Le header d'un fichier "Jekyll" commence et se termine par <code>---</code>. A l'intérieur du header vous pouvez y mettre ce que vous voulez : ces valeurs seront récupérables.
-On peut par exemple imaginer une variable <code>comments: true</code> ou <code>false</code> qui nous permette ensuite dans le HTML de la page de déterminer si on doit, ou non, afficher les commentaires.</p>
-
-<h2>Notre page principale</h2>
-
-<p>Comme tout site qui se respecte on a un <code>index.html</code>. Ici, c'est pareil. On peut également le nommer <code>index.md</code> mais dans ce cas il sera, en plus d'être parsé par Jekyll, parsé par le moteur Markdown. Et pour un fichier qui va contenir un HTML bien spécifique c'est un peu lourd de faire passer markdown par là.</p>
-
-<p>On va décider que notre page d'accueil aura un <code>layout</code> standard qu'on pourra réutiliser : <code>default</code>.</p>
-
-<p>Je vous explique plus bas ce qu'est le layout, mais vous allez voir, c'est très simple à comprendre !</p>
-
-<p>En attendant notre page d'accueil doit boucler sur les posts, qui ont une pagination (on doit donc gérer cette pagination).</p>
-
-<script type="text/javascript">gist(4526322, 'index.html');</script>
-
-
-<p>Les conditions sont simples à comprendre. Par contre effectivement c'est pas super bien indenté... Sauf que si j'indente plus le code on va se retrouver avec des pages dont le HTML reçu par le serveur contiendra des tonnes d'espaces. Car les <code>{% if ... %}</code> sont supprimés, mais pas les espaces avant !</p>
-
-<p>On a là notre page d'accueil avec sa pagination.</p>
-
-<h2>Les includes</h2>
-
-<p>Un fichier peut être inclu grâce à la méthode <code>include</code> : <code>{% include file %}</code>.</p>
-
-<p>On peut donc par exemple facilement créer les fichiers <code>head.html</code>, <code>header.html</code> et <code>footer.html</code> !</p>
-
-<script type="text/javascript">gist(4526322, '_includes/head.html');</script>
-
-
-
-
-<script type="text/javascript">gist(4526322, '_includes/header.html');</script>
-
-
-
-
-<script type="text/javascript">gist(4526322, '_includes/footer.html');</script>
-
-
-<h2>Les layouts</h2>
-
-<p>Les layouts sont des fichiers qui contiennent nos pages, notre <em>contenu</em> : <code>{{ content }}</code>.</p>
-
-<p>Voici le layout <code>default</code> que nous avons utilisé pour notre page d'accueil :</p>
-
-<script type="text/javascript">gist(4526322, '_layouts/default.html');</script>
-
-
-<p>Vous voyez tout de suite l'intérêts des <code>includes</code> n'est-ce pas ?</p>
-
-<p>Et le layout pour nos articles : <code>post</code></p>
-
-<script type="text/javascript">gist(4526322, '_layouts/post.html');</script>
-
-
-<h2>Notre premier article</h2>
-
-<p>Nos articles sont dans le dossier <code>_posts</code>.</p>
-
-<p>Le nom du fichier est important car il contient la date utilisée dans l'URL. Par exemple : <code>2013-01-13-premier-article.md</code></p>
-
-<p>Et son contenu, rien de plus simple ! On utilise la layout <code>post</code>, une date de publication et un titre :</p>
-
-<pre><code>---
-title: "Mon premier article !"
-layout: post
-published: 2013-01-13 22:00:00
-tags: [foo, bar, baz]
----
-
-Super :)
-</code></pre>
-
-<h2>Les tags</h2>
-
-<p>On peut également gérer des tags... avec par exemple une page qui va permettre de les lister.</p>
-
-<p>Je vous laisse adapter ce code dans votre layout favoris, sur votre page d'accueil, dans une sidebar ou autre...</p>
-
-<script type="text/javascript">gist(4526322, 'tags.html');</script>
-
-
-<p>Ici on a surchargé le <code>permalink</code> car sinon notre lien aurait été <code>/tags/</code> et non <code>/tags.html</code>. Seul l'<code>index.html</code> n'est pas modifié au niveau de son URL (sauf si on force le <code>permalink</code>).</p>
-
-<h2>Et GitHub dans tout ça ?</h2>
-
-<p>Au final on a vu comment faire tourner un blog avec Jekyll... Mais je n'ai pas parlé de GitHub.</p>
-
-<p>L'intérêt de GitHub dans cette affaire c'est que nous avons quelque chose de propre pour gérer nos fichiers et une interface vraiment simple pour modifier nos articles.</p>
-
-<p>Depuis peu on peut créer des branches directement dans GitHub, ce qui fait qu'on peut rédiger un article directement en ligne, même s'il n'est pas terminé !</p>
-
-<p>Et les contributeurs d'un projet peuvent devenir des auteurs ;)</p>
-
-<h3>Le CNAME ?</h3>
-
-<p>Le détail qui tue... ajoutez un fichier <code>CNAME</code> qui contient votre nom de domaine, par exemple <code>jacques.sh</code> (<a href="https://github.com/jacquesbh/jacquesbh.github.com/blob/master/CNAME">il existe vraiment !</a>).</p>
-
-<p>Faites pointer vos DNS sur les serveurs de GitHub :</p>
-
-<pre><code>jacques.sh.     38400   IN  A   204.232.175.78
-</code></pre>
-
-<p>Et le tour est joué !</p>
-
-<p><em>Ce blog fonctionne avec Jekyll et GitHub :)</em></p>
-
-<p>Pensez à bien modifier l'URL <code>production_url</code> dans la configuration du blog ! Sinon vous risquez quelques surprises avec vos URLs.</p>
-
-<h2>Conclusion</h2>
-
-<p>Je ne parle pas des commentaires et des catégories dans cet article. Mais vous avez toutes les clés en main pour faire ça sans moi !</p>
-
-<p>Pour les catégories, ça fonctionne exactement comme les tags. Notez qu'on ne peut pas avoir d'URL particulière pour une catégorie, ou un tag. A moins de faire quelque chose en Javascript ou autre... (comme les tags de ce blog)</p>
-
-<p>Pour les commentaires il vous suffit d'utiliser <a href="http://disqus.com/">Disqus</a>. Avec un <code>include</code> par exemple ! Et un peu de config ?</p>
-
-<pre><code>disqus:
-    username: mon_username
-</code></pre>
-
-<p>On récupère le nom d'utilisateur comme ceci : <code>{{ site.disqus.username }}</code></p>
-
-<p>Si vous souhaitez un formulaire de contact vous pouvez vous tourner vers <a href="http://getsimpleform.com/">Get Simple Form</a>.
-Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulaire de contact et vous envoi un email avec les informations. Très pratique quand on sait que nous sommes sur un site statique !</p>
-
-<p>N'oubliez pas de gérer l'envoi de votre formulaire en javascript (ou tout autre méthode) afin d'éviter le spam.</p>
-
-<p>Concernant la recherche... c'est un peu compliqué de faire une recherche sur un site statique non ? Au final vous pouvez tenter quelque chose avec un fichier <code>json</code> à la racine de votre site et un bout de javascript pour gérer tout ça !</p>
-
-<p>Vous pouvez récupérer la source de tout ce tuto en <a href="https://gist.github.com/4526322">clonant le gist dédié à cet article</a>, il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).</p>
-
-<p>N'hésitez pas à regarder la <a href="https://github.com/jacquesbh/jacquesbh.github.com">source de ce blog également</a>.</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/01/un-site-avec-jekyll-rapidement.html" data-text="Un blog avec Jekyll et GitHub" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/2013/01/un-site-avec-jekyll-rapidement.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/2013/01/un-site-avec-jekyll-rapidement.html">Lire la suite du tutoriel</a>
 
     </div>
 
