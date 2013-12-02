@@ -39,7 +39,10 @@ Sébastien nous a retracé l'historique des versions de Magento. De la première
 Il nous a expliqué de manière détaillée comment monter en version sur la plateforme.  
 Rien à dire, sujet maîtrisé.
 
+Sébastien a mis à disposition ses slides : [Montée de version de Magento : la préparation, les étapes, les pièges à éviter][slides_seb]
+
 [meliweb]: http://www.meliweb.fr/
+[slides_seb]: http://www.meliweb.fr/mageconf-montee-version.pdf
 
 <!-- more start -->
 
