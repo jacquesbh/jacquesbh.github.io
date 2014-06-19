@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2013-12-02T19:12:48+01:00</updated>
+ <updated>2014-06-19T23:15:25+02:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Meet Magento DE 2014 - Présentation de l'Installer</title>
+   <link href="http://jacques.sh/2014/06/meet-magento-de-2014-installer-barcamp.html"/>
+   <updated>2014-06-20T01:30:00+02:00</updated>
+   <id>http://jacques.sh/2014/06/meet-magento-de-2014-installer-barcamp</id>
+   <content type="html"><![CDATA[Cette vidéo proposée par Meet Magento vous donne un aperçu de l&#39;outil de scafolding conçu avec amour pour Magento.]]></content>
+ </entry>
  
  <entry>
    <title>La première MageConf, l'événement Magento de l'année ?</title>
@@ -25,7 +33,7 @@
    <link href="http://jacques.sh/2013/11/et-si-on-emulait.html"/>
    <updated>2013-11-10T20:00:00+01:00</updated>
    <id>http://jacques.sh/2013/11/et-si-on-emulait</id>
-   <content type="html"><![CDATA[Il est parfois nécessaire de faire croire à Magento qu'il est sur un store en particulier pendant l'exécution d'un bout de code.]]></content>
+   <content type="html"><![CDATA[Il est parfois nécessaire de faire croire à Magento qu&#39;il est sur un store en particulier pendant l&#39;exécution d&#39;un bout de code.]]></content>
  </entry>
  
  <entry>
@@ -33,7 +41,7 @@
    <link href="http://jacques.sh/2013/11/mageconf-en-novembre.html"/>
    <updated>2013-11-02T20:00:00+01:00</updated>
    <id>http://jacques.sh/2013/11/mageconf-en-novembre</id>
-   <content type="html"><![CDATA[C'est avec un grand plaisir que Monsieur Biz participe au financement de la première MageConf 2013 à Paris !]]></content>
+   <content type="html"><![CDATA[C&#39;est avec un grand plaisir que Monsieur Biz participe au financement de la première MageConf 2013 à Paris !]]></content>
  </entry>
  
  <entry>
@@ -73,7 +81,7 @@
    <link href="http://jacques.sh/2013/02/afficher-un-attribut.html"/>
    <updated>2013-02-26T00:15:00+01:00</updated>
    <id>http://jacques.sh/2013/02/afficher-un-attribut</id>
-   <content type="html"><![CDATA[On a toujours envie que notre attribut s'affiche correctement dans notre page produit ou notre catalogue sans créer de dépendances... Explication !]]></content>
+   <content type="html"><![CDATA[On a toujours envie que notre attribut s&#39;affiche correctement dans notre page produit ou notre catalogue sans créer de dépendances... Explication !]]></content>
  </entry>
  
  <entry>
@@ -82,14 +90,6 @@
    <updated>2013-02-17T20:20:00+01:00</updated>
    <id>http://jacques.sh/2013/02/un-attribut-dynamique-sur-magento</id>
    <content type="html"><![CDATA[Il est temps de ne pas perdre de temps avec les attributs à valeur multiple !]]></content>
- </entry>
- 
- <entry>
-   <title>Créez votre type de produit, ses attributs et son jeu</title>
-   <link href="http://jacques.sh/2013/01/creation-product-type-attributes-and-set.html"/>
-   <updated>2013-01-21T01:30:00+01:00</updated>
-   <id>http://jacques.sh/2013/01/creation-product-type-attributes-and-set</id>
-   <content type="html"><![CDATA[Appenez à créer votre type de produit sans vous tromper. Créez également votre jeu d'attributs et vos attributs personnalisés.]]></content>
  </entry>
  
  

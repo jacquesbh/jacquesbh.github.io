@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Meet Magento DE 2014 - Présentation de l'Installer",
+            "subtitle": "",
+            "keywords": "",
+            "tags": ["The Installer","Meet Magento","Productivité"],
+            "categories": [],
+            "description": "Cette vidéo proposée par Meet Magento vous donne un aperçu de l'outil de scafolding conçu avec amour pour Magento.",
+            "url": "/2014/06/meet-magento-de-2014-installer-barcamp.html",
+            "date": "20 June 2014"
+        },
+        
+        {
             "title": "La première MageConf, l'événement Magento de l'année ?",
             "subtitle": "",
             "keywords": "mageconf",

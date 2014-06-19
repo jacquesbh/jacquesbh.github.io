@@ -170,6 +170,10 @@
         
     
 
+    
+        
+    
+
 
 
 
@@ -253,7 +257,7 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=CMS">CMS</a></span>
 
-    <span style="font-size:14.4px"><a href="/search.html#!tag=The Installer">The Installer</a></span>
+    <span style="font-size:15.6px"><a href="/search.html#!tag=The Installer">The Installer</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Android">Android</a></span>
 
@@ -305,6 +309,10 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Émulation">Émulation</a></span>
 
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Meet Magento">Meet Magento</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Productivité">Productivité</a></span>
+
 </p>
 
 <hr />
@@ -318,6 +326,184 @@
 
     
 
+
+    <hr />
+    <h2><a href="/un-push-pour-vos-produits-sur-magento.html">Un push pour vos produits</a></h2>
+    <div class="content post">
+        <p>Ne vous êtes-vous jamais retrouvé à créer un block dédié au fameux « push produit » sur votre projet ?</p>
+
+<p>Vous savez, le block qui affiche le produit et qu'on a envie de mettre partout, sur la homepage, sur une mise en avant ou que sais-je !</p>
+
+<p>Cet article va vous montrer la meilleure manière de gérer ce problème en prenant en compte, je l'espère, une bonne partie des contraintes.</p>
+
+<!-- 
+
+
+<hr />
+
+<div style="text-align: center;">
+    <img alt="Push produit Magento EE" src="/images/posts/block-push-produit/push_produit_ee.png" height="272" width="161" style="border: 1px dashed gray;" />
+</div>
+
+
+<p>Pour bien faire nous allons créer le module <code>Jbh_Catalog</code>.</p>
+
+<h2>De quoi avons-nous besoin ?</h2>
+
+<p>Pour commencer, comme je l'explique souvent, nous devons déterminer vers quoi nous allons, et ce que nous allons faire. Il s'agit d'une partie d'analyse importante avant de développer.</p>
+
+<p>On liste.</p>
+
+<p>Nous devons :</p>
+
+<ul>
+<li> Créer un block <code>Jbh_Catalog_Block_Product_Push</code> pour afficher notre produit. Nous devons prévoir que notre block puisse s'ajuster au type de produit via des templates spécifiques. On poussera un peu la chose et pour cela nous aurons besoin d'un peu de config. Nous ne gérerons pas le cache de notre block (par défaut sur Magento).</li>
+<li> Créer un helper <code>Jbh_Catalog_Helper_Product</code> pour récupérer notre block. Via la méthode <code>getPush($product)</code>.</li>
+<li> Créer un modèle <code>Jbh_Catalog_Model_Product_Push_Config</code> pour gérer notre configuration.</li>
+</ul>
+
+
+<p>Maintenant que nous savons ce que nous devons faire, faisons-le par étape.</p>
+
+<h2>La configuration</h2>
+
+<p>Pourquoi avons-nous besoin d'un peu de config ?</p>
+
+<p>Comme tout projet e-commerce j'imagine que votre boutique comprend plusieurs types de produits.</p>
+
+<p>Par défaut Magento en comprend 6 types de produits différents (+ le type <code>Gift Card</code> en EE).</p>
+
+<p>L'idée c'est que bien souvent chaque type de produit a un push un peu différent. Bien souvent on affiche des infos pour un type, par pour l'autre.</p>
+
+<p>Une première solution pour gérer ça est de conditionner simplement notre <code>phtml</code> avec de simples <code>if ($_product-&gt;getTypeId() == Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE)</code> par exemple.</p>
+
+<p>La seconde consiste à gérer un template par type, avec un template par défaut. Si le template pour le type du produit est défini alors on l'utilise, sinon on prend celui par défaut.</p>
+
+<p>Voici un exemple de configuration que nous pouvons mettre en place :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;jbh&gt;</span>
+    <span class="nt">&lt;catalog&gt;</span>
+        <span class="nt">&lt;product&gt;</span>
+            <span class="nt">&lt;push&gt;</span>
+                <span class="nt">&lt;modes&gt;</span>
+                    <span class="nt">&lt;default&gt;</span>
+                        <span class="nt">&lt;templates&gt;</span>
+                            <span class="nt">&lt;default&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/default&gt;</span>
+                            <span class="nt">&lt;simple&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/simple&gt;</span>
+                            <span class="nt">&lt;giftcard&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/giftcard&gt;</span>
+                        <span class="nt">&lt;/templates&gt;</span>
+                    <span class="nt">&lt;/default&gt;</span>
+                    <span class="nt">&lt;list&gt;</span>
+                        <span class="nt">&lt;templates&gt;</span>
+                            <span class="nt">&lt;default&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/default&gt;</span>
+                            <span class="nt">&lt;simple&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/simple&gt;</span>
+                            <span class="nt">&lt;giftcard&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/giftcard&gt;</span>
+                        <span class="nt">&lt;/templates&gt;</span>
+                    <span class="nt">&lt;/list&gt;</span>
+                <span class="nt">&lt;/modes&gt;</span>
+            <span class="nt">&lt;/push&gt;</span>
+        <span class="nt">&lt;/product&gt;</span>
+    <span class="nt">&lt;/catalog&gt;</span>
+<span class="nt">&lt;/jbh&gt;</span>
+</code></pre></div>
+
+
+<p>De cette manière il devient très facile de changer le template pour chaque mode ou chaque type de produit. Et pourquoi pas ajouter un <em>mode</em> ou encore un <em>type</em> fictif ? Après tout rien ne nous empêche d'inventer un mode, par exemple <code>homepage_mea</code>, pour changer les templates de tous les produits qui sont sur la mise en avant sur notre page d'accueil...</p>
+
+<h3>Notre modèle</h3>
+
+<p>Notre modèle <code>Jbh_Catalog_Model_Product_Push_Config</code> comprend les méthodes suivantes :</p>
+
+<ul>
+<li> <code>getModes()</code> qui retourne le tableau de tous les modes possibles.</li>
+<li> <code>getTemplates($mode)</code> qui retourne un tableau des templates par types, suivant le mode.</li>
+</ul>
+
+
+<p>Bien sûr les <code>path</code> de la configuration sont dans des constantes.</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Model/Product/Push/Config.php"></script>
+
+
+<h2>Le block</h2>
+
+<p>Notre block dépend surtout du produit et du mode que nous voulons utiliser pour l'affichage.</p>
+
+<p>Pour cela nous indiquons dans notre fichier PHP que notre classe comprend les méthodes implicites suivantes :</p>
+
+<ul>
+<li> <code>@method Jbh_Catalog_Block_Product_Push setProduct(Mage_Catalog_Model_Product $product)</code></li>
+<li> <code>@method Mage_Catalog_Model_Product getProduct()</code></li>
+<li> <code>@method Jbh_Catalog_Block_Product_Push setMode(string $mode)</code></li>
+<li> <code>@method string getMode()</code></li>
+</ul>
+
+
+<p>Ces méthodes sont utilisées lors de l'affichage dans la méthode <code>_toHtml</code>.</p>
+
+<p>Si un template a déjà été défini (si jamais il a été forcé par exemple) alors nous ne le changeons pas.</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Block/Product/Push.php"></script>
+
+
+<h2>Le helper</h2>
+
+<p>Notre helper est la clé de ce module car c'est lui qui va nous retourner notre block pour le produit que nous lui donnons.</p>
+
+<p>Nous développons donc deux méthodes :</p>
+
+<ul>
+<li> <code>getPush($product, $mode = null)</code> qui retournera le block instancié.</li>
+<li> <code>getPushHtml($product, $mode = null)</code> qui retournera le HTML du block.</li>
+</ul>
+
+
+<p>La première méthode fera juste une petite vérification : Notre variable <code>$product</code> est-elle bien un objet du type <code>Mage_Catalog_Model_Product</code> ? Si ça n'est pas le cas alors on considère que c'est un identifiant entier, et on <code>load</code> le produit. Ensuite on retourne notre nouveau block avec le produit et le mode dans ses données (via le <code>Varien_Object</code> hérité).</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Helper/Product.php"></script>
+
+
+<h2>Comment ça marche ?</h2>
+
+<p>Pour utiliser notre block rien de plus simple !</p>
+
+<p>Appelons simplement la méthode <code>getPushHtml</code> de notre helper :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;jbh_catalog/product&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getPushHtml</span><span class="p">(</span><span class="nv">$product</span><span class="p">,</span> <span class="nv">$mode</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Le <code>$mode</code> n'est pas obligatoire.</p>
+
+<p>Le <code>$product</code> peut être un produit instancié ou un entier (identifiant du produit).</p>
+
+<h2>Conclusion</h2>
+
+<p>Il vous est maintenant très facile, via un peu de configuration, de changer les différents affichages de vos produits sans vous prendre la tête.</p>
+
+<p>Rien ne vous empêche comme vous pouvez le voir de créer un mode didié à une page en particulier.</p>
+
+<p>Vous pouvez <a href="https://github.com/jacquesbh/jbh_catalog">retrouver le module <code>Jbh_Catalog</code> sur Github</a>.</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/un-push-pour-vos-produits-sur-magento.html" data-text="Un push pour vos produits" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/un-push-pour-vos-produits-sur-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/un-push-pour-vos-produits-sur-magento.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/le-layout-sur-magento.html">Le Layout sur Magento</a></h2>
@@ -1493,275 +1679,6 @@ Success
 
     </div>
 
-    <hr />
-    <h2><a href="/apprendre-a-utiliser-magento-installer.html">Utiliser l'Installer - Créer un grid en admin</a></h2>
-    <div class="content post">
-        <p>Dans mon article précédent je dévoile mon <strong>Installer</strong>.</p>
-
-<p>Pour vous permettre de prendre en main et vous montrer les possibilités de l'outil je vais vous montrer comment faire un simple grid en admin, en 13mn et 30s.</p>
-
-<p>A vos marques...</p>
-
-<!-- 
-
-
-
-
-<hr />
-
-
-<p>Ce tutoriel utilise l'<strong>Installer</strong> : <a href="http://jacques.sh/the-installer-v1.html">En savoir plus sur l'Installer pour Magento</a></p>
-
-<p>Tout d'abord on commence par déterminer ce dont nous avons besoin :</p>
-
-<ol>
-<li>Un module <code>Jbh_Grid</code></li>
-<li>Un modèle <code>Foo</code>, une ressource <code>Foo</code> et une collection <code>Foo_Collection</code></li>
-<li>Un routeur admin et son menu</li>
-<li>Un contrôleur admin</li>
-<li>2 blocs pour constituer le grid en admin (le container et le grid)</li>
-<li>Un setup MySQL</li>
-<li>Un helper Data pour les traductions, ainsi qu'un fichier de traductions <code>.csv</code></li>
-</ol>
-
-
-<p>Nous ne verrons pas ici comment faire le formulaire pour ajouter/éditer notre objet <code>Foo</code>.</p>
-
-<h2>Création des fichiers grâce à l'Installer</h2>
-
-<p>Lançons l'outil : (<a href="https://github.com/jacquesbh/Installer/tree/v1#bash-function-required">Voir le README</a>)</p>
-
-<pre><code>$ jbh
-The Installer - by jacquesbh
-&gt;
-</code></pre>
-
-<p>On commence par créer notre module :</p>
-
-<pre><code>&gt; mod jbh grid local
-Using: Jbh_Grid in local
-Jbh_Grid&gt;
-</code></pre>
-
-<p>Notez qu'on peut lancer l'Installer directement sur le module que l'on souhaite :</p>
-
-<pre><code>$ jbh jbh grid local
-The Installer - by jacquesbh
-Using: Jbh_Grid in local
-&gt;
-</code></pre>
-
-<p>Ensuite passons à notre "entité" :</p>
-
-<pre><code>Jbh_Grid&gt; ent foo jbh_grid_foo
-</code></pre>
-
-<p>Vous pouvez bien sûr ne taper que <code>ent</code> ou <code>entity</code> et suivre les instructions :</p>
-
-<pre><code>Jbh_Grid&gt; entity
-Entity?
-&gt; foo
-Table?
-&gt; jbh_grid_foo
-</code></pre>
-
-<p>A ce stade nous avons tous nos modèles.</p>
-
-<p>Le routeur en admin :</p>
-
-<pre><code>Jbh_Grid&gt; r admin foo_adminhtml
-</code></pre>
-
-<p>Pour le menu il nous faudra éditer manuellement le fichier <code>etc/adminhtml.xml</code> de notre module.</p>
-
-<p>(N'y oublions pas les ACL ;))</p>
-
-<p>Ensuite il nous faut notre contrôleur admin avec l'action grid :</p>
-
-<pre><code>Jbh_Grid&gt; c adminhtml_index grid
-</code></pre>
-
-<p>Nous en sommes à l'étape où il nous faut créer le grid...</p>
-
-<p>2 possibilités :</p>
-
-<ul>
-<li>Soit : créer le grid bloc après bloc, initialiser les blocs etc.</li>
-<li>Soit : utiliser la commande grid qui fait (presque) tout à notre place</li>
-</ul>
-
-
-<p>Le choix est vite fait...</p>
-
-<pre><code>Jbh_Grid&gt; grid foo
-</code></pre>
-
-<p>Il nous faut le setup pour créer notre table en base de données !</p>
-
-<pre><code>Jbh_Grid&gt; setup
-</code></pre>
-
-<p>On termine par notre Helper Data : (vide)</p>
-
-<pre><code>Jbh_Grid&gt; h data -
-</code></pre>
-
-<h2>Résumé des commandes</h2>
-
-<p>Une fois que vous connaissez les commandes (alias + ordre des arguments) vous pouvez aller vraiment vite !</p>
-
-<p>Vraiment vite... On reprend, en 30 secondes :</p>
-
-<pre><code>$ jbh jbh grid local
-The Installer - by jacquesbh
-Using: Jbh_Grid in local
-Jbh_Grid&gt; ent foo jbh_grid_foo
-Jbh_Grid&gt; r admin foo_adminhtml
-Jbh_Grid&gt; c adminhtml_index grid
-Jbh_Grid&gt; grid foo
-Jbh_Grid&gt; setup
-Jbh_Grid&gt; h data -
-Jbh_Grid&gt;
-</code></pre>
-
-<h2>Le SQL de notre table</h2>
-
-<p>Réfléchissons 3 minutes pour construire notre table en base de données :</p>
-
-<div class="highlight"><pre><code class="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">jbh_grid_foo</span><span class="o">`</span> <span class="p">(</span>
-  <span class="o">`</span><span class="n">foo_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span> <span class="k">COMMENT</span> <span class="s1">&#39;The Foo ID&#39;</span><span class="p">,</span>
-  <span class="o">`</span><span class="nb">text</span><span class="o">`</span> <span class="nb">text</span> <span class="k">COMMENT</span> <span class="s1">&#39;The text of our Foo&#39;</span><span class="p">,</span>
-  <span class="o">`</span><span class="n">created_at</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;Creation date&#39;</span><span class="p">,</span>
-  <span class="o">`</span><span class="n">updated_at</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;Update date&#39;</span><span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">foo_id</span><span class="o">`</span><span class="p">)</span>
-<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
-</code></pre></div>
-
-
-<p>Complétons notre setup :</p>
-
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/sql/jbh_grid_setup/mysql4-install-0.1.0.php"></script>
-
-
-<h2>Notre menu admin</h2>
-
-<p>Il nous faut éditer notre fichier <code>etc/adminhtml.xml</code> pour ajouter notre menu et les ACLs :</p>
-
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/etc/adminhtml.xml"></script>
-
-
-<h2>Notre contrôleur admin</h2>
-
-<p>On ajoute avant tout la méthode <code>_isAllowed()</code> à notre contrôleur :</p>
-
-<pre><code>Jbh_Grid&gt; c adminhtml_index _isAllowed:bool
-</code></pre>
-
-<p>On complète assez rapidement !</p>
-
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/controllers/Adminhtml/IndexController.php"></script>
-
-
-<h2>Complétons notre grid</h2>
-
-<p>Il nous faut ajouter les colonnes à notre grid ainsi que le configurer un minimum...</p>
-
-<h3>Le container</h3>
-
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo.php"></script>
-
-
-<h3>Le grid</h3>
-
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo/Grid.php"></script>
-
-
-<h2>N'oublions pas les traductions !</h2>
-
-<pre><code>Jbh_Grid&gt; __
-Where? (enter for front)
-&gt; admin
-Translate?
-&gt; Foo #
-Traduction for fr_FR?
-&gt; Foo ID
-Traduction for en_US?
-&gt; 
-Jbh_Grid&gt; __
-Translate?
-&gt; Text
-Traduction for fr_FR?
-&gt; Texte
-Traduction for en_US?
-&gt; 
-Jbh_Grid&gt; __
-Translate?
-&gt; Manage Foos
-Traduction for fr_FR?
-&gt; Gérer les Foos
-Traduction for en_US?
-&gt; 
-Jbh_Grid&gt;
-</code></pre>
-
-<p>Vous aurez remarqué que lors de l'ajout de la première ligne dans les fichiers de traduction l'Installer nous demande où nous voulons ajouter nos traductions. Tout simplement parce que la manipulation des traductions implique l'ajout d'un bout de config à notre module.</p>
-
-<p>Et ça donne ça, pour le français par exemple :</p>
-
-<script src="https://gist.github.com/3344499.js?file=app/locales/fr_FR/Jbh_Grid.csv"></script>
-
-
-<h2>Conclusion</h2>
-
-<p>Au final...</p>
-
-<ul>
-<li>30 secondes pour créer notre architecture</li>
-<li>3 minutes pour créer le SQL et compléter le setup</li>
-<li>5 minutes pour le fichier <code>adminhtml.xml</code></li>
-<li>5 minutes pour terminer le grid</li>
-</ul>
-
-
-<p>Ce qu'on obtient : Un module propre, développé avec les conventions <code>Zend Framework</code>, sans erreur de config.</p>
-
-<p>Surtout... le <code>config.xm</code>l... <code>&lt;3 &lt;3 &lt;3</code></p>
-
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/etc/config.xml"></script>
-
-
-<p>Le bonheur quoi...</p>
-
-<p>Vos avis sont les bienvenus !</p>
-
-<p>Vous pouvez <a href="https://gist.github.com/3344499/download">télécharger ce module</a>.</p>
-
-<h3>Astuce</h3>
-
-<p>Pour avoir une licence personnalisée dans le haut de mes fichiers voici la commande que j'ai réellement lancée :</p>
-
-<pre><code>$ LICENSE='WTFPL (http://sam.zoy.org/wtfpl/COPYING)' jbh jbh grid local
-</code></pre>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/apprendre-a-utiliser-magento-installer.html" data-text="Utiliser l'Installer - Créer un grid en admin" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/apprendre-a-utiliser-magento-installer.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/apprendre-a-utiliser-magento-installer.html">Lire la suite du tutoriel</a>
-
-    </div>
-
 
 <div class="pagination">
     <hr/>
@@ -1773,7 +1690,7 @@ Jbh_Grid&gt;
     –
     
     
-    <span class="page_number">Page 4 sur 6</span>
+    <span class="page_number">Page 4 sur 7</span>
     
     
     –
@@ -1916,6 +1833,10 @@ Jbh_Grid&gt;
         
     
 
+    
+
+    
+        
     
 
     

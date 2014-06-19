@@ -170,6 +170,10 @@
         
     
 
+    
+        
+    
+
 
 
 
@@ -253,7 +257,7 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=CMS">CMS</a></span>
 
-    <span style="font-size:14.4px"><a href="/search.html#!tag=The Installer">The Installer</a></span>
+    <span style="font-size:15.6px"><a href="/search.html#!tag=The Installer">The Installer</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Android">Android</a></span>
 
@@ -305,6 +309,10 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Émulation">Émulation</a></span>
 
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Meet Magento">Meet Magento</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Productivité">Productivité</a></span>
+
 </p>
 
 <hr />
@@ -318,6 +326,275 @@
 
     
 
+
+    <hr />
+    <h2><a href="/apprendre-a-utiliser-magento-installer.html">Utiliser l'Installer - Créer un grid en admin</a></h2>
+    <div class="content post">
+        <p>Dans mon article précédent je dévoile mon <strong>Installer</strong>.</p>
+
+<p>Pour vous permettre de prendre en main et vous montrer les possibilités de l'outil je vais vous montrer comment faire un simple grid en admin, en 13mn et 30s.</p>
+
+<p>A vos marques...</p>
+
+<!-- 
+
+
+
+
+<hr />
+
+
+<p>Ce tutoriel utilise l'<strong>Installer</strong> : <a href="http://jacques.sh/the-installer-v1.html">En savoir plus sur l'Installer pour Magento</a></p>
+
+<p>Tout d'abord on commence par déterminer ce dont nous avons besoin :</p>
+
+<ol>
+<li>Un module <code>Jbh_Grid</code></li>
+<li>Un modèle <code>Foo</code>, une ressource <code>Foo</code> et une collection <code>Foo_Collection</code></li>
+<li>Un routeur admin et son menu</li>
+<li>Un contrôleur admin</li>
+<li>2 blocs pour constituer le grid en admin (le container et le grid)</li>
+<li>Un setup MySQL</li>
+<li>Un helper Data pour les traductions, ainsi qu'un fichier de traductions <code>.csv</code></li>
+</ol>
+
+
+<p>Nous ne verrons pas ici comment faire le formulaire pour ajouter/éditer notre objet <code>Foo</code>.</p>
+
+<h2>Création des fichiers grâce à l'Installer</h2>
+
+<p>Lançons l'outil : (<a href="https://github.com/jacquesbh/Installer/tree/v1#bash-function-required">Voir le README</a>)</p>
+
+<pre><code>$ jbh
+The Installer - by jacquesbh
+&gt;
+</code></pre>
+
+<p>On commence par créer notre module :</p>
+
+<pre><code>&gt; mod jbh grid local
+Using: Jbh_Grid in local
+Jbh_Grid&gt;
+</code></pre>
+
+<p>Notez qu'on peut lancer l'Installer directement sur le module que l'on souhaite :</p>
+
+<pre><code>$ jbh jbh grid local
+The Installer - by jacquesbh
+Using: Jbh_Grid in local
+&gt;
+</code></pre>
+
+<p>Ensuite passons à notre "entité" :</p>
+
+<pre><code>Jbh_Grid&gt; ent foo jbh_grid_foo
+</code></pre>
+
+<p>Vous pouvez bien sûr ne taper que <code>ent</code> ou <code>entity</code> et suivre les instructions :</p>
+
+<pre><code>Jbh_Grid&gt; entity
+Entity?
+&gt; foo
+Table?
+&gt; jbh_grid_foo
+</code></pre>
+
+<p>A ce stade nous avons tous nos modèles.</p>
+
+<p>Le routeur en admin :</p>
+
+<pre><code>Jbh_Grid&gt; r admin foo_adminhtml
+</code></pre>
+
+<p>Pour le menu il nous faudra éditer manuellement le fichier <code>etc/adminhtml.xml</code> de notre module.</p>
+
+<p>(N'y oublions pas les ACL ;))</p>
+
+<p>Ensuite il nous faut notre contrôleur admin avec l'action grid :</p>
+
+<pre><code>Jbh_Grid&gt; c adminhtml_index grid
+</code></pre>
+
+<p>Nous en sommes à l'étape où il nous faut créer le grid...</p>
+
+<p>2 possibilités :</p>
+
+<ul>
+<li>Soit : créer le grid bloc après bloc, initialiser les blocs etc.</li>
+<li>Soit : utiliser la commande grid qui fait (presque) tout à notre place</li>
+</ul>
+
+
+<p>Le choix est vite fait...</p>
+
+<pre><code>Jbh_Grid&gt; grid foo
+</code></pre>
+
+<p>Il nous faut le setup pour créer notre table en base de données !</p>
+
+<pre><code>Jbh_Grid&gt; setup
+</code></pre>
+
+<p>On termine par notre Helper Data : (vide)</p>
+
+<pre><code>Jbh_Grid&gt; h data -
+</code></pre>
+
+<h2>Résumé des commandes</h2>
+
+<p>Une fois que vous connaissez les commandes (alias + ordre des arguments) vous pouvez aller vraiment vite !</p>
+
+<p>Vraiment vite... On reprend, en 30 secondes :</p>
+
+<pre><code>$ jbh jbh grid local
+The Installer - by jacquesbh
+Using: Jbh_Grid in local
+Jbh_Grid&gt; ent foo jbh_grid_foo
+Jbh_Grid&gt; r admin foo_adminhtml
+Jbh_Grid&gt; c adminhtml_index grid
+Jbh_Grid&gt; grid foo
+Jbh_Grid&gt; setup
+Jbh_Grid&gt; h data -
+Jbh_Grid&gt;
+</code></pre>
+
+<h2>Le SQL de notre table</h2>
+
+<p>Réfléchissons 3 minutes pour construire notre table en base de données :</p>
+
+<div class="highlight"><pre><code class="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">jbh_grid_foo</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">foo_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span> <span class="k">COMMENT</span> <span class="s1">&#39;The Foo ID&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="nb">text</span><span class="o">`</span> <span class="nb">text</span> <span class="k">COMMENT</span> <span class="s1">&#39;The text of our Foo&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">created_at</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;Creation date&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">updated_at</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;Update date&#39;</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">foo_id</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
+</code></pre></div>
+
+
+<p>Complétons notre setup :</p>
+
+<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/sql/jbh_grid_setup/mysql4-install-0.1.0.php"></script>
+
+
+<h2>Notre menu admin</h2>
+
+<p>Il nous faut éditer notre fichier <code>etc/adminhtml.xml</code> pour ajouter notre menu et les ACLs :</p>
+
+<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/etc/adminhtml.xml"></script>
+
+
+<h2>Notre contrôleur admin</h2>
+
+<p>On ajoute avant tout la méthode <code>_isAllowed()</code> à notre contrôleur :</p>
+
+<pre><code>Jbh_Grid&gt; c adminhtml_index _isAllowed:bool
+</code></pre>
+
+<p>On complète assez rapidement !</p>
+
+<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/controllers/Adminhtml/IndexController.php"></script>
+
+
+<h2>Complétons notre grid</h2>
+
+<p>Il nous faut ajouter les colonnes à notre grid ainsi que le configurer un minimum...</p>
+
+<h3>Le container</h3>
+
+<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo.php"></script>
+
+
+<h3>Le grid</h3>
+
+<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo/Grid.php"></script>
+
+
+<h2>N'oublions pas les traductions !</h2>
+
+<pre><code>Jbh_Grid&gt; __
+Where? (enter for front)
+&gt; admin
+Translate?
+&gt; Foo #
+Traduction for fr_FR?
+&gt; Foo ID
+Traduction for en_US?
+&gt; 
+Jbh_Grid&gt; __
+Translate?
+&gt; Text
+Traduction for fr_FR?
+&gt; Texte
+Traduction for en_US?
+&gt; 
+Jbh_Grid&gt; __
+Translate?
+&gt; Manage Foos
+Traduction for fr_FR?
+&gt; Gérer les Foos
+Traduction for en_US?
+&gt; 
+Jbh_Grid&gt;
+</code></pre>
+
+<p>Vous aurez remarqué que lors de l'ajout de la première ligne dans les fichiers de traduction l'Installer nous demande où nous voulons ajouter nos traductions. Tout simplement parce que la manipulation des traductions implique l'ajout d'un bout de config à notre module.</p>
+
+<p>Et ça donne ça, pour le français par exemple :</p>
+
+<script src="https://gist.github.com/3344499.js?file=app/locales/fr_FR/Jbh_Grid.csv"></script>
+
+
+<h2>Conclusion</h2>
+
+<p>Au final...</p>
+
+<ul>
+<li>30 secondes pour créer notre architecture</li>
+<li>3 minutes pour créer le SQL et compléter le setup</li>
+<li>5 minutes pour le fichier <code>adminhtml.xml</code></li>
+<li>5 minutes pour terminer le grid</li>
+</ul>
+
+
+<p>Ce qu'on obtient : Un module propre, développé avec les conventions <code>Zend Framework</code>, sans erreur de config.</p>
+
+<p>Surtout... le <code>config.xm</code>l... <code>&lt;3 &lt;3 &lt;3</code></p>
+
+<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/etc/config.xml"></script>
+
+
+<p>Le bonheur quoi...</p>
+
+<p>Vos avis sont les bienvenus !</p>
+
+<p>Vous pouvez <a href="https://gist.github.com/3344499/download">télécharger ce module</a>.</p>
+
+<h3>Astuce</h3>
+
+<p>Pour avoir une licence personnalisée dans le haut de mes fichiers voici la commande que j'ai réellement lancée :</p>
+
+<pre><code>$ LICENSE='WTFPL (http://sam.zoy.org/wtfpl/COPYING)' jbh jbh grid local
+</code></pre>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/apprendre-a-utiliser-magento-installer.html" data-text="Utiliser l'Installer - Créer un grid en admin" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/apprendre-a-utiliser-magento-installer.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/apprendre-a-utiliser-magento-installer.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/the-installer-v1.html">Je dévoile l'Installer</a></h2>
@@ -781,144 +1058,6 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
 
     </div>
 
-    <hr />
-    <h2><a href="/connectez-vous-sur-un-compte-client-sur-magento.html">Se connecter sur le compte d'un client</a></h2>
-    <div class="content post">
-        <p>Par défaut sur la Magento Community, nous n'avons pas de fonctionnalité pour se connecter sur le compte du client.</p>
-
-<p>Autant vous dire que parfois c'est quand même la <em>loose</em>. Bah ouais... le client a un problème et impossible de reproduire. De plus, lui demander de nous faire un screen pour voir comment ça se passe pour lui c'est juste... bah non en fait.</p>
-
-<p>Alors la solution c'est de se connecter sur son compte, même si ça n'est pas toujours la solution miracle, souvent ça aide un peu.</p>
-
-<p>Et puis on obtient d'un coup une autre fonctionnalité : on peut payer une commande pour le client par téléphone. Pratique non ?</p>
-
-<!-- 
-
-
-
-
-<hr />
-
-
-<p>Le module que nous allons développer nous allons l'appeler <code>Jbh_ConnectAs</code> et il sera dans community.</p>
-
-<p>Pourquoi dans community ? Parce qu'il est <a href="http://github.com/jacquesbh/jbh_connectas" title="Le module Jbh_ConnectAs sur GitHub">dispo en ligne</a>, pour la communauté.</p>
-
-<h2>Posons les bases</h2>
-
-<p>Nous avons besoin de :</p>
-
-<ul>
-<li>Un event pour ajouter le bouton « Connect As » sur la fiche client</li>
-<li>Un observer qui va attraper l'event</li>
-<li>Un contrôleur pour <em>se connecter sur le compte du client</em></li>
-<li>Une gestion de droits pour ne pas afficher ce bouton à tout le monde</li>
-</ul>
-
-
-<p>Avec ça nous avons bien sûr besoin d'un <em>Helper Data</em>, mais d'aucun block.</p>
-
-<h2>Notre event</h2>
-
-<p>Quand on regarde bien on voit qu'on peut mettre des boutons au niveau du block <code>Mage_Adminhtml_Block_Customer_Edit</code>.
-Après tout, pourquoi ne pourrions-nous pas avoir notre petit bouton orange à côté des autres ?</p>
-
-<p>Ils utilisent dans le constructeur secondaire (<code>protected function _construct</code> sur tous les <code>Varien_Object</code>) la méthode <code>_addButton</code>. Pas de bol, elle est protégée... Pas super pratique pour nous ça. Pas grave, on regarde ce qu'elle fait... et là c'est le petit bonheur...</p>
-
-<p>En fait il existe dans le container <code>Mage_Adminhtml_Block_Widget_Container</code> un alias public pour un certain nombre de méthodes protégées, dont notre <code>_addButton</code> :</p>
-
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$sortOrder</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$area</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span><span class="p">,</span> <span class="nv">$sortOrder</span><span class="p">,</span> <span class="nv">$area</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<p>Donc si on réfléchi bien... il nous suffit de récupérer ce block avant qu'il n'affiche la fiche du client pour pouvoir y ajouter notre bouton dynamiquement.
-On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. Chaque action a un <code>event</code> qui annonce le début du rendu. Pour nous, c'est ça :</p>
-
-<pre><code>controller_action_layout_render_before_adminhtml_customer_edit
-</code></pre>
-
-<p>Op, on a notre event :</p>
-
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
-    <span class="nt">&lt;observers&gt;</span>
-        <span class="nt">&lt;add_connectas_button&gt;</span>
-            <span class="nt">&lt;class&gt;</span>jbh_connectas/observer<span class="nt">&lt;/class&gt;</span>
-            <span class="nt">&lt;method&gt;</span>addOurCoolButton<span class="nt">&lt;/method&gt;</span>
-        <span class="nt">&lt;/add_connectas_button&gt;</span>
-    <span class="nt">&lt;/observers&gt;</span>
-<span class="nt">&lt;/controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
-</code></pre></div>
-
-
-<p>Comme on le voit dans cet event l'observer sera <code>Jbh_ConnectAs_Model_Observer</code> et la méthode <code>addOurCoolButton</code>. Ce bout de xml sera à placer dans le tag <code>adminhtml</code> de notre <code>config.xml</code> car nous sommes sur un event lancé en partie admin.</p>
-
-<h2>Les fichiers</h2>
-
-<h3>La config : <code>/app/code/community/Jbh/ConnectAs/etc/config.xml</code></h3>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/etc/config.xml"></script>
-
-
-<h3>Bien sûr notre fichier <em>etc/modules</em> : <code>/app/etc/modules/Jbh_ConnectAs.xml</code></h3>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/etc/modules/Jbh_ConnectAs.xml"></script>
-
-
-<h3>Notre fichier pour les droits en admin : <code>/app/code/community/Jbh/ConnectAs/etc/adminhtml.xml</code></h3>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/etc/adminhtml.xml"></script>
-
-
-<h3>Notre contrôleur d'admin : <code>/app/code/community/Jbh/ConnectAs/controllers/Adminhtml/IndexController.php</code></h3>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/controllers/Adminhtml/IndexController.php"></script>
-
-
-<h3>Notre observeur : <code>/app/code/community/Jbh/ConnectAs/Model/Observer.php</code></h3>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/Model/Observer.php"></script>
-
-
-<h3>Notre helper <code>Data</code> : <code>/app/code/community/Jbh/ConnectAs/Helper/Data.php</code></h3>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/Helper/Data.php"></script>
-
-
-<h2>Et au final ça fonctionne comment ?</h2>
-
-<p>A priori vous devriez voir apparaître au niveau des boutons d'actions de la fiche du client un nouveau bouton "Connect As".</p>
-
-<p>N'oubliez pas que les droits sont gérés et que vous pouvez par conséquent autoriser certains rôles à utiliser cette fonctionnalité.</p>
-
-<p>Il est également possible de rajouter des traductions puisque le PHP a été prévu pour. Il manque juste un peu de config et les fichiers CSV de traductions.</p>
-
-<p>Merci à <a href="http://benjion.wordpress.com/2011/04/29/magento-se-connecter-en-tant-que-client-depuis-ladmin/">Benjion pour l'article original</a> que j'ai eu l'occasion d'améliorer/corriger.</p>
-
-<p>Well done :)</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/connectez-vous-sur-un-compte-client-sur-magento.html" data-text="Se connecter sur le compte d'un client" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/connectez-vous-sur-un-compte-client-sur-magento.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/connectez-vous-sur-un-compte-client-sur-magento.html">Lire la suite du tutoriel</a>
-
-    </div>
-
 
 <div class="pagination">
     <hr/>
@@ -930,7 +1069,7 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
     –
     
     
-    <span class="page_number">Page 5 sur 6</span>
+    <span class="page_number">Page 5 sur 7</span>
     
     
     –
@@ -1073,6 +1212,10 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
         
     
 
+    
+
+    
+        
     
 
     
