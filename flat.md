@@ -17,7 +17,7 @@ Je recherche un appartement :
 -   En location
 -   Avec un parking dans l'immeuble (j'ai une moto)
 -   Surface de 25m<sup>2</sup> minimum
--   Loyer max : 800€ (charges comprises)
+-   Loyer max : 900€ (charges comprises)
 
 Si vous avez quelque chose pour moi n'hésitez pas à simplement mettre votre nom et votre numéro de téléphone dans le formulaire de contact si dessous !
 
