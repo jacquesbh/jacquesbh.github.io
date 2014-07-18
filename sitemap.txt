@@ -6,6 +6,7 @@ http://jacques.sh/atom.xml
 http://jacques.sh/categories.html
 http://jacques.sh/contact/thanks.html
 http://jacques.sh/credits.html
+http://jacques.sh/flat.html
 http://jacques.sh/index.html
 http://jacques.sh/legals.html
 http://jacques.sh/pages.html
