@@ -15,7 +15,7 @@ Je recherche un appartement :
 
 -   1 à 2 pièces
 -   En location
--   Avec un parking dans l'immeuble
+-   Avec un parking dans l'immeuble (j'ai une moto)
 -   Surface de 25m<sup>2</sup> minimum
 -   Loyer max : 800€ (charges comprises)
 
@@ -34,6 +34,7 @@ Si vous souhaitez obtenir mon numéro de téléphone et/ou mon adresse email il 
 
 
 <script type="text/javascript">
+var disable_popin = true;
 (function ($) {
 	$(document).ready(function () {
 		$('#contact_message').html("J'ai peut-être un appartement pour vous !");
