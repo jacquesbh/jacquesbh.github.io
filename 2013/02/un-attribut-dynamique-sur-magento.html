@@ -596,6 +596,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -605,6 +606,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

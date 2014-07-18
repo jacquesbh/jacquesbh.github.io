@@ -517,6 +517,7 @@ Ou dans certaines boucles d'exports... par exemple ;).</p>
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -526,6 +527,7 @@ Ou dans certaines boucles d'exports... par exemple ;).</p>
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

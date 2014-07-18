@@ -580,6 +580,7 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -589,6 +590,7 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

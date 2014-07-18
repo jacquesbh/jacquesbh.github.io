@@ -764,6 +764,7 @@ var techno = function (nb)
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -773,6 +774,7 @@ var techno = function (nb)
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

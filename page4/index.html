@@ -1918,6 +1918,7 @@ Success
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -1927,6 +1928,7 @@ Success
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

@@ -595,6 +595,7 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -604,6 +605,7 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

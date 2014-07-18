@@ -528,6 +528,7 @@ Cependant pour les navigateurs qui contiennent <code>Chrome</code> dans leur <co
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -537,6 +538,7 @@ Cependant pour les navigateurs qui contiennent <code>Chrome</code> dans leur <co
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

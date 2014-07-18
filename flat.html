@@ -214,7 +214,7 @@
 <ul>
 <li>1 à 2 pièces</li>
 <li>En location</li>
-<li>Avec un parking dans l'immeuble</li>
+<li>Avec un parking dans l'immeuble (j'ai une moto)</li>
 <li>Surface de 25m<sup>2</sup> minimum</li>
 <li>Loyer max : 800€ (charges comprises)</li>
 </ul>
@@ -236,6 +236,7 @@
 
 
 <script type="text/javascript">
+var disable_popin = true;
 (function ($) {
     $(document).ready(function () {
         $('#contact_message').html("J'ai peut-être un appartement pour vous !");
@@ -452,6 +453,7 @@
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -461,6 +463,7 @@
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

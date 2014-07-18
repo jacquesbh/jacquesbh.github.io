@@ -1297,6 +1297,7 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -1306,6 +1307,7 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

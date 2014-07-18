@@ -876,6 +876,7 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -885,6 +886,7 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

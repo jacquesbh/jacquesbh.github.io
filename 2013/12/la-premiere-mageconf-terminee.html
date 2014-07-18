@@ -578,6 +578,7 @@ Un petit merci aussi pour <a href="https://www.gandi.net/">Gandi</a> pour leur s
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -587,6 +588,7 @@ Un petit merci aussi pour <a href="https://www.gandi.net/">Gandi</a> pour leur s
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

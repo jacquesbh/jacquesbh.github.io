@@ -1285,6 +1285,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -1294,6 +1295,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

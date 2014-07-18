@@ -1014,6 +1014,7 @@ En bonus j'ai fait en sorte que l'icône du dock saute de temps en temps et qu'e
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -1023,6 +1024,7 @@ En bonus j'ai fait en sorte que l'icône du dock saute de temps en temps et qu'e
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

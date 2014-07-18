@@ -642,6 +642,7 @@ N'hésitez pas à me contacter !</p>
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -651,6 +652,7 @@ N'hésitez pas à me contacter !</p>
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

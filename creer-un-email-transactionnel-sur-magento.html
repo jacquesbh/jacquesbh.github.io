@@ -607,6 +607,7 @@ Rien de bien compliqué en fait !</p>
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -616,6 +617,7 @@ Rien de bien compliqué en fait !</p>
                 }
             });
          })(jQuery);
+    }
     </script>
 
 

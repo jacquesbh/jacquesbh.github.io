@@ -514,6 +514,7 @@ De plus il est vite apparu que les développements devaient être rapidement ex�
     </div>
 
     <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
         (function ($) {
             $(document).ready(function () {
                 var cookieId = 'monsieurbizPopinDisplayed';
@@ -523,6 +524,7 @@ De plus il est vite apparu que les développements devaient être rapidement ex�
                 }
             });
          })(jQuery);
+    }
     </script>
 
 
