@@ -44,7 +44,7 @@ Dans l'optique Open Source vous trouverez aussi quelques [modules et autres outi
 
 
 [warnerbros]: http://www.warnerbros.fr/
-[gm]: http://www.groupemoniteur.fr/
+[gm]: http://boutique.lemoniteur.fr/
 [jacques]: http://jacques.sh/
 [mbiz]: http://monsieurbiz.com/
 [github_mbiz]: https://github.com/monsieurbiz/
