@@ -28,6 +28,7 @@ http://jacques.sh/page5/index.html
 http://jacques.sh/page6/index.html
 http://jacques.sh/page7/index.html
 
+http://jacques.sh/2014/08/certificat-ssl-business.html
 http://jacques.sh/2014/06/meet-magento-de-2014-installer-barcamp.html
 http://jacques.sh/2013/12/la-premiere-mageconf-terminee.html
 http://jacques.sh/2013/11/et-si-on-emulait.html

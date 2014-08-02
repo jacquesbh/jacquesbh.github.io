@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2014-08-02T23:29:43+02:00</updated>
+ <updated>2014-08-03T00:51:15+02:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Votre certificat SSL Business</title>
+   <link href="http://jacques.sh/2014/08/certificat-ssl-business.html"/>
+   <updated>2014-08-03T02:00:00+02:00</updated>
+   <id>http://jacques.sh/2014/08/certificat-ssl-business</id>
+   <content type="html"><![CDATA[Comprenez comment obtenir votre certificat SSL Business avec COMODO !]]></content>
+ </entry>
  
  <entry>
    <title>Meet Magento DE 2014 - Présentation de l'Installer</title>
@@ -82,14 +90,6 @@
    <updated>2013-02-26T00:15:00+01:00</updated>
    <id>http://jacques.sh/2013/02/afficher-un-attribut</id>
    <content type="html"><![CDATA[On a toujours envie que notre attribut s&#39;affiche correctement dans notre page produit ou notre catalogue sans créer de dépendances... Explication !]]></content>
- </entry>
- 
- <entry>
-   <title>Un attribut dynamique</title>
-   <link href="http://jacques.sh/2013/02/un-attribut-dynamique-sur-magento.html"/>
-   <updated>2013-02-17T20:20:00+01:00</updated>
-   <id>http://jacques.sh/2013/02/un-attribut-dynamique-sur-magento</id>
-   <content type="html"><![CDATA[Il est temps de ne pas perdre de temps avec les attributs à valeur multiple !]]></content>
  </entry>
  
  

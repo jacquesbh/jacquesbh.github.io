@@ -322,6 +322,14 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Productivité">Productivité</a></span>
 
+    <span style="font-size:13.2px"><a href="/search.html#!tag=SSL">SSL</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=COMODO">COMODO</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=gandi">gandi</a></span>
+
 </p>
 
 <hr />
@@ -335,6 +343,87 @@
 
     
 
+
+    <hr />
+    <h2><a href="/2013/05/fluid-et-zimbra-sur-mac-osx.html">Utiliser Fluid avec Zimbra sur OSX</a></h2>
+    <div class="content post">
+        <p>Avez-vous déjà eu l'occasion d'utiliser <a href="http://www.zimbra.com/">Zimbra</a> ?</p>
+
+<p>Il s'agit d'un outil de collaboration. En gros on peut y gérer des mails, des documents, des rendez-vous, un carnet d'adresse plutôt poussé etc.<br/>
+Le logiciel est surtout intéressant côté serveur. Cependant il a un client web, moche mais plutôt bien fichu.</p>
+
+<p>Et quand on utilise souvent son client mail et bien on a envie d'utiliser un client desktop (comme Outlook par exemple).<br/>
+Sauf que Outlook j'aime pas (<em>Microsoft</em> est l'argument premier).<br/>
+Je suis sous OS X et le client Zimbra Desktop pour Mac... disons qu'il va faire exploser l'ordi. Il doit y avoir une fuite mémoire... enfin j'imagine.</p>
+
+<p>Bref, j'utilise Zimbra. Le client web est moche mais fonctionnel. Le client desktop est inutilisable et il n'y a pas d'alternative à part Outlook.<br/>
+On fait quoi dans ce cas ?</p>
+
+<p>Perso j'utilise <a href="http://fluidapp.com/">Fluid.app</a> et un peu de JavaScript.</p>
+
+<!-- 
+
+
+<hr />
+
+<p><a href="http://fluidapp.com/">Fluid</a> permet de créer des "Web App" comme on le dit si bien.<br/>
+En gros on clique sur l'application et ça lance un navigateur web sans fioritures, juste le site.</p>
+
+<p>Donc si vous avez suivi il suffit de créer une « App » avec l'adresse de notre client web Zimbra.<br/>
+Jusque là rien de bien compliqué.</p>
+
+<p>Mais voià qu'on a un faux client desktop. C'est un client desktop au sens où c'est une application. Mais c'est un faux client car un vrai client va venir se greffer à votre système d'exploitation.</p>
+
+<p>Et là j'apprends que Fluid propose une version payante. Pour quelques euros on peut avoir quelques fonctionnalités intéressantes en sus :</p>
+
+<ul>
+<li>Les <strong>scripts utilisateur</strong>.</li>
+<li>Les <strong>styles utilisateur</strong>.</li>
+<li>Le <strong>Drag and Drop</strong>.</li>
+<li>Une <strong>API JavaScript</strong> permettant d'effectuer quelques actions sur le système.</li>
+</ul>
+
+
+<p>Pensez à regarder le <a href="http://fluidapp.com/changelog.html">changelog</a> de temps en temps. Il y a des éléments intéressants.</p>
+
+<p>Quand j'ai vu ça je me suis dit...</p>
+
+<blockquote><p>Qu'est-ce qui m'empêche de faire en sorte que Fluid m'indique quand j'ai un nouveau mail ?</p></blockquote>
+
+<p>J'achète et je bosse un peu mon JS.</p>
+
+<h2>Un peu de Javascript</h2>
+
+<p>Avant tout j'ai tenté de vérifier la présence d'un nouveau mail et d'afficher le nombre de non lus dans mon dock.<br/>
+En bonus j'ai fait en sorte que l'icône du dock saute de temps en temps et qu'elle saute de manière continue au bout d'un certain temps.</p>
+
+<script type="text/javascript">gist('jacquesbh/1353873b8c13970af60d', 'zimbra.js');</script>
+
+
+<p>Le script s'installe via le menu "Window > Userscripts". Il suffit d'ajouter un nouveau script avec la bonne recherche d'URL.</p>
+
+<p>Au final ça fonctionne super bien. Vu que Zimbra actualise la vue assez souvent (toutes les 5 à 10mn je dirais) et bien on peut garder toutes les fonctionnalités du client web, le tout dans application desktop.</p>
+
+<p>Pratique.</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/05/fluid-et-zimbra-sur-mac-osx.html" data-text="Utiliser Fluid avec Zimbra sur OSX" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2013/05/fluid-et-zimbra-sur-mac-osx.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2013/05/fluid-et-zimbra-sur-mac-osx.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2013/03/sidebar-magento-developers.html">Une sidebar pour les développeurs</a></h2>
@@ -649,137 +738,6 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
         
 
         <a href="/2013/02/afficher-un-attribut.html">Lire l'article</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/2013/02/un-attribut-dynamique-sur-magento.html">Un attribut dynamique</a></h2>
-    <div class="content post">
-        <p>Parfois il est nécessaire de faire des développements un peu <em>borderline</em>...</p>
-
-<p>Aujourd'hui je vais vous expliquer comment j'ai réalisé un petit module afin de permettre d'ajouter une valeur à un attribut de type <code>select</code> ou <code>multiselect</code>... <strong>sans quitter la page d'édition du produit</strong> <em>(ou de la catégorie)</em>. Directement depuis le champ de l'attribut.</p>
-
-<p>Sur Magento on peut avoir un <em>Backend Model</em> sur un attribut, dans le but de valider son contenu, ou encore de faire des manipulations avant et/ou après sa sauvegarde/récupération. Je vais profiter de cette fonctionnalité !</p>
-
-<p>Il s'avère qu'on peut aussi avoir un champ HTML personnalisé en admin très facilement.</p>
-
-<p>Au final c'est pas bien compliqué et le module <code>Jbh_DynamicField</code> est réutilisable ;)</p>
-
-<p>Je vous explique ?</p>
-
-<p><strong>Let's go! Borderline!</strong></p>
-
-<!-- 
-
-
-<hr />
-
-<p>Pour commencer je vous explique ce que fait ce champ dynamique :</p>
-
-<p><img src="/images/posts/un-attribut-dynamique-sur-magento/dynamic-field.png" title="Le champ dynamique" alt="&quot;Le champ dynamique&quot;" /></p>
-
-<p>L'idée c'est que si vous remplissez le champ <em>Nouvelle valeur</em> alors la valeur entrée sera ajoutée aux options possibles pour l'attribut concerné.<br/>
-Quand le champ est de type <code>select</code> alors l'option sera en plus assignée à l'attribut. Si c'est un attribut <code>multiselect</code> alors l'option sera ajoutée aux options déjà sélectionnées.</p>
-
-<p>Il faut noter qu'un évènement est lancé lorsqu'une option est ajoutée. C'est très pratique quand on veut effectuer une action lors de l'ajout d'une option.<br/>
-Par contre attention ! Aucun évènement n'est lancé quand une option est ajoutée via l'administration des attributs !</p>
-
-<h2>Un champ HTML personnalisé</h2>
-
-<p>Magento permet, via la colonne <code>frontend_input_renderer</code>, de la table <code>catalog_eav_attribut</code>, de changer le <code>renderer</code> (le block qui fait le rendu HTML) de l'attribut dans les formulaire où celui-ci est utilisé.</p>
-
-<p>J'ai donc ajouté deux nouveaux blocks :</p>
-
-<ol>
-<li><code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Select</code> pour gérer les attributs de type <code>select</code>.</li>
-<li><code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Multiselect</code> pour gérer les attributs de type <code>multiselect</code>.</li>
-</ol>
-
-
-<p>Ces deux blocks sont simples. Ils ajoutent un champ nommé <code>jbh_dynamicfield_CODE</code> dans notre formulaire, avec <code>CODE</code> qui est le code de l'attribut.</p>
-
-<p>Voici le block <code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Select</code> :</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/Jbh_DynamicField/raw/master/app/code/community/Jbh/DynamicField/Block/Adminhtml/Catalog/Product/Renderer/Select.php"></script>
-
-
-<p>Le block <code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Multiselect</code> est identique au niveau de la méthode <code>getElementHtml</code> mais les deux blocks n'étendent pas la même classe. Les traits de PHP seraient ici une bonne alternative à ce copier/coller.</p>
-
-<h2>Une sauvegarde améliorée</h2>
-
-<p>Cette fois c'est dans la table <code>eav_attribute</code> et via la colonne <code>backend_model</code> que Magento nous permet de modifier la sauvegarde (et/ou le chargement) de notre attribut.</p>
-
-<p>J'ai donc logiquement créé deux nouveaux modèles :</p>
-
-<ol>
-<li><code>Jbh_DynamicField_Model_Catalog_Product_Attribute_Backend_Select</code> pour gérer les attributs de type <code>select</code>.</li>
-<li><code>Jbh_DynamicField_Model_Catalog_Product_Attribute_Backend_Multiselect</code> pour gérer les attributs de type <code>multiselect</code>.</li>
-</ol>
-
-
-<p>Des deux modèles permettent d'ajouter une option à notre attribut si le champ supplémentaire ajouté par le <code>renderer</code> contient quelque chose.</p>
-
-<p>L'idée c'est donc de récupérer le code de l'attribut, puis le nom du champ supplémentaire.<br/>
-Ensuite on effectue une vérification simple pour savoir s'il contient quelque chose.<br/>
-Si c'est le cas alors on ajoute la nouvelle option. <em>Aucune déduplication n'est effectuée ici.</em><br/>
-Un évènement est lancé si une option a été ajoutée.</p>
-
-<p>Et en dernier on sauvegarde la nouvelle option dans notre objet.</p>
-
-<p>Rien de mieux pour bien comprendre qu'un exemple.<br/>
-Voici le modèle qui gère les <code>multiselect</code> :</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/Jbh_DynamicField/raw/master/app/code/community/Jbh/DynamicField/Model/Catalog/Product/Attribute/Backend/Multiselect.php"></script>
-
-
-<p>De manière générale les deux modèles font la même chose.</p>
-
-<p>La différence se situe tout d'abord dans le modèle parent. Le <em>select</em> étend le modèle <code>abstract</code> alors que le <em>multiselect</em> le <code>array</code>.<br/>
-Ensuite la manière dont la valeur est changée quand une option a été ajoutée change aussi un peu, surtout au niveau du <em>multiselect</em>.</p>
-
-<p>Notez que l'évènement lancé, dans le cas où une option est ajoutée, est le suivant :</p>
-
-<ul>
-<li>Nom : <code>jbh_dynamicfield_attribute_CODE_option_added</code> où <code>CODE</code> est le code de l'attribut principal.</li>
-<li>Données :
-
-<ul>
-<li><code>object</code> : Votre produit/catégorie.</li>
-<li><code>code</code> : Le code de votre attribute. (que vous connaissez puisque vous utilisez un event qui porte son nom !) Il est là afin de permettre des actions dynamiques.</li>
-<li><code>option</code> : Un tableau qui contient l'identifiant de la nouvelle option et sa valeur textuelle. Respectivement les clés <code>id</code> et <code>value</code>.</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>Borderline ?</h2>
-
-<p>Au final je n'ai pas expliqué pourquoi un tel développement est, selon moi, un peu bordeline.</p>
-
-<p>Tout d'abord il n'y a aucune gestion des stores et donc de la possible traduction de l'option.<br/>
-L'ajout d'une nouvelle option implique la sauvegarde du produit ou de la catégorie afin d'être prise en compte... On aurait préféré avoir un peu d'ajax afin d'ajouter plusieurs options en même temps !<br/>
-Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel système engendre.</p>
-
-<p>Ce développement est vraiment pratique mais il est important que les personnes qui manipulent l'administration soient formées sur le fonctionnement de ce système.</p>
-
-<p>Si vous souhaitez <a href="https://github.com/jacquesbh/Jbh_DynamicField">améliorer le module <code>Jbh_DynamicField</code> : c'est sur github !</a>.</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/02/un-attribut-dynamique-sur-magento.html" data-text="Un attribut dynamique" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/2013/02/un-attribut-dynamique-sur-magento.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/2013/02/un-attribut-dynamique-sur-magento.html">Lire l'article</a>
 
     </div>
 
