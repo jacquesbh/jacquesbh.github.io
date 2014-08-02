@@ -61,8 +61,8 @@ body {
     height: 80px;
     position: absolute;
     top: 8px;
-    left: 802px;
-    width: 145px;
+    left: 750px;
+    width: 200px;
     a {
         display: block;
         height: 80px;
@@ -79,6 +79,10 @@ body {
     }
     .frontend-developer {
         background: url(../img/magento_frontend_developer.png) top left no-repeat transparent;
+    }
+    .solution-specialist {
+        background: url(../img/magento_solution_specialist.png) top left no-repeat transparent;
+        margin-right: 5px;
     }
 }
 
