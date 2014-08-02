@@ -16,6 +16,7 @@ http://jacques.sh/references/auto-ecole-tallet.html
 http://jacques.sh/references/cms-sofitel.html
 http://jacques.sh/references/jbhslider.html
 http://jacques.sh/references/joliebox.html
+http://jacques.sh/references/monsieurbiz.html
 http://jacques.sh/references.html
 http://jacques.sh/search.html
 http://jacques.sh/search.json
