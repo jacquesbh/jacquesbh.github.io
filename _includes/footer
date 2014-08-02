@@ -40,7 +40,7 @@
             | <a href="/atom.xml">RSS</a>
             | <a href="#" id="toplink">Haut de page</a>
             <br />
-            <span class="copy">&copy; {{ site.author.name }} - 2013</span>
+            <span class="copy">&copy; {{ site.author.name }} - 2014</span>
         </div>
     </div>
 
