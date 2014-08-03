@@ -1,0 +1,17 @@
+User-Agent: *
+Sitemap: http://jacques.sh/sitemap.xml
+Disallow: http://jacques.sh/404.html
+Disallow: http://jacques.sh/archive.html
+Disallow: http://jacques.sh/atom.xml
+Disallow: http://jacques.sh/categories.html
+Disallow: http://jacques.sh/contact/thanks.html
+Disallow: http://jacques.sh/credits.html
+Disallow: http://jacques.sh/flat.html
+Disallow: http://jacques.sh/legals.html
+Disallow: http://jacques.sh/pages.html
+Disallow: http://jacques.sh/robots.txt
+Disallow: http://jacques.sh/search.html
+Disallow: http://jacques.sh/search.json
+Disallow: http://jacques.sh/sitemap.xml
+
+
