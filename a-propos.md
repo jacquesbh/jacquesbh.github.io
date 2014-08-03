@@ -31,14 +31,16 @@ Je suis [certifié _développeur_ et _développeur plus_ sur Magento][certif] de
 
 En mars 2013 je quitte la société Internim pour intégrer la société [Capkod][capkod], une nouvelle filiale du groupe [InovenAltenor][inoven].
 
-En mai 2013 j'obtiens la [dernière certification Magento et deviens certifié _Front End Developer_ sur Magento][certif].  
-On peut considérer que je suis [expert Magento][mbiz], même si je n'aime pas ce terme car nous avons toujours quelque chose à apprendre.
+En mai 2013 je deviens [_Magento Certified Front End Developer_][certif].
 
 C'est en juillet 2013 que je décide finalement de monter mon [agence dédiée à la solution Magento][mbiz] : [Monsieur Biz][mbiz].  
 N'hésitez pas à aller faire un tour sur le [site de l'agence dédiée à la plateforme e-commerce Magento][mbiz] ou à me contacter si vous souhaitez de plus amples informations.
 
+Le 1<sup>er</sup> août 2014 j'obtiens la dernière certification Magento et deviens [_Magento Certified Solution Specialist_][certif].  
+On peut considérer que je suis [expert Magento][mbiz], même si je n'aime pas ce terme car nous avons toujours quelque chose à apprendre.
+
 Par ailleurs vous pourrez trouver plusieurs [projets opensource][github], parfois abandonnés faute de temps, sur [mon github][github]. Entre autre [le slider jQuery « JbhSlider »][jbhslider], un [slider réalisé pour répondre aux problématiques des développeurs et intégrateurs][jbhslider].  
-Et mon [Installer][installer], un outil simple mais puissant, permettant de [développer rapidement et proprement sur Magento][installer].
+Et mon [Installer][installer], un outil simple mais puissant, permettant de [développer rapidement et proprement sur Magento][installer]. J'ai d'ailleurs profité de mon passage au [Meet Magento 2014 en Allemagne pour parler de l'Installer aux développeurs][mm14_installer].
 
 Dans l'optique Open Source vous trouverez aussi quelques [modules et autres outils dédiés aux développeurs Magento][github_mbiz] sur le [github de l'agence Monsieur Biz][github_mbiz]. 
 
@@ -65,3 +67,4 @@ Dans l'optique Open Source vous trouverez aussi quelques [modules et autres outi
 [beautyst]: http://www.thebeautyst.com/
 [jimmy]: http://www.jimmyfairly.com/fr/
 [soubis]: http://www.soubis.com/
+[mm14_installer]: http://jacques.sh/2014/06/meet-magento-de-2014-installer-barcamp.html
