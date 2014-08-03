@@ -1,0 +1,11 @@
+---
+title : Robots.txt
+searchable: false
+sitemap: false
+---
+User-Agent: *
+Sitemap: {{site.production_url}}/sitemap.xml
+{% for page in site.pages %}{% if page.sitemap == false %}Disallow: {{site.production_url}}{{ page.url }}
+{% endif %}{% endfor %}
+{% for post in site.posts %}{% if post.sitemap == false %}{{site.production_url}}{{ post.url }}
+{% endif %}{% endfor %}

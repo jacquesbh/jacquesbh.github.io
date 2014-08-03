@@ -5,6 +5,7 @@ quote:
     content: Si tu veux être heureux, sois-le.
     author: Proverbe chinois
 searchable: false
+sitemap: false
 ---
 
 # Recherche appartement en location sur __Paris__
