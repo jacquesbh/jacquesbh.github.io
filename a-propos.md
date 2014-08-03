@@ -17,24 +17,24 @@ Fort de mon expérience, aussi bien personnelle avec mon activité de freelance 
  
 A l'origine simple amateur en PHP, je fini par trouver une réelle passion en développement web. En 2008 je décide d'obtenir un Dipôme Universitaire et Technologique en Informatique à l'IUT de la ville d'Orsay, en Essonne.
 
-A la fin de mon DUT je suis embauché chez [ATAFOTO.studio][atafoto] où je remet sur pied le site [Kinder Chocolat][kinderchocolat] basé entièrement sur le _Zend Framework_. J'aurai l'occasion de travailler pour des clients tels que _Sofitel_ pour l'agence social media [Roxane][roxane], _Pyrex_ et _Ferrero_.
+A la fin de mon DUT je suis embauché chez [ATAFOTO.studio][atafoto] où je remets sur pied le site [Kinder Chocolat][kinderchocolat] basé entièrement sur le _Zend Framework_. J'aurais l'occasion de travailler pour des clients tels que _Sofitel_ pour l'agence social media [Roxane][roxane], _Pyrex_ et _Ferrero_.
 
 C'est en décembre 2010, quand j'arrive chez [Colorz][clrz] en tant que [développeur PHP confirmé][jacques], que je me dirige indirectement vers la [solution e-commerce Magento][mbiz].
 
 Je mets les mains dedans grâce à [Emoi-Emoi][emoiemoi], [Jimmy Fairly][jimmy], [Megalithes Montres][megalithes], [The Beautyst][beautyst], Vinobest ou encore [Soubis][soubis].
 
-L'envie de mouvement m'attire ensuite vers la startup [JolieBox][joliebox] en novembre 2011 où j'interviendrais sur la mise en place de la [plateforme e-commerce basée sur Magento][mbiz] pour les sites anglais et espagnol. Avant de continuer chez Internim, je réalise une migration des deux sites de la version _community 1.6.1.0_ vers la version _enterprise 1.12.0.2_.
+L'envie de mouvement m'attire ensuite vers la startup [JolieBox][joliebox] en novembre 2011 où j'interviendrais sur la [mise en place de la plateforme e-commerce basée sur Magento][mbiz] pour les sites anglais et espagnol. Avant de continuer chez Internim, je réalise une migration des deux sites de la version _Magento Community 1.6.1.0_ vers la version _Magento Enterprise 1.12.0.2_.
 
-J'ai l'occasion de travailler sur de gros projets Magento chez Internim tels que [Warner Bros France][warnerbros] ou encore [Groupe Moniteur][gm] et d'apprendre un peu plus le rôle de [Lead Développeur][mbiz].
+J'ai eu l'occasion de travailler sur de gros projets Magento chez Internim tels que [Warner Bros France][warnerbros] ou encore [Groupe Moniteur][gm] et d'apprendre un peu plus le rôle de [Lead Développeur][mbiz].
 
-Je suis [certifié _développeur_ et _développeur plus_ sur Magento][certif] depuis respectivement novembre et décembre 2012.
+Je suis [certifié _Magento Certified Developer_ et _Magento Certified Developer Plus_ sur Magento][certif] depuis respectivement novembre et décembre 2012.
 
 En mars 2013 je quitte la société Internim pour intégrer la société [Capkod][capkod], une nouvelle filiale du groupe [InovenAltenor][inoven].
 
-En mai 2013 je deviens [_Magento Certified Front End Developer_][certif].
+En mai 2013 je deviens [_Magento Certified Front End Developer_][certif] sur un coup de tête en quelques heures.
 
 C'est en juillet 2013 que je décide finalement de monter mon [agence dédiée à la solution Magento][mbiz] : [Monsieur Biz][mbiz].  
-N'hésitez pas à aller faire un tour sur le [site de l'agence dédiée à la plateforme e-commerce Magento][mbiz] ou à me contacter si vous souhaitez de plus amples informations.
+_N'hésitez pas à aller faire un tour sur le [site de l'agence dédiée à la plateforme e-commerce Magento][mbiz] ou à me contacter si vous souhaitez de plus amples informations._
 
 Le 1<sup>er</sup> août 2014 j'obtiens la dernière certification Magento et deviens [_Magento Certified Solution Specialist_][certif].  
 On peut considérer que je suis [expert Magento][mbiz], même si je n'aime pas ce terme car nous avons toujours quelque chose à apprendre.
