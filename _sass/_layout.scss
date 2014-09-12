@@ -86,6 +86,25 @@ body {
     }
 }
 
+/**
+ * Forum PHP
+ */
+#forumphp {
+    height: 80px;
+    position: absolute;
+    top: 8px;
+    left: 400px;
+    width: 364px;
+    a {
+        display: block;
+        margin: 5px 0 0 0;
+        width: 200px;
+        img {
+            width: 550px;
+        }
+    }
+}
+
 
 /*
 #loginWrap {
