@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2014-09-12T17:50:34+02:00</updated>
+ <updated>2014-09-14T18:38:39+02:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Fabric et Magento, le combo gagnant !</title>
+   <link href="http://jacques.sh/2014/09/fabric-magento.html"/>
+   <updated>2014-09-14T02:00:00+02:00</updated>
+   <id>http://jacques.sh/2014/09/fabric-magento</id>
+   <content type="html"><![CDATA[Déployez vos projets Magento avec Fabric en un rien de temps !]]></content>
+ </entry>
  
  <entry>
    <title>Votre certificat SSL Business</title>
@@ -82,14 +90,6 @@
    <updated>2013-03-07T18:00:00+01:00</updated>
    <id>http://jacques.sh/2013/03/plusieurs-themes-sur-magento</id>
    <content type="html"><![CDATA[On a toujours besoin de regarder le thème par défaut en même temps que notre propre thème pendant nos développements !]]></content>
- </entry>
- 
- <entry>
-   <title>Bien afficher un attribut personnalisé</title>
-   <link href="http://jacques.sh/2013/02/afficher-un-attribut.html"/>
-   <updated>2013-02-26T00:15:00+01:00</updated>
-   <id>http://jacques.sh/2013/02/afficher-un-attribut</id>
-   <content type="html"><![CDATA[On a toujours envie que notre attribut s&#39;affiche correctement dans notre page produit ou notre catalogue sans créer de dépendances... Explication !]]></content>
  </entry>
  
  

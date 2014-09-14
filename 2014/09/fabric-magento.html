@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Fabric et Magento, le combo gagnant ! - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Déployez vos projets Magento avec Fabric en un rien de temps !">
+    <meta name="keywords" content="fabric magento">
+    <meta name="author" content="Jacques Bodin-Hullin">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+    <link rel="alternate" type="application/rss+xml" title="Jacques Bodin-Hullin - Latest Posts" href="/atom.xml" >
+
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js" ></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js" ></script>
+    <script type="text/javascript" src="/js/event.js" ></script>
+    <script type="text/javascript" src="/js/functions.js" ></script>
+
+    <style for="gists"></style>
+</head>
+<body class="">
+
+<div id="mainWrap">
+
+    <div id="topWrap">
+        <div id="headerWrap">
+            <p>
+                Jacques Bodin-Hullin
+                <span class="baseline">Développeur d'applications Web</span>
+            </p>
+            <a href="http://jacques.sh"></a>
+
+            <!--
+            <div id="magento_certified">
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="L'Agence Monsieur Biz est certifiée Magento Solution Specialist" class="solution-specialist" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="L'Agence Monsieur Biz est certifiée Magento Developer Plus" class="developer-plus" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="Jacques Bodin-Hullin, développeur certifié Magento Developer" class="developer" target="_blank"></a>
+                <a href="http://www.magentocommerce.com/certification/directory/dev/69536/" title="Jacques Bodin-Hullin est développeur certifié Magento Front End Developer" class="frontend-developer" target="_blank"></a>
+            </div>
+            -->
+
+            <div id="forumphp">
+                <a href="http://forumphp.org" title="J'y serai ! Forum PHP 2014 - AFUP" class="forumphp" target="_blank">
+                    <img src="/img/forumphp2014.png" alt="" />
+                </a>
+            </div>
+
+        </div>
+
+        <blockquote id="quoteWrap">
+            
+            <p>
+                La perfection est atteinte non quand il ne reste rien à ajouter, mais quand il ne reste
+                rien à enlever.
+            </p>
+            <div><cite>Antoine de Saint Exupéry</cite></div>
+            
+        </blockquote>
+
+        <ul id="menu">
+            
+            <li><a href="/"><span></span>Accueil</a></li>
+            
+            <li><a href="https://github.com/jacquesbh" target="_blank"><span></span>Code</a></li>
+            
+            
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <li><a href="/references.html"><span></span>Références</a></li>
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+            <li class="search">
+                <form action="/search.html" method="get" id="search_form">
+                    <div>
+                        <input type="text" name="q" placeholder="Votre recherche" />
+                    </div>
+                </form>
+            </li>
+        </ul>
+
+        <div class="mbiz">
+            <p>
+                <a href="http://monsieurbiz.com" title="Découvrez l'agence Monsieur Biz, spécialiste Magento">
+                    <img src="/img/monsieurbiz_bg.png" title="L'Agence Monsieur Biz" />
+                    <span>Vous cherchez une agence spécialiste du e-commerce certifiée Magento Solution Specialist ? L'agence Monsieur Biz est faite pour vous !</span>
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div id="globalWrap">
+
+
+    
+
+    <div id="contentWrap" class="post">
+
+        <h1>Fabric et Magento, le combo gagnant !</h1>
+
+        <div class="carrousel" style="height: 145px;">
+    <img src="/images/posts/fabric-magento/fabric.png" width="608" height="145" />
+</div>
+
+
+<p>Fabric est une librairie Python et un outil en ligne de commande pour le déploiement facile et/ou l'administration système via le protocole SSH.</p>
+
+<p>Avec un simple petit fichier, le <code>fabfile.py</code>, vous allez pouvoir vous connecter sur vos serveurs, en simultané ou l'un après l'autre, et y exécuter des commandes.</p>
+
+<p>Sur de petits projets c'est vraiment magique et très simple d'utilisation. Mais très vite on est confronté à un problème :</p>
+
+<blockquote><p>Je veux lancer un déploiement en une seule commande mais mes serveurs ne font pas tous la même chose !</p></blockquote>
+
+<p>J'ai passé un bon moment à chercher une parade à tout ça tout en restant dans l'esprit de fabric ;</p>
+
+<!-- more start -->
+
+
+<hr />
+
+<p>Prenons un exemple concret.</p>
+
+<p>Nous avons 2 serveurs :</p>
+
+<ol>
+<li>Le premier [le serveur Back] est un serveur dédié au Back Office de notre e-commerce. C'est également lui qui s'occupe de la base de données (partagée entre les deux serveurs) et du cache avec un Redis.</li>
+<li>Le second [le serveur Front] est un serveur dédié au Front Office. On va considérer qu'il n'a qu'un Apache pour simplifier. Evidemment il a un client MySQL et un client Redis.</li>
+</ol>
+
+
+<p>Quand nous voulons déployer il nous suffit de lancer la commande :</p>
+
+<pre><code>fab deploy
+</code></pre>
+
+<p>Et c'est là que nous avons un problème. La commande <code>deploy</code> peut ressembler à ceci :</p>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'deploy.py');</script>
+
+
+<p>Si on y regarde de plus près :</p>
+
+<ul>
+<li>La récupération des sources sur notre projet doit être exécutée à la fois sur le serveur Back et le serveur Front. Car tous les deux ont une version de notre Magento installée.<br/>
+Le premier pour afficher le Back Office et le second pour afficher le Front Office ; Jusque là rien de bien foufou.<br/>
+Vous noterez que le chemin d'accès aux sources doit ici être le même sur les deux serveurs : pas pratique.</li>
+<li>Le vidage du cache ne doit être exécuté que sur le serveur Back, car c'est lui qui gère la base de données Redis. Ça ne sert à rien de lancer cette commande sur le serveur Front car il se connecte sur le Redis du serveur Back.</li>
+<li>La réindexation n'a aucun intérêt à être lancée sur le serveur Front. Pour les mêmes raisons que Redis, c'est le serveur Back qui s'occupe de la base de données.<br/>
+Même remarque pour l'emplacement des sources, on ne peut pas avoir un dossier différent.</li>
+</ul>
+
+
+<p>Donc si on laisse faire cette commande <code>deploy</code> alors Fabric va planter dès le vidage du cache. Car au final sur le serveur Front… il n'y a pas de base de données Redis : donc pas de cache à vider.<br/>
+Voire même dès la récupération des sources si notre chemin n'est pas le même sur les deux serveurs !</p>
+
+<p>La réindexation ne fera pas planter notre déploiement mais fera deux réindexations au lieu d'une seule ; Pas idéal…</p>
+
+<h2>Et si on ajoutait des tags à nos serveurs ?</h2>
+
+<p>Ma solution a été de tagguer les différents serveurs.</p>
+
+<blockquote><p>Celui-ci a un Redis, lui un Apache, lui il gère la base de données…</p></blockquote>
+
+<p>Ainsi le vidage du cache pourra se dérouler comme suit :</p>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'clean_cache.py');</script>
+
+
+<p>Seuls les serveurs avec le tag <code>redis</code> exécuteront le <code>run()</code>.</p>
+
+<p>Avec cette idée de tags en tête j'ai pu faire évoluer mon <code>fabfile.py</code> de manière assez monstrueuse.<br/>
+Je peux maintenant ajouter un serveur de production simplement en ajoutant leur configuration.</p>
+
+<h2>Le <code>fabfile.py</code></h2>
+
+<p>Voici donc comment ça se passe concrètement.</p>
+
+<h3>Déclaration des serveurs et settings de base</h3>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'settings.py');</script>
+
+
+<p>Ici on déclare nos serveurs et pour chacun les informations suivantes :</p>
+
+<ul>
+<li>Les <code>tags</code> : Nos fameux tags !</li>
+<li>Le <code>path</code> : Il s'agit du chemin pour accéder à notre Magento sur le serveur.</li>
+</ul>
+
+
+<p>Petit plus : On va ici gérer des tags mais aussi de la configuration propre à chaque serveur ; Comme le <code>path</code> par exemple !</p>
+
+<h3>La fonction <code>_has_tag()</code></h3>
+
+<p>Dans nos différentes tâches nous aurons besoin de savoir si le <code>host</code> qui est en cours a, ou n'a pas, un tag précis.</p>
+
+<p>Voici la méthode :</p>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'has_tags.py');</script>
+
+
+<p>Celle-ci utilise <code>_get_setting()</code> qui permet de récupérer une configuration propre au <code>host</code> en cours (ou toute sa configuration) :</p>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'get_setting.py');</script>
+
+
+<p>À présent nous pouvons appeler la fonction <code>_has_tag('redis')</code> par exemple pour savoir si le <code>host</code> en cours utilise Redis.</p>
+
+<h3>Exemple de déploiement</h3>
+
+<p>Voici donc un exemple de tâche de déploiement avec la configuration que nous venons de créer, dans la simplicité :</p>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'deploy_final.py');</script>
+
+
+<p>Vous noterez que nous n'avons donc plus un seul soucis. Chaque serveur exécute ses tâches et chaque serveur a son propre <code>path</code>.</p>
+
+<h2>Aller plus loin</h2>
+
+<p>Et si on tagguait nos serveurs par environnement ?</p>
+
+<blockquote><p>Celui-ci c'est un serveur de prod avec redis, mysql et apache.<br/>
+Lui c'est un serveur de staging avec apache et mysql. Et il a un cache en fichiers car pas de redis.<br/>
+Celui-là c'est le serveur de backup. Il a juste le droit de backuper !</p></blockquote>
+
+<p>Et si on a lancé une commande de backup sur un pool de serveurs de prod ?</p>
+
+<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'backup.py');</script>
+
+
+<p>Je vous laisse cogiter ;)</p>
+
+<!-- more end -->
+
+
+
+
+
+        <hr />
+
+        
+        <h2 id="comments">Commentaires</h2>
+        
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+        
+    </div>
+
+    <div id="sideWrap">
+
+    <h2>Quelques infos</h2>
+    <ul class="infos">
+        <li>
+            <span>Par</span>
+            <strong>Jacques Bodin-Hullin</strong>
+            
+        </li>
+        <li>
+            <span>Publié le</span>
+            <strong>14 September 2014</strong>
+        </li>
+        <li>
+            <span>Les tags</span>
+            <strong>
+                
+                <a href="/search.html#!tag=Fabric">Fabric</a>, 
+                
+                <a href="/search.html#!tag=Magento">Magento</a>
+                
+            </strong>
+        </li>
+        
+        
+        <li>
+            <span>Gist associé</span>
+            <strong><a href="https://gist.github.com/jacquesbh/349c538bdbf179fd333b">jacquesbh/349c538bdbf179fd333b</a></strong>
+        </li>
+        
+    </ul>
+
+    <div class="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2014/09/fabric-magento.html" data-text="Fabric et Magento, le combo gagnant !" data-via="jacquesbh">Tweet</a>
+    </div>
+
+    
+</div>
+
+
+    </div>
+
+    <div id="bottomWrap">
+        <div id="contactWrap">
+            <form action="#" method="post" id="contact_form">
+                <h3>Contact</h3>
+                <p>
+                    <label for="contactNom">Votre nom</label>
+                    <input type="text" name="contact_name" id="contact_name" class="text" tabindex="1" />
+                </p>
+                <p>
+                    <label for="contactEmail">Votre email</label>
+                    <input type="email" name="contact_email" id="contact_email" class="text" tabindex="2" />
+                </p>
+                <p>
+                    <label for="contactMessage">Message</label>
+                    <textarea name="contact_message" id="contact_message" rows="5" cols="30" tabindex="8"></textarea>
+                </p>
+                <p class="send">
+                    <input type="hidden" name="redirect_to" value="http://jacques.sh/contact/thanks.html" />
+                    <input type="submit" id="contactSend" value="Envoyer" tabindex="9" />
+                </p>
+                <div style="display: none;" class="url">http://getsimpleform.com/messages?form_api_token=4ba030c3b67553e1ccb25710aee63bd6</div>
+            </form>
+            <div class="qrcode">
+                <h3>Mon QRcode</h3>
+                <p>
+                    <img src="/img/qrcode.png" alt="le QRcode" width="198" height="192" />
+                </p>
+            </div>
+        </div>
+
+        <div id="footerWrap">
+            <div class="social">
+                <a href="https://twitter.com/jacquesbh" class="twitter-follow-button" data-show-count="false">Follow @jacquesbh</a>
+            </div>
+            
+            <a href="http://monsieurbiz.com" title="Découvrez Monsieur Biz, une agence spécialisée sur Magento, solution e-commerce">Agence Magento</a>
+            | 
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            
+            <a href="/credits.html">Crédits</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+            |
+            <a href="/legals.html">Informations légales</a>
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+            | <a href="/atom.xml">RSS</a>
+            | <a href="#" id="toplink">Haut de page</a>
+            <br />
+            <span class="copy">&copy; Jacques Bodin-Hullin - 2014</span>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27192340-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript" src="/js/jquery/cookies.js"></script>
+    <div id="popin" class="monsieurbiz-popin" style="display: none;">
+        <img src="/img/monsieurbiz.png" alt="" height="250" style="height: 250px;" />
+        <h2><span class="lines">Un projet, Une agence</span></h2>
+        <div class="action">
+            <p>
+                Monsieur Biz, une agence spécialisée Magento pour votre projet.
+            </p>
+            <a href="http://monsieurbiz.com">
+                <div class="button1">C'est par ici que ça se passe !</div>
+            </a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    if (typeof disable_popin === 'undefined' || !disable_popin) {
+        (function ($) {
+            $(document).ready(function () {
+                var cookieId = 'monsieurbizPopinDisplayed';
+                if ($.cookie(cookieId) == null) {
+                    $.fancybox.open('#popin');
+                    $.cookie(cookieId, 'true');
+                }
+            });
+         })(jQuery);
+    }
+    </script>
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
+

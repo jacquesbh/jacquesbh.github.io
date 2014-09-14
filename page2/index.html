@@ -252,7 +252,7 @@
 
     <span style="font-size:14.4px"><a href="/search.html#!tag=GitHub">GitHub</a></span>
 
-    <span style="font-size:37.2px"><a href="/search.html#!tag=Magento">Magento</a></span>
+    <span style="font-size:38.4px"><a href="/search.html#!tag=Magento">Magento</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Snippets">Snippets</a></span>
 
@@ -342,6 +342,8 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=gandi">gandi</a></span>
 
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Fabric">Fabric</a></span>
+
 </p>
 
 <hr />
@@ -355,6 +357,64 @@
 
     
 
+
+    <hr />
+    <h2><a href="/2013/11/mageconf-en-novembre.html">La MageConf pour la première fois en France !</a></h2>
+    <div class="content post">
+        <p class="center">
+    <a href="http://jacques.sh/2013/11/mageconf-en-novembre.html" title="Aller sur le site de MageConf"><img src="/images/posts/mageconf2013/mageconf.jpg" alt="MageConf 2013" /></a>
+</p>
+
+
+<p><strong>Ça n'est pas tous les jours que la communauté Magento se bouge pour organiser quelque chose 100% développeurs !</strong></p>
+
+<p>Je suis ravi de participer à cet évènement car nous allons enfin avoir l'occasion d'être entre techos et de parler technos, outils, astuces...</p>
+
+<p><em>(Plus d'infos dans la suite de l'article ;))</em></p>
+
+<!-- 
+
+
+<hr />
+
+<p>Je participe à cette MageConf sous plusieurs formes :</p>
+
+<ul>
+<li>En tant que participant bien sûr !</li>
+<li>Et en tant que sponsor par le biais de l'<a href="http://monsieurbiz.com/">agence Monsieur Biz</a> que j'ai lancée il y a quelques semaines.</li>
+</ul>
+
+
+<p>Peut-être aurai-je aussi l'occasion d'être parmi les quelques speakers qui s'exprimeront devant un public beaucoup plus geek qu'au Bargento.</p>
+
+<p>C'est <a href="http://www.boutikcircus.com/">Boutik Circus</a>, qui a lancé l'idée et c'est ensuite plusieurs développeurs qui ont rejoint l'aventure afin de donner vie à cette journée qui j'en suis sûr sera pleine de rebondissements, et avec des talks très intéressantes !</p>
+
+<p>Il ne vous reste plus qu'à <a href="http://mageconf.org/inscription">vous inscrire</a> ! Attention, les places sont limitées à environ 100 personnes ! Dépêchez-vous car elles filent, lentement, mais sûrement !</p>
+
+<p>A noter que la liste des talkeurs qui auront l'honneur de lancer cette première en France n'est pas encore connue. Pour <a href="http://mageconf.org/programme/">donner vos avis sur les talks</a> je vous invite à le faire via <a href="http://mageconf.org/programme/">la page de vote</a>.</p>
+
+<p>Ah j'oubliais... C'est le 27 novembre 2013, de 9h à 18h à <a href="http://www.lacartonnerieparis.com/">La Cartonnerie</a> !</p>
+
+<p><a href="http://mageconf.org/">Site officiel de MageConf</a></p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/11/mageconf-en-novembre.html" data-text="La MageConf pour la première fois en France !" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2013/11/mageconf-en-novembre.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2013/11/mageconf-en-novembre.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2013/05/fluid-et-zimbra-sur-mac-osx.html">Utiliser Fluid avec Zimbra sur OSX</a></h2>
@@ -631,125 +691,6 @@ Cependant pour les navigateurs qui contiennent <code>Chrome</code> dans leur <co
         
 
         <a href="/2013/03/plusieurs-themes-sur-magento.html">Lire l'article</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/2013/02/afficher-un-attribut.html">Bien afficher un attribut personnalisé</a></h2>
-    <div class="content post">
-        <p>Je me souviens de la galère, à mes débuts sur Magento, pour afficher un attribut un peu personnalisé...</p>
-
-<p>Si l'attribut est l'identifiant d'un bloc CMS, un chiffre sans unité, une clé qui détermine une image... ou que sais-je encore !<br/>
-Pour l'exemple nous prendrons l'identifiant d'un bloc CMS, ça me plait bien !</p>
-
-<p>Là tout de suite le problème c'est de garder un template clair...</p>
-
-<blockquote><p>Il faut faire ton traitement dans le <code>phtml</code> !</p></blockquote>
-
-<p>Heu... <strong>Non !</strong></p>
-
-<blockquote><p>Il faut faire un helper pour afficher ton attribut !</p></blockquote>
-
-<p>Là oui. Mais pas que !</p>
-
-<!-- 
-
-
-<hr />
-
-<p>Vous connaissez la partie « Additional Information » dans une fiche produit n'est-ce pas ?<br/>
-Et vous ne savez pas comment faire pour que votre attribut, qui, je le rappelle est un identifiant de block CMS, s'affiche correctement ?</p>
-
-<p>Regardons-y d'un peu plus près. Voici le template <code>frontend/base/default/template/catalog/product/view/attributes.phtml</code> :</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'attributes.phtml', '15');</script>
-
-
-<p>Ce template est donc celui qui affiche nos attributs.</p>
-
-<p>A la ligne surlignée on peut remarquer un appel étrange à notre helper <code>Mage_Catalog_Helper_Output</code>... Mais concrêtement il se passe quoi ?<br/>
-Allez, on remonte !</p>
-
-<p>Le helper a une méthode <code>productAttribute</code> assez particulière comme on peut le voir ci-dessous :</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'Output_productAttribute.php', '17-38');</script>
-
-
-<p>Si on lis cette méthode on comprend que si notre attribut a un <code>frontend_input</code> qui vaut <code>price</code> ou <code>textarea</code> alors il y aura un petit traitement de faveur pour la valeur de notre attribut.<br/>
-Même chose si notre attribut a l'éditeur WYSIWYG d'activé ou que le HTML est autorisé en front pour celui-ci.</p>
-
-<p>Par contre dans tous les autres cas c'est la méthode <code>process</code> qui prend la main...</p>
-
-<p>Bon ok, et cette méthode elle fait quoi ? Voyons-voir ça :</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'Output_process.php', '17-22');</script>
-
-
-<p>Notre helper récupère des "handlers" et effectue un traitement particulier : il vérifie que la méthode passée en argument (<code>productAttribute</code> dans notre cas) existe pour le "handler" courant dans la boucle...<br/>
-Si la méthode existe alors elle est appelée.</p>
-
-<p>Bon, et ces handlers, ils viennent d'où ? La méthode <code>addHandler</code> est là pour nous l'expliquer, enfin... plus ou moins :</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'Output_addHandler.php', '16-26');</script>
-
-
-<p>En gros on peut ajouter pour une méthode données un helper personnalisé via cette méthode. Et puis bon comme les helpers sont des singletons rien ne nous empêche de le faire quand bon nous semble tant que c'est fait avant l'affichage de notre attribut.</p>
-
-<p>Bon, donc, qu'est-ce qui nous empêche de créer un helper avec la méthode <code>productAttribute($outputHelper, $result, $params)</code> afin de personnaliser l'affichage de notre attribut ?</p>
-
-<p>Vous me suivez ?</p>
-
-<p>Ouais ok... mais bon, comment on fait pour ajouter notre "handler" personnalisé ?</p>
-
-<p>Avec un peu de chance il y a bien un évènement qui est lancé dans les environs... Ah tiens, il fait quoi le constructeur ?? Comme quoi... faut pas chercher bien loin !</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'Output_construct.php', '12');</script>
-
-
-<p>Bon, on a notre <em>event</em>, alors on observe et on fait en sorte que notre observeur ajoute notre helper !</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'Observer.php', '14');</script>
-
-
-<p>Et notre helper alors ? Il fait quoi ?</p>
-
-<p>Vu que notre attribut (que nous nommerons ici <code>out_attribute_code</code>) est l'identifiant d'un block CMS, il faut que nous affichions le contenu de ce block !<br/>
-Pour faire simple et sans rentrer dans des histoires de cache (car oui le block <code>Mage_Cms_Block_Block</code> ne gère aucun cache !) et bien nous pouvons faire ça :</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'Helper.php', '16-43');</script>
-
-
-<h2>Conclusion</h2>
-
-<p>Certains me diront que c'est compliqué pour faire simple...</p>
-
-<p>Bah moi j'ai envie de dire... c'est super pratique. Car au final quand je veux afficher un attribut j'ai juste à faire ça :</p>
-
-<script type="text/javascript">gist('jacquesbh/5033402', 'call.php');</script>
-
-
-<p>De cette manière mes modules sont indépendant les uns des autres et je n'ai qu'une seule manière de faire pour afficher mes attributs.</p>
-
-<p>Et en plus ils s'affichent parfaitement dans notre template de départ ! Et tout ça « sans rien faire » !</p>
-
-<blockquote><p>Bah moi si j'ai envie de filtrer le contenu de mon attribut et bah je peux ! Et en plus s'trop facile !</p></blockquote>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/02/afficher-un-attribut.html" data-text="Bien afficher un attribut personnalisé" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/2013/02/afficher-un-attribut.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/2013/02/afficher-un-attribut.html">Lire l'article</a>
 
     </div>
 

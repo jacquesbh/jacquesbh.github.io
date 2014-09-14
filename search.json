@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Fabric et Magento, le combo gagnant !",
+            "subtitle": "",
+            "keywords": "fabric magento",
+            "tags": ["Fabric","Magento"],
+            "categories": [],
+            "description": "Déployez vos projets Magento avec Fabric en un rien de temps !",
+            "url": "/2014/09/fabric-magento.html",
+            "date": "14 September 2014"
+        },
+        
+        {
             "title": "Votre certificat SSL Business",
             "subtitle": "",
             "keywords": "ssl business, sécurité, comodo, gandi,",
