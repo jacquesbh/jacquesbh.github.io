@@ -1,6 +1,17 @@
 (function ($) {
     $(document).ready(function () {
 
+        // Affix menu
+        if ($('#menu').length) {
+            $('#menu').affix({
+                offset: {
+                    top: function () {
+                        return $('#quoteWrap').position().top + $('#quoteWrap').outerHeight(true);
+                    }
+                }
+            });
+        }
+
         // Contact form validation (simple way)
         $('#contact_form').submit(function () {
             var messages = [];
