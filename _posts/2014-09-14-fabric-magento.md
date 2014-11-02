@@ -70,7 +70,7 @@ Ainsi le vidage du cache pourra se dérouler comme suit :
 Seuls les serveurs avec le tag `redis` exécuteront le `run()`.
 
 Avec cette idée de tags en tête j'ai pu faire évoluer mon `fabfile.py` de manière assez monstrueuse.  
-Je peux maintenant ajouter un serveur de production simplement en ajoutant leur configuration.
+Je peux maintenant ajouter un serveur de production simplement en ajoutant sa configuration.
 
 ## Le `fabfile.py`
 
@@ -78,7 +78,7 @@ Voici donc comment ça se passe concrètement.
 
 ### Déclaration des serveurs et settings de base
 
-<script type="text/javascript">gist('{{page.gist}}', 'settings.py');</script>
+<script type="text/javascript">gist('{{page.gist}}', 'setting.py');</script>
 
 Ici on déclare nos serveurs et pour chacun les informations suivantes :
 
