@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /** @author        Jacques Bodin-Hullin <http://www.bodin-hullin.net> @copyright     (C) 2009 Jacques Bodin-Hullin @license       All rights reserved */
-html, body, a, abbr, acronym, address, blockquote, cite, code, del, dfn, em, h1, h2, h3, h4, h5, h6, hr, ins, kbd, p, pre, q, samp, strong, sub, sup, var, img, dd, dl, dt, li, ol, ul, caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr, button, fieldset, form, input, label, legend, optgroup, option, select, textarea, div, span { padding: 0; margin: 0; outline: none; }
+html, body, a, abbr, acronym, address, blockquote, cite, code, del, dfn, em, h1, h2, h3, h4, h5, h6, hr, ins, kbd, p, pre, q, samp, strong, sub, sup, var, img, dd, dl, dt, li, ol, ul, caption, col, colgroup, table, tbody, td, tfoot, th, thead, tr, button, fieldset, form, input, label, legend, optgroup, option, select, textarea, div, span  { padding: 0; margin: 0; outline: none; }
 
 body { text-align: center; font-size: 0.8em; height: 100%; }
 
@@ -16,7 +16,7 @@ a img { border: none; }
 
 /** @author        Jacques Bodin-Hullin <http://www.bodin-hullin.net> @copyright     (C) 2009 Jacques Bodin-Hullin @license       All rights reserved */
 /** Body */
-body { font-family: 'Times New Roman', Verdana, Helvetica, Arial, Sans-serif; color: #292e10; background-color: #fffcf3; }
+body { font-family: 'Times New Roman', Verdana, Helvetica, Arial, Sans-serif; color: #292E10; background-color: #fffcf3; }
 
 /** Tooltik */
 #tooltip { position: absolute; display: none; }
@@ -85,37 +85,21 @@ body { font-family: 'Times New Roman', Verdana, Helvetica, Arial, Sans-serif; co
 #quoteWrap cite { font-style: italic; font-size: 1.3em; color: #444c1a; padding-left: 10px; }
 
 /** Menu */
-#menu, #menuLava { height: 45px; background: url(../img/menu_fond.png) top left repeat-x; padding-left: 20px; margin-bottom: 20px; overflow: hidden; }
+#menu, .menu-wrapper { height: 45px; margin-bottom: 20px; }
 
+#menu { background: url(../img/menu_fond.png) top left repeat-x; padding-left: 20px; overflow: hidden; width: 930px; }
+#menu.affix { position: fixed; top: 0; z-index: 99999; }
 #menu .search { float: right; padding-right: 12px; }
-
-#menu li, #menuLava li { line-height: 45px; font-style: italic; font-size: 1.3em; float: left; list-style: none; letter-spacing: 1px; }
-
-#menu li a, #menuLava li a { color: #FFFFFF; display: block; float: left; padding: 0 25px 0 0; outline: none; }
-
-#menu li a span { display: block; float: left; width: 3px; height: 45px; margin-right: 22px; }
-
-/*#menu li.current a,*/
+#menu li { line-height: 45px; font-style: italic; font-size: 1.3em; float: left; list-style: none; letter-spacing: 1px; }
 #menu li.current a, #menu li a:hover { background: url(../img/bord_droit_menu_hover.png) right 8px no-repeat; text-decoration: none; }
-
-/*#menu li.current a span,*/
 #menu li.current a span, #menu li a:hover span { background: url(../img/bord_gauche_menu_hover.png) left 8px no-repeat; }
-
-/* Menu Javascript */
-#menuLava { position: relative; }
-
-#menuLava li.back { background: url(../img/bord_droit_menu_hover.png) right 8px no-repeat; z-index: 8; position: absolute; }
-
-#menuLava li.back .left { background: url(../img/bord_gauche_menu_hover.png) left 8px no-repeat; width: 3px; height: 45px; margin-right: 22px; }
-
-#menuLava li a { z-index: 10; height: 45px; position: relative; overflow: hidden; margin: auto 10px; padding: 0 10px 0 10px; padding: 0 15px 0 15px; }
-
-#menuLava li a:hover, #menuLava li a:active, #menuLava li a:visited { border: none; text-decoration: none; }
+#menu li a { color: #FFFFFF; display: block; float: left; padding: 0 25px 0 0; outline: none; }
+#menu li a span { display: block; float: left; width: 3px; height: 45px; margin-right: 22px; }
 
 /** Link to Monsieur Biz */
 #topWrap div.mbiz { border: 1px solid #BBD367; padding: 5px; width: 938px; text-align: center; }
 #topWrap div.mbiz p { background-color: #F2F4D1; width: 100%; }
-#topWrap div.mbiz p a { display: block; width: 100%; padding-top: 10px; padding-bottom: 10px; color: #292e10; position: relative; }
+#topWrap div.mbiz p a { display: block; width: 100%; padding-top: 10px; padding-bottom: 10px; color: #292E10; position: relative; }
 #topWrap div.mbiz p a img { position: absolute; top: 0px; height: 35px; }
 #topWrap div.mbiz p a span { padding-left: 45px; }
 
@@ -164,7 +148,7 @@ body { font-family: 'Times New Roman', Verdana, Helvetica, Arial, Sans-serif; co
 #footerWrap { clear: both; background: #444c1a; height: 60px; line-height: 60px; text-align: right; font-size: 1.1em; color: #FFFFFF; letter-spacing: 10px; padding-right: 20px; margin-bottom: 50px; }
 #footerWrap a { color: #FFFFFF; font-style: italic; letter-spacing: 1px; margin-right: 10px; }
 #footerWrap .social { float: left; margin: 5px 20px; }
-#footerWrap .copy { color: #292e10; letter-spacing: 2px; }
+#footerWrap .copy { color: #292E10; letter-spacing: 2px; }
 
 #contentWrap blockquote { padding-left: 10px; margin: 15px 0 15px 10px; border-left: 3px solid #bbd367; color: #5c6724; }
 
@@ -303,7 +287,7 @@ img.post { border: 1px solid #bbd367; }
 .c { color: #408080; font-style: italic; }
 
 /* Comment */
-.err { border: 1px solid red; }
+.err { border: 1px solid #FF0000; }
 
 /* Error */
 .k { color: #008000; font-weight: bold; }
@@ -315,7 +299,7 @@ img.post { border: 1px solid #bbd367; }
 .cm { color: #408080; font-style: italic; }
 
 /* Comment.Multiline */
-.cp { color: #bc7a00; }
+.cp { color: #BC7A00; }
 
 /* Comment.Preproc */
 .c1 { color: #408080; font-style: italic; }
@@ -324,22 +308,22 @@ img.post { border: 1px solid #bbd367; }
 .cs { color: #408080; font-style: italic; }
 
 /* Comment.Special */
-.gd { color: #a00000; }
+.gd { color: #A00000; }
 
 /* Generic.Deleted */
 .ge { font-style: italic; }
 
 /* Generic.Emph */
-.gr { color: red; }
+.gr { color: #FF0000; }
 
 /* Generic.Error */
 .gh { color: #000080; font-weight: bold; }
 
 /* Generic.Heading */
-.gi { color: #00a000; }
+.gi { color: #00A000; }
 
 /* Generic.Inserted */
-.go { color: gray; }
+.go { color: #808080; }
 
 /* Generic.Output */
 .gp { color: #000080; font-weight: bold; }
@@ -351,7 +335,7 @@ img.post { border: 1px solid #bbd367; }
 .gu { color: #800080; font-weight: bold; }
 
 /* Generic.Subheading */
-.gt { color: #0040d0; }
+.gt { color: #0040D0; }
 
 /* Generic.Traceback */
 .kc { color: #008000; font-weight: bold; }
@@ -363,25 +347,25 @@ img.post { border: 1px solid #bbd367; }
 .kn { color: #008000; font-weight: bold; }
 
 /* Keyword.Namespace */
-.kp { color: green; }
+.kp { color: #008000; }
 
 /* Keyword.Pseudo */
 .kr { color: #008000; font-weight: bold; }
 
 /* Keyword.Reserved */
-.kt { color: #b00040; }
+.kt { color: #B00040; }
 
 /* Keyword.Type */
 .m { color: #666666; }
 
 /* Literal.Number */
-.s { color: #ba2121; }
+.s { color: #BA2121; }
 
 /* Literal.String */
-.na { color: #7d9029; }
+.na { color: #7D9029; }
 
 /* Name.Attribute */
-.nb { color: green; }
+.nb { color: #008000; }
 
 /* Name.Builtin */
 .nc { color: #0000FF; font-weight: bold; }
@@ -390,7 +374,7 @@ img.post { border: 1px solid #bbd367; }
 .no { color: #880000; }
 
 /* Name.Constant */
-.nd { color: #aa22ff; }
+.nd { color: #AA22FF; }
 
 /* Name.Decorator */
 .ni { color: #999999; font-weight: bold; }
@@ -399,10 +383,10 @@ img.post { border: 1px solid #bbd367; }
 .ne { color: #D2413A; font-weight: bold; }
 
 /* Name.Exception */
-.nf { color: blue; }
+.nf { color: #0000FF; }
 
 /* Name.Function */
-.nl { color: #a0a000; }
+.nl { color: #A0A000; }
 
 /* Name.Label */
 .nn { color: #0000FF; font-weight: bold; }
@@ -411,7 +395,7 @@ img.post { border: 1px solid #bbd367; }
 .nt { color: #008000; font-weight: bold; }
 
 /* Name.Tag */
-.nv { color: #19177c; }
+.nv { color: #19177C; }
 
 /* Name.Variable */
 .ow { color: #AA22FF; font-weight: bold; }
@@ -432,49 +416,49 @@ img.post { border: 1px solid #bbd367; }
 .mo { color: #666666; }
 
 /* Literal.Number.Oct */
-.sb { color: #ba2121; }
+.sb { color: #BA2121; }
 
 /* Literal.String.Backtick */
-.sc { color: #ba2121; }
+.sc { color: #BA2121; }
 
 /* Literal.String.Char */
 .sd { color: #BA2121; font-style: italic; }
 
 /* Literal.String.Doc */
-.s2 { color: #ba2121; }
+.s2 { color: #BA2121; }
 
 /* Literal.String.Double */
 .se { color: #BB6622; font-weight: bold; }
 
 /* Literal.String.Escape */
-.sh { color: #ba2121; }
+.sh { color: #BA2121; }
 
 /* Literal.String.Heredoc */
 .si { color: #BB6688; font-weight: bold; }
 
 /* Literal.String.Interpol */
-.sx { color: green; }
+.sx { color: #008000; }
 
 /* Literal.String.Other */
-.sr { color: #bb6688; }
+.sr { color: #BB6688; }
 
 /* Literal.String.Regex */
-.s1 { color: #ba2121; }
+.s1 { color: #BA2121; }
 
 /* Literal.String.Single */
-.ss { color: #19177c; }
+.ss { color: #19177C; }
 
 /* Literal.String.Symbol */
-.bp { color: green; }
+.bp { color: #008000; }
 
 /* Name.Builtin.Pseudo */
-.vc { color: #19177c; }
+.vc { color: #19177C; }
 
 /* Name.Variable.Class */
-.vg { color: #19177c; }
+.vg { color: #19177C; }
 
 /* Name.Variable.Global */
-.vi { color: #19177c; }
+.vi { color: #19177C; }
 
 /* Name.Variable.Instance */
 .il { color: #666666; }
@@ -499,3 +483,5 @@ pre code { background: none; padding: 0; }
 #results ul { padding-left: 30px; }
 
 #loader { background: url(../img/loader.gif) center center no-repeat; height: 30px; width: 30px; margin: 0 auto; text-indent: -99999px; }
+
+/*# sourceMappingURL=style.css.map */

@@ -225,90 +225,62 @@ body {
 /**
  * Menu
  */
-#menu, #menuLava {
+#menu, .menu-wrapper {
     height:             45px;
+    margin-bottom:      20px;
+}
+
+#menu {
     background:         url(../img/menu_fond.png) top left repeat-x;
     padding-left:       20px;
-    margin-bottom:      20px;
     overflow:           hidden;
-}
+    width:              930px;
 
-#menu .search {
-    float: right;
-    padding-right: 12px;
-}
+    &.affix {
+        position: fixed;
+        top: 0;
+        z-index: 99999;
+    }
 
-#menu li, #menuLava li {
-    line-height:        45px;
-    font-style:         italic;
-    font-size:          1.3em;
-    float:              left;
-    list-style:         none;
-    letter-spacing:     1px;
-}
+    .search {
+        float: right;
+        padding-right: 12px;
+    }
 
-#menu li a, #menuLava li a {
-    color:              #FFFFFF;
-    display:            block;
-    float:              left;
-    padding:            0 25px 0 0;
-    outline:            none;
-}
+    li {
+        line-height:        45px;
+        font-style:         italic;
+        font-size:          1.3em;
+        float:              left;
+        list-style:         none;
+        letter-spacing:     1px;
 
-#menu li a span {
-    display:            block;
-    float:              left;
-    width:              3px;
-    height:             45px;
-    margin-right:       22px;
-}
+        &.current a, a:hover {
+            background:         url(../img/bord_droit_menu_hover.png) right 8px no-repeat;
+            text-decoration:    none;
 
-/*#menu li.current a,*/
-#menu li.current a,
-#menu li a:hover {
-    background:         url(../img/bord_droit_menu_hover.png) right 8px no-repeat;
-    text-decoration:    none;
-}
+            span {
+                background:         url(../img/bord_gauche_menu_hover.png) left 8px no-repeat;
+            }
+        }
 
-/*#menu li.current a span,*/
-#menu li.current a span,
-#menu li a:hover span {
-    background:         url(../img/bord_gauche_menu_hover.png) left 8px no-repeat;
-}
+        a {
+            color:              #FFFFFF;
+            display:            block;
+            float:              left;
+            padding:            0 25px 0 0;
+            outline:            none;
 
-/* Menu Javascript */
-#menuLava {
-    position:           relative;
+            span {
+                display:            block;
+                float:              left;
+                width:              3px;
+                height:             45px;
+                margin-right:       22px;
+            }
+        }
+    }
 }
-
-#menuLava li.back {
-    background:         url(../img/bord_droit_menu_hover.png) right 8px no-repeat;
-    z-index:            8;
-    position:           absolute;
-}
-
-#menuLava li.back .left {
-    background:         url(../img/bord_gauche_menu_hover.png) left 8px no-repeat;
-    width:              3px;
-    height:             45px;
-    margin-right:       22px;
-}
-
-#menuLava li a {
-    z-index:            10;
-    height:             45px;
-    position:           relative;
-    overflow:           hidden;
-    margin:             auto 10px;
-    padding:            0 10px 0 10px;
-    padding:            0 15px 0 15px;
-}
-
-#menuLava li a:hover, #menuLava li a:active, #menuLava li a:visited {
-    border:             none;
-    text-decoration:    none;
-}
-
 
 /**
  * Link to Monsieur Biz
