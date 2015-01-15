@@ -741,6 +741,11 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
 <p><img src="http://monsieurbiz.com/media/wysiwyg/other/charlie.jpg" /></p>
 <p style="padding-top: 30px;"><a href="#" style="color: white;" onclick="$('#charlie').remove(); return false;">[⤫] Fermer</a></p>
 </div>
+<script type="text/javascript">
+setTimeout(function () {
+    $('#charlie').fadeOut();
+}, 2000);
+</script>
 
 </body>
 </html>
