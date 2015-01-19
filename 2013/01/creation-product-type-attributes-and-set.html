@@ -246,7 +246,7 @@
 
 <p>La sale consiste à dupliquer, simplement, le XML de configuration du type <code>simple</code> avec notre propre balise <code>foo</code> :</p>
 
-<script type="text/javascript">gist(4582238, 'bad.xml', '11');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'bad.xml', '11');</script>
 
 
 <p>Vous remarquerez la ligne surlignée. Et bah oui ! Si notre type se comporte comme un produit <code>simple</code>, pourquoi créer un modèle personnalisé ?</p>
@@ -257,7 +257,7 @@
 
 <p>Et puis ça permet de prévoir les évolutions ;)</p>
 
-<script type="text/javascript">gist(4582238, 'good.xml', '11,12,15,16');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'good.xml', '11,12,15,16');</script>
 
 
 <p>Vous remarquez cette fois que nous avons quatre modèles personnalisés.</p>
@@ -268,31 +268,31 @@
 
 <p>Ce modèle contient la constante qui vaut le code du type : <code>foo</code>.</p>
 
-<script type="text/javascript">gist(4582238, 'type.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'type.php');</script>
 
 
 <h4>Le modèle de prix</h4>
 
-<script type="text/javascript">gist(4582238, 'price.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'price.php');</script>
 
 
 <h4>Le modèle d'index des prix</h4>
 
-<script type="text/javascript">gist(4582238, 'indexer.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'indexer.php');</script>
 
 
 <h4>Le data retreiver</h4>
 
 <p>Ce modèle a une méthode qui permet de récupérer le code du type. On utilise donc la constante disponible.</p>
 
-<script type="text/javascript">gist(4582238, 'retreiver.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'retreiver.php');</script>
 
 
 <h3>Le layout</h3>
 
 <p>Comme tout nouveau type de produit pensez à ajouter le bout de layout qui va avec ! Sinon pas de prix dans la fiche produit par exemple !</p>
 
-<script type="text/javascript">gist(4582238, 'layout.xml');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'layout.xml');</script>
 
 
 <h3>Les attributs de type « Prix »</h3>
@@ -303,7 +303,7 @@
 
 <p>Dans un setup de votre module, mettez ceci : (c'est plutôt facile à comprendre)</p>
 
-<script type="text/javascript">gist(4582238, 'setup_price.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'setup_price.php');</script>
 
 
 <h2>La création du jeu d'attributs <code>Bar</code></h2>
@@ -312,7 +312,7 @@
 
 <p>On considérera que notre nouveau jeu se base sur les mêmes attributs que le jeu par défaut.</p>
 
-<script type="text/javascript">gist(4582238, 'set.php', '11');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'set.php', '11');</script>
 
 
 <p>Il faut savoir que si on fait un <code>addAttributeSet</code> d'un jeu d'attributs existant alors celui-ci est mis à jour, tout simplement.</p>
@@ -323,7 +323,7 @@
 
 <p>Dans notre installeur ou dans un update il nous suffit d'ajouter notre attribut, tout simplement, comme ceci :</p>
 
-<script type="text/javascript">gist(4582238, 'attribute.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'attribute.php');</script>
 
 
 <h2>Conclusion</h2>
@@ -334,7 +334,7 @@
 
 <p>Néanmoins vous trouverez beaucoup de méthode dans le modèle EAV ;)</p>
 
-<script type="text/javascript">gist(4582238, 'eav_setup.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'eav_setup.php');</script>
 
 
 
@@ -403,7 +403,7 @@
         
         <li>
             <span>Gist associé</span>
-            <strong><a href="https://gist.github.com/4582238">4582238</a></strong>
+            <strong><a href="https://gist.github.com/jacquesbh/4582238">jacquesbh/4582238</a></strong>
         </li>
         
     </ul>

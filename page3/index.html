@@ -631,7 +631,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>La sale consiste à dupliquer, simplement, le XML de configuration du type <code>simple</code> avec notre propre balise <code>foo</code> :</p>
 
-<script type="text/javascript">gist(4582238, 'bad.xml', '11');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'bad.xml', '11');</script>
 
 
 <p>Vous remarquerez la ligne surlignée. Et bah oui ! Si notre type se comporte comme un produit <code>simple</code>, pourquoi créer un modèle personnalisé ?</p>
@@ -642,7 +642,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>Et puis ça permet de prévoir les évolutions ;)</p>
 
-<script type="text/javascript">gist(4582238, 'good.xml', '11,12,15,16');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'good.xml', '11,12,15,16');</script>
 
 
 <p>Vous remarquez cette fois que nous avons quatre modèles personnalisés.</p>
@@ -653,31 +653,31 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>Ce modèle contient la constante qui vaut le code du type : <code>foo</code>.</p>
 
-<script type="text/javascript">gist(4582238, 'type.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'type.php');</script>
 
 
 <h4>Le modèle de prix</h4>
 
-<script type="text/javascript">gist(4582238, 'price.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'price.php');</script>
 
 
 <h4>Le modèle d'index des prix</h4>
 
-<script type="text/javascript">gist(4582238, 'indexer.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'indexer.php');</script>
 
 
 <h4>Le data retreiver</h4>
 
 <p>Ce modèle a une méthode qui permet de récupérer le code du type. On utilise donc la constante disponible.</p>
 
-<script type="text/javascript">gist(4582238, 'retreiver.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'retreiver.php');</script>
 
 
 <h3>Le layout</h3>
 
 <p>Comme tout nouveau type de produit pensez à ajouter le bout de layout qui va avec ! Sinon pas de prix dans la fiche produit par exemple !</p>
 
-<script type="text/javascript">gist(4582238, 'layout.xml');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'layout.xml');</script>
 
 
 <h3>Les attributs de type « Prix »</h3>
@@ -688,7 +688,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>Dans un setup de votre module, mettez ceci : (c'est plutôt facile à comprendre)</p>
 
-<script type="text/javascript">gist(4582238, 'setup_price.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'setup_price.php');</script>
 
 
 <h2>La création du jeu d'attributs <code>Bar</code></h2>
@@ -697,7 +697,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>On considérera que notre nouveau jeu se base sur les mêmes attributs que le jeu par défaut.</p>
 
-<script type="text/javascript">gist(4582238, 'set.php', '11');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'set.php', '11');</script>
 
 
 <p>Il faut savoir que si on fait un <code>addAttributeSet</code> d'un jeu d'attributs existant alors celui-ci est mis à jour, tout simplement.</p>
@@ -708,7 +708,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>Dans notre installeur ou dans un update il nous suffit d'ajouter notre attribut, tout simplement, comme ceci :</p>
 
-<script type="text/javascript">gist(4582238, 'attribute.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'attribute.php');</script>
 
 
 <h2>Conclusion</h2>
@@ -719,7 +719,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>Néanmoins vous trouverez beaucoup de méthode dans le modèle EAV ;)</p>
 
-<script type="text/javascript">gist(4582238, 'eav_setup.php');</script>
+<script type="text/javascript">gist(jacquesbh/4582238, 'eav_setup.php');</script>
 
 
 
@@ -794,7 +794,7 @@ Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel systè
 
 <p>Il nous faut initialiser notre blog :</p>
 
-<script type="text/javascript">gist(4526322, 'misc/init.sh');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'misc/init.sh');</script>
 
 
 <p>La <a href="https://github.com/mojombo/jekyll/wiki/Configuration">configuration de Jekyll</a> est contenu dans le fichier <code>_config.yml</code>.</p>
@@ -812,7 +812,7 @@ pygments: true
 
 <p>Mais nous pouvons tout de même personnaliser quelques éléments :</p>
 
-<script type="text/javascript">gist(4526322, '_config.yml');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_config.yml');</script>
 
 
 <p>La configuration n'est pas bien compliquée à comprendre. Il s'agit d'un fichier en <code>YAML</code>, c'est donc une liste de clés/valeurs, tout simplement.</p>
@@ -821,7 +821,7 @@ pygments: true
 
 <p>Tout fichier texte peut-être transformé par Jekyll. Il suffit d'y inclure le "header" qui va bien, exemple :</p>
 
-<script type="text/javascript">gist(4526322, 'misc/header_example.txt', 4);</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'misc/header_example.txt', 4);</script>
 
 
 <p>La date de publication permet de décider de la date de parution de notre article, à condition que la configuration <code>future</code> soit à <code>false</code>.</p>
@@ -839,7 +839,7 @@ On peut par exemple imaginer une variable <code>comments: true</code> ou <code>f
 
 <p>En attendant notre page d'accueil doit boucler sur les posts, qui ont une pagination (on doit donc gérer cette pagination).</p>
 
-<script type="text/javascript">gist(4526322, 'index.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'index.html');</script>
 
 
 <p>Les conditions sont simples à comprendre. Par contre effectivement c'est pas super bien indenté... Sauf que si j'indente plus le code on va se retrouver avec des pages dont le HTML reçu par le serveur contiendra des tonnes d'espaces. Car les <code>{% if ... %}</code> sont supprimés, mais pas les espaces avant !</p>
@@ -852,17 +852,17 @@ On peut par exemple imaginer une variable <code>comments: true</code> ou <code>f
 
 <p>On peut donc par exemple facilement créer les fichiers <code>head.html</code>, <code>header.html</code> et <code>footer.html</code> !</p>
 
-<script type="text/javascript">gist(4526322, '_includes/head.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_includes/head.html');</script>
 
 
 
 
-<script type="text/javascript">gist(4526322, '_includes/header.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_includes/header.html');</script>
 
 
 
 
-<script type="text/javascript">gist(4526322, '_includes/footer.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_includes/footer.html');</script>
 
 
 <h2>Les layouts</h2>
@@ -871,14 +871,14 @@ On peut par exemple imaginer une variable <code>comments: true</code> ou <code>f
 
 <p>Voici le layout <code>default</code> que nous avons utilisé pour notre page d'accueil :</p>
 
-<script type="text/javascript">gist(4526322, '_layouts/default.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_layouts/default.html');</script>
 
 
 <p>Vous voyez tout de suite l'intérêts des <code>includes</code> n'est-ce pas ?</p>
 
 <p>Et le layout pour nos articles : <code>post</code></p>
 
-<script type="text/javascript">gist(4526322, '_layouts/post.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_layouts/post.html');</script>
 
 
 <h2>Notre premier article</h2>
@@ -905,7 +905,7 @@ Super :)
 
 <p>Je vous laisse adapter ce code dans votre layout favoris, sur votre page d'accueil, dans une sidebar ou autre...</p>
 
-<script type="text/javascript">gist(4526322, 'tags.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'tags.html');</script>
 
 
 <p>Ici on a surchargé le <code>permalink</code> car sinon notre lien aurait été <code>/tags/</code> et non <code>/tags.html</code>. Seul l'<code>index.html</code> n'est pas modifié au niveau de son URL (sauf si on force le <code>permalink</code>).</p>
@@ -956,7 +956,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>Concernant la recherche... c'est un peu compliqué de faire une recherche sur un site statique non ? Au final vous pouvez tenter quelque chose avec un fichier <code>json</code> à la racine de votre site et un bout de javascript pour gérer tout ça !</p>
 
-<p>Vous pouvez récupérer la source de tout ce tuto en <a href="https://gist.github.com/4526322">clonant le gist dédié à cet article</a>, il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).</p>
+<p>Vous pouvez récupérer la source de tout ce tuto en <a href="https://gist.github.com/jacquesbh/4526322">clonant le gist dédié à cet article</a>, il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).</p>
 
 <p>N'hésitez pas à regarder la <a href="https://github.com/jacquesbh/jacquesbh.github.com">source de ce blog également</a>.</p>
 
@@ -1029,7 +1029,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>La méthode <code>loadLayout()</code> décortiquée/complétée/nettoyée et commentée ci-dessous :</p>
 
-<script type="text/javascript">gist(4401568, 'load_layout.php', '18-19,30-31,33-35,37-39,50-53');</script>
+<script type="text/javascript">gist(jacquesbh/4401568, 'load_layout.php', '18-19,30-31,33-35,37-39,50-53');</script>
 
 
 <p>Vous avez compris le fonctionnement ? Les points les plus importants sont surlignés.</p>
@@ -1048,7 +1048,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>Dans cette méthode on va simplement vérifier que nous sommes bien en train d'afficher notre action et nous allons pouvoir y faire l'ajout de notre nouvel handle :</p>
 
-<script type="text/javascript">gist(4401568, 'observer_handle.php', '12-18');</script>
+<script type="text/javascript">gist(jacquesbh/4401568, 'observer_handle.php', '12-18');</script>
 
 
 <p>L'idée c'est surtout de ne pas utiliser une triple condition à la <code>if ($action == 'action' &amp;&amp; $controller == 'controller' &amp;&amp; $module == 'module')</code> car c'est bien trop lourd. On a la possibilité d'avoir un nom d'action précis, alors on fait un case !</p>
@@ -1057,7 +1057,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>Rien ne nous empêche de récupérer un objet dans le registre pour y ajouter un peu de dynamisme (c'est l'idée en fait) : <em>exemple avec une "news"</em></p>
 
-<script type="text/javascript">gist(4401568, 'observer_news.php', '15-18');</script>
+<script type="text/javascript">gist(jacquesbh/4401568, 'observer_news.php', '15-18');</script>
 
 
 <p>A vous de jouer !</p>
@@ -1066,7 +1066,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>Pour vérifier que notre handle est présent, rien de plus simple : on ouvre le fichier <code>index.php</code> et on ajoute à la fin du fichier ces quelques lignes.</p>
 
-<script type="text/javascript">gist(4401568, 'index.php');</script>
+<script type="text/javascript">gist(jacquesbh/4401568, 'index.php');</script>
 
 
 <p>On actualise ! Et pof ! (tout en bas..)</p>
@@ -1079,7 +1079,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>On peut donc lancer un évènement précis pour chaque page sur notre e-commerce :</p>
 
-<script type="text/javascript">gist(4401568, 'observer_dispatch.php', '13-16');</script>
+<script type="text/javascript">gist(jacquesbh/4401568, 'observer_dispatch.php', '13-16');</script>
 
 
 <p>De cette manière on peut utiliser l'évènement <code>controller_action_layout_load_before_frontname_controller_action</code> pour ajouter notre handle sans crainte !</p>

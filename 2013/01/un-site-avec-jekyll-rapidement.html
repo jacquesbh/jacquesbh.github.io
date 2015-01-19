@@ -271,7 +271,7 @@
 
 <p>Il nous faut initialiser notre blog :</p>
 
-<script type="text/javascript">gist(4526322, 'misc/init.sh');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'misc/init.sh');</script>
 
 
 <p>La <a href="https://github.com/mojombo/jekyll/wiki/Configuration">configuration de Jekyll</a> est contenu dans le fichier <code>_config.yml</code>.</p>
@@ -289,7 +289,7 @@ pygments: true
 
 <p>Mais nous pouvons tout de même personnaliser quelques éléments :</p>
 
-<script type="text/javascript">gist(4526322, '_config.yml');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_config.yml');</script>
 
 
 <p>La configuration n'est pas bien compliquée à comprendre. Il s'agit d'un fichier en <code>YAML</code>, c'est donc une liste de clés/valeurs, tout simplement.</p>
@@ -298,7 +298,7 @@ pygments: true
 
 <p>Tout fichier texte peut-être transformé par Jekyll. Il suffit d'y inclure le "header" qui va bien, exemple :</p>
 
-<script type="text/javascript">gist(4526322, 'misc/header_example.txt', 4);</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'misc/header_example.txt', 4);</script>
 
 
 <p>La date de publication permet de décider de la date de parution de notre article, à condition que la configuration <code>future</code> soit à <code>false</code>.</p>
@@ -316,7 +316,7 @@ On peut par exemple imaginer une variable <code>comments: true</code> ou <code>f
 
 <p>En attendant notre page d'accueil doit boucler sur les posts, qui ont une pagination (on doit donc gérer cette pagination).</p>
 
-<script type="text/javascript">gist(4526322, 'index.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'index.html');</script>
 
 
 <p>Les conditions sont simples à comprendre. Par contre effectivement c'est pas super bien indenté... Sauf que si j'indente plus le code on va se retrouver avec des pages dont le HTML reçu par le serveur contiendra des tonnes d'espaces. Car les <code>{% if ... %}</code> sont supprimés, mais pas les espaces avant !</p>
@@ -329,17 +329,17 @@ On peut par exemple imaginer une variable <code>comments: true</code> ou <code>f
 
 <p>On peut donc par exemple facilement créer les fichiers <code>head.html</code>, <code>header.html</code> et <code>footer.html</code> !</p>
 
-<script type="text/javascript">gist(4526322, '_includes/head.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_includes/head.html');</script>
 
 
 
 
-<script type="text/javascript">gist(4526322, '_includes/header.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_includes/header.html');</script>
 
 
 
 
-<script type="text/javascript">gist(4526322, '_includes/footer.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_includes/footer.html');</script>
 
 
 <h2>Les layouts</h2>
@@ -348,14 +348,14 @@ On peut par exemple imaginer une variable <code>comments: true</code> ou <code>f
 
 <p>Voici le layout <code>default</code> que nous avons utilisé pour notre page d'accueil :</p>
 
-<script type="text/javascript">gist(4526322, '_layouts/default.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_layouts/default.html');</script>
 
 
 <p>Vous voyez tout de suite l'intérêts des <code>includes</code> n'est-ce pas ?</p>
 
 <p>Et le layout pour nos articles : <code>post</code></p>
 
-<script type="text/javascript">gist(4526322, '_layouts/post.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, '_layouts/post.html');</script>
 
 
 <h2>Notre premier article</h2>
@@ -382,7 +382,7 @@ Super :)
 
 <p>Je vous laisse adapter ce code dans votre layout favoris, sur votre page d'accueil, dans une sidebar ou autre...</p>
 
-<script type="text/javascript">gist(4526322, 'tags.html');</script>
+<script type="text/javascript">gist(jacquesbh/4526322, 'tags.html');</script>
 
 
 <p>Ici on a surchargé le <code>permalink</code> car sinon notre lien aurait été <code>/tags/</code> et non <code>/tags.html</code>. Seul l'<code>index.html</code> n'est pas modifié au niveau de son URL (sauf si on force le <code>permalink</code>).</p>
@@ -433,7 +433,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>Concernant la recherche... c'est un peu compliqué de faire une recherche sur un site statique non ? Au final vous pouvez tenter quelque chose avec un fichier <code>json</code> à la racine de votre site et un bout de javascript pour gérer tout ça !</p>
 
-<p>Vous pouvez récupérer la source de tout ce tuto en <a href="https://gist.github.com/4526322">clonant le gist dédié à cet article</a>, il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).</p>
+<p>Vous pouvez récupérer la source de tout ce tuto en <a href="https://gist.github.com/jacquesbh/4526322">clonant le gist dédié à cet article</a>, il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).</p>
 
 <p>N'hésitez pas à regarder la <a href="https://github.com/jacquesbh/jacquesbh.github.com">source de ce blog également</a>.</p>
 
@@ -497,7 +497,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
         
         <li>
             <span>Gist associé</span>
-            <strong><a href="https://gist.github.com/4526322">4526322</a></strong>
+            <strong><a href="https://gist.github.com/jacquesbh/4526322">jacquesbh/4526322</a></strong>
         </li>
         
     </ul>
