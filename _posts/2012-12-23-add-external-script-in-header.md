@@ -9,7 +9,7 @@ published: 2012-12-23 23:30:00
 date: 2012-12-23 23:30:00
 comments: true
 permalink: /ajouter-un-script-externe-au-header-sur-magento.html
-gist: 4365871
+gist: jacquesbh/4365871
 ---
 
 On a toujours besoin d'ajouter un bout de script ou un script externe complet dans le header de nos pages mais on ne sait jamais comment s'y prendre ! Doit-on préférer la solution simple qui consiste à modifier le template `head.phtml` ? Devons-nous ajouter ce bout de code en dur ? Le rendre dynamique ?
@@ -30,17 +30,17 @@ Vous connaissez tous le block `core/text` n'est-ce pas ? Ce petit block bien sym
 
 Par exemple si on devait initialiser un tel block voici ce qu'on ferait :
 
-<script src="https://gist.github.com/4365871.js?file=create_block.php"></script>
+<script src="https://gist.github.com/jacquesbh/4365871.js?file=create_block.php"></script>
 
 Vous voyez peut-être déjà où je veux en venir ?
 
 Et si maintenant notre texte était `<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>` ?
 
-<script src="https://gist.github.com/4365871.js?file=jquery.php"></script>
+<script src="https://gist.github.com/jacquesbh/4365871.js?file=jquery.php"></script>
 
 Ok mais dans le layout ça donne quoi ?
 
-<script src="https://gist.github.com/4365871.js?file=core_text.xml"></script>
+<script src="https://gist.github.com/jacquesbh/4365871.js?file=core_text.xml"></script>
 
 _Note : N'oubliez pas le `<![CDATA[ ]]>` !_
 
@@ -67,7 +67,7 @@ Afin d'ajouter un block à notre `head` nous devons en faire une référence au 
 
 Voici à quoi ressemble notre `local.xml` :
 
-<script src="https://gist.github.com/4365871.js?file=local.xml"></script>
+<script src="https://gist.github.com/jacquesbh/4365871.js?file=local.xml"></script>
 
 A partir de maintenant notre jQuery en provenance de Google est directement chargé dans notre `head`.
 
@@ -81,7 +81,7 @@ Et dans ces scripts on a besoin de l'URL du projet dans certains cas.
 
 Voici comment ajouter la "constante" `BASE_URL` dans le `head` de vos projets, dans votre local.xml :
 
-<script src="https://gist.github.com/4365871.js?file=local_base_url.xml"></script>
+<script src="https://gist.github.com/jacquesbh/4365871.js?file=local_base_url.xml"></script>
 
 <!-- more end -->
 

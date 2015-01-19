@@ -8,7 +8,7 @@ type: howto
 date: 2012-07-19 01:20:00
 comments: true
 permalink: /realisez-vos-propres-scripts-php-sur-magento.html
-gist: 3139595
+gist: jacquesbh/3139595
 ---
 
 Nous sommes tous confrontés à un moment ou à un autre à devoir palier un problème rapidement sur un site en production.
@@ -109,7 +109,7 @@ On exécute :
 
 Voilà ce que ça donne :
 
-<script src="https://gist.github.com/3139595.js?file=misc-change_admin_password.php"></script>
+<script src="https://gist.github.com/jacquesbh/3139595.js?file=misc-change_admin_password.php"></script>
 
 <hr />
 

@@ -8,7 +8,7 @@ type: howto
 published: 2012-07-31 01:00:00
 date: 2012-07-31 01:00:00
 comments: true
-gist: 3210926
+gist: jacquesbh/3210926
 permalink: /vos-blocs-en-ajax-via-webservice.html
 ---
 
@@ -42,14 +42,14 @@ Il nous faut bien sûr faire un module... Nous l'appellerons `Jbh_Webservice`. J
 
 Nous aurons juste besoin d'un contrôleur (et donc d'une route front) :
 
-<script src="https://gist.github.com/3210926.js?file=config.xml"></script>
+<script src="https://gist.github.com/jacquesbh/3210926.js?file=config.xml"></script>
 
 Dans le contrôleur, rien de bien compliqué :
 
 *   Une action `footerAction` qui va retirer le output du block `root` et afficher directement le block `footer`.
 *   Une méthode `postDispatch` qui va modifier le contenu de la réponse si on a besoin d'un callback (pour du JSONP par exemple).
 
-<script src="https://gist.github.com/3210926.js?file=PageController.php"></script>
+<script src="https://gist.github.com/jacquesbh/3210926.js?file=PageController.php"></script>
 
 L'idée c'est que c'est à vous d'ajouter vos propres actions par la suite !
 
@@ -57,7 +57,7 @@ L'idée c'est que c'est à vous d'ajouter vos propres actions par la suite !
 
 Voici comment appeler notre footer en ajax via jQuery :
 
-<script src="https://gist.github.com/3210926.js?file=demo.js"></script>
+<script src="https://gist.github.com/jacquesbh/3210926.js?file=demo.js"></script>
 
 Sachez qu'un simple appel en php tel que :
 
@@ -81,5 +81,5 @@ P.S. Le fichier `app/etc/modules/Jbh_Webservice.xml` est [sur github ;)][config]
 <!-- more end -->
 
 [wtfpl]: http://sam.zoy.org/wtfpl/
-[config]: https://gist.github.com/3210926#file_jbh_webservice.xml
+[config]: https://gist.github.com/jacquesbh/3210926#file_jbh_webservice.xml
 

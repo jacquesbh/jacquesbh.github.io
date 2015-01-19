@@ -9,7 +9,7 @@ published: 2012-09-06 02:20:00
 date: 2012-09-06 02:20:00
 comments: true
 permalink: /le-cache-des-blocks-sur-magento.html
-gist: 3646203
+gist: jacquesbh/3646203
 ---
 
 Le cache block sur Magento... Quelle galère !
@@ -44,13 +44,13 @@ Par exemple on peut mettre en cache la réponse d'une requête SQL, à condition
 
 Sinon c'est la _loose_... Prenons un exemple _bidon_ :
 
-<script src="https://gist.github.com/3646203.js?file=example_01.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_01.php"></script>
 
 On peut voir que la clé ne change pas car elle dépend de la variable `$_cacheKey` qui ne change pas entre le premier et le second appel à la méthode `getCountLessThan`.
 
 Maintenant si on change la valeur de `$_cacheKey` à `jbh_counter_sql_result_%d` le résultat n'est plus le même !
 
-<script src="https://gist.github.com/3646203.js?file=example_02.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_02.php"></script>
     
 **La clé est donc vraiment importante dans la gestion du cache !**
 
@@ -77,17 +77,17 @@ Sauf qu'en pratique... bah c'est franchement la merde. Et c'est là que les tags
 
 Imaginons plusieurs caches avec chacun une liste de tags :
 
-<script src="https://gist.github.com/3646203.js?file=example_03.txt"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_03.txt"></script>
         
 Maintenant, si on veut vider les caches `A` et `B` on fait tout simplement :
 
-<script src="https://gist.github.com/3646203.js?file=example_04.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_04.php"></script>
 
 Par défaut Magento fait en sorte que si un tag _match_ un cache celui-ci soit supprimé. Si vous avez renseigné plusieurs tags à vider, __tous__ les cache concernés par __un ou plusieurs__ de ces tags seront supprimés.
 
 Si vous souhaitez supprimer un cache (sur le cache `frontend`, pas le cache `backend`) qui _match_ tous les tags renseignés il faut faire :
 
-<script src="https://gist.github.com/3646203.js?file=example_05.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_05.php"></script>
 
 Ici on a vidé le cache du `C`.
 
@@ -101,7 +101,7 @@ Sauf que qui dit `Varien_Object` dit `__call`... non ?
 
 Donc en fait les variables du cache sont récupérées de la manière suivante :
 
-<script src="https://gist.github.com/3646203.js?file=example_06.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_06.php"></script>
 
 Donc ? Bah donc on peut surcharger sur nos blocks. Et oui !
 
@@ -123,15 +123,15 @@ Soyons fous !
 
 Mais en fait... Magento le fait pour nous ; avec l'appel à `getCacheKeyInfo()` dans `getCacheKey()` :
 
-<script src="https://gist.github.com/3646203.js?file=example_07.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_07.php"></script>
 
 Si on y regarde de plus près on remarque que la méthode `getCacheKeyInfo()` retourne un tableau qui contient une seule valeur : le nom du block dans le Layout :
 
-<script src="https://gist.github.com/3646203.js?file=example_08.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_08.php"></script>
 
 Dans notre block, on surcharge cette méthode !
 
-<script src="https://gist.github.com/3646203.js?file=example_09.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_09.php"></script>
 
 ### Les tags avec `getCacheTags()`
 
@@ -143,13 +143,13 @@ Il suffit de modifier la méthode `_afterSave` de nos modèles pour y ajouter le
 
 Revenons à nos moutons et voyons à quoi ressemble la méthode `getCacheTags` par défaut de Magento :
 
-<script src="https://gist.github.com/3646203.js?file=example_10.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_10.php"></script>
 
 Allez, on surcharge dans notre block !
 
 J'ajoute ici un exemple _vite fait_ d'un modèle avec une constante `CACHE_TAG` bien utilisée :
 
-<script src="https://gist.github.com/3646203.js?file=example_11.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_11.php"></script>
 
 Vous noterez qu'on peut ajouter n'importe quels tags. Attention cependant à ne pas oublier les tags par défaut récupérés grâce au `parent` !
 
@@ -157,7 +157,7 @@ Vous noterez qu'on peut ajouter n'importe quels tags. Attention cependant à ne 
 
 Rien de plus simple !
 
-<script src="https://gist.github.com/3646203.js?file=example_12.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_12.php"></script>
 
 ## Pensez à vider le cache !
 
@@ -167,13 +167,13 @@ Vous pouvez aussi enregistrer tous les tags utilisés sur les blocks par défaut
 
 Dans le fichier `/app/code/core/Mage/Core/Model/App.php`, ajoutez un log dans la méthode `saveCache` :
 
-<script src="https://gist.github.com/3646203.js?file=example_13.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_13.php"></script>
 
 Vous aurez ici les tags utilisés ! Mais pas ceux qui ne sont pas utilisés, mais vidés !
 
 Dans le fichier `/app/code/core/Mage/Core/Model/App.php`, ajoutez un log dans la méthode `cleanCache` :
 
-<script src="https://gist.github.com/3646203.js?file=example_14.php"></script>
+<script src="https://gist.github.com/jacquesbh/3646203.js?file=example_14.php"></script>
 
 ## Conclusion
 

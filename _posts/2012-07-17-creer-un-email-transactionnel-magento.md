@@ -8,7 +8,7 @@ type: howto
 date: 2012-07-17 23:35:00
 comments: true
 permalink: /creer-un-email-transactionnel-sur-magento.html
-gist: 3132212
+gist: jacquesbh/3132212
 ---
 
 Qui n'a pas voulu envoyer un email personnalisé rapidement via Magento ?
@@ -72,7 +72,7 @@ Le second c'est l'identifiant de notre email, en général.
 
 Editons notre fichier `/app/code/local/Jbh/Demo/etc/config.xml`.
 
-<script src="https://gist.github.com/3132212.js?file=app-code-local-Jbh-Demo-etc-config.xml"></script>
+<script src="https://gist.github.com/jacquesbh/3132212.js?file=app-code-local-Jbh-Demo-etc-config.xml"></script>
 
 Une partie `template` dans `global` consiste à indiquer à Magento que nous avons un nouvel email transactionnel dans l'application.
 
@@ -80,7 +80,7 @@ La partie `default` permet d'avoir en config l'identifiant de notre email. Vous 
 
 N'oubliez pas le fichier `/app/etc/modules/Jbh_Demo.xml` :)
 
-<script src="https://gist.github.com/3132212.js?file=app-etc-modules-Jbh_Demo.xml"></script>
+<script src="https://gist.github.com/jacquesbh/3132212.js?file=app-etc-modules-Jbh_Demo.xml"></script>
 
 ## Notre fichier email
 
@@ -94,7 +94,7 @@ Nous avons besoin de respecter la syntaxe des emails sur Magento :
 
 Je vous laisse le soin de regarder les autres emails pour comprendre l'utilisation des variables. Ici nous feront juste en sorte que nos textes soient protégés.
 
-<script src="https://gist.github.com/3132212.js?file=app-locale-fr_FR-template-email-jbh_demo-happyday.html"></script>
+<script src="https://gist.github.com/jacquesbh/3132212.js?file=app-locale-fr_FR-template-email-jbh_demo-happyday.html"></script>
 
 ## Notre modèle
 
@@ -104,7 +104,7 @@ Il s'agit d'un simple modèle avec une méthode qui envoie un email au client pa
 
 On notera la présence de deux constantes. Comme on le fait dans Magento, on utilise des constantes pour indiquer les chemins vers les variables de configuration. Ici nous avons les chemins vers le template et l'expéditeur du mail.
 
-<script src="https://gist.github.com/3132212.js?file=app-code-local-Jbh-Demo-Model-Email.php"></script>
+<script src="https://gist.github.com/jacquesbh/3132212.js?file=app-code-local-Jbh-Demo-Model-Email.php"></script>
 
 ## Et ensuite ?
 

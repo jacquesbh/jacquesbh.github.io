@@ -8,7 +8,7 @@ type: howto
 published: 2013-01-14 01:00:00
 date: 2013-01-14 01:00:00
 comments: true
-gist: 4526322
+gist: jacquesbh/4526322
 ---
 
 L'occasion de faire un petit blog ou un site un poil dynamique n'est pas rare dans notre métier.
@@ -192,7 +192,7 @@ N'oubliez pas de gérer l'envoi de votre formulaire en javascript (ou tout autre
 
 Concernant la recherche... c'est un peu compliqué de faire une recherche sur un site statique non ? Au final vous pouvez tenter quelque chose avec un fichier `json` à la racine de votre site et un bout de javascript pour gérer tout ça !
 
-Vous pouvez récupérer la source de tout ce tuto en [clonant le gist dédié à cet article](https://gist.github.com/4526322), il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).
+Vous pouvez récupérer la source de tout ce tuto en [clonant le gist dédié à cet article](https://gist.github.com/jacquesbh/4526322), il est totalement fonctionnel et peut servir de base pour votre prochain blog ! (Moi ça sera le cas :)).
 
 N'hésitez pas à regarder la [source de ce blog également](https://github.com/jacquesbh/jacquesbh.github.com).
 

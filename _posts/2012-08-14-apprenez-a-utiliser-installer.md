@@ -8,7 +8,7 @@ type: howto
 published: 2012-08-14 01:15:00
 date: 2012-08-14 01:15:00
 comments: true
-gist: 3344499
+gist: jacquesbh/3344499
 permalink: /apprendre-a-utiliser-magento-installer.html
 ---
 
@@ -135,13 +135,13 @@ CREATE TABLE `jbh_grid_foo` (
 
 Complétons notre setup :
 
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/sql/jbh_grid_setup/mysql4-install-0.1.0.php"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/code/local/Jbh/Grid/sql/jbh_grid_setup/mysql4-install-0.1.0.php"></script>
 
 ## Notre menu admin
 
 Il nous faut éditer notre fichier `etc/adminhtml.xml` pour ajouter notre menu et les ACLs :
 
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/etc/adminhtml.xml"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/code/local/Jbh/Grid/etc/adminhtml.xml"></script>
 
 ## Notre contrôleur admin
 
@@ -151,7 +151,7 @@ On ajoute avant tout la méthode `_isAllowed()` à notre contrôleur :
 
 On complète assez rapidement !
 
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/controllers/Adminhtml/IndexController.php"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/code/local/Jbh/Grid/controllers/Adminhtml/IndexController.php"></script>
 
 ## Complétons notre grid
 
@@ -159,11 +159,11 @@ Il nous faut ajouter les colonnes à notre grid ainsi que le configurer un minim
 
 ### Le container
 
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo.php"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo.php"></script>
 
 ### Le grid
 
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo/Grid.php"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/code/local/Jbh/Grid/Block/Adminhtml/Foo/Grid.php"></script>
 
 ## N'oublions pas les traductions !
 
@@ -196,7 +196,7 @@ Vous aurez remarqué que lors de l'ajout de la première ligne dans les fichiers
 
 Et ça donne ça, pour le français par exemple :
 
-<script src="https://gist.github.com/3344499.js?file=app/locales/fr_FR/Jbh_Grid.csv"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/locales/fr_FR/Jbh_Grid.csv"></script>
 
 ## Conclusion
 
@@ -211,7 +211,7 @@ Ce qu'on obtient : Un module propre, développé avec les conventions `Zend Fram
 
 Surtout... le `config.xm`l... `<3 <3 <3`
 
-<script src="https://gist.github.com/3344499.js?file=app/code/local/Jbh/Grid/etc/config.xml"></script>
+<script src="https://gist.github.com/jacquesbh/3344499.js?file=app/code/local/Jbh/Grid/etc/config.xml"></script>
 
 Le bonheur quoi...
 
@@ -228,4 +228,4 @@ Pour avoir une licence personnalisée dans le haut de mes fichiers voici la comm
 <!-- more end -->
 
 [readme_function]: https://github.com/jacquesbh/Installer/tree/v1#bash-function-required
-[download]: https://gist.github.com/3344499/download
+[download]: https://gist.github.com/jacquesbh/3344499/download

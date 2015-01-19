@@ -9,7 +9,7 @@ published: 2012-12-28 23:30:00
 date: 2012-12-28 23:30:00
 comments: true
 permalink: /ajouter-un-handle-personnalise-sur-une-page-sur-magento.html
-gist: 4401568
+gist: jacquesbh/4401568
 ---
 
 > Hey Jacques, c'est possible d'avoir un affichage différent suivant le type de produit ?

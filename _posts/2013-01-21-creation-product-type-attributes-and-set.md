@@ -8,7 +8,7 @@ type: howto
 published: 2013-01-21 00:30:00
 date: 2013-01-21 00:30:00
 comments: true
-gist: 4582238
+gist: jacquesbh/4582238
 ---
 
 Quand on démarre un projet on a souvent besoin de créer nos propres types de produits.
