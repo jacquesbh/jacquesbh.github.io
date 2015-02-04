@@ -608,7 +608,7 @@ Pour faire simple et sans rentrer dans des histoires de cache (car oui le block 
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);

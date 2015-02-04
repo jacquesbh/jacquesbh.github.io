@@ -556,7 +556,7 @@ Cependant pour les navigateurs qui contiennent <code>Chrome</code> dans leur <co
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);

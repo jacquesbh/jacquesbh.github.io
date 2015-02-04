@@ -723,7 +723,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);

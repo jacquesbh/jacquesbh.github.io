@@ -649,7 +649,7 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);

@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2015-01-19T16:17:43+01:00</updated>
+ <updated>2015-02-05T00:29:49+01:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Comment utiliser Vagrant et Magento ?</title>
+   <link href="http://jacques.sh/2015/02/demarrer-projet-vagrant-magento.html"/>
+   <updated>2015-02-04T01:00:00+01:00</updated>
+   <id>http://jacques.sh/2015/02/demarrer-projet-vagrant-magento</id>
+   <content type="html"><![CDATA[Apprenez votre projet Magento avec la box Vagrant de Monsieur Biz !]]></content>
+ </entry>
  
  <entry>
    <title>Fabric et Magento, le combo gagnant !</title>
@@ -82,14 +90,6 @@
    <updated>2013-03-16T15:00:00+01:00</updated>
    <id>http://jacques.sh/2013/03/remplacer-mysql-par-mariadb</id>
    <content type="html"><![CDATA[Allez, on remplace notre MySQL par MariaDB !]]></content>
- </entry>
- 
- <entry>
-   <title>Le multi-thèmes en développement</title>
-   <link href="http://jacques.sh/2013/03/plusieurs-themes-sur-magento.html"/>
-   <updated>2013-03-07T18:00:00+01:00</updated>
-   <id>http://jacques.sh/2013/03/plusieurs-themes-sur-magento</id>
-   <content type="html"><![CDATA[On a toujours besoin de regarder le thème par défaut en même temps que notre propre thème pendant nos développements !]]></content>
  </entry>
  
  

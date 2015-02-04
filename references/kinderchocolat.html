@@ -538,7 +538,7 @@ On y trouve également un concours mensuel de dessin sur un thème sélectionné
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);

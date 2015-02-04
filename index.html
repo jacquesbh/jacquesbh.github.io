@@ -249,7 +249,7 @@
 
     <span style="font-size:14.4px"><a href="/search.html#!tag=GitHub">GitHub</a></span>
 
-    <span style="font-size:38.4px"><a href="/search.html#!tag=Magento">Magento</a></span>
+    <span style="font-size:39.599999999999994px"><a href="/search.html#!tag=Magento">Magento</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Snippets">Snippets</a></span>
 
@@ -340,6 +340,8 @@
     <span style="font-size:13.2px"><a href="/search.html#!tag=gandi">gandi</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Fabric">Fabric</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Vagrant">Vagrant</a></span>
 
 </p>
 
@@ -448,6 +450,169 @@
     </p>
     
 
+
+    <hr />
+    <h2><a href="/2015/02/demarrer-projet-vagrant-magento.html">Comment utiliser Vagrant et Magento ?</a></h2>
+    <div class="content post">
+        <p>Ça fait plusieurs fois qu'on me demande comment on utilise Vagrant chez <a href="http://monsieurbiz.com">Monsieur Biz</a>.</p>
+
+<p>J'ai donc décidé de faire un article malgré le peu de temps que j'ai à ma disposition en ce moment.</p>
+
+<p>L'idée c'est de vous montrer comment on fonctionne.
+Après libre à vous de nous faire quelques PR sur Github, ou encore de ne pas utiliser notre box, tout simplement !</p>
+
+<p>Je vous expliquerai aussi pourquoi nous ne passons pas sur Docker pour le moment.</p>
+
+<p>Pour les plus impatients, vous trouverez la <a href="https://github.com/monsieurbiz/vagrant-magento">Vagrant Box Magento de Monsieur Biz sur Github</a>.</p>
+
+<!-- 
+
+
+<hr />
+
+<p>Pour ceux qui ne sont pas habitués à Vagrant, sachez que ça n'est pas très compliqué.<br/>
+Par ailleurs je vais essayer de donner un maximum d'explications.</p>
+
+<p><em>NB : Je suis exclusivement sur Mac. Donc il est très très fort probable que la box ne fonctionne pas pour vous si vous êtes sur Windows ou Linux.</em></p>
+
+<h2>Le Vagrantfile</h2>
+
+<p>Ce fichier est le point de départ de votre Vagrant. Je vais tenter d'expliquer celui que j'ai réalisé.</p>
+
+<script src="http://gist-it.appspot.com/https://github.com/monsieurbiz/vagrant-magento/blob/master/Vagrantfile"></script>
+
+
+<p>Au tout début il s'agit de quelques commentaires pour dire à Vim d'utiliser la syntax de ruby.<br/>
+Ensuite vient le nom d'hôte de votre projet, ici <code>vagrant-mage.dev</code>. On utilise <code>.dev</code> car ça permet d'éviter la résolution des DNS.
+Juste en dessous on a l'IP utilisée pour Virtualbox. Si vous utilisez Virtualbox, faites en sorte ici d'avoir une IP différente pour chacun de vos projets.</p>
+
+<p>Bon ensuite viennent les deux lignes qui permettent de rentrer dans la configuration de la box à proprement parler :</p>
+
+<pre><code>VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+</code></pre>
+
+<p>Là on entre simplement dans la configuration, comme l'indique bien le <code>Vagrant.configure</code>.</p>
+
+<p>Au tout début on a la configuration pour VMWare :</p>
+
+<ul>
+<li>On sélectionne précisément la box qu'on veut télécharger (elle ne l'est qu'une seule fois) ;</li>
+<li>On précise la puissance de la VM ;</li>
+<li>On ajoute une seconde interface ethernet. L'idée ici c'est d'avoir une seconde adresse IP dispo sur VM sur le même sous-réseau que la machine hôte. On utilise cette interface pour tester nos sites sur des machines virtuelles Windows.</li>
+</ul>
+
+
+<p>Ensuite il y a une configuration pour Virtual Box :</p>
+
+<ul>
+<li>Même chose on précise la box qu'on veut utiliser ;</li>
+<li>On améliore un peu les perfs de Virtual Box ;</li>
+<li>On assigne l'adresse IP qui est en haut du fichier.</li>
+</ul>
+
+
+<p><strong>Pourquoi choisir VM Ware et pas Virtual Box ?</strong></p>
+
+<blockquote><p>Je suis parti du constat que Virtual Box est lent. La copie des fichiers, si ça n'est pas en NFS, est basée sur la solution native de Virtual Box : une horreur.<br/>
+Finalement au bout de quelques mois j'ai tout simplement testé VMWare. Il s'avère que ma machine de dev basée sur Vagrant et VMWare est tout aussi rapide, voire plus rapide, que les serveurs de prod. Donc je n'ai pas cherché plus longtemps, le choix était fait.</p></blockquote>
+
+<p>Ensuite on a un peu de configuration réseau. Et surtout l'assignation du hostname à la ligne <code>config.vm.hostname</code>.</p>
+
+<p>Le plus important c'est les dossiers partagés. On utilise NFS afin de gagner en performances (c'est "juste" ce qu'on utilise entre les serveurs pour partager des dossiers…).<br/>
+<a href="https://github.com/IvanChepurnyi">Ivan Chepurnyi</a> et moi-même nous sommes amusés fin 2013 lors d'un Hackathon à Leipzig en Allemagne à améliorer les performances de NFS. C'est pour cette raison qu'on y trouve plein de trucs étranges du genre :</p>
+
+<pre><code>mount_options: ["nolock", "async"],
+bsd__nfs_options: ["alldirs","async","nolock"]
+</code></pre>
+
+<p>À noter que les options <code>bsd__nfs_options</code> sont dédiées à OSX (et à BSD du coup…) ;</p>
+
+<p>Les lignes suivantes permettent de modifier le fichier <code>/etc/hosts</code> de votre machine afin de ne pas s'embêter avec l'IP auto-assignée par VMWare à la machine virtuelle :</p>
+
+<pre><code># "Provision" with hostmanager
+config.vm.provision :hostmanager
+</code></pre>
+
+<p>Ensuite on initialise la Vagrant avec Puppet !</p>
+
+<p>On y retrouve quelques paramètres de personnalisation. Les voici expliqués avec des commentaires :</p>
+
+<script>gist('jacquesbh/cab7770ec953e653379d', 'factors.rb');</script>
+
+
+<p>Le dernier truc sympa c'est ça :</p>
+
+<script>gist('jacquesbh/cab7770ec953e653379d', 'localfile.rb');</script>
+
+
+<p>Ici c'est très simple. Si vous avez un fichier <code>LocalVagrantfile.rb</code> à la racine de votre projet (au même endroit que le <code>Vagrantfile</code> et bien celui-ci sera chargé.<br/>
+Ça permet d'avoir un fichier dédié à votre projet, ou un fichier juste pour vous.<br/>
+Personnellement ce fichier est dans mon <code>~/.gitignore</code>. Ainsi je peux ajouter des interfaces réseau, faire un peu de custom, etc. et ça uniquement pour moi !</p>
+
+<h2>Et sinon, elle contient quoi ta Vagrant ?</h2>
+
+<p>La box contient plein de choses !</p>
+
+<p>Entre autres :</p>
+
+<ul>
+<li><a href="https://github.com/jacquesbh/installer">L'Installer pour Magento (<em>a PHP command line tool for Magento extension development and scaffolding</em>)</a> accessible par défaut ;</li>
+<li><a href="https://github.com/netz98/n98-magerun">Magerun</a> ;</li>
+<li><a href="https://github.com/colinmollenhour/modman">Modman</a> ;</li>
+<li>Deux certificats SSL : <code>*.vagrant-mage.dev</code> et <code>[www.]vagrant-mage.dev</code> (car ici le hostname est sur <code>vagrant-mage.dev</code> mais si vous le changez alors les certificats seront adaptés par Puppet) ;</li>
+<li>Du coup 3 <code>VirtualHost</code> sur Apache qui gèrent les domaines suivants en <code>http</code> et <code>https</code> : <code>*.vagrant-mage.dev</code> et <code>vagrant-mage.dev</code>. C'est super pratique si vous voulez tester votre projet avec un SSL. Surtout que maintenant c'est une bonne pratique d'être full SSL.</li>
+<li>Mailcatcher : Afin qu'aucun email ne se disperse dans l'Internet Mondial hein. Pour le lancer c'est simple : <code>mailcatcher --ip=0.0.0.0</code>.</li>
+<li>Quelques outils : <code>git</code>, <code>tmux</code> (avec <a href="https://gist.github.com/jacquesbh/9187257">config perso</a>), <code>screen</code> (avec <a href="https://github.com/jacquesbh/dotfiles/blob/master/.screenrc">config perso</a>, <code>htop</code> et <code>vim</code>.</li>
+<li><a href="http://casperjs.org/">CasperJS</a>, et donc du coup <a href="http://phantomjs.org/">PhantomJS</a>.</li>
+<li><a href="https://getcomposer.org/">Composer</a></li>
+<li><a href="https://phpunit.de/">PHPUnit</a></li>
+<li>MySQL évidemment. Du coup si vous avez un fichier <code>database.sql.gz</code> à la racine de votre projet (avec votre <code>Vagrantfile</code>) alors il sera importé au premier lancement.</li>
+</ul>
+
+
+<h2>Installer hostmanager</h2>
+
+<p><code>hostmanager</code> est un petit plugin vagrant qui permet de modifier votre fichier <code>/etc/hosts</code> comme je l'indique un peu plus haut dans l'article. Pour l'installer :</p>
+
+<pre><code>vagrant plugin install vagrant-hostmanager
+</code></pre>
+
+<h2>Comment démarrer un projet avec la Vagrant Box Magento ?</h2>
+
+<p>Commencez par cloner le projet où vous voulez : <code>git clone https://github.com/monsieurbiz/vagrant-magento.git</code></p>
+
+<p>Ensuite créez le dossier de votre projet et copiez-y les fichiers et dossiers <code>Vagrantfile</code> et <code>puppet/</code>.<br/>
+Le dossier <code>htdocs/</code> doit exister également, c'est dans celui-ci que vous mettrez votre projet Magento.</p>
+
+<p>C'est parti pour un <code>vagrant up</code> !</p>
+
+<p>Là ça va tout installer et tout et tout…</p>
+
+<p>Ensuite rendez-vous dans votre navigateur sur <code>http://vagrant-mage.dev</code> ou <code>https://vagrant-mage.dev</code>.</p>
+
+<p>Pensez à aller en SSH dans votre dossier Magento : <code>vagrant ssh</code> puis <code>cd /vagrant/htdocs</code>.<br/>
+Là vous pouvez lancer <code>magerun</code> par exemple ! Ou encore <code>installer</code> !</p>
+
+<h2>C'est fini !</h2>
+
+<p>J'ai rédigé cet article très très rapidement, alors si vous avez des remarques ou questions, n'hésitez pas !</p>
+
+<p>:)</p>
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2015/02/demarrer-projet-vagrant-magento.html" data-text="Comment utiliser Vagrant et Magento ?" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2015/02/demarrer-projet-vagrant-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2015/02/demarrer-projet-vagrant-magento.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2014/09/fabric-magento.html">Fabric et Magento, le combo gagnant !</a></h2>
@@ -948,64 +1113,6 @@ Un petit merci aussi pour <a href="https://www.gandi.net/">Gandi</a> pour leur s
 
     </div>
 
-    <hr />
-    <h2><a href="/2013/11/et-si-on-emulait.html">Et si on émulait un store ?</a></h2>
-    <div class="content post">
-        <p>Il n'est pas toujours simple dans <a href="http://magento.com">Magento</a> de faire certaines actions dans un store précis.</p>
-
-<p>Vous avez peut-être déjà essayé d'<a href="http://jacques.sh/creer-un-email-transactionnel-sur-magento.html">envoyer un email personnalisé</a> depuis l'admin avec toute la configuration d'un store en particulier...<br/>
-À un client qui s'est inscrit sur le store <em>numéro 2</em> par exemple ?</p>
-
-<p>C'est toujours la galère... Et si on faisait croire à Magento qu'il est sur ce store ?</p>
-
-<!-- 
-
-
-<hr />
-
-<p><strong>Émuler un store</strong>... Si si c'est possible :).</p>
-
-<p>Souvent on le fait de cette <em>mauvaise</em> manière :</p>
-
-<script type="text/javascript">gist('jacquesbh/7401505', 'bad.php');</script>
-
-
-<blockquote><p>Pourquoi est-ce une mauvaise manière ?</p></blockquote>
-
-<p>Simplement parce que vous ne chargez que le store et non pas sa config, ses traductions, <a href="http://jacques.sh/2013/03/plusieurs-themes-sur-magento.html">son thème</a>...</p>
-
-<blockquote><p>Mais alors comment faire ?</p></blockquote>
-
-<p>Figurez-vous que Magento propose une solution à ça, regardez plutôt :</p>
-
-<script type="text/javascript">gist('jacquesbh/7401505', 'good.php');</script>
-
-
-<p>Vous pouvez employer cette technique pour énormément de choses.<br/>
-Enfin bien sûr toujours avec parcimonie ; Car si vous devez émuler c'est <em>peut-être</em> parce que votre code n'est pas au bon endroit ?</p>
-
-<p>Néanmoins cette astuce s'avère être extrêmement pratique pour de simples scripts !<br/>
-Ou dans certaines boucles d'exports... par exemple ;).</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/11/et-si-on-emulait.html" data-text="Et si on émulait un store ?" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/2013/11/et-si-on-emulait.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/2013/11/et-si-on-emulait.html">Lire l'article</a>
-
-    </div>
-
 
 <div class="pagination">
     <hr/>
@@ -1250,7 +1357,7 @@ Ou dans certaines boucles d'exports... par exemple ;).</p>
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);

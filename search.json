@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Comment utiliser Vagrant et Magento ?",
+            "subtitle": "",
+            "keywords": "vagrant magento",
+            "tags": ["Vagrant","Magento"],
+            "categories": [],
+            "description": "Apprenez votre projet Magento avec la box Vagrant de Monsieur Biz !",
+            "url": "/2015/02/demarrer-projet-vagrant-magento.html",
+            "date": "04 February 2015"
+        },
+        
+        {
             "title": "Fabric et Magento, le combo gagnant !",
             "subtitle": "",
             "keywords": "fabric magento",

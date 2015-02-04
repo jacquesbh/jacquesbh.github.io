@@ -606,7 +606,7 @@ Un petit merci aussi pour <a href="https://www.gandi.net/">Gandi</a> pour leur s
                 var cookieId = 'monsieurbizPopinDisplayed';
                 if ($.cookie(cookieId) == null) {
                     $.fancybox.open('#popin');
-                    $.cookie(cookieId, 'true');
+                    $.cookie(cookieId, 'true', { expires: 15 });
                 }
             });
          })(jQuery);
