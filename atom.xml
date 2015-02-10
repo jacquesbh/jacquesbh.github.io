@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2015-02-10T23:32:12+01:00</updated>
+ <updated>2015-02-11T00:06:23+01:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Bilan 2013-2014, en avant 2015 !</title>
+   <link href="http://jacques.sh/2015/02/bilan-2014-debut-2015.html"/>
+   <updated>2015-02-11T01:00:00+01:00</updated>
+   <id>http://jacques.sh/2015/02/bilan-2014-debut-2015</id>
+   <content type="html"><![CDATA[]]></content>
+ </entry>
  
  <entry>
    <title>Comment utiliser Vagrant et Magento ?</title>
@@ -82,14 +90,6 @@
    <updated>2013-03-18T02:30:00+01:00</updated>
    <id>http://jacques.sh/2013/03/sidebar-magento-developers</id>
    <content type="html"><![CDATA[Vider le cache, activer les aides de vue, réindexer... Tout ça rapidement !]]></content>
- </entry>
- 
- <entry>
-   <title>Merci MySQL pour tes loyaux services</title>
-   <link href="http://jacques.sh/2013/03/remplacer-mysql-par-mariadb.html"/>
-   <updated>2013-03-16T15:00:00+01:00</updated>
-   <id>http://jacques.sh/2013/03/remplacer-mysql-par-mariadb</id>
-   <content type="html"><![CDATA[Allez, on remplace notre MySQL par MariaDB !]]></content>
  </entry>
  
  

@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Bilan 2013-2014, en avant 2015 !",
+            "subtitle": "",
+            "keywords": "afup \"monsieur biz\"",
+            "tags": ["AFUP","Monsieur Biz"],
+            "categories": [],
+            "description": "",
+            "url": "/2015/02/bilan-2014-debut-2015.html",
+            "date": "11 February 2015"
+        },
+        
+        {
             "title": "Comment utiliser Vagrant et Magento ?",
             "subtitle": "",
             "keywords": "vagrant magento",

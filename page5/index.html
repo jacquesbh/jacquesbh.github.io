@@ -339,6 +339,10 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Vagrant">Vagrant</a></span>
 
+    <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+
 </p>
 
 <hr />
@@ -352,6 +356,428 @@
 
     
 
+
+    <hr />
+    <h2><a href="/le-layout-sur-magento.html">Le Layout sur Magento</a></h2>
+    <div class="content post">
+        <p>Le <em>Layout</em> est une partie vraiment importante que tout développeur Magento doit connaître.</p>
+
+<p>De premier abord il n'est pas simple de comprendre le fonctionnement du layout et c'est bien là le but de cet article.</p>
+
+<p>Mais pas seulement ! Je vais aussi vous donner quelques trucs pour maîtriser encore mieux le layout !</p>
+
+<!-- 
+
+
+<hr />
+
+<p>Le <strong>Layout</strong> c'est du <em>XML</em>.</p>
+
+<p>La balise principale est <code>layout</code>, quoi de mieux ?</p>
+
+<h2>Les handles</h2>
+
+<p>Le layout de Magento est vraiment très complet. On a des fichiers de plusieurs centaines de lignes parfois. Mais comment distinguer quelles parties du layout vont s'appliquer à notre page ?</p>
+
+<p>Les <em>handles</em> sont des balises libres. Lors de son chargement Magento complète une liste de <em>handles</em> qui seront utilisés lors du rendu final.</p>
+
+<p>Pour dire à notre action, dans notre contrôleur, d'utiliser les handles par défaut il faut utiliser la ligne de code suivante :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// Ci-dessous la ligne qui charge les handles par défaut du Layout</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLayout</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>La méthode <code>loadLayout()</code> appelle deux méthodes qui sont les méthodes qui ajoutent réellement les handles par défaut :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLayout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUpdate</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addHandle</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>et</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nx">addActionLayoutHandles</span><span class="p">();</span>
+</code></pre></div>
+
+
+<p>Pour une action qui serait <code>jbh_foo/bar/baz</code> nous aurions les handles suivants :</p>
+
+<ul>
+<li> <code>default</code> : handle principal par défaut</li>
+<li> <code>STORE_default</code> : handle du store (par défaut)</li>
+<li> <code>THEME_frontend_default_default</code> : handle du thème (par défaut)</li>
+<li> <code>jbh_foo_bar_baz</code> : handle de notre action</li>
+</ul>
+
+
+<p>On peut changer le handle <code>default</code> par autre chose si on le précise comme ceci :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLayout</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>Avant le chargement de ces layouts l'évènement <code>controller_action_layout_load_before</code> est lancé par Magento. Donc si vous souhaitez ajouter un handle il faut le faire avant cet évènement.</p>
+
+<p>Magento peut gérer des handles à l'infinie.</p>
+
+<p>Attention cependant : L'ordre de traitement de ces handle a son importance ! Car on peut faire de la surcharge de <code>name</code> et bien d'autres choses encore !</p>
+
+<p>Dans le layout, on peut demander à charger un handle défini de la manière suivante :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;update</span> <span class="na">handle=</span><span class="s">&quot;nom_du_handle&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+
+<p>C'est très pratique ! Et ça permet surtout de ne pas dupliquer de code !</p>
+
+<h3>Comment trouver le handle d'une page ?</h3>
+
+<p>Prenons par exemple la page de connexion dont l'URL est : <code>https://example.org/customer/account/login</code></p>
+
+<p>Il nous suffit de remplacer les <code>/</code> par des <code>_</code> :</p>
+
+<pre><code>customer_account_login
+</code></pre>
+
+<p>En règle générale :</p>
+
+<ul>
+<li> En premier c'est le <strong>nom de la route</strong> (et pas du module !)</li>
+<li> En deuxième c'est le <strong>nom du contrôleur</strong></li>
+<li> En troisième c'est le <strong>nom de l'action</strong></li>
+</ul>
+
+
+<h2>Les blocks</h2>
+
+<p>Le layout c'est plein de <code>block</code> qui ont tous deux attributs principaux :</p>
+
+<ul>
+<li> <code>type</code> ou <code>class</code> : indique la classe PHP du block (par exemple : <code>jbh_foo/bar</code> indique la classe <code>Jbh_Foo_Block_Bar</code> – à priori)</li>
+<li> <code>name</code> : indique le nom du block dans le layout (doit être unique)</li>
+</ul>
+
+
+<p>On peut ensuite trouver d'autres attributs tels que :</p>
+
+<ul>
+<li> <code>template</code> : indique le path du fichier template <code>.phtml</code> utilisé par le block</li>
+<li> <code>as</code> : indique le <em>nom</em> du block dans son parent</li>
+<li> <code>translate</code> : indique les différentes balises qui peuvent être traduites (<code>label</code> est la valeur la plus utilisée)</li>
+<li> <code>output</code> : indique la méthode du block à utiliser pour forcer l'affichage de celui-ci</li>
+<li> <code>parent</code> : indique le nom du block parent (surcharge le parent réel dans le XML)</li>
+<li> <code>before</code> : indique la place du block dans son parent (si la valeur est <code>-</code> alors le block sera ajouté tout au début de la liste des blocks enfants de son parent)</li>
+<li> <code>after</code> : indique la place du block dans son parent (si la valeur est <code>-</code> alors le block sera ajouté tout à la fin de la liste des blocks enfants de son parent). Cet attribut n'est pas traité si <code>before</code> existe. Si la valeur est <code>-</code> et qu'un block est généré ensuite avec un <code>after="-"</code> alors ce dernier prendra la place en fin de liste.</li>
+</ul>
+
+
+<h3>Surcharger un block</h3>
+
+<p>On peut surcharger un block dans le layout, pour changer son type par exemple !</p>
+
+<p>Deux solutions :</p>
+
+<ol>
+<li>  Changer le type directement dans le fichier <code>.xml</code> qui déclare le block.</li>
+<li>  Ajouter un nouveau block avec le même <code>name</code>.</li>
+</ol>
+
+
+<p>La première solution a l'avantage de ne pas créer d'instance de block inutilisée. Cependant elle a le désavantage d'obliger (bien souvent) le développeur à copier le fichier <code>.xml</code> du core dans son nouveau thème et à en modifier le contenu.</p>
+
+<p>La seconde solution permet en fait d'écraser un block existant. Le problème dans ce cas c'est que lorsqu'on écrase le block, celui-ci disparaît du layout mais il reste dans son parent (sauf si on ajoute l'attribut <code>parent</code> à notre nouveau block, auquel cas il y a aussi un écrasement). On perd également toutes les opérations effectuée sur le vieux block, ainsi que tous ces enfants (qui sont toujours dans le layout mais qui étaient dans le block qu'on tente de remplacer).</p>
+
+<p>En conclusion il est plus simple d'utiliser la première méthode. Cependant la seconde méthode peut avoir un avantage si on souhaite surcharger un block simple (qui n'a pas d'enfants) et sur lequel il n'y a pas eu d'<code>action</code> (voir plus bas « Les actions »).</p>
+
+<h2>Les références</h2>
+
+<p>Dans un <code>handle</code> on peut récupérer un block en utilisant une référence.</p>
+
+<p>Une référence c'est juste un rappel du block pour permettre l'appel à des actions ou l'ajout de blocks enfants.</p>
+
+<p>Une référence peut être insérée à n'importe quel endroit dans le handle : dans un block ou même dans une autre référence.</p>
+
+<p>Un seul attribut est nécessaire (et obligatoire) pour la balise <code>reference</code> : l'attribut <code>name</code>. Celui-ci indique le nom du block à utiliser en tant que parent pour tout ce qui est dans le noeud <code>reference</code> en cours de traitement.</p>
+
+<p>Par exemple pour faire une référence au content, pour y ajouter un block par exemple, sur toutes les pages (handle <code>default</code> donc) :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;default&gt;</span>
+    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;block</span> <span class="na">type=</span><span class="s">&quot;core/text_list&quot;</span> <span class="na">name=</span><span class="s">&quot;sub_content&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/reference&gt;</span>
+<span class="nt">&lt;/default&gt;</span>
+</code></pre></div>
+
+
+<h2>Les actions</h2>
+
+<p>Les actions sont très pratiques ! On utilise le XML du layout pour appeler des méthodes d'un block !</p>
+
+<p>(La principale action utilisée est celle qui consiste à changer le template d'un block.)</p>
+
+<p>Une <code>action</code> comprend 2 attributs :</p>
+
+<ul>
+<li> <code>method</code> : il est obligatoire, il indique la méthode du block à appeler (peut être une méthode magique ! si si  <code>;)</code>)</li>
+<li> <code>block</code> : il est facultatif, il permet d'indiquer le block sur lequel l'action doit être appliquée.</li>
+</ul>
+
+
+<p>Une action fait donc appel à une méthode de son block :</p>
+
+<ul>
+<li> soit le block parent dans le Layout</li>
+<li> soit le block précisé par l'attribut <code>block</code></li>
+</ul>
+
+
+<p>Dans les deux cas il faut préciser (sauf s'il n'y en a pas) les paramètres de la méthode.</p>
+
+<p>Pour cela il suffit de suivre une logique simple :</p>
+
+<ul>
+<li> Le premier paramètre sera le premier enfant de l'action</li>
+<li> Le second paramètre sera le second enfant de l'action</li>
+<li> etc.</li>
+</ul>
+
+
+<p>Si bien que si nous avons par exemple la méthode suivante :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">addLink</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$path</span><span class="p">,</span> <span class="nv">$label</span><span class="p">,</span> <span class="nv">$urlParams</span> <span class="o">=</span> <span class="k">array</span><span class="p">());</span>
+</code></pre></div>
+
+
+<p>Nous aurons l'action ci-dessous :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">&quot;addLink&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param1&gt;</span>name<span class="nt">&lt;/param1&gt;</span>
+    <span class="nt">&lt;param2&gt;</span>path<span class="nt">&lt;/param2&gt;</span>
+    <span class="nt">&lt;param3&gt;</span>label<span class="nt">&lt;/param3&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div>
+
+
+<p>Nous ne mettons pas de 4ème balise car nous ne voulons pas préciser de 4ème paramètre lors de notre appel.</p>
+
+<p>D'ailleurs... ce 4ème paramètre c'est un tableau !</p>
+
+<p>Pour les tableaux c'est un peu plus compliqué...</p>
+
+<p>Notez que bien souvent le nom d'une balise correspond au nom de la variable en paramètre de la méthode, pour plus de clareté (et uniquement pour cette raison, sauf pour les tableaux <code>;)</code>).</p>
+
+<h3>Les tableaux en paramètre</h3>
+
+<p>Pour un tableau de valeurs (indexé) il faut faire :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tab&gt;</span>value_1<span class="nt">&lt;/tab&gt;</span>
+    <span class="nt">&lt;tab&gt;</span>value_2<span class="nt">&lt;/tab&gt;</span>
+    <span class="nt">&lt;tab&gt;</span>value_3<span class="nt">&lt;/tab&gt;</span>
+    <span class="nt">&lt;tab&gt;</span>value_4<span class="nt">&lt;/tab&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div>
+
+
+<p>Pour un tableau associatif il faut faire :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tab&gt;</span>
+        <span class="nt">&lt;cle_1&gt;</span>value_1<span class="nt">&lt;/cle_1&gt;</span>
+        <span class="nt">&lt;cle_2&gt;</span>value_2<span class="nt">&lt;/cle_2&gt;</span>
+        <span class="nt">&lt;cle_3&gt;</span>value_3<span class="nt">&lt;/cle_3&gt;</span>
+    <span class="nt">&lt;/tab&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div>
+
+
+<p>Et bien sûr on peut aller loin...</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;tab&gt;</span>
+        <span class="nt">&lt;cle_1&gt;</span>value_1<span class="nt">&lt;/cle_1&gt;</span>
+        <span class="nt">&lt;cle_2&gt;</span>value_2<span class="nt">&lt;/cle_2&gt;</span>
+        <span class="nt">&lt;cle_3&gt;</span>
+            <span class="nt">&lt;cle_4&gt;</span>value_4<span class="nt">&lt;/cle_4&gt;</span>
+            <span class="nt">&lt;cle_5&gt;</span>value_5<span class="nt">&lt;/cle_5&gt;</span>
+            <span class="nt">&lt;cle_6&gt;</span>
+                <span class="nt">&lt;cle_7&gt;</span>value_7<span class="nt">&lt;/cle_7&gt;</span>
+                <span class="nt">&lt;cle_8&gt;</span>value_8<span class="nt">&lt;/cle_8&gt;</span>
+            <span class="nt">&lt;/cle_6&gt;</span>
+        <span class="nt">&lt;/cle_3&gt;</span>
+    <span class="nt">&lt;/tab&gt;</span>
+<span class="nt">&lt;/action&gt;</span>
+</code></pre></div>
+
+
+<p>Et ainsi de suite !</p>
+
+<p><em>Par contre à partir du second niveau vous ne pourrez plus faire de tableaux indexés.</em></p>
+
+<h3>Changer le template d'un block</h3>
+
+<p>Nous voulons par exemple changer le template de la page de login (template global).</p>
+
+<p>D'abord il nous faut déterminer le handle de cette page le plus approprié. Le plus simple quand il faut modifier le template d'un block qui n'est que sur une seule page c'est d'utiliser le handle de l'action. Ici nous avons donc le handle suivant :</p>
+
+<pre><code>customer_account_login
+</code></pre>
+
+<p>Ensuite nous devons trouver le block sur lequel nous devons changer le template.
+Comme nous voulons changer le template global, le block est <code>root</code>.</p>
+
+<p>Nous avons maintenant deux possibilités :</p>
+
+<p>Soit on passe par une référence :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;customer_account_login&gt;</span>
+    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;root&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">&quot;setTemplate&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;template&gt;</span>customer/account/new_login.phtml<span class="nt">&lt;/template&gt;</span>
+        <span class="nt">&lt;/action&gt;</span>
+    <span class="nt">&lt;/reference&gt;</span>
+<span class="nt">&lt;/customer_account_login&gt;</span>
+</code></pre></div>
+
+
+<p>Soit on utilise l'attribut <code>block</code> :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;customer_account_login&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">&quot;setTemplate&quot;</span> <span class="na">block=</span><span class="s">&quot;root&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;template&gt;</span>customer/account/new_login.phtml<span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/action&gt;</span>
+<span class="nt">&lt;/customer_account_login&gt;</span>
+</code></pre></div>
+
+
+<p><strong>Il s'avère qu'il est d'ailleurs préférable de changer le template d'un block en utilisant l'attribut <code>block</code> plutôt qu'en utilisant une référence</strong> car c'est moins coûteux en ressources : on fait une itération en moins dans la génération des blocks. (c'est peu certes, mais c'est par là que passe l'optimisation... aussi)</p>
+
+<h2>Ignorer un block</h2>
+
+<p>On voit de temps en temps une petite ligne qui ressemble à ceci :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;remove</span> <span class="na">name=</span><span class="s">&quot;left&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+
+<p>Cette balise permet d'ignorer un block. Ici on ignore le block <code>left</code> (la colonne de gauche).</p>
+
+<p>Et il arrive assez fréquemment que le développeur se demande si le fait de mettre cette balise avant ou après la création d'un block aura un impact différent.</p>
+
+<p>La réponse est <strong>non</strong>.</p>
+
+<p>En effet, Magento utilise <em>XPATH</em> pour ignorer tous les noeuds et toutes les références aux noeuds dont le nom est indiqué dans l'attribut <code>name</code> de tous les tags <code>remove</code> du Layout.</p>
+
+<p>Si vous ne voulez pas qu'un noeud soit finalement ignoré il faut réussir à supprimer le noeud <code>remove</code> qui le « supprime » ! (logique !)</p>
+
+<p>(Sinon vous pouvez aller voir du côté du module <a href="http://alanstorm.com/magento_layout_unremove_in_local_xml">Layout UnRemove de Alan Storm</a>.)</p>
+
+<p>La balise <code>remove</code> accepte l'attribut <code>acl</code> pour indiquer si on ignore ou non ce block dans le cas d'un layout admin. L'attribut prend la valeur du droit nécessaire pour afficher le block comme par exemple :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;remove</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">acl=</span><span class="s">&quot;jbh_foo/bar&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+
+<p>Si l'administrateur connecté a le droit <code>jbh_foo/bar</code> alors le block ne sera pas ignoré.</p>
+
+<p>A noter aussi qu'on peut inhiber l'action du remove sur un block en définissant l'attribut <code>ignore</code> de celui-ci !</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">type=</span><span class="s">&quot;core/text_list&quot;</span> <span class="na">ignore=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+
+
+<p>Ce block ne pourra donc pas être supprimé via <code>remove</code>. Attention par contre... vu qu'on ne peut pas ajouter un attribut à un block déjà existant (via une référence par exemple) cette manipulation implique que le block ne sera <strong>jamais</strong> ignoré.</p>
+
+<h2>Le fichier <code>local.xml</code> (dans <code>design/../layout/</code>)</h2>
+
+<p>Surprise ! Ce fichier est toujours parsé en dernier ! Donc si vous souhaitez faire de la mise à jour pour un thème sans rien en particulier vous pouvez utiliser ce fichier.</p>
+
+<p>C'est bon à savoir non ?</p>
+
+<p>Avec lui, plus besoin de faire un module pour « nettoyer » votre thème :)</p>
+
+<h2>Un recherché remplacé ?</h2>
+
+<p>Oui ! Magento effectue un <code>str_replace</code> sur tout votre XML comme ceci :</p>
+
+<ul>
+<li><code>{{baseUrl}}</code> devient l'URL non sécurisée de votre store</li>
+<li><code>{{baseSecureUrl}}</code> devient l'URL sécurisée de votre store</li>
+</ul>
+
+
+<h2>Les updates</h2>
+
+<p>Un update c'est simplement un bout de XML ajouté au layout qui sera traité de la même façon que tous les fichiers <code>.xml</code> de votre thème.</p>
+
+<h3>Le tag <code>update</code></h3>
+
+<p>Il ne peut être qu'un enfant d'un <em>handle</em>, sinon il ne sera pas pris en compte.</p>
+
+<p>Il doit comporter un seul attribut : <code>handle</code>.</p>
+
+<p>Cet attribut indique le nom d'un autre <em>handle</em> qui doit être pris en compte dans le layout.</p>
+
+<p>Vous pouvez par exemple vouloir appliquer le handle <code>customer_account</code> à votre nouvelle page pour qu'elle s'intègre parfaitement dans la partie "Mon Compte" du client :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;handle_de_ma_nouvelle_page&gt;</span>
+    <span class="nt">&lt;update</span> <span class="na">handle=</span><span class="s">&quot;customer_account&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/handle_de_ma_nouvelle_page&gt;</span>
+</code></pre></div>
+
+
+<p>Vous pouvez également utiliser cette technique pour éviter de dupliquer un gros bout de layout que vous voudriez réutiliser !</p>
+
+<h3>Des updates en base de données</h3>
+
+<p>Les Widgets utilisent la base de données pour ajouter des updates sur le layout.</p>
+
+<p>Il nous est possible de faire de même si on le souhaite en utilisant les deux tables <code>core_layout_link</code> et <code>core_layout_update</code>.</p>
+
+<p>Désactiver le module des Widgets n'empêchera pas Magento de faire une requête <code>SELECT</code> par <em>handle</em> par page.</p>
+
+<p>Donc si vous n'avez pas de cache, sachez que Magento fait au <strong>minimum</strong> 4 requêtes pour récupérer les possibles <em>layout updates</em> en base de données à chaque chargement.</p>
+
+<p>A savoir que la sauvegarde d'un seul Widget invalidera les caches suivants :</p>
+
+<ul>
+<li> Le cache « Blocks HTML output  » (<code>block_html</code>)</li>
+<li> Le cache « Layouts » (<code>layout</code>)</li>
+</ul>
+
+
+<p>Merci les widgets ! (à utiliser avec parcimonie donc...)</p>
+
+<h2>Conclusion</h2>
+
+<p>Vous maîtrisez maintenant le layout sur Magento ! Au moins vous avez les connaissances... Vous savez comment créer, modifier, supprimer tout ou partie du Layout. Il ne vous manque plus que la pratique !</p>
+
+<p>A présent n'hésitez surtout pas à laisser un commentaire sur vos astuces bien à vous ;) Ou simplement pour réagir à cet article !</p>
+
+ -->
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/le-layout-sur-magento.html" data-text="Le Layout sur Magento" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/le-layout-sur-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/le-layout-sur-magento.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/le-cache-des-blocks-sur-magento.html">Le cache des blocks sur Magento</a></h2>
@@ -1371,40 +1797,6 @@ Jbh_Grid&gt;
         
 
         <a href="/apprendre-a-utiliser-magento-installer.html">Lire la suite du tutoriel</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/the-installer-v1.html">Je dévoile l'Installer</a></h2>
-    <div class="content post">
-        <p>Tout a commencé à Berlin en 2011...</p>
-
-<p>(J'ai tout de même réussi – une seule fois – à perdre la totalité de 3 heures de travail...)</p>
-
-<p>Si vous trouvez des bugs, si vous souhaitez améliorer.... n'hésitez pas c'est sur GitHub !</p>
-
-<p>Ah aussi... je prépare une v2, mais je ne sais pas encore comment l'organiser... probablement avec un système modulaire permettant d'ajouter des commandes à volonté.</p>
-
-<p>Amusez-vous !</p>
-
-<p style="text-align: center;" class="code">
-    PERSONNAL USAGE ONLY<br/>
-    For professional or commercial use, ask.<br/>
-    <a href="https://github.com/jacquesbh/Installer/tree/master" title="The Installer" style="font-size: 30px;">The Installer - v1</a>
-</p>
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/the-installer-v1.html" data-text="Je dévoile l'Installer" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/the-installer-v1.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/the-installer-v1.html">Lire l'article</a>
 
     </div>
 
