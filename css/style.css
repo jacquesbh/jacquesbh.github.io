@@ -117,6 +117,7 @@ body { font-family: 'Times New Roman', Verdana, Helvetica, Arial, Sans-serif; co
 #sideWrap .tags a :hover { text-decoration: underline; }
 #sideWrap .infos strong { float: right; font-weight: normal; }
 #sideWrap .me { margin-top: 20px; }
+#sideWrap .me img { border-color: transparent; }
 
 /** Contenu */
 #contentWrap { width: 620px; float: left; margin-bottom: 40px; }
