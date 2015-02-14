@@ -187,6 +187,10 @@
         
     
 
+    
+        
+    
+
 
 
 
@@ -327,9 +331,9 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Productivité">Productivité</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=SSL">SSL</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=SSL">SSL</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=COMODO">COMODO</a></span>
 
@@ -342,6 +346,8 @@
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
 
 </p>
 
@@ -443,6 +449,8 @@
             
             
             
+            
+            
         </div>
     </div>
     <p class="voirPlus">
@@ -450,6 +458,185 @@
     </p>
     
 
+
+    <hr />
+    <h2><a href="/2015/02/installer-certificat-ssl-apache.html">Installation de votre SSL + Top sécurité</a></h2>
+    <div class="content post">
+        <div class="carrousel">
+    <img src="/images/posts/installer-certificat-ssl-apache/ssl-security--grade-a.png" width="608" />
+</div>
+
+
+<p>Maintenant que vous avez acheté <a href="http://jacques.sh/2014/08/certificat-ssl-business.html">votre certificat SSL Business</a> et que vous êtes prêt à l'installer sur votre serveur, voici quelques astuces pour obtenir la qualité optimale au niveau sécurité et ainsi éviter que votre site ne s'affiche pas sur certains navigateurs (Android etc.) à cause d'une alerte de sécurité !</p>
+
+<!-- 
+
+
+<hr />
+
+<h3>Les ingrédients</h3>
+
+<p>Pour réaliser cette recette il vous faudra :</p>
+
+<ol>
+<li>La clé de votre certificat : <code>jacques.sh.key</code> ;</li>
+<li>Votre certificat : <code>jacques.sh.crt</code> ;</li>
+<li>Le bundle de votre certificat : <code>jacques.sh.bundle</code>.</li>
+</ol>
+
+
+<p>Le premier ingrédient est facile à trouver puisque vous l'avez généré vous-même en même temps que votre <code>Certificate Signing Request</code> (<code>CSR</code>).</p>
+
+<p>Le second, le certificat, vous est délivré par une <a href="http://jacques.sh/2014/08/certificat-ssl-business.html">autorité de certification telle que gandi</a> par exemple (là où vous l'avez acheté tout simplement).</p>
+
+<p>La dernier est plus difficile à avoir. Voici comment faire.</p>
+
+<h3>Le bon bundle</h3>
+
+<p>Le bundle c'est votre chaîne de certification. C'est tout simplement un fichier qui contient les certificats de la chaine les uns en dessous des autres.<br/>
+La chaine de certification commence par votre certificat et se termine par un certicat root. Par contre le bundle ne contient ni votre certificat ni le certificat root mais seulements ceux qui sont intermédiaires.
+C'est pour cette raison que ces certificats sont aussi appelés des « intermédiaires » car c'est tout simplement leur rôle.</p>
+
+<p>En général il y a 3 ou 4 certificats (en comptant le vôtre et le root) dans la chaîne (<a href="https://www.sslshopper.com/ssl-checker.html#hostname=google.com" target="_blank">exemple avec google</a>).</p>
+
+<p>Le problème c'est d'avoir les bons intermédiaires pour avoir le bon bundle !</p>
+
+<p>Prenons l'exemple d'un certificat Business COMODO chiffré avec l'algorithme SHA2 :</p>
+
+<ol>
+<li><code>jacques.sh.crt</code> : c'est le vôtre ;</li>
+<li><code>COMODOExtendedValidationSecureServerCA2.pem</code> : c'est le dernier intermédiaire ;</li>
+<li><code>COMODORSAAddTrustCA.crt</code> : c'est le second intermédiaire. Il est signé par un <code>root certificate</code> ;</li>
+<li><code>AddTrust External CA Root.cer</code> : c'est le certificat root. Il est auto-signé et dans le « Trust Store », donc il ne lèvera pas d'exception de sécurité.</li>
+</ol>
+
+
+<p>Au passage, les seuls certificats auto-signés qui sont acceptés par défaut par votre navigateur sont ceux qui sont dans le Trust Store.</p>
+
+<p>Et dans le bundle on met quoi alors ? Et bien on prend les intermédiaires et on les concatène dans leur priorité croissante : le plus proche de votre certificat en premier.</p>
+
+<pre><code>-----BEGIN CERTIFICATE-----
+[...]o/Br0Oksxgn
+KKlHMd99SUW[...]
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+[...]bCBDQSBSb29
+sHNA7qxcS1u[...]
+-----END CERTIFICATE-----
+</code></pre>
+
+<p>De <code>-----BEGIN CERTIFICATE-----</code> à <code>-----END CERTIFICATE-----</code> c'est un certificat. Le premier est donc le contenu de <code>COMODOExtendedValidationSecureServerCA2.pem</code> et le second le contenu de <code>COMODORSAAddTrustCA.crt</code>.</p>
+
+<p>On a notre <code>jacques.sh.bundle</code> !</p>
+
+<p>Le problème c'est : <strong>comment on sait qu'on ne s'est pas trompé ?</strong></p>
+
+<p>Un certificat est signé par un autre, sauf le root qui est auto-signé. Donc si on veut le « papa » d'un certificat, que ça soit un intermédiaire ou le certifiat final, il nous faut savoir qui l'a émis.<br/>
+Pour ça on ouvre le certificat et on trouve le <code>Common name</code> du <code>Issuer</code>. En gros on veut le nom du certificat parent.</p>
+
+<p>Voici un exemple avec un intermédiaire COMODO (présicément celui de notre exemple, le <code>COMODORSAAddTrustCA.crt</code>) :</p>
+
+<p class="center">
+    <img src="/images/posts/installer-certificat-ssl-apache/intermediate.png" width="608" />
+</p>
+
+
+<p>Le papa c'est donc <code>AddTrust External CA Root</code>. Oh bah tiens, c'est le root !</p>
+
+<p>Une fois votre certificat installé sur votre serveur avec son bundle, pensez à vérifier que tout est bon ici : <a href="https://www.sslshopper.com/ssl-checker.html">https://www.sslshopper.com/ssl-checker.html</a><br/>
+Ce site vous dira si votre chaîne n'est pas bonne.</p>
+
+<p>On dit souvent qu'on a pas besoin d'inclure les intermédiaires. Mais il s'avère que certains navigateurs (surtout sur mobile) ne font pas de recherche pour trouver les certificats intermédiaires pour vous. Il faut les fournir !</p>
+
+<p><em>Note : votre certificat doit être chiffré avec l'algorithme SHA2 car le SHA1 est en fin de vie. Par conséquent le SHA2 n'étant pas géré par tous les navigateurs à l'heure où j'écris ces lignes, il est possible que vous soyez obligé d'ajouter un intermédiaire "cross-signed" dans votre bundle. Plus d'infos ici sur les intermédiaires ici : <a href="http://wiki.gandi.net/fr/ssl/intermediate">http://wiki.gandi.net/fr/ssl/intermediate</a></em></p>
+
+<h3>Installation sur Apache</h3>
+
+<p>Là c'est super simple, il vous suffit de reproduire ça dans votre VirtualHost en changeant les chemins !</p>
+
+<p>Évidemment n'oubliez pas de copier les fichiers sur votre serveur !</p>
+
+<pre><code>&lt;IfModule mod_ssl.c&gt;
+    # Activate SSL
+    SSLEngine on
+
+    # Certificates
+    SSLCertificateFile /etc/ssl/certs/jacques.sh/jacques.sh.crt
+    SSLCertificateKeyFile /etc/ssl/certs/jacques.sh/jacques.sh.key
+    SSLCertificateChainFile /etc/ssl/certs/jacques.sh/jacques.sh.bundle
+&lt;/IfModule&gt;
+</code></pre>
+
+<p>Et la sécurité dans tout ça ? Là on a notre certificat mais ça ne nous donne pas une note A+ sur <a href="https://www.ssllabs.com/ssltest/analyze.html">SSL Labs</a> !</p>
+
+<p>On va ajouter quelques petits détails sous nos certificats :</p>
+
+<pre><code># Security
+SSLCipherSuite AES128+EECDH:AES128+EDH
+SSLProtocol All -SSLv2 -SSLv3
+SSLHonorCipherOrder On
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+
+# More security - Requires Apache &gt;= 2.4
+SSLCompression off 
+SSLUseStapling on 
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+</code></pre>
+
+<p>Attention à la partie qui ne concerne que Apache >= 2.4 !</p>
+
+<p>On a donc ceci dans notre VirtualHost :</p>
+
+<pre><code>&lt;IfModule mod_ssl.c&gt;
+    # Activate SSL
+    SSLEngine on
+
+    # Certificates
+    SSLCertificateFile /etc/ssl/certs/jacques.sh/jacques.sh.crt
+    SSLCertificateKeyFile /etc/ssl/certs/jacques.sh/jacques.sh.key
+    SSLCertificateChainFile /etc/ssl/certs/jacques.sh/jacques.sh.bundle
+
+    # Security
+    SSLCipherSuite AES128+EECDH:AES128+EDH
+    SSLProtocol All -SSLv2 -SSLv3
+    SSLHonorCipherOrder On
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+    Header always set X-Frame-Options DENY
+    Header always set X-Content-Type-Options nosniff
+
+    # More security - Requires Apache &gt;= 2.4
+    SSLCompression off 
+    SSLUseStapling on 
+    SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+&lt;/IfModule&gt;
+</code></pre>
+
+<p>Vous trouverez plus d'infos sur la partie <a href="https://cipherli.st/">sécurité sur Cipherli.st</a> pour Apache/Nginx/Lighttpd/haproxy…</p>
+
+<p>N'oublier pas de lancer un petit <code>apache2ctl -t</code> avant de recharger la configuration.</p>
+
+<p>Et en dernier, <a href="https://www.ssllabs.com/ssltest/analyze.html">testez votre site sur ssllabs</a> !</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2015/02/installer-certificat-ssl-apache.html" data-text="Installation de votre SSL + Top sécurité" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2015/02/installer-certificat-ssl-apache.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2015/02/installer-certificat-ssl-apache.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2015/02/bilan-2014-debut-2015.html">Bilan 2013-2014, en avant 2015 !</a></h2>
@@ -854,7 +1041,9 @@ Celui-là c'est le serveur de backup. Il a juste le droit de backuper !</p></blo
     <hr />
     <h2><a href="/2014/08/certificat-ssl-business.html">Votre certificat SSL Business</a></h2>
     <div class="content post">
-        <p>Un certificat SSL, pour Secure Socket Layer, est basé sur plusieurs fichiers qui permettent le chiffrement des données entre le client (vous) et un site tiers.</p>
+        <p><em>[Dernière mise à jour le 14/02/2015.]</em></p>
+
+<p>Un certificat SSL, pour Secure Socket Layer, est basé sur plusieurs fichiers qui permettent le chiffrement des données entre le client (vous) et un site tiers.</p>
 
 <p>En e-commerce nous avons souvent recourt à un certificat SSL pour sécuriser les données que vous échangez avec le site marchand. Comme par exemple votre adresse postale, vos informations de connexion et bien plus encore.</p>
 
@@ -922,7 +1111,8 @@ Après c'est vrai que c'est le même prix...</p>
 
 <p>Le CSR est une clé que vous devez générer. Vous obtenez ainsi deux fichiers lors de la génération, un fichier <code>.csr</code> (le fichier dont nous avons besoin) et un fichier <code>.key</code> (fichier que vous devez garder précieusement !).</p>
 
-<p>Vous pouvez générer la commande permettant d'obtenir ces deux fichiers via le <a href="https://www.gandi.net/ssl/create/openssl">générateur proposé par gandi</a>. La commande devra ensuite être lancée sur une console UNIX avec openssl (sur mac ou linux).</p>
+<p>Vous pouvez générer la commande permettant d'obtenir ces deux fichiers via le <a href="https://www.gandi.net/ssl/create/openssl">générateur proposé par gandi</a>. La commande devra ensuite être lancée sur une console UNIX avec openssl (sur mac ou linux).<br/>
+À la fin de la commande proposée par Gandi, ajoutez <code>-sha256</code> afin de changer l'algorithme de chiffrage qui sera utilisé. En effet le SHA1 est en fin de vie, il vous faut utiliser SHA2.</p>
 
 <p><strong>Attention !</strong> Renseignez les bonnes informations pour le CSR ! On vous demande par exemple l'<strong>Organisation : il s'agit de la raison sociale</strong> et non pas du nom commercial ! C'est très important !</p>
 
@@ -971,7 +1161,16 @@ Après c'est vrai que c'est le même prix...</p>
 </ul>
 
 
-<p>Une fois que c'est fait vous n'avez plus qu'à attendre. À noter que COMODO passera un appel téléphonique aux différentes personnes indiquées sur le formulaire. Justement le formulaire...</p>
+<p>Une fois que c'est fait vous n'avez plus qu'à attendre. À noter que COMODO passera un appel téléphonique aux différentes personnes indiquées sur le formulaire.</p>
+
+<p><em>Attention : COMODO doit vous appeler. Par conséquent ils vont vouloir vérifier le numéro de téléphone. Si vous êtes dans les Pages Jaunes et que le numéro correspond alors ça ira très bien. Sinon vous devez apparaître sur un site qui donne votre numéro officiel. Du coup évitez votre numéro de portable !</em><br/>
+<em>Si vous avez une ligne SIP alors pensez à la redirection de l'appel vers votre mobile… car évidemment ils appelleront quand vous ne serez pas prêt du fixe, à coup sûr !</em>
+<em>Gardez votre téléphone sur sonnerie jusqu'à ce que la validation soit faite si vous ne voulez pas attendre trop longtemps. D'expérience ils se fichent un peu de savoir dans quel fuseau horaire vous êtes :).</em></p>
+
+<p><em>Autre chose, si vous êtes seul dans votre société, ça ne va pas aider. La personne qui va vous appeler va demander à vérifier votre identité auprès d'un collègue. Dites simplement que vous êtes "self employed" et que vous n'avez pas de collègue. Soit la personne comprend et ça passe, soit elle demande quand vos collègues vont revenir et dans ce cas elle n'a rien compris. Faites en sorte qu'elle comprenne.</em><br/>
+<em>Et comme elle va insister, dites-lui de vérifier votre société via <strong>Dun &amp; Bradstreet</strong> (<a href="http://www.dnb.com/">http://www.dnb.com/</a>)</em></p>
+
+<p>Et sinon le formulaire… non parce qu'il est un peu barbare tout de même !</p>
 
 <h2>Remplir le formulaire étendu COMODO</h2>
 
@@ -988,7 +1187,7 @@ Après c'est vrai que c'est le même prix...</p>
 <li><strong>Jurisdiction of Incorporation</strong> : Il s'agit des infos de votre RCS. Donc la ville, le département et le Pays (FRANCE !)</li>
 <li><strong>Incorporating Agency</strong> : Pour nous ça sera gandi. C'est eux qui nous délivrent le certificat au final.</li>
 <li><strong>Registration Number</strong> : Il s'agit du numéro SIREN de la société.</li>
-<li><strong>Certificate Requester</strong> : Ici il faut indiquer les coordonnées de la société ou de la personne qui fait la demande. Soit c'est vous-même, soit c'est votre agence web (par exemple). De manière générale chez Monsieur Biz nous ne faisons qu'accompagner notre client dans les démarches. Notre client renseigne donc ici ses propres coordonnées.</li>
+<li><strong>Certificate Requester</strong> : Ici il faut indiquer les coordonnées de la société ou de la personne qui fait la demande. Soit c'est vous-même, soit c'est votre agence web (par exemple). De manière générale chez Monsieur Biz nous ne faisons qu'accompagner notre client dans les démarches. Notre client renseigne donc ici ses propres coordonnées. Attention à préciser un numéro de téléphone qui est vérifiable (dans les Pages Jaunes par exemple).</li>
 <li><strong>Applicant Address</strong> : Siège social de la société.</li>
 <li><strong>Certificate Approver</strong> : Il s'agit de la personne qui approuve la demande du certificat. À priori, la société. <strong>Idéalement il s'agit d'une personne sur le KBis, ainsi c'est beaucoup plus simple</strong>.</li>
 <li><strong>Contract Signer</strong> : Il s'agit de la personne qui signe le contrat. Faites en sorte que ça soit la même personne que le <strong>Certificat Approver</strong>, ça facilitera la démarche de COMODO.</li>
@@ -1009,7 +1208,8 @@ Après c'est vrai que c'est le même prix...</p>
 
 <h2>Installation du certificat</h2>
 
-<p>Là je vous propose de faire appel à votre administrateur système ou à l'agence avec qui vous travaillez. Ils feront ça à merveille !</p>
+<p>Évidemment j'ose espérer que votre adminsys saura installer votre certificat.<br/>
+Sinon vous pouvez aussi aller lire mon article qui vous explique <a href="http://jacques.sh/2015/02/installer-certificat-ssl-apache.html">comment installer un certificat SSL avec une sécurité renforcée sur votre serveur</a>.</p>
 
  -->
 
@@ -1030,53 +1230,13 @@ Après c'est vrai que c'est le même prix...</p>
 
     </div>
 
-    <hr />
-    <h2><a href="/2014/06/meet-magento-de-2014-installer-barcamp.html">Meet Magento DE 2014 - Présentation de l'Installer</a></h2>
-    <div class="content post">
-        <p>Le Meet Magento est un événement incontournable qui a lieu dans certains pays d'Europe.<br/>
-Pas en France hélas.</p>
-
-<p>J'ai eu l'occasion d'aller à l'édition allemande à Leipzig en mai dernier. C'était vraiment très intéressant.</p>
-
-<p>La partie la plus sympa et la plus stressante a sans doute été de présenter l'outil que j'utilise tous les jours depuis plusieurs années :</p>
-
-<p class="center"><a href="http://github.com/jacquesbh/installer">The Installer, a PHP command line tool for Magento extension development and scaffolding</a></p>
-
-
-<p>La présentation a été filmée, je vous invite à la regarder.</p>
-
-<p>Je m'excuse d'avance pour mon anglais tout stressé ;)</p>
-
-<iframe width="620" height="315" src="//www.youtube.com/embed/tKicBK3rW9M" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Si ça vous intéresse le projet est totalement ouvert et c'est avec plaisir que j'accepte vos Pull Requests !</p>
-
-<p><a href="http://github.com/jacquesbh/installer">The Installer sur github</a></p>
-
-<p>Merci à Pierre Fay pour m'avoir indiqué que la vidéo est sur Youtube, je n'y avais pas fait attention.</p>
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2014/06/meet-magento-de-2014-installer-barcamp.html" data-text="Meet Magento DE 2014 - Présentation de l'Installer" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/2014/06/meet-magento-de-2014-installer-barcamp.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/2014/06/meet-magento-de-2014-installer-barcamp.html">Lire l'article</a>
-
-    </div>
-
 
 <div class="pagination">
     <hr/>
     
     
     
-    <span class="page_number">Page 1 sur 7</span>
+    <span class="page_number">Page 1 sur 8</span>
     
     
     –
@@ -1231,6 +1391,10 @@ Pas en France hélas.</p>
         
     
 
+    
+
+    
+        
     
 
     

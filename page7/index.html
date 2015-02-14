@@ -187,6 +187,10 @@
         
     
 
+    
+        
+    
+
 
 
 
@@ -327,9 +331,9 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Productivité">Productivité</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=SSL">SSL</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=SSL">SSL</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=COMODO">COMODO</a></span>
 
@@ -342,6 +346,8 @@
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
 
 </p>
 
@@ -356,6 +362,144 @@
 
     
 
+
+    <hr />
+    <h2><a href="/connectez-vous-sur-un-compte-client-sur-magento.html">Se connecter sur le compte d'un client</a></h2>
+    <div class="content post">
+        <p>Par défaut sur la Magento Community, nous n'avons pas de fonctionnalité pour se connecter sur le compte du client.</p>
+
+<p>Autant vous dire que parfois c'est quand même la <em>loose</em>. Bah ouais... le client a un problème et impossible de reproduire. De plus, lui demander de nous faire un screen pour voir comment ça se passe pour lui c'est juste... bah non en fait.</p>
+
+<p>Alors la solution c'est de se connecter sur son compte, même si ça n'est pas toujours la solution miracle, souvent ça aide un peu.</p>
+
+<p>Et puis on obtient d'un coup une autre fonctionnalité : on peut payer une commande pour le client par téléphone. Pratique non ?</p>
+
+<!-- 
+
+
+
+
+<hr />
+
+
+<p>Le module que nous allons développer nous allons l'appeler <code>Jbh_ConnectAs</code> et il sera dans community.</p>
+
+<p>Pourquoi dans community ? Parce qu'il est <a href="http://github.com/jacquesbh/jbh_connectas" title="Le module Jbh_ConnectAs sur GitHub">dispo en ligne</a>, pour la communauté.</p>
+
+<h2>Posons les bases</h2>
+
+<p>Nous avons besoin de :</p>
+
+<ul>
+<li>Un event pour ajouter le bouton « Connect As » sur la fiche client</li>
+<li>Un observer qui va attraper l'event</li>
+<li>Un contrôleur pour <em>se connecter sur le compte du client</em></li>
+<li>Une gestion de droits pour ne pas afficher ce bouton à tout le monde</li>
+</ul>
+
+
+<p>Avec ça nous avons bien sûr besoin d'un <em>Helper Data</em>, mais d'aucun block.</p>
+
+<h2>Notre event</h2>
+
+<p>Quand on regarde bien on voit qu'on peut mettre des boutons au niveau du block <code>Mage_Adminhtml_Block_Customer_Edit</code>.
+Après tout, pourquoi ne pourrions-nous pas avoir notre petit bouton orange à côté des autres ?</p>
+
+<p>Ils utilisent dans le constructeur secondaire (<code>protected function _construct</code> sur tous les <code>Varien_Object</code>) la méthode <code>_addButton</code>. Pas de bol, elle est protégée... Pas super pratique pour nous ça. Pas grave, on regarde ce qu'elle fait... et là c'est le petit bonheur...</p>
+
+<p>En fait il existe dans le container <code>Mage_Adminhtml_Block_Widget_Container</code> un alias public pour un certain nombre de méthodes protégées, dont notre <code>_addButton</code> :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$sortOrder</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$area</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span><span class="p">,</span> <span class="nv">$sortOrder</span><span class="p">,</span> <span class="nv">$area</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Donc si on réfléchi bien... il nous suffit de récupérer ce block avant qu'il n'affiche la fiche du client pour pouvoir y ajouter notre bouton dynamiquement.
+On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. Chaque action a un <code>event</code> qui annonce le début du rendu. Pour nous, c'est ça :</p>
+
+<pre><code>controller_action_layout_render_before_adminhtml_customer_edit
+</code></pre>
+
+<p>Op, on a notre event :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
+    <span class="nt">&lt;observers&gt;</span>
+        <span class="nt">&lt;add_connectas_button&gt;</span>
+            <span class="nt">&lt;class&gt;</span>jbh_connectas/observer<span class="nt">&lt;/class&gt;</span>
+            <span class="nt">&lt;method&gt;</span>addOurCoolButton<span class="nt">&lt;/method&gt;</span>
+        <span class="nt">&lt;/add_connectas_button&gt;</span>
+    <span class="nt">&lt;/observers&gt;</span>
+<span class="nt">&lt;/controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
+</code></pre></div>
+
+
+<p>Comme on le voit dans cet event l'observer sera <code>Jbh_ConnectAs_Model_Observer</code> et la méthode <code>addOurCoolButton</code>. Ce bout de xml sera à placer dans le tag <code>adminhtml</code> de notre <code>config.xml</code> car nous sommes sur un event lancé en partie admin.</p>
+
+<h2>Les fichiers</h2>
+
+<h3>La config : <code>/app/code/community/Jbh/ConnectAs/etc/config.xml</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/etc/config.xml"></script>
+
+
+<h3>Bien sûr notre fichier <em>etc/modules</em> : <code>/app/etc/modules/Jbh_ConnectAs.xml</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/etc/modules/Jbh_ConnectAs.xml"></script>
+
+
+<h3>Notre fichier pour les droits en admin : <code>/app/code/community/Jbh/ConnectAs/etc/adminhtml.xml</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/etc/adminhtml.xml"></script>
+
+
+<h3>Notre contrôleur d'admin : <code>/app/code/community/Jbh/ConnectAs/controllers/Adminhtml/IndexController.php</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/controllers/Adminhtml/IndexController.php"></script>
+
+
+<h3>Notre observeur : <code>/app/code/community/Jbh/ConnectAs/Model/Observer.php</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/Model/Observer.php"></script>
+
+
+<h3>Notre helper <code>Data</code> : <code>/app/code/community/Jbh/ConnectAs/Helper/Data.php</code></h3>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_connectas/raw/master/app/code/community/Jbh/ConnectAs/Helper/Data.php"></script>
+
+
+<h2>Et au final ça fonctionne comment ?</h2>
+
+<p>A priori vous devriez voir apparaître au niveau des boutons d'actions de la fiche du client un nouveau bouton "Connect As".</p>
+
+<p>N'oubliez pas que les droits sont gérés et que vous pouvez par conséquent autoriser certains rôles à utiliser cette fonctionnalité.</p>
+
+<p>Il est également possible de rajouter des traductions puisque le PHP a été prévu pour. Il manque juste un peu de config et les fichiers CSV de traductions.</p>
+
+<p>Merci à <a href="http://benjion.wordpress.com/2011/04/29/magento-se-connecter-en-tant-que-client-depuis-ladmin/">Benjion pour l'article original</a> que j'ai eu l'occasion d'améliorer/corriger.</p>
+
+<p>Well done :)</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/connectez-vous-sur-un-compte-client-sur-magento.html" data-text="Se connecter sur le compte d'un client" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/connectez-vous-sur-un-compte-client-sur-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/connectez-vous-sur-un-compte-client-sur-magento.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/realisez-vos-propres-scripts-php-sur-magento.html">Les scripts Magento</a></h2>
@@ -901,85 +1045,6 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
 
     </div>
 
-    <hr />
-    <h2><a href="/un-debut-a-tout.html">Un début à tout</a></h2>
-    <div class="content post">
-        <p>Il faut bien commencer un jour...</p>
-
-<p>En réalité, ce blog est en attente depuis environ 3 ans.
-Il me fallait <em>juste</em> le temps de déterminer la plateforme la plus intéressante pour publier mes articles ainsi que du temps pour en écrire.</p>
-
-<p>D'ailleurs à ce propos...</p>
-
-<!-- 
-
-
-<h2>Mes articles</h2>
-
-<p>Ils seront écrit en <a href="http://daringfireball.net/projects/markdown" title="Markdown is a text-to-HTML conversion tool for web writers">Markdown</a> bien sûr ! Et sur <a href="http://jekyllrb.com/" title="Jekyll,  transform your text into a monster">Jekyll</a>, évidemment !</p>
-
-<p>Pas simple tout ça...
-En réalité j'ai longtemps réfléchi à coder moi-même ce blog, en <a href="http://php.net" title="Hypertext Preprocessor">PHP</a>. Mais là j'ai hésité entre une solution main à la WordPress, avec un backoffice etc. Et une solution plutôt du genre de "blogit", un blog géré par <a href="http://git-scm.com/" title="git, everything is local">git</a>, via <a href="http://github.com" title="GitHug, Social Coding">github</a> par exemple.</p>
-
-<p>Finalement j'ai trouvé <a href="http://jekyllrb.com/" title="Jekyll,  transform your text into a monster">Jekyll</a>, un moteur de blog écrit en Ruby qui gère les pages et les posts avec la syntax <a href="http://daringfireball.net/projects/markdown" title="Markdown is a text-to-HTML conversion tool for web writers">Markdown</a>.
-Même si <em>en réalité</em> Jekyll n'est pas un moteur de blog mais un <em>générateur de site statique</em>.</p>
-
-<p>Pour le CSS j'ai utilisé <a href="http://sass-lang.com/" title="SASS (style with attributes)">SASS</a> car j'ai eu envie de tester. Et j'aime bien ! :)</p>
-
-<p>Et ce blog justement bah... <a href="http://github.com/jacquesbh/jacquesbh.github.com" title="Mon blog sur GitHub">il est sur github</a>.</p>
-
-<h2>Et les articles ? Quels genres ?</h2>
-
-<p>Je suis développeur <a href="http://php.net" title="Hypertext Preprocessor">PHP</a>, sur <a href="http://magentocommerce.com" title="Magento: E-commerce">Magento</a>, et sur plein d'autres trucs à côté.</p>
-
-<p>C'est donc sur ça que porteront mes articles... mon métier.</p>
-
-<p>Au final ça va devenir un blog banal, comme les autres. <em>Je vais faire comme les autres.</em></p>
-
-<p>Néanmoins j'ai envie que vous trouviez ici beaucoup de tutoriels sur <a href="http://magentocommerce.com" title="Magento: E-commerce">Magento</a>, quelques trucs et astuces, des liens, des démos/tutos sur mes projets personnels, des articles de fond peut-être aussi... Bref, plein de trucs intéressants, j'espère !</p>
-
-<p>Pour vous le prouver cet article est directement suivi d'un article qui vous amène quelques snippets bien utiles sur Magento.</p>
-
-<h1>Et quoi d'autre ?</h1>
-
-<p>A quoi bon se faire un blog sur un <em>générateur de site statique</em> si on ne l'utilise pas un monimum pour y mettre autre chose que des articles ?</p>
-
-<p>Comme vous pouvez le voir, le blog a été entièrement réintégré. Surtout pour les quelques informations présentes qui sont 100% personnalisables.
-<em>J'ai appris à utiliser Jekyll ces derniers jours pour ça</em>.</p>
-
-<p>Vous trouverez donc sur ce site la liste de quelques unes de mes références, avec une page dédiée à chaque fois.</p>
-
-<p>Vous y trouverez aussi des articles ou des pages sur mes différents projets libres.</p>
-
-<p>Et un formulaire de contact, en bas de chaque page ! Alors...
-N'hésitez pas à me contacter !</p>
-
-<p>NOTE: Ah oui aussi... le design, c'est <a href="http://demontiers.com" title="Laurent Demontiers - Ergonomie et design d'interfaces">Laurent Demontiers</a>.
-(Le logo aussi, que j'utilise depuis un moment maintenant).</p>
-
-<p>Merci à toi Laurent.</p>
-
-<p>Merci aussi aux développeurs du Chan IRC #magento-fr sur freenode qui ont supporté mon <em>débat</em> sur quelle plateforme utiliser pour ce blog !</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/un-debut-a-tout.html" data-text="Un début à tout" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/un-debut-a-tout.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/un-debut-a-tout.html">Lire l'article</a>
-
-    </div>
-
 
 <div class="pagination">
     <hr/>
@@ -991,8 +1056,11 @@ N'hésitez pas à me contacter !</p>
     –
     
     
-    <span class="page_number">Page 7 sur 7</span>
+    <span class="page_number">Page 7 sur 8</span>
     
+    
+    –
+    <a href="/page8" class="next">Suivant</a>
     
     
 </div>
@@ -1143,6 +1211,10 @@ N'hésitez pas à me contacter !</p>
         
     
 
+    
+
+    
+        
     
 
     

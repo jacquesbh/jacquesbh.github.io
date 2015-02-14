@@ -187,6 +187,10 @@
         
     
 
+    
+        
+    
+
 
 
 
@@ -327,9 +331,9 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Productivité">Productivité</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=SSL">SSL</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=SSL">SSL</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=Sécurité">Sécurité</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=COMODO">COMODO</a></span>
 
@@ -342,6 +346,8 @@
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
 
 </p>
 
@@ -356,6 +362,144 @@
 
     
 
+
+    <hr />
+    <h2><a href="/2013/01/creation-product-type-attributes-and-set.html">Créez votre type de produit, ses attributs et son jeu</a></h2>
+    <div class="content post">
+        <p>Quand on démarre un projet on a souvent besoin de créer nos propres types de produits.</p>
+
+<p>Bien souvent on en profite aussi pour créer un ou deux jeux d'attributs et quelques attributs particuliers.</p>
+
+<p>Le problème dans tout ça c'est qu'on ne sait jamais quoi faire et on oublie bien souvent un ou deux fichiers dans l'histoire...</p>
+
+<p>On va commencer par créer notre type (ou nos types) de produit : soyons <code>Foo</code>.</p>
+
+<!-- 
+
+
+<hr />
+
+<h2>La création du type de produit <code>Foo</code></h2>
+
+<p>Notre type est identique au niveau fonctionnel du type <code>Simple</code>.</p>
+
+<p>Nous avons donc deux solutions : la sale, et la propre.</p>
+
+<h3>La méthode « sale »</h3>
+
+<p>La sale consiste à dupliquer, simplement, le XML de configuration du type <code>simple</code> avec notre propre balise <code>foo</code> :</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'bad.xml', '11');</script>
+
+
+<p>Vous remarquerez la ligne surlignée. Et bah oui ! Si notre type se comporte comme un produit <code>simple</code>, pourquoi créer un modèle personnalisé ?</p>
+
+<h3>La méthode « un peu plus propre »</h3>
+
+<p>L'idée c'est de dupliquer les modèles. Pourquoi ? Et bien parce que de cette manière notre type est totalement indépendant.</p>
+
+<p>Et puis ça permet de prévoir les évolutions ;)</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'good.xml', '11,12,15,16');</script>
+
+
+<p>Vous remarquez cette fois que nous avons quatre modèles personnalisés.</p>
+
+<p>Pas de panique, ils font tous un <code>extends</code> sur le même modèle pour le type <code>simple</code>.</p>
+
+<h4>Le modèle principal</h4>
+
+<p>Ce modèle contient la constante qui vaut le code du type : <code>foo</code>.</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'type.php');</script>
+
+
+<h4>Le modèle de prix</h4>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'price.php');</script>
+
+
+<h4>Le modèle d'index des prix</h4>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'indexer.php');</script>
+
+
+<h4>Le data retreiver</h4>
+
+<p>Ce modèle a une méthode qui permet de récupérer le code du type. On utilise donc la constante disponible.</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'retreiver.php');</script>
+
+
+<h3>Le layout</h3>
+
+<p>Comme tout nouveau type de produit pensez à ajouter le bout de layout qui va avec ! Sinon pas de prix dans la fiche produit par exemple !</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'layout.xml');</script>
+
+
+<h3>Les attributs de type « Prix »</h3>
+
+<p>Notre nouveau type de produit va nous permettre de créer de beaux produits... mais sans prix !</p>
+
+<p>Pour avoir une gestion du prix comme le produit simple, il faut ajouter les attributs nécessaires à notre nouveau type !</p>
+
+<p>Dans un setup de votre module, mettez ceci : (c'est plutôt facile à comprendre)</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'setup_price.php');</script>
+
+
+<h2>La création du jeu d'attributs <code>Bar</code></h2>
+
+<p>Pour créer un jeu d'attribut, rien de plus simple !</p>
+
+<p>On considérera que notre nouveau jeu se base sur les mêmes attributs que le jeu par défaut.</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'set.php', '11');</script>
+
+
+<p>Il faut savoir que si on fait un <code>addAttributeSet</code> d'un jeu d'attributs existant alors celui-ci est mis à jour, tout simplement.</p>
+
+<p>C'est pour cette raison qu'on peut se dispenser de faire un <code>try/catch</code> dans notre installeur.</p>
+
+<h2>La création d'un attribut <code>baz</code></h2>
+
+<p>Dans notre installeur ou dans un update il nous suffit d'ajouter notre attribut, tout simplement, comme ceci :</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'attribute.php');</script>
+
+
+<h2>Conclusion</h2>
+
+<p>Vous pouvez maintenant ajouter rapidement un type de produit, un jeu d'attributs et des attributs !</p>
+
+<p>Cet article n'est pas complet car il ne présente pas comment ajouter un attribut à deux groupes qui sont utilisés par deux types de produits différents etc.</p>
+
+<p>Néanmoins vous trouverez beaucoup de méthode dans le modèle EAV ;)</p>
+
+<script type="text/javascript">gist(jacquesbh/4582238, 'eav_setup.php');</script>
+
+
+
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/01/creation-product-type-attributes-and-set.html" data-text="Créez votre type de produit, ses attributs et son jeu" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2013/01/creation-product-type-attributes-and-set.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2013/01/creation-product-type-attributes-and-set.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2013/01/un-site-avec-jekyll-rapidement.html">Un blog avec Jekyll et GitHub</a></h2>
@@ -938,184 +1082,6 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
     </div>
 
-    <hr />
-    <h2><a href="/un-push-pour-vos-produits-sur-magento.html">Un push pour vos produits</a></h2>
-    <div class="content post">
-        <p>Ne vous êtes-vous jamais retrouvé à créer un block dédié au fameux « push produit » sur votre projet ?</p>
-
-<p>Vous savez, le block qui affiche le produit et qu'on a envie de mettre partout, sur la homepage, sur une mise en avant ou que sais-je !</p>
-
-<p>Cet article va vous montrer la meilleure manière de gérer ce problème en prenant en compte, je l'espère, une bonne partie des contraintes.</p>
-
-<!-- 
-
-
-<hr />
-
-<div style="text-align: center;">
-    <img alt="Push produit Magento EE" src="/images/posts/block-push-produit/push_produit_ee.png" height="272" width="161" style="border: 1px dashed gray;" />
-</div>
-
-
-<p>Pour bien faire nous allons créer le module <code>Jbh_Catalog</code>.</p>
-
-<h2>De quoi avons-nous besoin ?</h2>
-
-<p>Pour commencer, comme je l'explique souvent, nous devons déterminer vers quoi nous allons, et ce que nous allons faire. Il s'agit d'une partie d'analyse importante avant de développer.</p>
-
-<p>On liste.</p>
-
-<p>Nous devons :</p>
-
-<ul>
-<li> Créer un block <code>Jbh_Catalog_Block_Product_Push</code> pour afficher notre produit. Nous devons prévoir que notre block puisse s'ajuster au type de produit via des templates spécifiques. On poussera un peu la chose et pour cela nous aurons besoin d'un peu de config. Nous ne gérerons pas le cache de notre block (par défaut sur Magento).</li>
-<li> Créer un helper <code>Jbh_Catalog_Helper_Product</code> pour récupérer notre block. Via la méthode <code>getPush($product)</code>.</li>
-<li> Créer un modèle <code>Jbh_Catalog_Model_Product_Push_Config</code> pour gérer notre configuration.</li>
-</ul>
-
-
-<p>Maintenant que nous savons ce que nous devons faire, faisons-le par étape.</p>
-
-<h2>La configuration</h2>
-
-<p>Pourquoi avons-nous besoin d'un peu de config ?</p>
-
-<p>Comme tout projet e-commerce j'imagine que votre boutique comprend plusieurs types de produits.</p>
-
-<p>Par défaut Magento en comprend 6 types de produits différents (+ le type <code>Gift Card</code> en EE).</p>
-
-<p>L'idée c'est que bien souvent chaque type de produit a un push un peu différent. Bien souvent on affiche des infos pour un type, par pour l'autre.</p>
-
-<p>Une première solution pour gérer ça est de conditionner simplement notre <code>phtml</code> avec de simples <code>if ($_product-&gt;getTypeId() == Mage_Catalog_Model_Product_Type_Configurable::TYPE_CODE)</code> par exemple.</p>
-
-<p>La seconde consiste à gérer un template par type, avec un template par défaut. Si le template pour le type du produit est défini alors on l'utilise, sinon on prend celui par défaut.</p>
-
-<p>Voici un exemple de configuration que nous pouvons mettre en place :</p>
-
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;jbh&gt;</span>
-    <span class="nt">&lt;catalog&gt;</span>
-        <span class="nt">&lt;product&gt;</span>
-            <span class="nt">&lt;push&gt;</span>
-                <span class="nt">&lt;modes&gt;</span>
-                    <span class="nt">&lt;default&gt;</span>
-                        <span class="nt">&lt;templates&gt;</span>
-                            <span class="nt">&lt;default&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/default&gt;</span>
-                            <span class="nt">&lt;simple&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/simple&gt;</span>
-                            <span class="nt">&lt;giftcard&gt;</span>jbh/catalog/product/push/grid/default.phtml<span class="nt">&lt;/giftcard&gt;</span>
-                        <span class="nt">&lt;/templates&gt;</span>
-                    <span class="nt">&lt;/default&gt;</span>
-                    <span class="nt">&lt;list&gt;</span>
-                        <span class="nt">&lt;templates&gt;</span>
-                            <span class="nt">&lt;default&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/default&gt;</span>
-                            <span class="nt">&lt;simple&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/simple&gt;</span>
-                            <span class="nt">&lt;giftcard&gt;</span>jbh/catalog/product/push/list/default.phtml<span class="nt">&lt;/giftcard&gt;</span>
-                        <span class="nt">&lt;/templates&gt;</span>
-                    <span class="nt">&lt;/list&gt;</span>
-                <span class="nt">&lt;/modes&gt;</span>
-            <span class="nt">&lt;/push&gt;</span>
-        <span class="nt">&lt;/product&gt;</span>
-    <span class="nt">&lt;/catalog&gt;</span>
-<span class="nt">&lt;/jbh&gt;</span>
-</code></pre></div>
-
-
-<p>De cette manière il devient très facile de changer le template pour chaque mode ou chaque type de produit. Et pourquoi pas ajouter un <em>mode</em> ou encore un <em>type</em> fictif ? Après tout rien ne nous empêche d'inventer un mode, par exemple <code>homepage_mea</code>, pour changer les templates de tous les produits qui sont sur la mise en avant sur notre page d'accueil...</p>
-
-<h3>Notre modèle</h3>
-
-<p>Notre modèle <code>Jbh_Catalog_Model_Product_Push_Config</code> comprend les méthodes suivantes :</p>
-
-<ul>
-<li> <code>getModes()</code> qui retourne le tableau de tous les modes possibles.</li>
-<li> <code>getTemplates($mode)</code> qui retourne un tableau des templates par types, suivant le mode.</li>
-</ul>
-
-
-<p>Bien sûr les <code>path</code> de la configuration sont dans des constantes.</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Model/Product/Push/Config.php"></script>
-
-
-<h2>Le block</h2>
-
-<p>Notre block dépend surtout du produit et du mode que nous voulons utiliser pour l'affichage.</p>
-
-<p>Pour cela nous indiquons dans notre fichier PHP que notre classe comprend les méthodes implicites suivantes :</p>
-
-<ul>
-<li> <code>@method Jbh_Catalog_Block_Product_Push setProduct(Mage_Catalog_Model_Product $product)</code></li>
-<li> <code>@method Mage_Catalog_Model_Product getProduct()</code></li>
-<li> <code>@method Jbh_Catalog_Block_Product_Push setMode(string $mode)</code></li>
-<li> <code>@method string getMode()</code></li>
-</ul>
-
-
-<p>Ces méthodes sont utilisées lors de l'affichage dans la méthode <code>_toHtml</code>.</p>
-
-<p>Si un template a déjà été défini (si jamais il a été forcé par exemple) alors nous ne le changeons pas.</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Block/Product/Push.php"></script>
-
-
-<h2>Le helper</h2>
-
-<p>Notre helper est la clé de ce module car c'est lui qui va nous retourner notre block pour le produit que nous lui donnons.</p>
-
-<p>Nous développons donc deux méthodes :</p>
-
-<ul>
-<li> <code>getPush($product, $mode = null)</code> qui retournera le block instancié.</li>
-<li> <code>getPushHtml($product, $mode = null)</code> qui retournera le HTML du block.</li>
-</ul>
-
-
-<p>La première méthode fera juste une petite vérification : Notre variable <code>$product</code> est-elle bien un objet du type <code>Mage_Catalog_Model_Product</code> ? Si ça n'est pas le cas alors on considère que c'est un identifiant entier, et on <code>load</code> le produit. Ensuite on retourne notre nouveau block avec le produit et le mode dans ses données (via le <code>Varien_Object</code> hérité).</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_catalog/raw/master/app/code/community/Jbh/Catalog/Helper/Product.php"></script>
-
-
-<h2>Comment ça marche ?</h2>
-
-<p>Pour utiliser notre block rien de plus simple !</p>
-
-<p>Appelons simplement la méthode <code>getPushHtml</code> de notre helper :</p>
-
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="k">echo</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;jbh_catalog/product&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getPushHtml</span><span class="p">(</span><span class="nv">$product</span><span class="p">,</span> <span class="nv">$mode</span><span class="p">);</span>
-</code></pre></div>
-
-
-<p>Le <code>$mode</code> n'est pas obligatoire.</p>
-
-<p>Le <code>$product</code> peut être un produit instancié ou un entier (identifiant du produit).</p>
-
-<h2>Conclusion</h2>
-
-<p>Il vous est maintenant très facile, via un peu de configuration, de changer les différents affichages de vos produits sans vous prendre la tête.</p>
-
-<p>Rien ne vous empêche comme vous pouvez le voir de créer un mode didié à une page en particulier.</p>
-
-<p>Vous pouvez <a href="https://github.com/jacquesbh/jbh_catalog">retrouver le module <code>Jbh_Catalog</code> sur Github</a>.</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/un-push-pour-vos-produits-sur-magento.html" data-text="Un push pour vos produits" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/un-push-pour-vos-produits-sur-magento.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/un-push-pour-vos-produits-sur-magento.html">Lire l'article</a>
-
-    </div>
-
 
 <div class="pagination">
     <hr/>
@@ -1127,7 +1093,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
     –
     
     
-    <span class="page_number">Page 4 sur 7</span>
+    <span class="page_number">Page 4 sur 8</span>
     
     
     –
@@ -1282,6 +1248,10 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
         
     
 
+    
+
+    
+        
     
 
     

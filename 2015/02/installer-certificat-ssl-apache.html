@@ -4,9 +4,9 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <title>Ajouter un handle au layout sur Magento - Jacques Bodin-Hullin, développeur Magento</title>
-    <meta name="description" content="Il est très utile d'avoir des handles personnalisés dans notre layout pour certaines pages.">
-    <meta name="keywords" content="layout, magento, handle, events">
+    <title>Installation de votre SSL + Top sécurité - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Maintenant que vous avez un certificat SSL, il vous faut l'installer ! Je vous propose de vous montrer comment le faire sur Apache et ainsi avoir une note A+ en sécurité.">
+    <meta name="keywords" content="ssl apache securite">
     <meta name="author" content="Jacques Bodin-Hullin">
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
@@ -221,113 +221,164 @@
 
     <div id="contentWrap" class="post">
 
-        <h1>Ajouter un handle au layout sur Magento</h1>
+        <h1>Installation de votre SSL + Top sécurité</h1>
 
-        <blockquote><p>Hey Jacques, c'est possible d'avoir un affichage différent suivant le type de produit ?</p></blockquote>
+        <div class="carrousel">
+    <img src="/images/posts/installer-certificat-ssl-apache/ssl-security--grade-a.png" width="608" />
+</div>
 
-<p>Bah évidemment ! Et c'est même natif sur Magento !</p>
 
-<blockquote><p>Et on peut faire la même chose sur notre système éditorial ? Pour que suivant le type de news l'affichage soit différent ?</p></blockquote>
-
-<p>Oui on peut, mais là ça implique un peu de dev !</p>
-
-<blockquote><p>Il te faut combien de temps ?</p></blockquote>
-
-<p>Je ne sais pas, pour mettre en place la personnalisation il faut 30 petites minutes... Ensuite pour faire ton templating bah ça dépendra de l'intégration que tu vas me fournir !</p>
-
-<hr />
-
-<p>C'est typiquement le genre de discussion qu'on peut avoir avec un chef de projet qui a besoin d'aller vite et qui vient vous voir pour estimer le travail qu'il va devoir donner aux développeurs. Mais quand on donne au développeur, qui, soit dit en passant, n'a jamais touché aux <em>handles personnalisés</em> sur Magento, ce travail... Et bien il a du mal à voir comment faire, et surtout... comment le faire en 30 minutes !</p>
-
-<p>Laissez-moi vous montrer ;)</p>
+<p>Maintenant que vous avez acheté <a href="http://jacques.sh/2014/08/certificat-ssl-business.html">votre certificat SSL Business</a> et que vous êtes prêt à l'installer sur votre serveur, voici quelques astuces pour obtenir la qualité optimale au niveau sécurité et ainsi éviter que votre site ne s'affiche pas sur certains navigateurs (Android etc.) à cause d'une alerte de sécurité !</p>
 
 <!-- more start -->
 
 
 <hr />
 
-<p>Avant toute chose vous devez savoir <a href="http://jacques.sh/le-layout-sur-magento.html">comment fonctionne le layout sur Magento</a>. Sans ça vous risquez d'être un peu perdu dans la suite de cet article.</p>
+<h3>Les ingrédients</h3>
 
-<p>On sait que les handles par défaut qui sont chargés sur notre page <code>frontname/controller/action</code> sont les suivants :</p>
+<p>Pour réaliser cette recette il vous faudra :</p>
 
-<ul>
-<li><code>default</code> : handle principal par défaut</li>
-<li><code>STORE_default</code> : handle du store (par défaut)</li>
-<li><code>THEME_frontend_default_default</code> : handle du thème (par défaut)</li>
-<li><code>frontname_controller_action</code> : handle de notre action</li>
-</ul>
-
-
-<p>On peut aussi avoir les handles <code>customer_logged_out</code> ou <code>customer_logged_in</code> qui permettent de changer l'affichage suivant si le visiteur est connecté ou non.</p>
-
-<p>Maintenant qu'on a ces handles il faut songer à en ajouter... Mais comment ?</p>
-
-<h2>La méthode <code>loadLayout()</code></h2>
-
-<p>Quand on a l'occasion de créer nos propres actions il est vite nécessaire de charger le layout (et donc les handles cités plus haut). Et pour ça c'est la méthode <code>loadLayout()</code> dans notre contrôleur qui fait l'affaire.</p>
-
-<p>Mais cette méthode, elle fait quoi exactement ??</p>
-
-<p>La méthode <code>loadLayout()</code> décortiquée/complétée/nettoyée et commentée ci-dessous :</p>
-
-<script type="text/javascript">gist(jacquesbh/4401568, 'load_layout.php', '18-19,30-31,33-35,37-39,50-53');</script>
+<ol>
+<li>La clé de votre certificat : <code>jacques.sh.key</code> ;</li>
+<li>Votre certificat : <code>jacques.sh.crt</code> ;</li>
+<li>Le bundle de votre certificat : <code>jacques.sh.bundle</code>.</li>
+</ol>
 
 
-<p>Vous avez compris le fonctionnement ? Les points les plus importants sont surlignés.</p>
+<p>Le premier ingrédient est facile à trouver puisque vous l'avez généré vous-même en même temps que votre <code>Certificate Signing Request</code> (<code>CSR</code>).</p>
 
-<p>Ok, next ;)</p>
+<p>Le second, le certificat, vous est délivré par une <a href="http://jacques.sh/2014/08/certificat-ssl-business.html">autorité de certification telle que gandi</a> par exemple (là où vous l'avez acheté tout simplement).</p>
 
-<h2>Un évènement</h2>
+<p>La dernier est plus difficile à avoir. Voici comment faire.</p>
 
-<p>Vous avez sans doute remarqué qu'un évènement <code>controller_action_layout_load_before</code> est lancé pile poil avant la génération du XML du Layout qui sera utilisé sur la page... C'est pas par hasard hein ;)</p>
+<h3>Le bon bundle</h3>
 
-<p>Sauf que le nom de cet évènement, quand on y regarde de plus près, bah il est commun à toutes les pages ! Comment savoir alors si on est bien sur <code>frontname/controller/action</code> ?</p>
+<p>Le bundle c'est votre chaîne de certification. C'est tout simplement un fichier qui contient les certificats de la chaine les uns en dessous des autres.<br/>
+La chaine de certification commence par votre certificat et se termine par un certicat root. Par contre le bundle ne contient ni votre certificat ni le certificat root mais seulements ceux qui sont intermédiaires.
+C'est pour cette raison que ces certificats sont aussi appelés des « intermédiaires » car c'est tout simplement leur rôle.</p>
 
-<p>Je vais vous donner une solution rapide à mettre en place mais qui ne fonctionnera que sur certains projets assez petits car si vous voulez souvent "taper" sur cet évènement il faudra trouver autre chose. Par chance je l'explique plus bas !</p>
+<p>En général il y a 3 ou 4 certificats (en comptant le vôtre et le root) dans la chaîne (<a href="https://www.sslshopper.com/ssl-checker.html#hostname=google.com" target="_blank">exemple avec google</a>).</p>
 
-<p>Nous devons dans tous les cas agir sur notre évènement, donc un peu de config, et une classe avec une méthode <code>layoutLoadBefore</code> (pas très original, mais assez parlant) et le tour est joué !</p>
+<p>Le problème c'est d'avoir les bons intermédiaires pour avoir le bon bundle !</p>
 
-<p>Dans cette méthode on va simplement vérifier que nous sommes bien en train d'afficher notre action et nous allons pouvoir y faire l'ajout de notre nouvel handle :</p>
+<p>Prenons l'exemple d'un certificat Business COMODO chiffré avec l'algorithme SHA2 :</p>
 
-<script type="text/javascript">gist(jacquesbh/4401568, 'observer_handle.php', '12-18');</script>
-
-
-<p>L'idée c'est surtout de ne pas utiliser une triple condition à la <code>if ($action == 'action' &amp;&amp; $controller == 'controller' &amp;&amp; $module == 'module')</code> car c'est bien trop lourd. On a la possibilité d'avoir un nom d'action précis, alors on fait un case !</p>
-
-<p>Ensuite on ajoute notre handle personnalisé, en majuscules (eh oui !).</p>
-
-<p>Rien ne nous empêche de récupérer un objet dans le registre pour y ajouter un peu de dynamisme (c'est l'idée en fait) : <em>exemple avec une "news"</em></p>
-
-<script type="text/javascript">gist(jacquesbh/4401568, 'observer_news.php', '15-18');</script>
+<ol>
+<li><code>jacques.sh.crt</code> : c'est le vôtre ;</li>
+<li><code>COMODOExtendedValidationSecureServerCA2.pem</code> : c'est le dernier intermédiaire ;</li>
+<li><code>COMODORSAAddTrustCA.crt</code> : c'est le second intermédiaire. Il est signé par un <code>root certificate</code> ;</li>
+<li><code>AddTrust External CA Root.cer</code> : c'est le certificat root. Il est auto-signé et dans le « Trust Store », donc il ne lèvera pas d'exception de sécurité.</li>
+</ol>
 
 
-<p>A vous de jouer !</p>
+<p>Au passage, les seuls certificats auto-signés qui sont acceptés par défaut par votre navigateur sont ceux qui sont dans le Trust Store.</p>
 
-<h2>Vérifions</h2>
+<p>Et dans le bundle on met quoi alors ? Et bien on prend les intermédiaires et on les concatène dans leur priorité croissante : le plus proche de votre certificat en premier.</p>
 
-<p>Pour vérifier que notre handle est présent, rien de plus simple : on ouvre le fichier <code>index.php</code> et on ajoute à la fin du fichier ces quelques lignes.</p>
+<pre><code>-----BEGIN CERTIFICATE-----
+[...]o/Br0Oksxgn
+KKlHMd99SUW[...]
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+[...]bCBDQSBSb29
+sHNA7qxcS1u[...]
+-----END CERTIFICATE-----
+</code></pre>
 
-<script type="text/javascript">gist(jacquesbh/4401568, 'index.php');</script>
+<p>De <code>-----BEGIN CERTIFICATE-----</code> à <code>-----END CERTIFICATE-----</code> c'est un certificat. Le premier est donc le contenu de <code>COMODOExtendedValidationSecureServerCA2.pem</code> et le second le contenu de <code>COMODORSAAddTrustCA.crt</code>.</p>
+
+<p>On a notre <code>jacques.sh.bundle</code> !</p>
+
+<p>Le problème c'est : <strong>comment on sait qu'on ne s'est pas trompé ?</strong></p>
+
+<p>Un certificat est signé par un autre, sauf le root qui est auto-signé. Donc si on veut le « papa » d'un certificat, que ça soit un intermédiaire ou le certifiat final, il nous faut savoir qui l'a émis.<br/>
+Pour ça on ouvre le certificat et on trouve le <code>Common name</code> du <code>Issuer</code>. En gros on veut le nom du certificat parent.</p>
+
+<p>Voici un exemple avec un intermédiaire COMODO (présicément celui de notre exemple, le <code>COMODORSAAddTrustCA.crt</code>) :</p>
+
+<p class="center">
+    <img src="/images/posts/installer-certificat-ssl-apache/intermediate.png" width="608" />
+</p>
 
 
-<p>On actualise ! Et pof ! (tout en bas..)</p>
+<p>Le papa c'est donc <code>AddTrust External CA Root</code>. Oh bah tiens, c'est le root !</p>
 
-<h2>En mieux ?</h2>
+<p>Une fois votre certificat installé sur votre serveur avec son bundle, pensez à vérifier que tout est bon ici : <a href="https://www.sslshopper.com/ssl-checker.html">https://www.sslshopper.com/ssl-checker.html</a><br/>
+Ce site vous dira si votre chaîne n'est pas bonne.</p>
 
-<p>Si vous devez faire un event sur plein de modules car vous avez souvent besoin de faire de l'affichage personnalisé (c'est super pratique il faut l'avouer !) et bien je vous propose de faire plutôt ceci : lancer un évènement un peu plus personnalisé !</p>
+<p>On dit souvent qu'on a pas besoin d'inclure les intermédiaires. Mais il s'avère que certains navigateurs (surtout sur mobile) ne font pas de recherche pour trouver les certificats intermédiaires pour vous. Il faut les fournir !</p>
 
-<p>Vous vous souvenez, on a un évènement "global". Mais cet évènement nous donne le nom de l'action (via <code>$observer-&gt;getAction()-&gt;getFullActionName()</code>).</p>
+<p><em>Note : votre certificat doit être chiffré avec l'algorithme SHA2 car le SHA1 est en fin de vie. Par conséquent le SHA2 n'étant pas géré par tous les navigateurs à l'heure où j'écris ces lignes, il est possible que vous soyez obligé d'ajouter un intermédiaire "cross-signed" dans votre bundle. Plus d'infos ici sur les intermédiaires ici : <a href="http://wiki.gandi.net/fr/ssl/intermediate">http://wiki.gandi.net/fr/ssl/intermediate</a></em></p>
 
-<p>On peut donc lancer un évènement précis pour chaque page sur notre e-commerce :</p>
+<h3>Installation sur Apache</h3>
 
-<script type="text/javascript">gist(jacquesbh/4401568, 'observer_dispatch.php', '13-16');</script>
+<p>Là c'est super simple, il vous suffit de reproduire ça dans votre VirtualHost en changeant les chemins !</p>
 
+<p>Évidemment n'oubliez pas de copier les fichiers sur votre serveur !</p>
 
-<p>De cette manière on peut utiliser l'évènement <code>controller_action_layout_load_before_frontname_controller_action</code> pour ajouter notre handle sans crainte !</p>
+<pre><code>&lt;IfModule mod_ssl.c&gt;
+    # Activate SSL
+    SSLEngine on
 
-<h2>Et au final ?</h2>
+    # Certificates
+    SSLCertificateFile /etc/ssl/certs/jacques.sh/jacques.sh.crt
+    SSLCertificateKeyFile /etc/ssl/certs/jacques.sh/jacques.sh.key
+    SSLCertificateChainFile /etc/ssl/certs/jacques.sh/jacques.sh.bundle
+&lt;/IfModule&gt;
+</code></pre>
 
-<p>Au final... n'abusez pas des évènements ;)</p>
+<p>Et la sécurité dans tout ça ? Là on a notre certificat mais ça ne nous donne pas une note A+ sur <a href="https://www.ssllabs.com/ssltest/analyze.html">SSL Labs</a> !</p>
+
+<p>On va ajouter quelques petits détails sous nos certificats :</p>
+
+<pre><code># Security
+SSLCipherSuite AES128+EECDH:AES128+EDH
+SSLProtocol All -SSLv2 -SSLv3
+SSLHonorCipherOrder On
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+
+# More security - Requires Apache &gt;= 2.4
+SSLCompression off 
+SSLUseStapling on 
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+</code></pre>
+
+<p>Attention à la partie qui ne concerne que Apache >= 2.4 !</p>
+
+<p>On a donc ceci dans notre VirtualHost :</p>
+
+<pre><code>&lt;IfModule mod_ssl.c&gt;
+    # Activate SSL
+    SSLEngine on
+
+    # Certificates
+    SSLCertificateFile /etc/ssl/certs/jacques.sh/jacques.sh.crt
+    SSLCertificateKeyFile /etc/ssl/certs/jacques.sh/jacques.sh.key
+    SSLCertificateChainFile /etc/ssl/certs/jacques.sh/jacques.sh.bundle
+
+    # Security
+    SSLCipherSuite AES128+EECDH:AES128+EDH
+    SSLProtocol All -SSLv2 -SSLv3
+    SSLHonorCipherOrder On
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+    Header always set X-Frame-Options DENY
+    Header always set X-Content-Type-Options nosniff
+
+    # More security - Requires Apache &gt;= 2.4
+    SSLCompression off 
+    SSLUseStapling on 
+    SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+&lt;/IfModule&gt;
+</code></pre>
+
+<p>Vous trouverez plus d'infos sur la partie <a href="https://cipherli.st/">sécurité sur Cipherli.st</a> pour Apache/Nginx/Lighttpd/haproxy…</p>
+
+<p>N'oublier pas de lancer un petit <code>apache2ctl -t</code> avant de recharger la configuration.</p>
+
+<p>Et en dernier, <a href="https://www.ssllabs.com/ssltest/analyze.html">testez votre site sur ssllabs</a> !</p>
 
 <!-- more end -->
 
@@ -373,33 +424,26 @@
         </li>
         <li>
             <span>Publié le</span>
-            <strong>29 December 2012</strong>
+            <strong>14 February 2015</strong>
         </li>
         <li>
             <span>Les tags</span>
             <strong>
                 
-                <a href="/search.html#!tag=Magento">Magento</a>, 
+                <a href="/search.html#!tag=SSL">SSL</a>, 
                 
-                <a href="/search.html#!tag=Layout">Layout</a>, 
+                <a href="/search.html#!tag=Apache">Apache</a>, 
                 
-                <a href="/search.html#!tag=Handle">Handle</a>, 
-                
-                <a href="/search.html#!tag=Events">Events</a>
+                <a href="/search.html#!tag=Sécurité">Sécurité</a>
                 
             </strong>
         </li>
         
         
-        <li>
-            <span>Gist associé</span>
-            <strong><a href="https://gist.github.com/jacquesbh/4401568">jacquesbh/4401568</a></strong>
-        </li>
-        
     </ul>
 
     <div class="social">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/ajouter-un-handle-personnalise-sur-une-page-sur-magento.html" data-text="Ajouter un handle au layout sur Magento" data-via="jacquesbh">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2015/02/installer-certificat-ssl-apache.html" data-text="Installation de votre SSL + Top sécurité" data-via="jacquesbh">Tweet</a>
     </div>
 
     

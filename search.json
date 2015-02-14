@@ -2,6 +2,17 @@
     "posts": [
         
         {
+            "title": "Installation de votre SSL + Top sécurité",
+            "subtitle": "",
+            "keywords": "ssl apache securite",
+            "tags": ["SSL","Apache","Sécurité"],
+            "categories": [],
+            "description": "Maintenant que vous avez un certificat SSL, il vous faut l'installer ! Je vous propose de vous montrer comment le faire sur Apache et ainsi avoir une note A+ en sécurité.",
+            "url": "/2015/02/installer-certificat-ssl-apache.html",
+            "date": "14 February 2015"
+        },
+        
+        {
             "title": "Bilan 2013-2014, en avant 2015 !",
             "subtitle": "",
             "keywords": "afup \"monsieur biz\"",

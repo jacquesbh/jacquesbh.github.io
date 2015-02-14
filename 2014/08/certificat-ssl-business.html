@@ -187,6 +187,10 @@
         
     
 
+    
+        
+    
+
 
 
 
@@ -219,7 +223,9 @@
 
         <h1>Votre certificat SSL Business</h1>
 
-        <p>Un certificat SSL, pour Secure Socket Layer, est basé sur plusieurs fichiers qui permettent le chiffrement des données entre le client (vous) et un site tiers.</p>
+        <p><em>[Dernière mise à jour le 14/02/2015.]</em></p>
+
+<p>Un certificat SSL, pour Secure Socket Layer, est basé sur plusieurs fichiers qui permettent le chiffrement des données entre le client (vous) et un site tiers.</p>
 
 <p>En e-commerce nous avons souvent recourt à un certificat SSL pour sécuriser les données que vous échangez avec le site marchand. Comme par exemple votre adresse postale, vos informations de connexion et bien plus encore.</p>
 
@@ -287,7 +293,8 @@ Après c'est vrai que c'est le même prix...</p>
 
 <p>Le CSR est une clé que vous devez générer. Vous obtenez ainsi deux fichiers lors de la génération, un fichier <code>.csr</code> (le fichier dont nous avons besoin) et un fichier <code>.key</code> (fichier que vous devez garder précieusement !).</p>
 
-<p>Vous pouvez générer la commande permettant d'obtenir ces deux fichiers via le <a href="https://www.gandi.net/ssl/create/openssl">générateur proposé par gandi</a>. La commande devra ensuite être lancée sur une console UNIX avec openssl (sur mac ou linux).</p>
+<p>Vous pouvez générer la commande permettant d'obtenir ces deux fichiers via le <a href="https://www.gandi.net/ssl/create/openssl">générateur proposé par gandi</a>. La commande devra ensuite être lancée sur une console UNIX avec openssl (sur mac ou linux).<br/>
+À la fin de la commande proposée par Gandi, ajoutez <code>-sha256</code> afin de changer l'algorithme de chiffrage qui sera utilisé. En effet le SHA1 est en fin de vie, il vous faut utiliser SHA2.</p>
 
 <p><strong>Attention !</strong> Renseignez les bonnes informations pour le CSR ! On vous demande par exemple l'<strong>Organisation : il s'agit de la raison sociale</strong> et non pas du nom commercial ! C'est très important !</p>
 
@@ -336,7 +343,16 @@ Après c'est vrai que c'est le même prix...</p>
 </ul>
 
 
-<p>Une fois que c'est fait vous n'avez plus qu'à attendre. À noter que COMODO passera un appel téléphonique aux différentes personnes indiquées sur le formulaire. Justement le formulaire...</p>
+<p>Une fois que c'est fait vous n'avez plus qu'à attendre. À noter que COMODO passera un appel téléphonique aux différentes personnes indiquées sur le formulaire.</p>
+
+<p><em>Attention : COMODO doit vous appeler. Par conséquent ils vont vouloir vérifier le numéro de téléphone. Si vous êtes dans les Pages Jaunes et que le numéro correspond alors ça ira très bien. Sinon vous devez apparaître sur un site qui donne votre numéro officiel. Du coup évitez votre numéro de portable !</em><br/>
+<em>Si vous avez une ligne SIP alors pensez à la redirection de l'appel vers votre mobile… car évidemment ils appelleront quand vous ne serez pas prêt du fixe, à coup sûr !</em>
+<em>Gardez votre téléphone sur sonnerie jusqu'à ce que la validation soit faite si vous ne voulez pas attendre trop longtemps. D'expérience ils se fichent un peu de savoir dans quel fuseau horaire vous êtes :).</em></p>
+
+<p><em>Autre chose, si vous êtes seul dans votre société, ça ne va pas aider. La personne qui va vous appeler va demander à vérifier votre identité auprès d'un collègue. Dites simplement que vous êtes "self employed" et que vous n'avez pas de collègue. Soit la personne comprend et ça passe, soit elle demande quand vos collègues vont revenir et dans ce cas elle n'a rien compris. Faites en sorte qu'elle comprenne.</em><br/>
+<em>Et comme elle va insister, dites-lui de vérifier votre société via <strong>Dun &amp; Bradstreet</strong> (<a href="http://www.dnb.com/">http://www.dnb.com/</a>)</em></p>
+
+<p>Et sinon le formulaire… non parce qu'il est un peu barbare tout de même !</p>
 
 <h2>Remplir le formulaire étendu COMODO</h2>
 
@@ -353,7 +369,7 @@ Après c'est vrai que c'est le même prix...</p>
 <li><strong>Jurisdiction of Incorporation</strong> : Il s'agit des infos de votre RCS. Donc la ville, le département et le Pays (FRANCE !)</li>
 <li><strong>Incorporating Agency</strong> : Pour nous ça sera gandi. C'est eux qui nous délivrent le certificat au final.</li>
 <li><strong>Registration Number</strong> : Il s'agit du numéro SIREN de la société.</li>
-<li><strong>Certificate Requester</strong> : Ici il faut indiquer les coordonnées de la société ou de la personne qui fait la demande. Soit c'est vous-même, soit c'est votre agence web (par exemple). De manière générale chez Monsieur Biz nous ne faisons qu'accompagner notre client dans les démarches. Notre client renseigne donc ici ses propres coordonnées.</li>
+<li><strong>Certificate Requester</strong> : Ici il faut indiquer les coordonnées de la société ou de la personne qui fait la demande. Soit c'est vous-même, soit c'est votre agence web (par exemple). De manière générale chez Monsieur Biz nous ne faisons qu'accompagner notre client dans les démarches. Notre client renseigne donc ici ses propres coordonnées. Attention à préciser un numéro de téléphone qui est vérifiable (dans les Pages Jaunes par exemple).</li>
 <li><strong>Applicant Address</strong> : Siège social de la société.</li>
 <li><strong>Certificate Approver</strong> : Il s'agit de la personne qui approuve la demande du certificat. À priori, la société. <strong>Idéalement il s'agit d'une personne sur le KBis, ainsi c'est beaucoup plus simple</strong>.</li>
 <li><strong>Contract Signer</strong> : Il s'agit de la personne qui signe le contrat. Faites en sorte que ça soit la même personne que le <strong>Certificat Approver</strong>, ça facilitera la démarche de COMODO.</li>
@@ -374,7 +390,8 @@ Après c'est vrai que c'est le même prix...</p>
 
 <h2>Installation du certificat</h2>
 
-<p>Là je vous propose de faire appel à votre administrateur système ou à l'agence avec qui vous travaillez. Ils feront ça à merveille !</p>
+<p>Évidemment j'ose espérer que votre adminsys saura installer votre certificat.<br/>
+Sinon vous pouvez aussi aller lire mon article qui vous explique <a href="http://jacques.sh/2015/02/installer-certificat-ssl-apache.html">comment installer un certificat SSL avec une sécurité renforcée sur votre serveur</a>.</p>
 
 <!-- more end -->
 
@@ -578,6 +595,10 @@ Après c'est vrai que c'est le même prix...</p>
         
     
 
+    
+
+    
+        
     
 
     

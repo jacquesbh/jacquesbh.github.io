@@ -4,13 +4,21 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2015-02-13T18:04:09+01:00</updated>
+ <updated>2015-02-14T14:38:51+01:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Installation de votre SSL + Top sécurité</title>
+   <link href="http://jacques.sh/2015/02/installer-certificat-ssl-apache.html"/>
+   <updated>2015-02-14T01:00:00+01:00</updated>
+   <id>http://jacques.sh/2015/02/installer-certificat-ssl-apache</id>
+   <content type="html"><![CDATA[Maintenant que vous avez un certificat SSL, il vous faut l&#39;installer ! Je vous propose de vous montrer comment le faire sur Apache et ainsi avoir une note A+ en sécurité.]]></content>
+ </entry>
  
  <entry>
    <title>Bilan 2013-2014, en avant 2015 !</title>
@@ -82,14 +90,6 @@
    <updated>2013-05-05T23:00:00+02:00</updated>
    <id>http://jacques.sh/2013/05/fluid-et-zimbra-sur-mac-osx</id>
    <content type="html"><![CDATA[Oubliez votre client mail habituel et utilisez Zimbra avec Fluid sur Mac OS X.]]></content>
- </entry>
- 
- <entry>
-   <title>Une sidebar pour les développeurs</title>
-   <link href="http://jacques.sh/2013/03/sidebar-magento-developers.html"/>
-   <updated>2013-03-18T02:30:00+01:00</updated>
-   <id>http://jacques.sh/2013/03/sidebar-magento-developers</id>
-   <content type="html"><![CDATA[Vider le cache, activer les aides de vue, réindexer... Tout ça rapidement !]]></content>
  </entry>
  
  
