@@ -615,6 +615,9 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
 
 <p>Vous trouverez plus d'infos sur la partie <a href="https://cipherli.st/">sécurité sur Cipherli.st</a> pour Apache/Nginx/Lighttpd/haproxy…</p>
 
+<p>Avec la <code>CipherSuite</code> ci dessus certains navigateurs comme IE8 sur Windows XP ne pourront pas afficher votre site. C'est un choix qui n'est pas anodin.
+Vous pouvez utiliser le <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">générateur de configuration SSL proposé par Mozilla</a> pour avoir quelque chose qui vous convienne.</p>
+
 <p>N'oublier pas de lancer un petit <code>apache2ctl -t</code> avant de recharger la configuration.</p>
 
 <p>Et en dernier, <a href="https://www.ssllabs.com/ssltest/analyze.html">testez votre site sur ssllabs</a> !</p>
