@@ -6,17 +6,17 @@ I hereby claim:
 
   * I am an admin of http://jacques.sh
   * I am jacquesbh (https://keybase.io/jacquesbh) on keybase.
-  * I have a public key with fingerprint 8FC6 E26C BB61 1469 9EA2  8B19 4BE7 A065 2BBF 004E
+  * I have a public key with fingerprint DEB8 A04A 7CB9 5FD7 57E8  B1A0 5B80 3023 D40A 0F67
 
 To do so, I am signing this object:
 
 {
     "body": {
         "key": {
-            "fingerprint": "8fc6e26cbb6114699ea28b194be7a0652bbf004e",
+            "fingerprint": "deb8a04a7cb95fd757e8b1a05b803023d40a0f67",
             "host": "keybase.io",
-            "key_id": "4be7a0652bbf004e",
-            "kid": "0111ff822ec68553aeb0ee3902f27b237cde2e33b068ad715e4fcf9180ad04a7e2ab0a",
+            "key_id": "5b803023d40a0f67",
+            "kid": "0101f1f4c7713a88492ada7743b1e3e992bd07da387f1970f716c8f1f5c30bdd051a0a",
             "uid": "ac68450423a59124e4ef2ce07a0ec319",
             "username": "jacquesbh"
         },
@@ -27,10 +27,10 @@ To do so, I am signing this object:
         "type": "web_service_binding",
         "version": 1
     },
-    "ctime": 1432912076,
+    "ctime": 1432913728,
     "expire_in": 157680000,
-    "prev": "e7bd7db541fcbacae7927dabcb2aff126cd5eacf719860e0384043f0a5ac2284",
-    "seqno": 4,
+    "prev": "bee44be8e0f8f22e302119d57ed1ceb1a4d1996b1ac83b5552905bac597cdae1",
+    "seqno": 11,
     "tag": "signature"
 }
 
@@ -40,18 +40,23 @@ which yields the signature:
 Version: Keybase OpenPGP v2.0.8
 Comment: https://keybase.io/crypto
 
-yME7AnicbZK/axYxGMevWgVfKthFCt2ig9KXkuRyl7tbuomiuKmL+PIk9+S9WL27
-3t372lIKLuJ/ILgVXBQqiOgmSMVBUDqJS3FxEZcXXBSXYvKig2CWkG++z+f5kbw9
-fjjozV/8uo1Lr4PLM+93V0bBleLuh02iqnyDZJtkFaebseUQm7qxZUcykhgdI4+1
-UjFjIk5TBJ4olgqFEmgccaUMpQJJnxRV6yMcRkGLy7ZymjsMbO7U//hXpxeUMWZM
-wjnqOImiEFBRxDCl3HCpeCh1jhzDUNE4gVyyCIXRJmUJhZwKkMhBUXC40RQHjiIi
-KngIUcq4QIGGa6QuOeqQpd7YYlPCbXTum6DXRtiqgmz1iZPHVqOfgW/lX8tyW7jQ
-uqm6Sle3nF50XZ35sG6j9r47qAZ/CANly9xN0QWMsWltVZKMOafurEcyEXJXGpVx
-n+B6bRscWO+IZJxQt3waHDskSpXLXEWCGa1AA8qUyxyUVhyMYe5V8ghBG8nSJKZI
-w0RQERoKEWjOE0F8T2tlRTLhyoShQ7Z2WEI3apBsvbkxG8z3gqNHDvlvEPSOnfj7
-ORZMcLC0s737mZz8dnZunZxaePL0x8tLw/s/r764N/n08cvz/Z2Z4NH1yau92Xff
-V84cLP56du3h+eDxXjA3uRDunz43flBnvwF5w8tF
-=gTYN
+yMIYAnicbVJdSBRBHD81xSyzHiqDDFkLfdBrZj9udk+DyAjrQTTNyz64m92Z9TZ1
+99y9M+3OSCqEoi8iMzChqISsiKIsKtKIEEQfeuiDqHwoQYUwgz6hmpV6CJqXmfnN
+7/eb/9fjzBRPRtJI4c6ywfapd0nDg2tjni3hjrVxTrVIK+ePc/V0dtMNs47aEdsw
+o5yfI1SVMRAx0lRF0gmSEJVViIGkykAAvEBEgIHuQ1whF7YcV8FsVOxQr2ExjF2C
+BmHof/j1sw8AAqhDXdQQggKWZVHhMcEIiYIKqUAVhVcJQAQLMtKhgoCOoE+TmULS
+BKASAiQWDWZ2sVk7rPlkUQIiL2BJgbxIRarzGgUIA6oJUHGJDrVN3EgZexfWmmLU
+UcNcWyHH4GZDo24N3FT+pXidMJNGbCtqaVYDw8PRaMTvyqKtEZe3m6rBPw5B1TAJ
+qyITNFPbMSyT80PG1KKGawlFgVeggHi5kKMtEcOmQcNlSMgnA7bcb2gzs1QpFUWV
+yhToss7zlNUPQoWwFhCoUdYFkUBF8bGDJguqJEm8wvqCNUlBGsEUcm5OTabFvCGL
+E9cxT8eoM3E0ZlOu7dHAjjmepAxPWmqyOwiejLkL/47H/HPpnhs71u/Z8+o9el3E
+h8xHKSlp6etGc+LVy8eeTB7bFv9Vk4NPXsO92YnM0Tzfiq2X+cXZ3d5Y1aVF3wNk
+pCi/YemH6fjEt6LnlZGh+3dr1lTwh47OFHzeuKxrwz7v5h/Tt54F83tEZ7xcCCQm
+vw4bM50he+fWeOImPb99ZWn/AfOUM0+6l95Xcbp7dQvf/lTOFdIuHKyxU/cuqA4N
+PjyrDpCb3YFNDRPn+kq+VOvBK7VHtgxXlV3MMmtf3Dla+XIkfn2Jt6N0X22/dedN
+u1iel7X96pnkrhMPCjpDvsOBpv7jtxs3vV21qOejfyC3oPfB2M8UabyE7p8aqij+
+ZCQ6Z4p/A5nzIig=
+=E0vx
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
@@ -60,4 +65,3 @@ appending to this document.
 View my publicly-auditable identity here: https://keybase.io/jacquesbh
 
 ==================================================================
-
