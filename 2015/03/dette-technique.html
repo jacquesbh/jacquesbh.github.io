@@ -4,9 +4,9 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <title>Fabric et Magento, le combo gagnant ! - Jacques Bodin-Hullin, développeur Magento</title>
-    <meta name="description" content="Déployez vos projets Magento avec Fabric en un rien de temps !">
-    <meta name="keywords" content="fabricmagento">
+    <title>Concilier Dette technique et Magento - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Magento est une grosse plateforme. La dette technique ? Oui il y en a. Comment ça se passe en vrai ?">
+    <meta name="keywords" content="monsieur bizdette technique">
     <meta name="author" content="Jacques Bodin-Hullin">
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
@@ -221,139 +221,16 @@
 
     <div id="contentWrap" class="post">
 
-        <h1>Fabric et Magento, le combo gagnant !</h1>
+        <h1>Concilier Dette technique et Magento</h1>
 
-        <div class="carrousel" style="height: 145px;">
-    <img src="/images/posts/fabric-magento/fabric.png" width="608" height="145" />
-</div>
+        <p>C'est assez difficile de parler de dette technique. Et ça n'est pas plus facile de parler de Magento.</p>
 
-
-<p>Fabric est une librairie Python et un outil en ligne de commande pour le déploiement facile et/ou l'administration système via le protocole SSH.</p>
-
-<p>Avec un simple petit fichier, le <code>fabfile.py</code>, vous allez pouvoir vous connecter sur vos serveurs, en simultané ou l'un après l'autre, et y exécuter des commandes.</p>
-
-<p>Sur de petits projets c'est vraiment magique et très simple d'utilisation. Mais très vite on est confronté à un problème :</p>
-
-<blockquote><p>Je veux lancer un déploiement en une seule commande mais mes serveurs ne font pas tous la même chose !</p></blockquote>
-
-<p>J'ai passé un bon moment à chercher une parade à tout ça tout en restant dans l'esprit de fabric ;</p>
+<p>Après la (re)lecture d'un très bon petit <a href="http://boutique.letrainde13h37.fr/products/la-dette-technique-bastien-jaillot">manuel de survie sur la dette technique par Bastien Jaillot</a> j'ai décidé d'écrire cet article.</p>
 
 <!-- more start -->
 
 
 <hr />
-
-<p>Prenons un exemple concret.</p>
-
-<p>Nous avons 2 serveurs :</p>
-
-<ol>
-<li>Le premier [le serveur Back] est un serveur dédié au Back Office de notre e-commerce. C'est également lui qui s'occupe de la base de données (partagée entre les deux serveurs) et du cache avec un Redis.</li>
-<li>Le second [le serveur Front] est un serveur dédié au Front Office. On va considérer qu'il n'a qu'un Apache pour simplifier. Evidemment il a un client MySQL et un client Redis.</li>
-</ol>
-
-
-<p>Quand nous voulons déployer il nous suffit de lancer la commande :</p>
-
-<pre><code>fab deploy
-</code></pre>
-
-<p>Et c'est là que nous avons un problème. La commande <code>deploy</code> peut ressembler à ceci :</p>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'deploy.py');</script>
-
-
-<p>Si on y regarde de plus près :</p>
-
-<ul>
-<li>La récupération des sources sur notre projet doit être exécutée à la fois sur le serveur Back et le serveur Front. Car tous les deux ont une version de notre Magento installée.<br/>
-Le premier pour afficher le Back Office et le second pour afficher le Front Office ; Jusque là rien de bien foufou.<br/>
-Vous noterez que le chemin d'accès aux sources doit ici être le même sur les deux serveurs : pas pratique.</li>
-<li>Le vidage du cache ne doit être exécuté que sur le serveur Back, car c'est lui qui gère la base de données Redis. Ça ne sert à rien de lancer cette commande sur le serveur Front car il se connecte sur le Redis du serveur Back.</li>
-<li>La réindexation n'a aucun intérêt à être lancée sur le serveur Front. Pour les mêmes raisons que Redis, c'est le serveur Back qui s'occupe de la base de données.<br/>
-Même remarque pour l'emplacement des sources, on ne peut pas avoir un dossier différent.</li>
-</ul>
-
-
-<p>Donc si on laisse faire cette commande <code>deploy</code> alors Fabric va planter dès le vidage du cache. Car au final sur le serveur Front… il n'y a pas de base de données Redis : donc pas de cache à vider.<br/>
-Voire même dès la récupération des sources si notre chemin n'est pas le même sur les deux serveurs !</p>
-
-<p>La réindexation ne fera pas planter notre déploiement mais fera deux réindexations au lieu d'une seule ; Pas idéal…</p>
-
-<h2>Et si on ajoutait des tags à nos serveurs ?</h2>
-
-<p>Ma solution a été de tagguer les différents serveurs.</p>
-
-<blockquote><p>Celui-ci a un Redis, lui un Apache, lui il gère la base de données…</p></blockquote>
-
-<p>Ainsi le vidage du cache pourra se dérouler comme suit :</p>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'clean_cache.py');</script>
-
-
-<p>Seuls les serveurs avec le tag <code>redis</code> exécuteront le <code>run()</code>.</p>
-
-<p>Avec cette idée de tags en tête j'ai pu faire évoluer mon <code>fabfile.py</code> de manière assez monstrueuse.<br/>
-Je peux maintenant ajouter un serveur de production simplement en ajoutant sa configuration.</p>
-
-<h2>Le <code>fabfile.py</code></h2>
-
-<p>Voici donc comment ça se passe concrètement.</p>
-
-<h3>Déclaration des serveurs et settings de base</h3>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'setting.py');</script>
-
-
-<p>Ici on déclare nos serveurs et pour chacun les informations suivantes :</p>
-
-<ul>
-<li>Les <code>tags</code> : Nos fameux tags !</li>
-<li>Le <code>path</code> : Il s'agit du chemin pour accéder à notre Magento sur le serveur.</li>
-</ul>
-
-
-<p>Petit plus : On va ici gérer des tags mais aussi de la configuration propre à chaque serveur ; Comme le <code>path</code> par exemple !</p>
-
-<h3>La fonction <code>_has_tag()</code></h3>
-
-<p>Dans nos différentes tâches nous aurons besoin de savoir si le <code>host</code> qui est en cours a, ou n'a pas, un tag précis.</p>
-
-<p>Voici la méthode :</p>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'has_tags.py');</script>
-
-
-<p>Celle-ci utilise <code>_get_setting()</code> qui permet de récupérer une configuration propre au <code>host</code> en cours (ou toute sa configuration) :</p>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'get_setting.py');</script>
-
-
-<p>À présent nous pouvons appeler la fonction <code>_has_tag('redis')</code> par exemple pour savoir si le <code>host</code> en cours utilise Redis.</p>
-
-<h3>Exemple de déploiement</h3>
-
-<p>Voici donc un exemple de tâche de déploiement avec la configuration que nous venons de créer, dans la simplicité :</p>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'deploy_final.py');</script>
-
-
-<p>Vous noterez que nous n'avons donc plus un seul soucis. Chaque serveur exécute ses tâches et chaque serveur a son propre <code>path</code>.</p>
-
-<h2>Aller plus loin</h2>
-
-<p>Et si on tagguait nos serveurs par environnement ?</p>
-
-<blockquote><p>Celui-ci c'est un serveur de prod avec redis, mysql et apache.<br/>
-Lui c'est un serveur de staging avec apache et mysql. Et il a un cache en fichiers car pas de redis.<br/>
-Celui-là c'est le serveur de backup. Il a juste le droit de backuper !</p></blockquote>
-
-<p>Et si on a lancé une commande de backup sur un pool de serveurs de prod ?</p>
-
-<script type="text/javascript">gist('jacquesbh/349c538bdbf179fd333b', 'backup.py');</script>
-
-
-<p>Je vous laisse cogiter ;)</p>
 
 <!-- more end -->
 
@@ -399,29 +276,24 @@ Celui-là c'est le serveur de backup. Il a juste le droit de backuper !</p></blo
         </li>
         <li>
             <span>Publié le</span>
-            <strong>14 September 2014</strong>
+            <strong>22 March 2015</strong>
         </li>
         <li>
             <span>Les tags</span>
             <strong>
                 
-                <a href="/search.html#!tag=Fabric">Fabric</a>, 
+                <a href="/search.html#!tag=Dette technique">Dette technique</a>, 
                 
-                <a href="/search.html#!tag=Magento">Magento</a>
+                <a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a>
                 
             </strong>
         </li>
         
         
-        <li>
-            <span>Gist associé</span>
-            <strong><a href="https://gist.github.com/jacquesbh/349c538bdbf179fd333b">jacquesbh/349c538bdbf179fd333b</a></strong>
-        </li>
-        
     </ul>
 
     <div class="social">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2014/09/fabric-magento.html" data-text="Fabric et Magento, le combo gagnant !" data-via="jacquesbh">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2015/03/dette-technique.html" data-text="Concilier Dette technique et Magento" data-via="jacquesbh">Tweet</a>
     </div>
 
     

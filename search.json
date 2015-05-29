@@ -2,9 +2,20 @@
     "posts": [
         
         {
+            "title": "Concilier Dette technique et Magento",
+            "subtitle": "",
+            "keywords": "[\"monsieur biz\", \"dette technique\"]",
+            "tags": ["Dette technique","Monsieur Biz"],
+            "categories": [],
+            "description": "Magento est une grosse plateforme. La dette technique ? Oui il y en a. Comment ça se passe en vrai ?",
+            "url": "/2015/03/dette-technique.html",
+            "date": "22 March 2015"
+        },
+        
+        {
             "title": "Installation de votre SSL + Top sécurité",
             "subtitle": "",
-            "keywords": "ssl apache securite",
+            "keywords": "[\"ssl\", \"apache\", \"securite\"]",
             "tags": ["SSL","Apache","Sécurité"],
             "categories": [],
             "description": "Maintenant que vous avez un certificat SSL, il vous faut l'installer ! Je vous propose de vous montrer comment le faire sur Apache et ainsi avoir une note A+ en sécurité.",
@@ -15,7 +26,7 @@
         {
             "title": "Bilan 2013-2014, en avant 2015 !",
             "subtitle": "",
-            "keywords": "afup \"monsieur biz\"",
+            "keywords": "[\"afup\", \"monsieur biz\"]",
             "tags": ["AFUP","Monsieur Biz"],
             "categories": [],
             "description": "",
@@ -26,7 +37,7 @@
         {
             "title": "Comment utiliser Vagrant et Magento ?",
             "subtitle": "",
-            "keywords": "vagrant magento",
+            "keywords": "[\"vagrant\", \"magento\"]",
             "tags": ["Vagrant","Magento"],
             "categories": [],
             "description": "Apprenez votre projet Magento avec la box Vagrant de Monsieur Biz !",
@@ -37,7 +48,7 @@
         {
             "title": "Fabric et Magento, le combo gagnant !",
             "subtitle": "",
-            "keywords": "fabric magento",
+            "keywords": "[\"fabric\", \"magento\"]",
             "tags": ["Fabric","Magento"],
             "categories": [],
             "description": "Déployez vos projets Magento avec Fabric en un rien de temps !",
@@ -48,7 +59,7 @@
         {
             "title": "Votre certificat SSL Business",
             "subtitle": "",
-            "keywords": "ssl business, sécurité, comodo, gandi,",
+            "keywords": "[\"ssl business\", \"sécurité\", \"comodo\", \"gandi\"]",
             "tags": ["SSL","Sécurité","COMODO","gandi"],
             "categories": [],
             "description": "Comprenez comment obtenir votre certificat SSL Business avec COMODO !",

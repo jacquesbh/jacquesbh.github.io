@@ -1,0 +1,63 @@
+==================================================================
+https://keybase.io/jacquesbh
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://jacques.sh
+  * I am jacquesbh (https://keybase.io/jacquesbh) on keybase.
+  * I have a public key with fingerprint 8FC6 E26C BB61 1469 9EA2  8B19 4BE7 A065 2BBF 004E
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "8fc6e26cbb6114699ea28b194be7a0652bbf004e",
+            "host": "keybase.io",
+            "key_id": "4be7a0652bbf004e",
+            "kid": "0111ff822ec68553aeb0ee3902f27b237cde2e33b068ad715e4fcf9180ad04a7e2ab0a",
+            "uid": "ac68450423a59124e4ef2ce07a0ec319",
+            "username": "jacquesbh"
+        },
+        "service": {
+            "hostname": "jacques.sh",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1432912076,
+    "expire_in": 157680000,
+    "prev": "e7bd7db541fcbacae7927dabcb2aff126cd5eacf719860e0384043f0a5ac2284",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.8
+Comment: https://keybase.io/crypto
+
+yME7AnicbZK/axYxGMevWgVfKthFCt2ig9KXkuRyl7tbuomiuKmL+PIk9+S9WL27
+3t372lIKLuJ/ILgVXBQqiOgmSMVBUDqJS3FxEZcXXBSXYvKig2CWkG++z+f5kbw9
+fjjozV/8uo1Lr4PLM+93V0bBleLuh02iqnyDZJtkFaebseUQm7qxZUcykhgdI4+1
+UjFjIk5TBJ4olgqFEmgccaUMpQJJnxRV6yMcRkGLy7ZymjsMbO7U//hXpxeUMWZM
+wjnqOImiEFBRxDCl3HCpeCh1jhzDUNE4gVyyCIXRJmUJhZwKkMhBUXC40RQHjiIi
+KngIUcq4QIGGa6QuOeqQpd7YYlPCbXTum6DXRtiqgmz1iZPHVqOfgW/lX8tyW7jQ
+uqm6Sle3nF50XZ35sG6j9r47qAZ/CANly9xN0QWMsWltVZKMOafurEcyEXJXGpVx
+n+B6bRscWO+IZJxQt3waHDskSpXLXEWCGa1AA8qUyxyUVhyMYe5V8ghBG8nSJKZI
+w0RQERoKEWjOE0F8T2tlRTLhyoShQ7Z2WEI3apBsvbkxG8z3gqNHDvlvEPSOnfj7
+ORZMcLC0s737mZz8dnZunZxaePL0x8tLw/s/r764N/n08cvz/Z2Z4NH1yau92Xff
+V84cLP56du3h+eDxXjA3uRDunz43flBnvwF5w8tF
+=gTYN
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jacquesbh
+
+==================================================================
+
