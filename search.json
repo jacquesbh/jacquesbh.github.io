@@ -2,17 +2,6 @@
     "posts": [
         
         {
-            "title": "Concilier Dette technique et Magento",
-            "subtitle": "",
-            "keywords": "[\"monsieur biz\", \"dette technique\"]",
-            "tags": ["Dette technique","Monsieur Biz"],
-            "categories": [],
-            "description": "Magento est une grosse plateforme. La dette technique ? Oui il y en a. Comment ça se passe en vrai ?",
-            "url": "/2015/03/dette-technique.html",
-            "date": "22 March 2015"
-        },
-        
-        {
             "title": "Installation de votre SSL + Top sécurité",
             "subtitle": "",
             "keywords": "[\"ssl\", \"apache\", \"securite\"]",
