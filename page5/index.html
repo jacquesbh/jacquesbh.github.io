@@ -345,9 +345,11 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Dette technique">Dette technique</a></span>
 
 </p>
 
@@ -362,6 +364,119 @@
 
     
 
+
+    <hr />
+    <h2><a href="/supprimer-le-merge-des-paniers.html">Supprimer le merge des paniers</a></h2>
+    <div class="content post">
+        <p>Sur presque tous les projets Magento sur lesquels j'ai eu l'occasion de travailler il est apparu nécessaire de désactiver le merge du panier du client avec celui du visiteur lors de la connexion.</p>
+
+<p>Pour cela nous devons commencer par <strong>identifier l'évènement</strong> lancé par Magento qui puisse nous permettre de supprimer ce fameux « merge » car aucune option en admin nous permet de l'empêcher.</p>
+
+<!-- 
+
+
+<hr />
+
+<h2>Identifier l'évènement</h2>
+
+<p>Il suffit d'investiguer un peu :</p>
+
+<p>Objet <code>Mage_Sales_Model_Quote</code>, qui est donc notre objet « panier » :</p>
+
+<p>Ligne 1678 : <code>public function merge(Mage_Sales_Model_Quote $quote)</code>.</p>
+
+<p>Pour vérifier que notre merge passe bien par là on y place un log : <code>Mage::log(__METHOD__ . ':' . __LINE__);</code>.</p>
+
+<p>On se connecte, on ajoute un produit à notre panier, on se déconnecte, on ajoute un produit dans notre panier et on se connecte à nouveau : là on a un log qui apparaît.</p>
+
+<p>Nous avons trouvé sans trop de difficultés l'endroit où est fait le merge.</p>
+
+<p>On remarque dans la méthode le lancement d'un évènement intéressant :</p>
+
+<div class="highlight"><pre><code class="php"><span class="x">Mage::dispatchEvent(</span>
+<span class="x">    $this-&gt;_eventPrefix . &#39;_merge_before&#39;,</span>
+<span class="x">    array(</span>
+<span class="x">    $this-&gt;_eventObject=&gt;$this,</span>
+<span class="x">        &#39;source&#39;=&gt;$quote</span>
+<span class="x">    )</span>
+<span class="x">);</span>
+</code></pre></div>
+
+
+<p>A partir de là on déduit que l'évènement est <code>sales_quote_merge_before</code> et que ces deux données sont :</p>
+
+<ol>
+<li>  Le panier <code>quote</code> : panier du client</li>
+<li>  Le panier <code>source</code> : panier du visiteur</li>
+</ol>
+
+
+<h2>La construction du module</h2>
+
+<ol>
+<li>  Un modèle <code>Observer</code> qui <code>catch</code> notre évènement et qui vide le panier du client.</li>
+<li>  Un helper <code>Data</code> qui nous permet de savoir si notre module est activé et si on peut vider le panier du client quand celui du visiteur est vide.</li>
+<li>  Un fichier <code>system.xml</code> qui nous permet d'ajouter un peu de configuation (configuration utilisée dans le helper).</li>
+</ol>
+
+
+<h3>Le helper</h3>
+
+<p>Le helper n'est utilisé que pour savoir deux choses :</p>
+
+<ol>
+<li>  Notre module est-il activé ? Ou plutôt, pouvons-nous supprimer le merge des paniers ? Via la méthode <code>isActive</code>.</li>
+<li>  Pouvons-nous vider le panier du client si le panier du visiteur est vide ? Via la méthode <code>cleanIfEmpty</code>.</li>
+</ol>
+
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/Helper/Data.php"></script>
+
+
+<h3>Le modèle</h3>
+
+<p>Le modèle <code>catch</code> notre évènement est vide le panier du client que si les conditions suivantes sont validées&nbsp;:</p>
+
+<ol>
+<li>  Notre module est actif.</li>
+<li>  Le panier du visiteur a des produits OU on peut vider le panier du client si le panier du visiteur est vide.</li>
+</ol>
+
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/Model/Observer.php"></script>
+
+
+<h3>Le <code>system.xml</code></h3>
+
+<p>Le <code>system.xml</code> permet d'ajouter un peu de configuration, tout simplement.</p>
+
+<p>Nous ne nous prenons pas la tête avec les <code>ACL</code> car ils sont déjà gérés par Magento pour cette partie de la configuration.</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/etc/system.xml"></script>
+
+
+<h2>Conclusion</h2>
+
+<p>Il est en réalité assez simple, à présent, via le module complet, ou en suivant les étapes de cet article, de supprimer le merge des paniers du visiteur et du client lors de la connexion de notre client.</p>
+
+<p>Vous trouverez le <a href="https://github.com/jacquesbh/jbh_cartmerge">code complet du module sur github</a>.</p>
+
+ -->
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/supprimer-le-merge-des-paniers.html" data-text="Supprimer le merge des paniers" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/supprimer-le-merge-des-paniers.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/supprimer-le-merge-des-paniers.html">Lire la suite du tutoriel</a>
+
+    </div>
 
     <hr />
     <h2><a href="/un-push-pour-vos-produits-sur-magento.html">Un push pour vos produits</a></h2>
@@ -1574,144 +1689,6 @@ C'est essentiellement à cause de ces <code>reset</code> que je force le commit 
         
 
         <a href="/git-en-entreprise.html">Lire l'article</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/utiliser-un-proxy-sur-android.html">Android + Proxy = HTTP en clair</a></h2>
-    <div class="content post">
-        <p>Ce soir j'ai joué à un jeu (dont je ne donnerai pas le nom) sur mon téléphone, sous Android 4.1.1 (Jelly Bean).</p>
-
-<p>Et il m'est venue l'idée de voir les requêtes envoyées par l'application pour enregistrer mon score...</p>
-
-<p>Procédure très facile à réaliser !</p>
-
-<!-- 
-
-
-
-
-<hr />
-
-
-<p>Ok tout d'abord je me suis dit que je pouvais peut-être sniffer les requêtes TCP depuis mon Mac à condition que le téléphone soit sur le même réseau... Pas possible.</p>
-
-<p>Ensuite je me suis dit que j'allais simplement utiliser <a href="http://www.charlesproxy.com/">Charles</a>, un proxy HTTP très sympa. J'ai donc pensé à mettre en place le proxy directement sur mon téléphone. Sauf que oui, mais non... Le proxy en place sur la connexion WiFi du téléphone n'est utilisé que par le navigateur. Enfin c'est ce qu'Android m'annonce quand je change le proxy.</p>
-
-<p>Soit.</p>
-
-<p>Je décide donc de récupérer le APK de mon application (via <a href="http://airdroid.com">AirDroid</a>) et d'utiliser une machine virtuelle android.</p>
-
-<p>Pour la machine virtuelle c'est simple... je prends le <a href="http://developer.android.com/sdk/index.html">SDK Android</a>.</p>
-
-<h2>Installer un <code>Android Virtual Device</code></h2>
-
-<p>Avant tout il nous faut donc une machine tournant sur Android. Pour ça on va simplement utiliser l'émulateur fourni avec le SDK.</p>
-
-<p>Le SDK est fraîchement téléchargé et pas complet, on remédie au problème en lançant la jolie interface <code>;)</code> :</p>
-
-<pre><code>~ $ cd Developper/android-sdk-macosx/tools/
-~/Developper/android-sdk-macosx/tools $ ./android
-</code></pre>
-
-<p><img src="/images/posts/android-http-proxy/charles.png" alt="Android SDK Manager" /></p>
-
-<p>On sélectionne l'API 16 (Android 4.1) et on installe tout ça !</p>
-
-<p>Maintenant nous avons donc tout ce qu'il faut pour créer notre <code>AVD</code>.</p>
-
-<p>On commence donc par lister les systèmes Android disponibles :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ ./android list targets
-Available Android targets:
-----------
-id: 1 or "android-16"
-     Name: Android 4.1
-     Type: Platform
-     API level: 16
-     Revision: 2
-     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in
-     ABIs : armeabi-v7a
-</code></pre>
-
-<p>Ensuite il nous faut créer notre <code>AVD</code> :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ ./android create avd -n android_4.1 -a -c 100M -t android-16
-Auto-selecting single ABI armeabi-v7a
-Android 4.1 is a basic Android platform.
-Do you wish to create a custom hardware profile [no]
-Created AVD 'android_4.1' based on Android 4.1, ARM (armeabi-v7a) processor,
-with the following hardware config:
-hw.lcd.density=240
-vm.heapSize=48
-hw.ramSize=512
-</code></pre>
-
-<p>Tapez <code>[enter]</code> ou <code>no</code> à la question sur le <code>hardware profile</code>.</p>
-
-<h2>Lancer Charles et notre <code>AVD</code></h2>
-
-<p>Avant de lancer notre nouvelle machine sous Android, nous devons lancer Charles.</p>
-
-<pre><code>clic clic
-</code></pre>
-
-<p>Voilà qui est fait.</p>
-
-<p>Et maintenant ? On lance notre émulateur !</p>
-
-<p>Attention : nous devons dire à notre émulateur que toutes les requêtes TCP passent par notre proxy, pour se faire rien de bien compliqué, nous devons ajouter l'argument <code>-http-proxy localhost:8888</code> à la ligne de commande permettant de lancer l'émulateur :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ ./emulator @android_4.1 -http-proxy localhost:8888
-</code></pre>
-
-<p>Pourquoi <code>localhost:8888</code> ? Simplement parce que par défaut Charles est actif sur le port 8888 et que nous sommes donc en local (car notre machine virtuelle est... virtuelle).</p>
-
-<p>Maintenant que nous avons une machine sous Android qui tourne et un proxy qui nous donne les informations sur toutes les requêtes TCP non chiffrées qui passent...</p>
-
-<h2>Installer notre <code>APK</code> téléchargé sur notre <code>AVD</code></h2>
-
-<p>Nous avons téléchargez notre <code>.apk</code> via <a href="http://airdroid.com">AirDroid</a> et nous devons maintenant l'installer sur notre machine Android :</p>
-
-<p>On se déplace dans le dossier <code>platform-tools</code> où se situe le fameux <code>adb</code> :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ cd ../platform-tools/
-</code></pre>
-
-<p>On installe notre <code>apk</code> téléchargé :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/platform-tools $ ./adb install ~/Downloads/SuperApplication.apk
-780 KB/s (1392781 bytes in 1.743s)
-    pkg: /data/local/tmp/SuperApplication.apk
-Success
-</code></pre>
-
-<p>Et maintenant on lance l'application sur la machine virtuelle (via le menu graphique... normal quoi) et on regarde ce que nous affiche Charles (qui enregistre ce qu'il se passe par défaut au lancement du logiciel).</p>
-
-<h2>Conclusion</h2>
-
-<p>On se rend compte que certaines applications (des jeux ? avec des scores ?) font transiter les informations en clair (connexion non sécurisée) et qu'il est donc très facile de reproduire un fonctionnement standard, avec de fausses valeurs (comment ça il a fait un score plus grand que le score maxi ???).</p>
-
-<blockquote><p>Ca s'appelle tricher ça ! Oui MONSIEUR !</p></blockquote>
-
-<p>En même temps... il existe un <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">standard qui s'appelle TLS</a>.</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/utiliser-un-proxy-sur-android.html" data-text="Android + Proxy = HTTP en clair" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/utiliser-un-proxy-sur-android.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/utiliser-un-proxy-sur-android.html">Lire l'article</a>
 
     </div>
 

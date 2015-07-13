@@ -4,9 +4,9 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <title>Créez votre type de produit, ses attributs et son jeu - Jacques Bodin-Hullin, développeur Magento</title>
-    <meta name="description" content="Appenez à créer votre type de produit sans vous tromper. Créez également votre jeu d'attributs et vos attributs personnalisés.">
-    <meta name="keywords" content="magento, attributes, set">
+    <title>Concilier Dette technique et Magento - Jacques Bodin-Hullin, développeur Magento</title>
+    <meta name="description" content="Magento est une grosse plateforme. La dette technique ? Oui il y en a. Comment ça se passe en vrai ?">
+    <meta name="keywords" content="monsieur bizdette technique">
     <meta name="author" content="Jacques Bodin-Hullin">
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
@@ -221,123 +221,62 @@
 
     <div id="contentWrap" class="post">
 
-        <h1>Créez votre type de produit, ses attributs et son jeu</h1>
+        <h1>Concilier Dette technique et Magento</h1>
 
-        <p>Quand on démarre un projet on a souvent besoin de créer nos propres types de produits.</p>
+        <p>C'est assez difficile de parler de dette technique. Et ça n'est pas plus facile de parler de Magento.</p>
 
-<p>Bien souvent on en profite aussi pour créer un ou deux jeux d'attributs et quelques attributs particuliers.</p>
+<p>Après la (re)lecture d'un très bon petit <a href="http://boutique.letrainde13h37.fr/products/la-dette-technique-bastien-jaillot">manuel de survie sur la dette technique par Bastien Jaillot</a> j'ai décidé d'écrire cet article (et ai quelques mois de retard d'ailleurs, <em>sic</em>).</p>
 
-<p>Le problème dans tout ça c'est qu'on ne sait jamais quoi faire et on oublie bien souvent un ou deux fichiers dans l'histoire...</p>
+<blockquote><p>Si vous ne savez pas ce qu'est la dette technique je vous invite (très fortement) à acheter le petit livre de Bastien et à la lire rapidement.</p></blockquote>
 
-<p>On va commencer par créer notre type (ou nos types) de produit : soyons <code>Foo</code>.</p>
+<p>Tout logiciel, et encore plus dans le web, a une dette technique. Magento n'y échappe pas ! Vraiment pas.<br/>
+On y voit encore pas mal de choses moches…</p>
+
+<script type="text/javascript">gist('35e86b688c2e2b5f8052', 'bouh-magento.php');</script>
+
+
+<p>Mais ne nous arrêtons pas là ! Voici mon retour d'expérience.</p>
 
 <!-- more start -->
 
 
 <hr />
 
-<h2>La création du type de produit <code>Foo</code></h2>
+<p>Magento est pour moi la plateforme web écrite en PHP la plus complexe à prendre en main. Même WordPress est un jeu d'enfant en comparaison.</p>
 
-<p>Notre type est identique au niveau fonctionnel du type <code>Simple</code>.</p>
+<p>Mais si nous faisons abstraction de sa complexité et que nous considérons que la dette technique du CMS/Framework utilisé compte pour zéro alors de quoi vais-je vous parler ?</p>
 
-<p>Nous avons donc deux solutions : la sale, et la propre.</p>
+<p>Une part importante de la dette technique sur un projet Magento vient du projet lui-même.<br/>
+Rien de mieux qu'un petit exemple.</p>
 
-<h3>La méthode « sale »</h3>
+<p><strong>Un fond de page dynamique</strong></p>
 
-<p>La sale consiste à dupliquer, simplement, le XML de configuration du type <code>simple</code> avec notre propre balise <code>foo</code> :</p>
+<p>On y voit tout de suite l'intérêt. Ça peut être pour de la pub, pour de la promotion interne, pour changer un peu l'habillage…<br/>
+Et comment on s'y prend ?</p>
 
-<script type="text/javascript">gist('jacquesbh/4582238', 'bad.xml', '11');</script>
+<p>J'ai entendu beaucoup de solutions. Celle qui me plaît le plus c'est :</p>
 
+<blockquote><p>On va vous développer un module qui permettra de gérer les images et ensuite vous aurez une page dans le back office qui vous permettra de changer l'image de fond de chaque boutique.</p></blockquote>
 
-<p>Vous remarquerez la ligne surlignée. Et bah oui ! Si notre type se comporte comme un produit <code>simple</code>, pourquoi créer un modèle personnalisé ?</p>
+<p><strong>WHAT?</strong> On va développer un module super complexe pour ça ?</p>
 
-<h3>La méthode « un peu plus propre »</h3>
+<p>Vous voyez où je veux en venir ?<br/>
+Pourquoi développer quelque chose alors que le natif de la plateforme va nous permettre de faire ça sans trop d'efforts ?</p>
 
-<p>L'idée c'est de dupliquer les modèles. Pourquoi ? Et bien parce que de cette manière notre type est totalement indépendant.</p>
+<p>Le but de la manœuvre est de permettre à l'administrateur de la plateforme de changer le fond de chaque boutique gérée par le système. Et ça sans trop d'efforts.</p>
 
-<p>Et puis ça permet de prévoir les évolutions ;)</p>
+<p>Vous connaissez les « variables personnalisées » sur Magento ?</p>
 
-<script type="text/javascript">gist('jacquesbh/4582238', 'good.xml', '11,12,15,16');</script>
+<p>Faites donc un simple bloc dans votre layout, conditionnez son contenu à cette variable personnalisée, et mettez un peu de CSS dans le head de votre site. Ça ne devrait prendre qu'une seule ligne, Google ne vous pénalisera pas pour ça. Uploadez l'image de fond via un bloc CMS (c'est pas super pratique effectivement, mais on trouve d'autres solutions), récupérez son URL, et changer la valeur de la variable dynamique pour votre boutique.<br/>
+Tada ! Pourquoi faire compliqué ? Et en plus c'est géré par website/store group/store.</p>
 
+<h2>La méconnaissance de Magento</h2>
 
-<p>Vous remarquez cette fois que nous avons quatre modèles personnalisés.</p>
+<p>La dette technique sur Magento arrive très vite quand le développeur ne connait pas la plateforme. Effectivement ça n'est pas évident de bien connaître cette machine.</p>
 
-<p>Pas de panique, ils font tous un <code>extends</code> sur le même modèle pour le type <code>simple</code>.</p>
-
-<h4>Le modèle principal</h4>
-
-<p>Ce modèle contient la constante qui vaut le code du type : <code>foo</code>.</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'type.php');</script>
-
-
-<h4>Le modèle de prix</h4>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'price.php');</script>
-
-
-<h4>Le modèle d'index des prix</h4>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'indexer.php');</script>
-
-
-<h4>Le data retreiver</h4>
-
-<p>Ce modèle a une méthode qui permet de récupérer le code du type. On utilise donc la constante disponible.</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'retreiver.php');</script>
-
-
-<h3>Le layout</h3>
-
-<p>Comme tout nouveau type de produit pensez à ajouter le bout de layout qui va avec ! Sinon pas de prix dans la fiche produit par exemple !</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'layout.xml');</script>
-
-
-<h3>Les attributs de type « Prix »</h3>
-
-<p>Notre nouveau type de produit va nous permettre de créer de beaux produits... mais sans prix !</p>
-
-<p>Pour avoir une gestion du prix comme le produit simple, il faut ajouter les attributs nécessaires à notre nouveau type !</p>
-
-<p>Dans un setup de votre module, mettez ceci : (c'est plutôt facile à comprendre)</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'setup_price.php');</script>
-
-
-<h2>La création du jeu d'attributs <code>Bar</code></h2>
-
-<p>Pour créer un jeu d'attribut, rien de plus simple !</p>
-
-<p>On considérera que notre nouveau jeu se base sur les mêmes attributs que le jeu par défaut.</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'set.php', '11');</script>
-
-
-<p>Il faut savoir que si on fait un <code>addAttributeSet</code> d'un jeu d'attributs existant alors celui-ci est mis à jour, tout simplement.</p>
-
-<p>C'est pour cette raison qu'on peut se dispenser de faire un <code>try/catch</code> dans notre installeur.</p>
-
-<h2>La création d'un attribut <code>baz</code></h2>
-
-<p>Dans notre installeur ou dans un update il nous suffit d'ajouter notre attribut, tout simplement, comme ceci :</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'attribute.php');</script>
-
-
-<h2>Conclusion</h2>
-
-<p>Vous pouvez maintenant ajouter rapidement un type de produit, un jeu d'attributs et des attributs !</p>
-
-<p>Cet article n'est pas complet car il ne présente pas comment ajouter un attribut à deux groupes qui sont utilisés par deux types de produits différents etc.</p>
-
-<p>Néanmoins vous trouverez beaucoup de méthode dans le modèle EAV ;)</p>
-
-<script type="text/javascript">gist('jacquesbh/4582238', 'eav_setup.php');</script>
-
-
-
+<p>Mais si on prend le temps de fouiller le Back Office on découvre énormément de choses !<br/>
+Les widgets par exemple sont un très bon moyen d'améliorer drastiquement le rendu de la boutique ! Développer un widget prend très peu de temps et on peut y faire vraiment ce qu'on veut.<br/>
+Choix de la page, de la zone, choix du template, du produit, d'une couleur, d'un titre, etc.</p>
 
 <!-- more end -->
 
@@ -383,19 +322,15 @@
         </li>
         <li>
             <span>Publié le</span>
-            <strong>21 January 2013</strong>
+            <strong>07 June 2015</strong>
         </li>
         <li>
             <span>Les tags</span>
             <strong>
                 
-                <a href="/search.html#!tag=Magento">Magento</a>, 
+                <a href="/search.html#!tag=Dette technique">Dette technique</a>, 
                 
-                <a href="/search.html#!tag=Attributes">Attributes</a>, 
-                
-                <a href="/search.html#!tag=Product">Product</a>, 
-                
-                <a href="/search.html#!tag=Product type">Product type</a>
+                <a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a>
                 
             </strong>
         </li>
@@ -403,13 +338,13 @@
         
         <li>
             <span>Gist associé</span>
-            <strong><a href="https://gist.github.com/jacquesbh/4582238">jacquesbh/4582238</a></strong>
+            <strong><a href="https://gist.github.com/35e86b688c2e2b5f8052">35e86b688c2e2b5f8052</a></strong>
         </li>
         
     </ul>
 
     <div class="social">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/01/creation-product-type-attributes-and-set.html" data-text="Créez votre type de produit, ses attributs et son jeu" data-via="jacquesbh">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2015/06/dette-technique.html" data-text="Concilier Dette technique et Magento" data-via="jacquesbh">Tweet</a>
     </div>
 
     

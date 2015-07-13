@@ -345,9 +345,11 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+    <span style="font-size:14.4px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
+
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Dette technique">Dette technique</a></span>
 
 </p>
 
@@ -362,6 +364,137 @@
 
     
 
+
+    <hr />
+    <h2><a href="/2013/02/un-attribut-dynamique-sur-magento.html">Un attribut dynamique</a></h2>
+    <div class="content post">
+        <p>Parfois il est nécessaire de faire des développements un peu <em>borderline</em>...</p>
+
+<p>Aujourd'hui je vais vous expliquer comment j'ai réalisé un petit module afin de permettre d'ajouter une valeur à un attribut de type <code>select</code> ou <code>multiselect</code>... <strong>sans quitter la page d'édition du produit</strong> <em>(ou de la catégorie)</em>. Directement depuis le champ de l'attribut.</p>
+
+<p>Sur Magento on peut avoir un <em>Backend Model</em> sur un attribut, dans le but de valider son contenu, ou encore de faire des manipulations avant et/ou après sa sauvegarde/récupération. Je vais profiter de cette fonctionnalité !</p>
+
+<p>Il s'avère qu'on peut aussi avoir un champ HTML personnalisé en admin très facilement.</p>
+
+<p>Au final c'est pas bien compliqué et le module <code>Jbh_DynamicField</code> est réutilisable ;)</p>
+
+<p>Je vous explique ?</p>
+
+<p><strong>Let's go! Borderline!</strong></p>
+
+<!-- 
+
+
+<hr />
+
+<p>Pour commencer je vous explique ce que fait ce champ dynamique :</p>
+
+<p><img src="/images/posts/un-attribut-dynamique-sur-magento/dynamic-field.png" title="Le champ dynamique" alt="&quot;Le champ dynamique&quot;" /></p>
+
+<p>L'idée c'est que si vous remplissez le champ <em>Nouvelle valeur</em> alors la valeur entrée sera ajoutée aux options possibles pour l'attribut concerné.<br/>
+Quand le champ est de type <code>select</code> alors l'option sera en plus assignée à l'attribut. Si c'est un attribut <code>multiselect</code> alors l'option sera ajoutée aux options déjà sélectionnées.</p>
+
+<p>Il faut noter qu'un évènement est lancé lorsqu'une option est ajoutée. C'est très pratique quand on veut effectuer une action lors de l'ajout d'une option.<br/>
+Par contre attention ! Aucun évènement n'est lancé quand une option est ajoutée via l'administration des attributs !</p>
+
+<h2>Un champ HTML personnalisé</h2>
+
+<p>Magento permet, via la colonne <code>frontend_input_renderer</code>, de la table <code>catalog_eav_attribut</code>, de changer le <code>renderer</code> (le block qui fait le rendu HTML) de l'attribut dans les formulaire où celui-ci est utilisé.</p>
+
+<p>J'ai donc ajouté deux nouveaux blocks :</p>
+
+<ol>
+<li><code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Select</code> pour gérer les attributs de type <code>select</code>.</li>
+<li><code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Multiselect</code> pour gérer les attributs de type <code>multiselect</code>.</li>
+</ol>
+
+
+<p>Ces deux blocks sont simples. Ils ajoutent un champ nommé <code>jbh_dynamicfield_CODE</code> dans notre formulaire, avec <code>CODE</code> qui est le code de l'attribut.</p>
+
+<p>Voici le block <code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Select</code> :</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/Jbh_DynamicField/raw/master/app/code/community/Jbh/DynamicField/Block/Adminhtml/Catalog/Product/Renderer/Select.php"></script>
+
+
+<p>Le block <code>Jbh_DynamicField_Block_Adminhtml_Catalog_Product_Renderer_Multiselect</code> est identique au niveau de la méthode <code>getElementHtml</code> mais les deux blocks n'étendent pas la même classe. Les traits de PHP seraient ici une bonne alternative à ce copier/coller.</p>
+
+<h2>Une sauvegarde améliorée</h2>
+
+<p>Cette fois c'est dans la table <code>eav_attribute</code> et via la colonne <code>backend_model</code> que Magento nous permet de modifier la sauvegarde (et/ou le chargement) de notre attribut.</p>
+
+<p>J'ai donc logiquement créé deux nouveaux modèles :</p>
+
+<ol>
+<li><code>Jbh_DynamicField_Model_Catalog_Product_Attribute_Backend_Select</code> pour gérer les attributs de type <code>select</code>.</li>
+<li><code>Jbh_DynamicField_Model_Catalog_Product_Attribute_Backend_Multiselect</code> pour gérer les attributs de type <code>multiselect</code>.</li>
+</ol>
+
+
+<p>Des deux modèles permettent d'ajouter une option à notre attribut si le champ supplémentaire ajouté par le <code>renderer</code> contient quelque chose.</p>
+
+<p>L'idée c'est donc de récupérer le code de l'attribut, puis le nom du champ supplémentaire.<br/>
+Ensuite on effectue une vérification simple pour savoir s'il contient quelque chose.<br/>
+Si c'est le cas alors on ajoute la nouvelle option. <em>Aucune déduplication n'est effectuée ici.</em><br/>
+Un évènement est lancé si une option a été ajoutée.</p>
+
+<p>Et en dernier on sauvegarde la nouvelle option dans notre objet.</p>
+
+<p>Rien de mieux pour bien comprendre qu'un exemple.<br/>
+Voici le modèle qui gère les <code>multiselect</code> :</p>
+
+<script src="http://gist-it.appspot.com/github/jacquesbh/Jbh_DynamicField/raw/master/app/code/community/Jbh/DynamicField/Model/Catalog/Product/Attribute/Backend/Multiselect.php"></script>
+
+
+<p>De manière générale les deux modèles font la même chose.</p>
+
+<p>La différence se situe tout d'abord dans le modèle parent. Le <em>select</em> étend le modèle <code>abstract</code> alors que le <em>multiselect</em> le <code>array</code>.<br/>
+Ensuite la manière dont la valeur est changée quand une option a été ajoutée change aussi un peu, surtout au niveau du <em>multiselect</em>.</p>
+
+<p>Notez que l'évènement lancé, dans le cas où une option est ajoutée, est le suivant :</p>
+
+<ul>
+<li>Nom : <code>jbh_dynamicfield_attribute_CODE_option_added</code> où <code>CODE</code> est le code de l'attribut principal.</li>
+<li>Données :
+
+<ul>
+<li><code>object</code> : Votre produit/catégorie.</li>
+<li><code>code</code> : Le code de votre attribute. (que vous connaissez puisque vous utilisez un event qui porte son nom !) Il est là afin de permettre des actions dynamiques.</li>
+<li><code>option</code> : Un tableau qui contient l'identifiant de la nouvelle option et sa valeur textuelle. Respectivement les clés <code>id</code> et <code>value</code>.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Borderline ?</h2>
+
+<p>Au final je n'ai pas expliqué pourquoi un tel développement est, selon moi, un peu bordeline.</p>
+
+<p>Tout d'abord il n'y a aucune gestion des stores et donc de la possible traduction de l'option.<br/>
+L'ajout d'une nouvelle option implique la sauvegarde du produit ou de la catégorie afin d'être prise en compte... On aurait préféré avoir un peu d'ajax afin d'ajouter plusieurs options en même temps !<br/>
+Il n'y a aucune gestion des problèmes de duplication d'options qu'un tel système engendre.</p>
+
+<p>Ce développement est vraiment pratique mais il est important que les personnes qui manipulent l'administration soient formées sur le fonctionnement de ce système.</p>
+
+<p>Si vous souhaitez <a href="https://github.com/jacquesbh/Jbh_DynamicField">améliorer le module <code>Jbh_DynamicField</code> : c'est sur github !</a>.</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2013/02/un-attribut-dynamique-sur-magento.html" data-text="Un attribut dynamique" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2013/02/un-attribut-dynamique-sur-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2013/02/un-attribut-dynamique-sur-magento.html">Lire l'article</a>
+
+    </div>
 
     <hr />
     <h2><a href="/2013/01/creation-product-type-attributes-and-set.html">Créez votre type de produit, ses attributs et son jeu</a></h2>
@@ -389,7 +522,7 @@
 
 <p>La sale consiste à dupliquer, simplement, le XML de configuration du type <code>simple</code> avec notre propre balise <code>foo</code> :</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'bad.xml', '11');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'bad.xml', '11');</script>
 
 
 <p>Vous remarquerez la ligne surlignée. Et bah oui ! Si notre type se comporte comme un produit <code>simple</code>, pourquoi créer un modèle personnalisé ?</p>
@@ -400,7 +533,7 @@
 
 <p>Et puis ça permet de prévoir les évolutions ;)</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'good.xml', '11,12,15,16');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'good.xml', '11,12,15,16');</script>
 
 
 <p>Vous remarquez cette fois que nous avons quatre modèles personnalisés.</p>
@@ -411,31 +544,31 @@
 
 <p>Ce modèle contient la constante qui vaut le code du type : <code>foo</code>.</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'type.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'type.php');</script>
 
 
 <h4>Le modèle de prix</h4>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'price.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'price.php');</script>
 
 
 <h4>Le modèle d'index des prix</h4>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'indexer.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'indexer.php');</script>
 
 
 <h4>Le data retreiver</h4>
 
 <p>Ce modèle a une méthode qui permet de récupérer le code du type. On utilise donc la constante disponible.</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'retreiver.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'retreiver.php');</script>
 
 
 <h3>Le layout</h3>
 
 <p>Comme tout nouveau type de produit pensez à ajouter le bout de layout qui va avec ! Sinon pas de prix dans la fiche produit par exemple !</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'layout.xml');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'layout.xml');</script>
 
 
 <h3>Les attributs de type « Prix »</h3>
@@ -446,7 +579,7 @@
 
 <p>Dans un setup de votre module, mettez ceci : (c'est plutôt facile à comprendre)</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'setup_price.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'setup_price.php');</script>
 
 
 <h2>La création du jeu d'attributs <code>Bar</code></h2>
@@ -455,7 +588,7 @@
 
 <p>On considérera que notre nouveau jeu se base sur les mêmes attributs que le jeu par défaut.</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'set.php', '11');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'set.php', '11');</script>
 
 
 <p>Il faut savoir que si on fait un <code>addAttributeSet</code> d'un jeu d'attributs existant alors celui-ci est mis à jour, tout simplement.</p>
@@ -466,7 +599,7 @@
 
 <p>Dans notre installeur ou dans un update il nous suffit d'ajouter notre attribut, tout simplement, comme ceci :</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'attribute.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'attribute.php');</script>
 
 
 <h2>Conclusion</h2>
@@ -477,7 +610,7 @@
 
 <p>Néanmoins vous trouverez beaucoup de méthode dans le modèle EAV ;)</p>
 
-<script type="text/javascript">gist(jacquesbh/4582238, 'eav_setup.php');</script>
+<script type="text/javascript">gist('jacquesbh/4582238', 'eav_setup.php');</script>
 
 
 
@@ -966,119 +1099,6 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
         
 
         <a href="/ajouter-un-script-externe-au-header-sur-magento.html">Lire la suite du tutoriel</a>
-
-    </div>
-
-    <hr />
-    <h2><a href="/supprimer-le-merge-des-paniers.html">Supprimer le merge des paniers</a></h2>
-    <div class="content post">
-        <p>Sur presque tous les projets Magento sur lesquels j'ai eu l'occasion de travailler il est apparu nécessaire de désactiver le merge du panier du client avec celui du visiteur lors de la connexion.</p>
-
-<p>Pour cela nous devons commencer par <strong>identifier l'évènement</strong> lancé par Magento qui puisse nous permettre de supprimer ce fameux « merge » car aucune option en admin nous permet de l'empêcher.</p>
-
-<!-- 
-
-
-<hr />
-
-<h2>Identifier l'évènement</h2>
-
-<p>Il suffit d'investiguer un peu :</p>
-
-<p>Objet <code>Mage_Sales_Model_Quote</code>, qui est donc notre objet « panier » :</p>
-
-<p>Ligne 1678 : <code>public function merge(Mage_Sales_Model_Quote $quote)</code>.</p>
-
-<p>Pour vérifier que notre merge passe bien par là on y place un log : <code>Mage::log(__METHOD__ . ':' . __LINE__);</code>.</p>
-
-<p>On se connecte, on ajoute un produit à notre panier, on se déconnecte, on ajoute un produit dans notre panier et on se connecte à nouveau : là on a un log qui apparaît.</p>
-
-<p>Nous avons trouvé sans trop de difficultés l'endroit où est fait le merge.</p>
-
-<p>On remarque dans la méthode le lancement d'un évènement intéressant :</p>
-
-<div class="highlight"><pre><code class="php"><span class="x">Mage::dispatchEvent(</span>
-<span class="x">    $this-&gt;_eventPrefix . &#39;_merge_before&#39;,</span>
-<span class="x">    array(</span>
-<span class="x">    $this-&gt;_eventObject=&gt;$this,</span>
-<span class="x">        &#39;source&#39;=&gt;$quote</span>
-<span class="x">    )</span>
-<span class="x">);</span>
-</code></pre></div>
-
-
-<p>A partir de là on déduit que l'évènement est <code>sales_quote_merge_before</code> et que ces deux données sont :</p>
-
-<ol>
-<li>  Le panier <code>quote</code> : panier du client</li>
-<li>  Le panier <code>source</code> : panier du visiteur</li>
-</ol>
-
-
-<h2>La construction du module</h2>
-
-<ol>
-<li>  Un modèle <code>Observer</code> qui <code>catch</code> notre évènement et qui vide le panier du client.</li>
-<li>  Un helper <code>Data</code> qui nous permet de savoir si notre module est activé et si on peut vider le panier du client quand celui du visiteur est vide.</li>
-<li>  Un fichier <code>system.xml</code> qui nous permet d'ajouter un peu de configuation (configuration utilisée dans le helper).</li>
-</ol>
-
-
-<h3>Le helper</h3>
-
-<p>Le helper n'est utilisé que pour savoir deux choses :</p>
-
-<ol>
-<li>  Notre module est-il activé ? Ou plutôt, pouvons-nous supprimer le merge des paniers ? Via la méthode <code>isActive</code>.</li>
-<li>  Pouvons-nous vider le panier du client si le panier du visiteur est vide ? Via la méthode <code>cleanIfEmpty</code>.</li>
-</ol>
-
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/Helper/Data.php"></script>
-
-
-<h3>Le modèle</h3>
-
-<p>Le modèle <code>catch</code> notre évènement est vide le panier du client que si les conditions suivantes sont validées&nbsp;:</p>
-
-<ol>
-<li>  Notre module est actif.</li>
-<li>  Le panier du visiteur a des produits OU on peut vider le panier du client si le panier du visiteur est vide.</li>
-</ol>
-
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/Model/Observer.php"></script>
-
-
-<h3>Le <code>system.xml</code></h3>
-
-<p>Le <code>system.xml</code> permet d'ajouter un peu de configuration, tout simplement.</p>
-
-<p>Nous ne nous prenons pas la tête avec les <code>ACL</code> car ils sont déjà gérés par Magento pour cette partie de la configuration.</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/etc/system.xml"></script>
-
-
-<h2>Conclusion</h2>
-
-<p>Il est en réalité assez simple, à présent, via le module complet, ou en suivant les étapes de cet article, de supprimer le merge des paniers du visiteur et du client lors de la connexion de notre client.</p>
-
-<p>Vous trouverez le <a href="https://github.com/jacquesbh/jbh_cartmerge">code complet du module sur github</a>.</p>
-
- -->
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/supprimer-le-merge-des-paniers.html" data-text="Supprimer le merge des paniers" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/supprimer-le-merge-des-paniers.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/supprimer-le-merge-des-paniers.html">Lire la suite du tutoriel</a>
 
     </div>
 
