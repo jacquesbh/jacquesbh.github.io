@@ -345,11 +345,9 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
-    <span style="font-size:14.4px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
-
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Dette technique">Dette technique</a></span>
 
 </p>
 
@@ -364,144 +362,6 @@
 
     
 
-
-    <hr />
-    <h2><a href="/utiliser-un-proxy-sur-android.html">Android + Proxy = HTTP en clair</a></h2>
-    <div class="content post">
-        <p>Ce soir j'ai joué à un jeu (dont je ne donnerai pas le nom) sur mon téléphone, sous Android 4.1.1 (Jelly Bean).</p>
-
-<p>Et il m'est venue l'idée de voir les requêtes envoyées par l'application pour enregistrer mon score...</p>
-
-<p>Procédure très facile à réaliser !</p>
-
-<!-- 
-
-
-
-
-<hr />
-
-
-<p>Ok tout d'abord je me suis dit que je pouvais peut-être sniffer les requêtes TCP depuis mon Mac à condition que le téléphone soit sur le même réseau... Pas possible.</p>
-
-<p>Ensuite je me suis dit que j'allais simplement utiliser <a href="http://www.charlesproxy.com/">Charles</a>, un proxy HTTP très sympa. J'ai donc pensé à mettre en place le proxy directement sur mon téléphone. Sauf que oui, mais non... Le proxy en place sur la connexion WiFi du téléphone n'est utilisé que par le navigateur. Enfin c'est ce qu'Android m'annonce quand je change le proxy.</p>
-
-<p>Soit.</p>
-
-<p>Je décide donc de récupérer le APK de mon application (via <a href="http://airdroid.com">AirDroid</a>) et d'utiliser une machine virtuelle android.</p>
-
-<p>Pour la machine virtuelle c'est simple... je prends le <a href="http://developer.android.com/sdk/index.html">SDK Android</a>.</p>
-
-<h2>Installer un <code>Android Virtual Device</code></h2>
-
-<p>Avant tout il nous faut donc une machine tournant sur Android. Pour ça on va simplement utiliser l'émulateur fourni avec le SDK.</p>
-
-<p>Le SDK est fraîchement téléchargé et pas complet, on remédie au problème en lançant la jolie interface <code>;)</code> :</p>
-
-<pre><code>~ $ cd Developper/android-sdk-macosx/tools/
-~/Developper/android-sdk-macosx/tools $ ./android
-</code></pre>
-
-<p><img src="/images/posts/android-http-proxy/charles.png" alt="Android SDK Manager" /></p>
-
-<p>On sélectionne l'API 16 (Android 4.1) et on installe tout ça !</p>
-
-<p>Maintenant nous avons donc tout ce qu'il faut pour créer notre <code>AVD</code>.</p>
-
-<p>On commence donc par lister les systèmes Android disponibles :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ ./android list targets
-Available Android targets:
-----------
-id: 1 or "android-16"
-     Name: Android 4.1
-     Type: Platform
-     API level: 16
-     Revision: 2
-     Skins: HVGA, QVGA, WQVGA400, WQVGA432, WSVGA, WVGA800 (default), WVGA854, WXGA720, WXGA800, WXGA800-7in
-     ABIs : armeabi-v7a
-</code></pre>
-
-<p>Ensuite il nous faut créer notre <code>AVD</code> :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ ./android create avd -n android_4.1 -a -c 100M -t android-16
-Auto-selecting single ABI armeabi-v7a
-Android 4.1 is a basic Android platform.
-Do you wish to create a custom hardware profile [no]
-Created AVD 'android_4.1' based on Android 4.1, ARM (armeabi-v7a) processor,
-with the following hardware config:
-hw.lcd.density=240
-vm.heapSize=48
-hw.ramSize=512
-</code></pre>
-
-<p>Tapez <code>[enter]</code> ou <code>no</code> à la question sur le <code>hardware profile</code>.</p>
-
-<h2>Lancer Charles et notre <code>AVD</code></h2>
-
-<p>Avant de lancer notre nouvelle machine sous Android, nous devons lancer Charles.</p>
-
-<pre><code>clic clic
-</code></pre>
-
-<p>Voilà qui est fait.</p>
-
-<p>Et maintenant ? On lance notre émulateur !</p>
-
-<p>Attention : nous devons dire à notre émulateur que toutes les requêtes TCP passent par notre proxy, pour se faire rien de bien compliqué, nous devons ajouter l'argument <code>-http-proxy localhost:8888</code> à la ligne de commande permettant de lancer l'émulateur :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ ./emulator @android_4.1 -http-proxy localhost:8888
-</code></pre>
-
-<p>Pourquoi <code>localhost:8888</code> ? Simplement parce que par défaut Charles est actif sur le port 8888 et que nous sommes donc en local (car notre machine virtuelle est... virtuelle).</p>
-
-<p>Maintenant que nous avons une machine sous Android qui tourne et un proxy qui nous donne les informations sur toutes les requêtes TCP non chiffrées qui passent...</p>
-
-<h2>Installer notre <code>APK</code> téléchargé sur notre <code>AVD</code></h2>
-
-<p>Nous avons téléchargez notre <code>.apk</code> via <a href="http://airdroid.com">AirDroid</a> et nous devons maintenant l'installer sur notre machine Android :</p>
-
-<p>On se déplace dans le dossier <code>platform-tools</code> où se situe le fameux <code>adb</code> :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/tools $ cd ../platform-tools/
-</code></pre>
-
-<p>On installe notre <code>apk</code> téléchargé :</p>
-
-<pre><code>~/Developper/android-sdk-macosx/platform-tools $ ./adb install ~/Downloads/SuperApplication.apk
-780 KB/s (1392781 bytes in 1.743s)
-    pkg: /data/local/tmp/SuperApplication.apk
-Success
-</code></pre>
-
-<p>Et maintenant on lance l'application sur la machine virtuelle (via le menu graphique... normal quoi) et on regarde ce que nous affiche Charles (qui enregistre ce qu'il se passe par défaut au lancement du logiciel).</p>
-
-<h2>Conclusion</h2>
-
-<p>On se rend compte que certaines applications (des jeux ? avec des scores ?) font transiter les informations en clair (connexion non sécurisée) et qu'il est donc très facile de reproduire un fonctionnement standard, avec de fausses valeurs (comment ça il a fait un score plus grand que le score maxi ???).</p>
-
-<blockquote><p>Ca s'appelle tricher ça ! Oui MONSIEUR !</p></blockquote>
-
-<p>En même temps... il existe un <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">standard qui s'appelle TLS</a>.</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/utiliser-un-proxy-sur-android.html" data-text="Android + Proxy = HTTP en clair" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/utiliser-un-proxy-sur-android.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/utiliser-un-proxy-sur-android.html">Lire l'article</a>
-
-    </div>
 
     <hr />
     <h2><a href="/apprendre-a-utiliser-magento-installer.html">Utiliser l'Installer - Créer un grid en admin</a></h2>
@@ -988,6 +848,249 @@ Notre handle à nous ne sera appliqué que si c'est notre layout qui est utilis�
         
 
         <a href="/vos-blocs-en-ajax-via-webservice.html">Lire la suite du tutoriel</a>
+
+    </div>
+
+    <hr />
+    <h2><a href="/le-piege-des-routes-sur-magento.html">Le piège des routeurs sur Magento</a></h2>
+    <div class="content post">
+        <p>Magento a un système de routes assez complexe...</p>
+
+<p>Entre les routes <code>frontend</code>, les routes <code>admin</code>, le catalogue et son <code>URL rewriting</code> et les pages CMS... On a vite fait de s'y perdre !</p>
+
+<p>Cet article est là pour vous montrer que Magento reste une application très permissive. Attention !</p>
+
+<!-- 
+
+
+
+
+<hr />
+
+
+<p>Je me suis longtemps trompé sur la manière de créer mes routes... surtout celles destinées à mes contrôleurs d'admin.</p>
+
+<h2>Le front</h2>
+
+<p>Pour ajouter une routes simple pour le front il y a un bout de XML à connaître. Rien de bien compliqué :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;frontend&gt;</span>
+    <span class="nt">&lt;routers&gt;</span>
+        <span class="nt">&lt;name_of_my_route&gt;</span>
+            <span class="nt">&lt;use&gt;</span>standard<span class="nt">&lt;/use&gt;</span>
+            <span class="nt">&lt;args&gt;</span>
+                <span class="nt">&lt;module&gt;</span>My_Module<span class="nt">&lt;/module&gt;</span>
+                <span class="nt">&lt;frontName&gt;</span>foo<span class="nt">&lt;/frontName&gt;</span>
+            <span class="nt">&lt;/args&gt;</span>
+        <span class="nt">&lt;/name_of_my_route&gt;</span>
+    <span class="nt">&lt;/routers&gt;</span>
+<span class="nt">&lt;/frontend&gt;</span>
+</code></pre></div>
+
+
+<p>Quelques explications :</p>
+
+<ul>
+<li><code>name_of_my_route</code> c'est le nom de la route... vraiment. Par exemple si je veux générer une URL via notre nouvelle route je fais :</li>
+</ul>
+
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">&#39;name_of_my_route/bar/baz&#39;</span><span class="p">);</span> <span class="c1">// =&gt; http://example.com/foo/bar/baz</span>
+</code></pre></div>
+
+
+<ul>
+<li><code>&lt;use&gt;standard&lt;/use&gt;</code> c'est pour dire que c'est une route en front.</li>
+<li><code>&lt;module&gt;My_Module&lt;/module&gt;</code> c'est le nom de votre module. Si vous mettez <code>Super_Foo</code> alors le contrôleur <code>index</code> aura pour nom : <code>Super_Foo_IndexController</code>.</li>
+<li><code>&lt;frontName&gt;foo&lt;/frontName&gt;</code> c'est le "final" de la route : http://example.com/<strong>foo</strong>/bar/baz.</li>
+</ul>
+
+
+<h2>L'admin</h2>
+
+<p>En admin c'est exactement pareil... ou presque.</p>
+
+<p>En réalité les routes de l'admin sont « parsées » avant celles du front. Ce qui fait que si votre route admin permet d'accéder à un contrôleur frontal... bah ça fonctionnera.</p>
+
+<h2>Exemple « bad practices »</h2>
+
+<p>L'architecture :</p>
+
+<pre><code>app/code/local/Jbh/Blog
+└── controllers
+    ├── Adminhtml
+    │   └── ManageController.php
+    └── IndexController.php
+</code></pre>
+
+<p><code>controllers/IndexController.php</code> :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Jbh_Blog_IndexController</span> <span class="k">extends</span> <span class="nx">Mage_Core_Controller_Front_Action</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;front&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p><code>controllers/Adminhtml/MagnageController.php</code> :</p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Jbh_Blog_Adminhtml_ManageController</span> <span class="k">extends</span> <span class="nx">Mage_Adminhtml_Controller_Action</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>Maintenant regardez bien ce fichier de config :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;config&gt;</span>
+    <span class="nt">&lt;modules&gt;</span>
+        <span class="nt">&lt;Jbh_Blog&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/Jbh_Blog&gt;</span>
+    <span class="nt">&lt;/modules&gt;</span>
+    <span class="nt">&lt;frontend</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;admin&gt;</span>
+        <span class="nt">&lt;routers&gt;</span>
+            <span class="nt">&lt;jbh_blog&gt;</span>
+                <span class="nt">&lt;use&gt;</span>admin<span class="nt">&lt;/use&gt;</span>
+                <span class="nt">&lt;args&gt;</span>
+                    <span class="nt">&lt;module&gt;</span>Jbh_Blog<span class="nt">&lt;/module&gt;</span>
+                    <span class="nt">&lt;frontName&gt;</span>blog<span class="nt">&lt;/frontName&gt;</span>
+                <span class="nt">&lt;/args&gt;</span>
+            <span class="nt">&lt;/jbh_blog&gt;</span>
+        <span class="nt">&lt;/routers&gt;</span>
+    <span class="nt">&lt;/admin&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</code></pre></div>
+
+
+<p>Vous remarquerez que nous n'avons rien dans la balise <code>frontend</code>, que notre routeur est bien dans <code>&lt;admin/&gt;</code> et a bien une balise <code>&lt;use&gt;</code> qui vaut <code>admin</code> également.</p>
+
+<p>On est donc en droit de penser que notre contrôleur front : <code>Jbh_Blog_IndexController</code> qui étend <code>Mage_Core_Controller_</code><strong>Front</strong><code>_Action</code> ne peut pas être accessible via cette route dédiée à l'admin.</p>
+
+<p>Que neni !</p>
+
+<pre><code>http://example.com/blog/index/index =&gt; « front »
+http://example.com/blog/adminhtml_manage/index =&gt; « admin »
+</code></pre>
+
+<p>WTF ?!</p>
+
+<p>[ Faites le test ;) ]</p>
+
+<h2>Bonnes pratiques</h2>
+
+<p>La manière de créer un routeur en front ne change pas car dans ce sens tout est bon. Impossible d'accéder à un contrôleur admin depuis un routeur frontal.</p>
+
+<p>Par contre voici comment éviter que nos routeurs d'admin ne soient utilisés pour afficher des contrôleurs front :</p>
+
+<div class="highlight"><pre><code class="diff"><span class="gd">--- a/config.xml</span>
+<span class="gi">+++ b/config.xml</span>
+<span class="gu">@@ -8,13 +8,13 @@</span>
+     &lt;frontend /&gt;
+     &lt;admin&gt;
+         &lt;routers&gt;
+<span class="gd">-            &lt;jbh_blog&gt;</span>
+<span class="gi">+            &lt;jbh_blog_adminhtml&gt;</span>
+                 &lt;use&gt;admin&lt;/use&gt;
+                 &lt;args&gt;
+<span class="gd">-                    &lt;module&gt;Jbh_Blog&lt;/module&gt;</span>
+<span class="gd">-                    &lt;frontName&gt;blog&lt;/frontName&gt;</span>
+<span class="gi">+                    &lt;module&gt;Jbh_Blog_Adminhtml&lt;/module&gt;</span>
+<span class="gi">+                    &lt;frontName&gt;blog_adminhtml&lt;/frontName&gt;</span>
+                 &lt;/args&gt;
+<span class="gd">-            &lt;/jbh_blog&gt;</span>
+<span class="gi">+            &lt;/jbh_blog_adminhtml&gt;</span>
+         &lt;/routers&gt;
+     &lt;/admin&gt;
+ &lt;/config&gt;
+</code></pre></div>
+
+
+<p>Ce que ça donne :</p>
+
+<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;config&gt;</span>
+    <span class="nt">&lt;modules&gt;</span>
+        <span class="nt">&lt;Jbh_Blog&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.1.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/Jbh_Blog&gt;</span>
+    <span class="nt">&lt;/modules&gt;</span>
+    <span class="nt">&lt;frontend</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;admin&gt;</span>
+        <span class="nt">&lt;routers&gt;</span>
+            <span class="nt">&lt;jbh_blog_adminhtml&gt;</span>
+                <span class="nt">&lt;use&gt;</span>admin<span class="nt">&lt;/use&gt;</span>
+                <span class="nt">&lt;args&gt;</span>
+                    <span class="nt">&lt;module&gt;</span>Jbh_Blog_Adminhtml<span class="nt">&lt;/module&gt;</span>
+                    <span class="nt">&lt;frontName&gt;</span>blog_adminhtml<span class="nt">&lt;/frontName&gt;</span>
+                <span class="nt">&lt;/args&gt;</span>
+            <span class="nt">&lt;/jbh_blog_adminhtml&gt;</span>
+        <span class="nt">&lt;/routers&gt;</span>
+    <span class="nt">&lt;/admin&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</code></pre></div>
+
+
+<blockquote><p>Tu peux nous expliquer ce que ça change ?</p></blockquote>
+
+<p>Le plus important c'est la balise <code>&lt;module&gt;</code> qui vaut maintenant <code>Jbh_Blog_Adminhtml</code>.</p>
+
+<p>Ceci a pour effet d'automatiquement préfixer les contrôleurs demandés par cette route de <code>Jbh_Blog_Adminhtml_</code>.</p>
+
+<p>La route admin a également un nom différent pour pouvoir la différencer de la route front :)</p>
+
+<h3>Exemple</h3>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+
+<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">&#39;jbh_blog_adminhtml/manage/index&#39;</span><span class="p">);</span>
+<span class="c1">// =&gt; http://example.com/blog_adminhtml/manage/index</span>
+<span class="c1">// =&gt; controller: Jbh_Blog_Adminhtml_ManageController</span>
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+
+<p>Nous avons donc forcément besoin d'une route front pour accéder à notre <code>Jbh_Blog_IndexControler</code>. Inévitable.</p>
+
+<p>Problème résolu.</p>
+
+<ul>
+<li>Suffixez vos routeurs d'admin par quelque chose (<code>_adminhtml</code> tout simplement, ou <code>_admin</code> à la limite ;)).</li>
+<li>Pensez à la balise <code>&lt;module/&gt;</code> pour forcer l'utilisation d'un sous répertoire dans les <code>controllers</code>.</li>
+</ul>
+
+
+<p>En espérant que vous y verrez plus clair dans vos routes et que vous ne ferez pas (plus ?) cette erreur !</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/le-piege-des-routes-sur-magento.html" data-text="Le piège des routeurs sur Magento" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/le-piege-des-routes-sur-magento.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/le-piege-des-routes-sur-magento.html">Lire la suite du tutoriel</a>
 
     </div>
 

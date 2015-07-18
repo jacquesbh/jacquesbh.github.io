@@ -345,11 +345,9 @@
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=AFUP">AFUP</a></span>
 
-    <span style="font-size:14.4px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
+    <span style="font-size:13.2px"><a href="/search.html#!tag=Monsieur Biz">Monsieur Biz</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Apache">Apache</a></span>
-
-    <span style="font-size:13.2px"><a href="/search.html#!tag=Dette technique">Dette technique</a></span>
 
 </p>
 
@@ -460,83 +458,6 @@
     </p>
     
 
-
-    <hr />
-    <h2><a href="/2015/06/dette-technique.html">Concilier Dette technique et Magento</a></h2>
-    <div class="content post">
-        <p>C'est assez difficile de parler de dette technique. Et ça n'est pas plus facile de parler de Magento.</p>
-
-<p>Après la (re)lecture d'un très bon petit <a href="http://boutique.letrainde13h37.fr/products/la-dette-technique-bastien-jaillot">manuel de survie sur la dette technique par Bastien Jaillot</a> j'ai décidé d'écrire cet article (et ai quelques mois de retard d'ailleurs, <em>sic</em>).</p>
-
-<blockquote><p>Si vous ne savez pas ce qu'est la dette technique je vous invite (très fortement) à acheter le petit livre de Bastien et à la lire rapidement.</p></blockquote>
-
-<p>Tout logiciel, et encore plus dans le web, a une dette technique. Magento n'y échappe pas ! Vraiment pas.<br/>
-On y voit encore pas mal de choses moches…</p>
-
-<script type="text/javascript">gist('35e86b688c2e2b5f8052', 'bouh-magento.php');</script>
-
-
-<p>Mais ne nous arrêtons pas là ! Voici mon retour d'expérience.</p>
-
-<!-- 
-
-
-<hr />
-
-<p>Magento est pour moi la plateforme web écrite en PHP la plus complexe à prendre en main. Même WordPress est un jeu d'enfant en comparaison.</p>
-
-<p>Mais si nous faisons abstraction de sa complexité et que nous considérons que la dette technique du CMS/Framework utilisé compte pour zéro alors de quoi vais-je vous parler ?</p>
-
-<p>Une part importante de la dette technique sur un projet Magento vient du projet lui-même.<br/>
-Rien de mieux qu'un petit exemple.</p>
-
-<p><strong>Un fond de page dynamique</strong></p>
-
-<p>On y voit tout de suite l'intérêt. Ça peut être pour de la pub, pour de la promotion interne, pour changer un peu l'habillage…<br/>
-Et comment on s'y prend ?</p>
-
-<p>J'ai entendu beaucoup de solutions. Celle qui me plaît le plus c'est :</p>
-
-<blockquote><p>On va vous développer un module qui permettra de gérer les images et ensuite vous aurez une page dans le back office qui vous permettra de changer l'image de fond de chaque boutique.</p></blockquote>
-
-<p><strong>WHAT?</strong> On va développer un module super complexe pour ça ?</p>
-
-<p>Vous voyez où je veux en venir ?<br/>
-Pourquoi développer quelque chose alors que le natif de la plateforme va nous permettre de faire ça sans trop d'efforts ?</p>
-
-<p>Le but de la manœuvre est de permettre à l'administrateur de la plateforme de changer le fond de chaque boutique gérée par le système. Et ça sans trop d'efforts.</p>
-
-<p>Vous connaissez les « variables personnalisées » sur Magento ?</p>
-
-<p>Faites donc un simple bloc dans votre layout, conditionnez son contenu à cette variable personnalisée, et mettez un peu de CSS dans le head de votre site. Ça ne devrait prendre qu'une seule ligne, Google ne vous pénalisera pas pour ça. Uploadez l'image de fond via un bloc CMS (c'est pas super pratique effectivement, mais on trouve d'autres solutions), récupérez son URL, et changer la valeur de la variable dynamique pour votre boutique.<br/>
-Tada ! Pourquoi faire compliqué ? Et en plus c'est géré par website/store group/store.</p>
-
-<h2>La méconnaissance de Magento</h2>
-
-<p>La dette technique sur Magento arrive très vite quand le développeur ne connait pas la plateforme. Effectivement ça n'est pas évident de bien connaître cette machine.</p>
-
-<p>Mais si on prend le temps de fouiller le Back Office on découvre énormément de choses !<br/>
-Les widgets par exemple sont un très bon moyen d'améliorer drastiquement le rendu de la boutique ! Développer un widget prend très peu de temps et on peut y faire vraiment ce qu'on veut.<br/>
-Choix de la page, de la zone, choix du template, du produit, d'une couleur, d'un titre, etc.</p>
-
- -->
-
-
-
-
-
-    </div>
-    <div class="voirPlus">
-        <div class="social">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2015/06/dette-technique.html" data-text="Concilier Dette technique et Magento" data-via="jacquesbh">Tweet</a>
-        </div>
-        
-        <a href="/2015/06/dette-technique.html#disqus_thread">Commentaires</a> -
-        
-
-        <a href="/2015/06/dette-technique.html">Lire l'article</a>
-
-    </div>
 
     <hr />
     <h2><a href="/2015/02/installer-certificat-ssl-apache.html">Installation de votre SSL + Top sécurité</a></h2>
@@ -1117,6 +1038,198 @@ Celui-là c'est le serveur de backup. Il a juste le droit de backuper !</p></blo
         
 
         <a href="/2014/09/fabric-magento.html">Lire l'article</a>
+
+    </div>
+
+    <hr />
+    <h2><a href="/2014/08/certificat-ssl-business.html">Votre certificat SSL Business</a></h2>
+    <div class="content post">
+        <p><em>[Dernière mise à jour le 14/02/2015.]</em></p>
+
+<p>Un certificat SSL, pour Secure Socket Layer, est basé sur plusieurs fichiers qui permettent le chiffrement des données entre le client (vous) et un site tiers.</p>
+
+<p>En e-commerce nous avons souvent recourt à un certificat SSL pour sécuriser les données que vous échangez avec le site marchand. Comme par exemple votre adresse postale, vos informations de connexion et bien plus encore.</p>
+
+<p>Là où le certificat est important c'est dans le tunnel de commande.</p>
+
+<p>Chez <a href="http://monsieurbiz.com/">Monsieur Biz nous utilisons des certificats SSL Business</a> : un certificat "Business" permet au e-commerçant d'avoir une plus grosse assurance en cas de problème de sécurité lié au certificat.<br/>
+Et surtout vous obtenez une « Green Bar ».</p>
+
+<p>Il y a plusieurs types de certificats mais nous n'allons retenir que les suivants :</p>
+
+<ul>
+<li>Le certificat dit <strong>auto-signé</strong> qui n'est pas signé par une autorité de certification.</li>
+<li>Le certificat <strong>signé simple</strong> qui est signé par une autorité de certification.</li>
+<li>Le certificat <strong>signé « Green Bar »</strong> qui, en plus d'être signé par une autorité de certification, affiche une barre verte dans le navigateur.</li>
+</ul>
+
+
+<p>Un certificat, s'il est signé, protège aussi bien les informations transmises entre le client et le serveur avec ou que sans barre verte.</p>
+
+<p class="center"><img src="/images/posts/certificat-ssl-business/certificat-business.png" width="350" /></p>
+
+
+<p>Ici on a par exemple google.fr qui propose un certificat sans Green Bar et Gandi qui a un certificat avec Green Bar.<br/>
+Le premier certificat en revanche est auto-signé. Chez Monsieur Biz nous utilisons des certificats auto-signés pendant nos développements afin de vérifier le bon fonctionnement du site e-commerce Magento avec un certificat SSL.</p>
+
+<p>Le point important est qu'une Green Bar n'est pas délivrée à n'importe qui. La société demandeuse doit passer une vérification de la part de l'autorité de certification.<br/>
+Pour Google encore une fois, c'est différent, car ils ont leur propre autorité de certification et peuvent donc créer autant de certificats qu'ils le souhaitent.</p>
+
+<p>C'est le sujet de cet article : <strong><a href="/2014/08/certificat-ssl-business.html">Comment obtenir un certificat business avec une Green Bar chez COMODO via gandi.net ?</a></strong></p>
+
+<p><small><em>Comodo est une autorité de certification</em></small></p>
+
+<!-- 
+
+
+<hr />
+
+<p>Tout d'abord nous devons acheter notre certificat.</p>
+
+<p><a href="https://www.gandi.net/ssl">Chez gandi il existe 3 types de certificats</a> :</p>
+
+<ul>
+<li>Les <strong>certificats standards</strong>, qui ne nécessitent pas de validation poussée. Par contre comme tous les certificats il faudra prouver que le domaine qu'on veut protéger nous appartient.</li>
+<li>Les <strong>certificats pro</strong>, qui nécessitent, en plus de la vérification standard, une valitation sera ensuite à effectuer : KBis de la société + Copie Carte d'identité + Appel de COMODO pour terminer la validation.</li>
+<li>Les <strong>certificats business</strong>, qui nécessitent, en plus de la vérification standard, une validation étendue. C'est la suite de cet article.</li>
+</ul>
+
+
+<h2>L'achat</h2>
+
+<p>Choisissez le certificat que vous souhaitez acheter ainsi que la durée de validité de celui-ci. Je vous conseille de prendre 2 ans directement pour plusieurs raisons :</p>
+
+<ul>
+<li>2 années c'est plus long qu'une seule.</li>
+<li>C'est moins cher à l'année !</li>
+</ul>
+
+
+<p>Vous avez le choix entre un certificat avec ou sans SGC (Server Gated Cryptography). C'est à vous de voir. Le SGC permet d'avoir un certificat qui fonctionne avec les vieux navigateurs. Si votre site web est truffé de Javascript et de HTML5 + CSS3 à gogo, alors ça n'est peut-être pas la peine de prendre l'option SGC.<br/>
+Après c'est vrai que c'est le même prix...</p>
+
+<p>Concernant le choix du Logiciel utilisé, prenez <code>Apache/ModSSL</code>. De nos jours ça n'a plus grande importance. Un certificat pour <code>apache</code> fonctionnera normalement aussi pour <code>nginx</code> etc.</p>
+
+<h2>La génération du CSR</h2>
+
+<p>Le CSR est une clé que vous devez générer. Vous obtenez ainsi deux fichiers lors de la génération, un fichier <code>.csr</code> (le fichier dont nous avons besoin) et un fichier <code>.key</code> (fichier que vous devez garder précieusement !).</p>
+
+<p>Vous pouvez générer la commande permettant d'obtenir ces deux fichiers via le <a href="https://www.gandi.net/ssl/create/openssl">générateur proposé par gandi</a>. La commande devra ensuite être lancée sur une console UNIX avec openssl (sur mac ou linux).<br/>
+À la fin de la commande proposée par Gandi, ajoutez <code>-sha256</code> afin de changer l'algorithme de chiffrage qui sera utilisé. En effet le SHA1 est en fin de vie, il vous faut utiliser SHA2.</p>
+
+<p><strong>Attention !</strong> Renseignez les bonnes informations pour le CSR ! On vous demande par exemple l'<strong>Organisation : il s'agit de la raison sociale</strong> et non pas du nom commercial ! C'est très important !</p>
+
+<p>Prenez ensuite le contenu du fichier <code>.csr</code> (c'est un fichier texte) et collez ce contenu dans le champ dédié lors de l'achat du certificat. Payez, et on passe à la suite.</p>
+
+<h2>Validation par email</h2>
+
+<p>La première validation est faite par email par gandi. Vous allez recevoir un email vous demandant de cliquer sur un lien pour valider cette première étape. Faites-le !</p>
+
+<h2>Validation du domaine</h2>
+
+<p>Une fois votre certificat acheté vous allez devoir effectuer la validation de votre domaine. Le plus simple c'est de faire une vérification par fichier si vous le pouvez, c'est simple, rapide et ne demande pas de connaissances techniques.</p>
+
+<p>Une fois le domaine validé vous allez recevoir plusieurs emails :</p>
+
+<ul>
+<li>Un de gandi avec un document indiquant la référence du certificat chez eux.</li>
+<li>Et un de COMODO vous demandant de leur envoyer plusieurs documents.</li>
+</ul>
+
+
+<h2>Les documents pour COMODO et gandi</h2>
+
+<p>N'hésitez pas à aller faire un tour sur <a href="http://wiki.gandi.net/fr/ssl/documents/business">le Wiki de gandi pour avoir de plus amples informations sur les documents à envoyer à COMODO pour un certificat Business</a>.</p>
+
+<p>Vous devez donc avoir les documents suivants :</p>
+
+<ul>
+<li>La page de garde GANDI.</li>
+<li>La page de garde COMODO.</li>
+<li>Kbis de votre société de moins de 3 mois.</li>
+<li>Le contrat COMODO signé.</li>
+<li>Le formulaire COMODO complété.</li>
+</ul>
+
+
+<p>Vous pouvez joindre une lettre (en anglais) si vous le souhaitez pour préciser votre demande.</p>
+
+<p>Tous les documents sont à envoyer à la fois à COMODO et également à GANDI.</p>
+
+<p>Je vous conseille de procéder comme suit :</p>
+
+<ul>
+<li>Envoyez un email à COMODO et GANDI avec une archive contenant vos documents scannés. Le mail du support France de gandi est <em>support-fr [at] support.gandi.net</em>. Attention au poids de votre archive !! Pour le mail de COMODO ils vous le donnent dans leur message.</li>
+<li>Envoyez un FAX à COMODO avec vos documents.</li>
+</ul>
+
+
+<p>Une fois que c'est fait vous n'avez plus qu'à attendre. À noter que COMODO passera un appel téléphonique aux différentes personnes indiquées sur le formulaire.</p>
+
+<p><em>Attention : COMODO doit vous appeler. Par conséquent ils vont vouloir vérifier le numéro de téléphone. Si vous êtes dans les Pages Jaunes et que le numéro correspond alors ça ira très bien. Sinon vous devez apparaître sur un site qui donne votre numéro officiel. Du coup évitez votre numéro de portable !</em><br/>
+<em>Si vous avez une ligne SIP alors pensez à la redirection de l'appel vers votre mobile… car évidemment ils appelleront quand vous ne serez pas prêt du fixe, à coup sûr !</em>
+<em>Gardez votre téléphone sur sonnerie jusqu'à ce que la validation soit faite si vous ne voulez pas attendre trop longtemps. D'expérience ils se fichent un peu de savoir dans quel fuseau horaire vous êtes :).</em></p>
+
+<p><em>Autre chose, si vous êtes seul dans votre société, ça ne va pas aider. La personne qui va vous appeler va demander à vérifier votre identité auprès d'un collègue. Dites simplement que vous êtes "self employed" et que vous n'avez pas de collègue. Soit la personne comprend et ça passe, soit elle demande quand vos collègues vont revenir et dans ce cas elle n'a rien compris. Faites en sorte qu'elle comprenne.</em><br/>
+<em>Et comme elle va insister, dites-lui de vérifier votre société via <strong>Dun &amp; Bradstreet</strong> (<a href="http://www.dnb.com/">http://www.dnb.com/</a>)</em></p>
+
+<p>Et sinon le formulaire… non parce qu'il est un peu barbare tout de même !</p>
+
+<h2>Remplir le formulaire étendu COMODO</h2>
+
+<p>Là c'est pas simple quand on ne sait pas à quoi correspondent les différents champs ! Surtout que c'est de l'anglais bien incompréhensible.</p>
+
+<p>Je me suis amusé, avec l'aide de gandi, à donner une signification à tous les champs du formulaire.</p>
+
+<p>Dans le désordre :</p>
+
+<ul>
+<li><strong>Organization Name</strong> : Raison sociale de la société. Il s'agit aussi du nom de l'organisation que vous avez indiqué pour le CSR.</li>
+<li><strong>Assumed Name</strong> : Nom commercial utilisé. Il s'agit du nom par lequel vos clients vous connaissent. Le nom de votre site internet par exemple.</li>
+<li><strong>Domain Name(s)</strong> : Nom(s) de domaine. Mettez le (ou les, mais pour un certificat business, c'est un seul domaine) que vous voulez protéger avec votre certificat. Il s'agit du même domaine que celui utilisé pour le CSR.</li>
+<li><strong>Jurisdiction of Incorporation</strong> : Il s'agit des infos de votre RCS. Donc la ville, le département et le Pays (FRANCE !)</li>
+<li><strong>Incorporating Agency</strong> : Pour nous ça sera gandi. C'est eux qui nous délivrent le certificat au final.</li>
+<li><strong>Registration Number</strong> : Il s'agit du numéro SIREN de la société.</li>
+<li><strong>Certificate Requester</strong> : Ici il faut indiquer les coordonnées de la société ou de la personne qui fait la demande. Soit c'est vous-même, soit c'est votre agence web (par exemple). De manière générale chez Monsieur Biz nous ne faisons qu'accompagner notre client dans les démarches. Notre client renseigne donc ici ses propres coordonnées. Attention à préciser un numéro de téléphone qui est vérifiable (dans les Pages Jaunes par exemple).</li>
+<li><strong>Applicant Address</strong> : Siège social de la société.</li>
+<li><strong>Certificate Approver</strong> : Il s'agit de la personne qui approuve la demande du certificat. À priori, la société. <strong>Idéalement il s'agit d'une personne sur le KBis, ainsi c'est beaucoup plus simple</strong>.</li>
+<li><strong>Contract Signer</strong> : Il s'agit de la personne qui signe le contrat. Faites en sorte que ça soit la même personne que le <strong>Certificat Approver</strong>, ça facilitera la démarche de COMODO.</li>
+</ul>
+
+
+<p>Vous n'avez plus qu'à envoyer les documents ! Et attendre.</p>
+
+<p>Généralement le certificat met entre 2 jours ouvrés (vécu) et 2 semaines à arriver. Pensez donc à vous y prendre un peu en avance !</p>
+
+<p>Voici deux liens qui peuvent vous aider si vous avez encore des points flous sur le formulaire :</p>
+
+<ul>
+<li><a href="https://support.comodo.com/index.php?/Default/Knowledgebase/Article/View/253/0/what-is-required-for-validation">https://support.comodo.com/index.php?/Default/Knowledgebase/Article/View/253/0/what-is-required-for-validation</a></li>
+<li><a href="https://support.comodo.com/index.php?/Default/Knowledgebase/Article/View/314/17/what-are-the-extended-validation-guidelines">https://support.comodo.com/index.php?/Default/Knowledgebase/Article/View/314/17/what-are-the-extended-validation-guidelines</a></li>
+</ul>
+
+
+<h2>Installation du certificat</h2>
+
+<p>Évidemment j'ose espérer que votre adminsys saura installer votre certificat.<br/>
+Sinon vous pouvez aussi aller lire mon article qui vous explique <a href="http://jacques.sh/2015/02/installer-certificat-ssl-apache.html">comment installer un certificat SSL avec une sécurité renforcée sur votre serveur</a>.</p>
+
+ -->
+
+
+
+
+
+    </div>
+    <div class="voirPlus">
+        <div class="social">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/2014/08/certificat-ssl-business.html" data-text="Votre certificat SSL Business" data-via="jacquesbh">Tweet</a>
+        </div>
+        
+        <a href="/2014/08/certificat-ssl-business.html#disqus_thread">Commentaires</a> -
+        
+
+        <a href="/2014/08/certificat-ssl-business.html">Lire l'article</a>
 
     </div>
 

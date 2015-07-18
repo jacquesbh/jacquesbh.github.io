@@ -4,21 +4,13 @@
  <title>Jacques Bodin-Hullin</title>
  <link href="http://jacques.sh/atom.xml" rel="self"/>
  <link href="http://jacques.sh"/>
- <updated>2015-07-13T15:28:57+02:00</updated>
+ <updated>2015-07-18T12:39:02+02:00</updated>
  <id>http://jacques.sh/</id>
  <author>
    <name>Jacques Bodin-Hullin</name>
    <email>jacques@bodin-hullin.net</email>
  </author>
 
- 
- <entry>
-   <title>Concilier Dette technique et Magento</title>
-   <link href="http://jacques.sh/2015/06/dette-technique.html"/>
-   <updated>2015-06-07T14:30:00+02:00</updated>
-   <id>http://jacques.sh/2015/06/dette-technique</id>
-   <content type="html"><![CDATA[Magento est une grosse plateforme. La dette technique ? Oui il y en a. Comment ça se passe en vrai ?]]></content>
- </entry>
  
  <entry>
    <title>Installation de votre SSL + Top sécurité</title>
@@ -90,6 +82,14 @@
    <updated>2013-11-02T20:00:00+01:00</updated>
    <id>http://jacques.sh/2013/11/mageconf-en-novembre</id>
    <content type="html"><![CDATA[C&#39;est avec un grand plaisir que Monsieur Biz participe au financement de la première MageConf 2013 à Paris !]]></content>
+ </entry>
+ 
+ <entry>
+   <title>Utiliser Fluid avec Zimbra sur OSX</title>
+   <link href="http://jacques.sh/2013/05/fluid-et-zimbra-sur-mac-osx.html"/>
+   <updated>2013-05-05T23:00:00+02:00</updated>
+   <id>http://jacques.sh/2013/05/fluid-et-zimbra-sur-mac-osx</id>
+   <content type="html"><![CDATA[Oubliez votre client mail habituel et utilisez Zimbra avec Fluid sur Mac OS X.]]></content>
  </entry>
  
  
