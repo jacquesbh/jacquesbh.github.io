@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -266,13 +266,11 @@ Après tout, pourquoi ne pourrions-nous pas avoir notre petit bouton orange à c
 
 <p>En fait il existe dans le container <code>Mage_Adminhtml_Block_Widget_Container</code> un alias public pour un certain nombre de méthodes protégées, dont notre <code>_addButton</code> :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$sortOrder</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$area</span> <span class="o">=</span> <span class="s1">&#39;header&#39;</span><span class="p">)</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$sortOrder</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$area</span> <span class="o">=</span> <span class="s1">'header'</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_addButton</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$level</span><span class="p">,</span> <span class="nv">$sortOrder</span><span class="p">,</span> <span class="nv">$area</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></figure></p>
 
 <p>Donc si on réfléchi bien... il nous suffit de récupérer ce block avant qu'il n'affiche la fiche du client pour pouvoir y ajouter notre bouton dynamiquement.
 On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. Chaque action a un <code>event</code> qui annonce le début du rendu. Pour nous, c'est ça :</p>
@@ -282,16 +280,14 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
 
 <p>Op, on a notre event :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
     <span class="nt">&lt;observers&gt;</span>
         <span class="nt">&lt;add_connectas_button&gt;</span>
             <span class="nt">&lt;class&gt;</span>jbh_connectas/observer<span class="nt">&lt;/class&gt;</span>
             <span class="nt">&lt;method&gt;</span>addOurCoolButton<span class="nt">&lt;/method&gt;</span>
         <span class="nt">&lt;/add_connectas_button&gt;</span>
     <span class="nt">&lt;/observers&gt;</span>
-<span class="nt">&lt;/controller_action_layout_render_before_adminhtml_customer_edit&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/controller_action_layout_render_before_adminhtml_customer_edit&gt;</span></code></pre></figure></p>
 
 <p>Comme on le voit dans cet event l'observer sera <code>Jbh_ConnectAs_Model_Observer</code> et la méthode <code>addOurCoolButton</code>. Ce bout de xml sera à placer dans le tag <code>adminhtml</code> de notre <code>config.xml</code> car nous sommes sur un event lancé en partie admin.</p>
 
@@ -354,7 +350,7 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
 
   <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_developer = 1;
+    
     var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -476,8 +472,32 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -492,7 +512,7 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -513,33 +533,9 @@ On ne va pas se prendre la tête très longtemps sur l'évènement à attraper. 
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     

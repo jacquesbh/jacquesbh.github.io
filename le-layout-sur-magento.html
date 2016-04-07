@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -246,28 +246,22 @@
 
 <p>Pour dire à notre action, dans notre contrôleur, d'utiliser les handles par défaut il faut utiliser la ligne de code suivante :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// Ci-dessous la ligne qui charge les handles par défaut du Layout</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLayout</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div>
-
+    <span class="c1">// Ci-dessous la ligne qui charge les handles par défaut du Layout
+</span>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLayout</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure></p>
 
 <p>La méthode <code>loadLayout()</code> appelle deux méthodes qui sont les méthodes qui ajoutent réellement les handles par défaut :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLayout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUpdate</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addHandle</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">);</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getLayout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUpdate</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addHandle</span><span class="p">(</span><span class="s1">'default'</span><span class="p">);</span></code></pre></figure></p>
 
 <p>et</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="nx">addActionLayoutHandles</span><span class="p">();</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nx">addActionLayoutHandles</span><span class="p">();</span></code></pre></figure></p>
 
 <p>Pour une action qui serait <code>jbh_foo/bar/baz</code> nous aurions les handles suivants :</p>
 
@@ -281,10 +275,8 @@
 
 <p>On peut changer le handle <code>default</code> par autre chose si on le précise comme ceci :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLayout</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">);</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadLayout</span><span class="p">(</span><span class="s1">'other'</span><span class="p">);</span></code></pre></figure></p>
 
 <p>Avant le chargement de ces layouts l'évènement <code>controller_action_layout_load_before</code> est lancé par Magento. Donc si vous souhaitez ajouter un handle il faut le faire avant cet évènement.</p>
 
@@ -294,9 +286,7 @@
 
 <p>Dans le layout, on peut demander à charger un handle défini de la manière suivante :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;update</span> <span class="na">handle=</span><span class="s">&quot;nom_du_handle&quot;</span> <span class="nt">/&gt;</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;update</span> <span class="na">handle=</span><span class="s">"nom_du_handle"</span> <span class="nt">/&gt;</span></code></pre></figure></p>
 
 <p>C'est très pratique ! Et ça permet surtout de ne pas dupliquer de code !</p>
 
@@ -348,8 +338,8 @@
 <p>Deux solutions :</p>
 
 <ol>
-<li>  Changer le type directement dans le fichier <code>.xml</code> qui déclare le block.</li>
-<li>  Ajouter un nouveau block avec le même <code>name</code>.</li>
+<li>Changer le type directement dans le fichier <code>.xml</code> qui déclare le block.</li>
+<li>Ajouter un nouveau block avec le même <code>name</code>.</li>
 </ol>
 
 
@@ -371,13 +361,11 @@
 
 <p>Par exemple pour faire une référence au content, pour y ajouter un block par exemple, sur toutes les pages (handle <code>default</code> donc) :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;default&gt;</span>
-    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;block</span> <span class="na">type=</span><span class="s">&quot;core/text_list&quot;</span> <span class="na">name=</span><span class="s">&quot;sub_content&quot;</span> <span class="nt">/&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;default&gt;</span>
+    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;block</span> <span class="na">type=</span><span class="s">"core/text_list"</span> <span class="na">name=</span><span class="s">"sub_content"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/reference&gt;</span>
-<span class="nt">&lt;/default&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/default&gt;</span></code></pre></figure></p>
 
 <h2>Les actions</h2>
 
@@ -414,20 +402,16 @@
 
 <p>Si bien que si nous avons par exemple la méthode suivante :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">addLink</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$path</span><span class="p">,</span> <span class="nv">$label</span><span class="p">,</span> <span class="nv">$urlParams</span> <span class="o">=</span> <span class="k">array</span><span class="p">());</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">addLink</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$path</span><span class="p">,</span> <span class="nv">$label</span><span class="p">,</span> <span class="nv">$urlParams</span> <span class="o">=</span> <span class="k">array</span><span class="p">());</span></code></pre></figure></p>
 
 <p>Nous aurons l'action ci-dessous :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">&quot;addLink&quot;</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">"addLink"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param1&gt;</span>name<span class="nt">&lt;/param1&gt;</span>
     <span class="nt">&lt;param2&gt;</span>path<span class="nt">&lt;/param2&gt;</span>
     <span class="nt">&lt;param3&gt;</span>label<span class="nt">&lt;/param3&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/action&gt;</span></code></pre></figure></p>
 
 <p>Nous ne mettons pas de 4ème balise car nous ne voulons pas préciser de 4ème paramètre lors de notre appel.</p>
 
@@ -441,30 +425,26 @@
 
 <p>Pour un tableau de valeurs (indexé) il faut faire :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
     <span class="nt">&lt;tab&gt;</span>value_1<span class="nt">&lt;/tab&gt;</span>
     <span class="nt">&lt;tab&gt;</span>value_2<span class="nt">&lt;/tab&gt;</span>
     <span class="nt">&lt;tab&gt;</span>value_3<span class="nt">&lt;/tab&gt;</span>
     <span class="nt">&lt;tab&gt;</span>value_4<span class="nt">&lt;/tab&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/action&gt;</span></code></pre></figure></p>
 
 <p>Pour un tableau associatif il faut faire :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
     <span class="nt">&lt;tab&gt;</span>
         <span class="nt">&lt;cle_1&gt;</span>value_1<span class="nt">&lt;/cle_1&gt;</span>
         <span class="nt">&lt;cle_2&gt;</span>value_2<span class="nt">&lt;/cle_2&gt;</span>
         <span class="nt">&lt;cle_3&gt;</span>value_3<span class="nt">&lt;/cle_3&gt;</span>
     <span class="nt">&lt;/tab&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/action&gt;</span></code></pre></figure></p>
 
 <p>Et bien sûr on peut aller loin...</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;action</span> <span class="err">...</span><span class="nt">&gt;</span>
     <span class="nt">&lt;tab&gt;</span>
         <span class="nt">&lt;cle_1&gt;</span>value_1<span class="nt">&lt;/cle_1&gt;</span>
         <span class="nt">&lt;cle_2&gt;</span>value_2<span class="nt">&lt;/cle_2&gt;</span>
@@ -477,9 +457,7 @@
             <span class="nt">&lt;/cle_6&gt;</span>
         <span class="nt">&lt;/cle_3&gt;</span>
     <span class="nt">&lt;/tab&gt;</span>
-<span class="nt">&lt;/action&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/action&gt;</span></code></pre></figure></p>
 
 <p>Et ainsi de suite !</p>
 
@@ -501,25 +479,21 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
 
 <p>Soit on passe par une référence :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;customer_account_login&gt;</span>
-    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">&quot;root&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">&quot;setTemplate&quot;</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;customer_account_login&gt;</span>
+    <span class="nt">&lt;reference</span> <span class="na">name=</span><span class="s">"root"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">"setTemplate"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;template&gt;</span>customer/account/new_login.phtml<span class="nt">&lt;/template&gt;</span>
         <span class="nt">&lt;/action&gt;</span>
     <span class="nt">&lt;/reference&gt;</span>
-<span class="nt">&lt;/customer_account_login&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/customer_account_login&gt;</span></code></pre></figure></p>
 
 <p>Soit on utilise l'attribut <code>block</code> :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;customer_account_login&gt;</span>
-    <span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">&quot;setTemplate&quot;</span> <span class="na">block=</span><span class="s">&quot;root&quot;</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;customer_account_login&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">method=</span><span class="s">"setTemplate"</span> <span class="na">block=</span><span class="s">"root"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;template&gt;</span>customer/account/new_login.phtml<span class="nt">&lt;/template&gt;</span>
     <span class="nt">&lt;/action&gt;</span>
-<span class="nt">&lt;/customer_account_login&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/customer_account_login&gt;</span></code></pre></figure></p>
 
 <p><strong>Il s'avère qu'il est d'ailleurs préférable de changer le template d'un block en utilisant l'attribut <code>block</code> plutôt qu'en utilisant une référence</strong> car c'est moins coûteux en ressources : on fait une itération en moins dans la génération des blocks. (c'est peu certes, mais c'est par là que passe l'optimisation... aussi)</p>
 
@@ -527,9 +501,7 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
 
 <p>On voit de temps en temps une petite ligne qui ressemble à ceci :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;remove</span> <span class="na">name=</span><span class="s">&quot;left&quot;</span> <span class="nt">/&gt;</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;remove</span> <span class="na">name=</span><span class="s">"left"</span> <span class="nt">/&gt;</span></code></pre></figure></p>
 
 <p>Cette balise permet d'ignorer un block. Ici on ignore le block <code>left</code> (la colonne de gauche).</p>
 
@@ -545,17 +517,13 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
 
 <p>La balise <code>remove</code> accepte l'attribut <code>acl</code> pour indiquer si on ignore ou non ce block dans le cas d'un layout admin. L'attribut prend la valeur du droit nécessaire pour afficher le block comme par exemple :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;remove</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">acl=</span><span class="s">&quot;jbh_foo/bar&quot;</span> <span class="nt">/&gt;</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;remove</span> <span class="na">name=</span><span class="s">"foo"</span> <span class="na">acl=</span><span class="s">"jbh_foo/bar"</span> <span class="nt">/&gt;</span></code></pre></figure></p>
 
 <p>Si l'administrateur connecté a le droit <code>jbh_foo/bar</code> alors le block ne sera pas ignoré.</p>
 
 <p>A noter aussi qu'on peut inhiber l'action du remove sur un block en définissant l'attribut <code>ignore</code> de celui-ci !</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">type=</span><span class="s">&quot;core/text_list&quot;</span> <span class="na">ignore=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"foo"</span> <span class="na">type=</span><span class="s">"core/text_list"</span> <span class="na">ignore=</span><span class="s">"0"</span> <span class="nt">/&gt;</span></code></pre></figure></p>
 
 <p>Ce block ne pourra donc pas être supprimé via <code>remove</code>. Attention par contre... vu qu'on ne peut pas ajouter un attribut à un block déjà existant (via une référence par exemple) cette manipulation implique que le block ne sera <strong>jamais</strong> ignoré.</p>
 
@@ -591,11 +559,9 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
 
 <p>Vous pouvez par exemple vouloir appliquer le handle <code>customer_account</code> à votre nouvelle page pour qu'elle s'intègre parfaitement dans la partie "Mon Compte" du client :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;handle_de_ma_nouvelle_page&gt;</span>
-    <span class="nt">&lt;update</span> <span class="na">handle=</span><span class="s">&quot;customer_account&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/handle_de_ma_nouvelle_page&gt;</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;handle_de_ma_nouvelle_page&gt;</span>
+    <span class="nt">&lt;update</span> <span class="na">handle=</span><span class="s">"customer_account"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/handle_de_ma_nouvelle_page&gt;</span></code></pre></figure></p>
 
 <p>Vous pouvez également utiliser cette technique pour éviter de dupliquer un gros bout de layout que vous voudriez réutiliser !</p>
 
@@ -638,7 +604,7 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
 
   <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_developer = 1;
+    
     var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -757,8 +723,32 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -773,7 +763,7 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -794,33 +784,9 @@ Comme nous voulons changer le template global, le block est <code>root</code>.</
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     

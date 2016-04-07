@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -253,13 +253,11 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
 </ul>
 
 
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mon_slider"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div&gt;</span>Slide 1<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;div&gt;</span>Slide 2<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;div&gt;</span>Slide 3<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/div&gt;</span></code></pre></figure></p>
 
 <p style="text-align:center;">Exemple 1</p>
 
@@ -268,27 +266,23 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
 </ul>
 
 
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"mon_slider"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;li&gt;</span>Slide 1<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span>Slide 2<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li&gt;</span>Slide 3<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/ul&gt;</span></code></pre></figure></p>
 
 <p style="text-align:center;">Exemple 2</p>
 
 <p>Par défaut nous sommes dans une liste à puce... entourée d'une <code>div</code> :</p>
 
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mon_slider&quot;</span> <span class="na">style=</span><span class="s">&quot;margin: 0 auto;&quot;</span><span class="nt">&gt;</span>
+<p><figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mon_slider"</span> <span class="na">style=</span><span class="s">"margin: 0 auto;"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/26c877/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/d53221/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://placehold.it/250x125/47c8f3/ffffff&quot;</span> <span class="nt">/&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">"http://placehold.it/250x125/26c877/ffffff"</span> <span class="nt">/&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">"http://placehold.it/250x125/d53221/ffffff"</span> <span class="nt">/&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;img</span> <span class="na">src=</span><span class="s">"http://placehold.it/250x125/47c8f3/ffffff"</span> <span class="nt">/&gt;&lt;/li&gt;</span>
     <span class="nt">&lt;/ul&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/div&gt;</span></code></pre></figure></p>
 
 <p style="text-align:center;">Exemple 3</p>
 
@@ -296,32 +290,26 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
 
 <p>Tout d'abord il nous faut inclure notre fichier slider javascript dans le <code>head</code> de notre page ou entre les balises <code>body</code> directement :</p>
 
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;jbhslider.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jbhslider.js"</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure></p>
 
 <p>Ensuite il suffit d'appeler ce petit bout de code pour activer notre exemple numéro 3.</p>
 
-<div class="highlight"><pre><code class="javascript"><span class="c1">// La closure et le &quot;document ready&quot; ne sont pas toujours nécessaires</span>
+<p><figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// La closure et le "document ready" ne sont pas toujours nécessaires</span>
 <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#mon_slider&#39;</span><span class="p">).</span><span class="nx">jbhSlider</span><span class="p">({</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#mon_slider'</span><span class="p">).</span><span class="nx">jbhSlider</span><span class="p">({</span>
             <span class="c1">// Par défaut la taille est de 500 par 250</span>
-            <span class="nx">css</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">width</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
-                <span class="nx">height</span><span class="o">:</span> <span class="mi">125</span>
+            <span class="na">css</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">width</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+                <span class="na">height</span><span class="p">:</span> <span class="mi">125</span>
             <span class="p">},</span>
             <span class="c1">// Par défaut il y a une navigation précédent/suivant qui est générée</span>
-            <span class="nx">navigation</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">active</span><span class="o">:</span> <span class="kc">false</span>
+            <span class="na">navigation</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">active</span><span class="p">:</span> <span class="kc">false</span>
             <span class="p">}</span>
         <span class="p">});</span>
     <span class="p">});</span>
-<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
-</code></pre></div>
-
-
-
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span></code></pre></figure></p>
 
 <hr/>
 
@@ -383,7 +371,7 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
 
   <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_developer = 1;
+    
     var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -502,8 +490,32 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -518,7 +530,7 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -539,33 +551,9 @@ Non sans déconner... L'intégrateur il veut un balisage précis, et jamais le m
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     

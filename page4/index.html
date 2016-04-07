@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -249,7 +249,7 @@
 
     <span style="font-size:14.4px"><a href="/search.html#!tag=GitHub">GitHub</a></span>
 
-    <span style="font-size:39.599999999999994px"><a href="/search.html#!tag=Magento">Magento</a></span>
+    <span style="font-size:39.6px"><a href="/search.html#!tag=Magento">Magento</a></span>
 
     <span style="font-size:13.2px"><a href="/search.html#!tag=Snippets">Snippets</a></span>
 
@@ -908,9 +908,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>Quand on regarde un peu les templates de base sur Magento on remarque que le <code>page/html/head.phtml</code> contient une ligne fort pratique :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getChildHtml</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x"></span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getChildHtml</span><span class="p">()</span> <span class="cp">?&gt;</span></code></pre></figure></p>
 
 <p>Cette ligne affiche tous les enfants du block <code>head</code>.</p>
 
@@ -997,30 +995,28 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
 <p>On remarque dans la méthode le lancement d'un évènement intéressant :</p>
 
-<div class="highlight"><pre><code class="php"><span class="x">Mage::dispatchEvent(</span>
-<span class="x">    $this-&gt;_eventPrefix . &#39;_merge_before&#39;,</span>
-<span class="x">    array(</span>
-<span class="x">    $this-&gt;_eventObject=&gt;$this,</span>
-<span class="x">        &#39;source&#39;=&gt;$quote</span>
-<span class="x">    )</span>
-<span class="x">);</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php">Mage::dispatchEvent(
+    $this-&gt;<em>eventPrefix . '</em>merge_before',
+    array(
+    $this-&gt;_eventObject=&gt;$this,
+        'source'=&gt;$quote
+    )
+);</code></pre></figure></p>
 
 <p>A partir de là on déduit que l'évènement est <code>sales_quote_merge_before</code> et que ces deux données sont :</p>
 
 <ol>
-<li>  Le panier <code>quote</code> : panier du client</li>
-<li>  Le panier <code>source</code> : panier du visiteur</li>
+<li>Le panier <code>quote</code> : panier du client</li>
+<li>Le panier <code>source</code> : panier du visiteur</li>
 </ol>
 
 
 <h2>La construction du module</h2>
 
 <ol>
-<li>  Un modèle <code>Observer</code> qui <code>catch</code> notre évènement et qui vide le panier du client.</li>
-<li>  Un helper <code>Data</code> qui nous permet de savoir si notre module est activé et si on peut vider le panier du client quand celui du visiteur est vide.</li>
-<li>  Un fichier <code>system.xml</code> qui nous permet d'ajouter un peu de configuation (configuration utilisée dans le helper).</li>
+<li>Un modèle <code>Observer</code> qui <code>catch</code> notre évènement et qui vide le panier du client.</li>
+<li>Un helper <code>Data</code> qui nous permet de savoir si notre module est activé et si on peut vider le panier du client quand celui du visiteur est vide.</li>
+<li>Un fichier <code>system.xml</code> qui nous permet d'ajouter un peu de configuation (configuration utilisée dans le helper).</li>
 </ol>
 
 
@@ -1029,8 +1025,8 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 <p>Le helper n'est utilisé que pour savoir deux choses :</p>
 
 <ol>
-<li>  Notre module est-il activé ? Ou plutôt, pouvons-nous supprimer le merge des paniers ? Via la méthode <code>isActive</code>.</li>
-<li>  Pouvons-nous vider le panier du client si le panier du visiteur est vide ? Via la méthode <code>cleanIfEmpty</code>.</li>
+<li>Notre module est-il activé ? Ou plutôt, pouvons-nous supprimer le merge des paniers ? Via la méthode <code>isActive</code>.</li>
+<li>Pouvons-nous vider le panier du client si le panier du visiteur est vide ? Via la méthode <code>cleanIfEmpty</code>.</li>
 </ol>
 
 
@@ -1042,8 +1038,8 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 <p>Le modèle <code>catch</code> notre évènement est vide le panier du client que si les conditions suivantes sont validées&nbsp;:</p>
 
 <ol>
-<li>  Notre module est actif.</li>
-<li>  Le panier du visiteur a des produits OU on peut vider le panier du client si le panier du visiteur est vide.</li>
+<li>Notre module est actif.</li>
+<li>Le panier du visiteur a des produits OU on peut vider le panier du client si le panier du visiteur est vide.</li>
 </ol>
 
 
@@ -1184,8 +1180,32 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -1200,7 +1220,7 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -1221,33 +1241,9 @@ Il s'agit d'un site qui récupère les données <code>POST</code> d'un formulair
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     

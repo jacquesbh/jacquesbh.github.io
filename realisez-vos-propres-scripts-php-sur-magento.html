@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -250,70 +250,62 @@ $ vim misc/change_admin_password.php
 
 <p>On commence donc par charger Magento :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span></p>
 
-<span class="c1">// Mage !</span>
-<span class="k">require_once</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../app/Mage.php&#39;</span><span class="p">;</span>
+<p><span class="c1">// Mage !
+</span><span class="k">require_once</span> <span class="nx"><strong>DIR</strong></span> <span class="o">.</span> <span class="s1">'/../app/Mage.php'</span><span class="p">;</span></p>
 
-<span class="c1">// Init Magento</span>
-<span class="nx">Mage</span><span class="o">::</span><span class="na">app</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+<p><span class="c1">// Init Magento
+</span><span class="nx">Mage</span><span class="o">::</span><span class="na">app</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">);</span></p>
 
-<span class="c1">// Init store (needed for save products for example)</span>
-<span class="nx">Mage</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setCurrentStore</span><span class="p">(</span><span class="nx">Mage_Core_Model_App</span><span class="o">::</span><span class="na">ADMIN_STORE_ID</span><span class="p">);</span>
-</code></pre></div>
-
+<p><span class="c1">// Init store (needed for save products for example)
+</span><span class="nx">Mage</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setCurrentStore</span><span class="p">(</span><span class="nx">Mage_Core_Model_App</span><span class="o">::</span><span class="na">ADMIN_STORE_ID</span><span class="p">);</span></code></pre></figure></p>
 
 <p>Peut-être qu'avant ça il serait préférable de tester la validiter de notre ligne de commande ?</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span></p>
 
-<span class="c1">// Usage function :)</span>
-<span class="k">function</span> <span class="nf">usage</span><span class="p">()</span>
+<p><span class="c1">// Usage function :)
+</span><span class="k">function</span> <span class="nf">usage</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="k">echo</span> <span class="s2">&quot;Usage: php -f &quot;</span> <span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot; &lt;username&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">"Usage: php -f "</span> <span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="k"><strong>FILE</strong></span><span class="p">)</span> <span class="o">.</span> <span class="s2">" &lt;username&gt;</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
     <span class="k">exit</span><span class="p">(</span><span class="mi">65</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="p">}</span></p>
 
-<span class="c1">// Check command line</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<p><span class="c1">// Check command line
+</span><span class="k">if</span> <span class="p">(</span><span class="nv">$argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">usage</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></figure></p>
 
 <p>Une fois qu'on a notre utilisateur, on le charge et on vérifie qu'il existe bien :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span></p>
 
-<span class="c1">// We get the user</span>
-<span class="nv">$user</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;admin/user&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;username&#39;</span><span class="p">);</span>
+<p><span class="c1">// We get the user
+</span><span class="nv">$user</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">'admin/user'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'username'</span><span class="p">);</span></p>
 
-<span class="c1">// User exists?</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s2">&quot;Bad username.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<p><span class="c1">// User exists?
+</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Bad username.</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">;</span>
     <span class="nx">usage</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></figure></p>
 
 <p>Ensuite on demande le mot de passe et on met à jour l'utilisateur :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span></p>
 
-<span class="c1">// We ask for the password</span>
-<span class="k">do</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="s2">&quot;Which password? &quot;</span><span class="p">;</span>
-    <span class="nv">$password</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nb">fgets</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">));</span>
-<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nv">$password</span><span class="p">);</span>
+<p><span class="c1">// We ask for the password
+</span><span class="k">do</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">"Which password? "</span><span class="p">;</span>
+    <span class="nv">$password</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="nb">fgets</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">));</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nv">$password</span><span class="p">);</span></p>
 
-<span class="c1">// We change the user password :)</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setNewPassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+<p><span class="c1">// We change the user password :)
+</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setNewPassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span></p>
 
-<span class="k">echo</span> <span class="s2">&quot;User updated</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<p><span class="k">echo</span> <span class="s2">"User updated</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span></p>
 
-<span class="k">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-</code></pre></div>
-
+<p><span class="k">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span></code></pre></figure></p>
 
 <p>On exécute :</p>
 
@@ -342,27 +334,23 @@ $
 
 <p>Pour récupérer un setup de l'EAV par exemple (pour pouvoir faire des <code>getAttributeId</code>) :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="nv">$setup</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;eav/entity_setup&#39;</span><span class="p">,</span> <span class="s1">&#39;eav&#39;</span><span class="p">);</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$setup</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getModel</span><span class="p">(</span><span class="s1">'eav/entity_setup'</span><span class="p">,</span> <span class="s1">'eav'</span><span class="p">);</span></p>
 
-<span class="c1">// Op le SQL !</span>
-<span class="c1">// $setup-&gt;run($sql);</span>
-</code></pre></div>
-
+<p><span class="c1">// Op le SQL !
+</span><span class="o">//</span> <span class="nv">$setup</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span></code></pre></figure></p>
 
 <p>Pour récupérer une connection et une ressource :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getSingleton</span><span class="p">(</span><span class="s1">&#39;core/resource&#39;</span><span class="p">);</span>
-<span class="nv">$cn</span> <span class="o">=</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">(</span><span class="s1">&#39;core_write&#39;</span><span class="p">);</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">getSingleton</span><span class="p">(</span><span class="s1">'core/resource'</span><span class="p">);</span>
+<span class="nv">$cn</span> <span class="o">=</span> <span class="nv">$res</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">(</span><span class="s1">'core_write'</span><span class="p">);</span></p>
 
-<span class="c1">// Nom d&#39;une table ?</span>
-<span class="c1">// $res-&gt;getTableName(&#39;foo&#39;);</span>
-
-<span class="c1">// Un select ? (Zend_Db_Select)</span>
-<span class="c1">// $select = $cn-&gt;select();</span>
-</code></pre></div>
-
+<p><span class="c1">// Nom d'une table ?
+// $res-&gt;getTableName('foo');
+</span>
+<span class="c1">// Un select ? (Zend_Db_Select)
+</span><span class="o">//</span> <span class="nv">$select</span> <span class="o">=</span> <span class="nv">$cn</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">();</span></code></pre></figure></p>
 
 <p>Voilà, à vous de jouer ! Et n'hésitez pas à partager vos scripts dans les commentaires, c'est toujours bon à prendre :)</p>
 
@@ -381,7 +369,7 @@ $
 
   <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_developer = 1;
+    
     var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -505,8 +493,32 @@ $
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -521,7 +533,7 @@ $
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -542,33 +554,9 @@ $
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     

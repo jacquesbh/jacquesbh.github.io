@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -274,7 +274,7 @@
 
 <p>Voici un exemple de configuration que nous pouvons mettre en place :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;jbh&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;jbh&gt;</span>
     <span class="nt">&lt;catalog&gt;</span>
         <span class="nt">&lt;product&gt;</span>
             <span class="nt">&lt;push&gt;</span>
@@ -297,9 +297,7 @@
             <span class="nt">&lt;/push&gt;</span>
         <span class="nt">&lt;/product&gt;</span>
     <span class="nt">&lt;/catalog&gt;</span>
-<span class="nt">&lt;/jbh&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/jbh&gt;</span></code></pre></figure></p>
 
 <p>De cette manière il devient très facile de changer le template pour chaque mode ou chaque type de produit. Et pourquoi pas ajouter un <em>mode</em> ou encore un <em>type</em> fictif ? Après tout rien ne nous empêche d'inventer un mode, par exemple <code>homepage_mea</code>, pour changer les templates de tous les produits qui sont sur la mise en avant sur notre page d'accueil...</p>
 
@@ -362,10 +360,8 @@
 
 <p>Appelons simplement la méthode <code>getPushHtml</code> de notre helper :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="k">echo</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;jbh_catalog/product&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getPushHtml</span><span class="p">(</span><span class="nv">$product</span><span class="p">,</span> <span class="nv">$mode</span><span class="p">);</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nx">Mage</span><span class="o">::</span><span class="na">helper</span><span class="p">(</span><span class="s1">'jbh_catalog/product'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getPushHtml</span><span class="p">(</span><span class="nv">$product</span><span class="p">,</span> <span class="nv">$mode</span><span class="p">);</span></code></pre></figure></p>
 
 <p>Le <code>$mode</code> n'est pas obligatoire.</p>
 
@@ -394,7 +390,7 @@
 
   <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_developer = 1;
+    
     var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -520,8 +516,32 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -536,7 +556,7 @@
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -557,33 +577,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     

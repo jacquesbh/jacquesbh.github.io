@@ -4,9 +4,9 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <title>Supprimer le merge des paniers - Jacques Bodin-Hullin, développeur Magento</title>
-    <meta name="description" content="N'avez-vous jamais voulu supprimer le merge entre le panier sauvegardé du client et le panier du visiteur lorsque celui-ci se connecte ?">
-    <meta name="keywords" content="magento, catalog, catalogue, product, produit, block">
+    <title>Gérant de SARL - Jacques Bodin-Hullin, développeur Magento</title>
+    
+    
     <meta name="author" content="Jacques Bodin-Hullin">
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/css/pygments.css" rel="stylesheet" type="text/css" media="all">
@@ -217,173 +217,109 @@
     <div id="globalWrap">
 
 
-    
-
-    <div id="contentWrap" class="post">
-
-        <h1>Supprimer le merge des paniers</h1>
-
-        <p>Sur presque tous les projets Magento sur lesquels j'ai eu l'occasion de travailler il est apparu nécessaire de désactiver le merge du panier du client avec celui du visiteur lors de la connexion.</p>
-
-<p>Pour cela nous devons commencer par <strong>identifier l'évènement</strong> lancé par Magento qui puisse nous permettre de supprimer ce fameux « merge » car aucune option en admin nous permet de l'empêcher.</p>
-
-<!-- more start -->
-
-
-<hr />
-
-<h2>Identifier l'évènement</h2>
-
-<p>Il suffit d'investiguer un peu :</p>
-
-<p>Objet <code>Mage_Sales_Model_Quote</code>, qui est donc notre objet « panier » :</p>
-
-<p>Ligne 1678 : <code>public function merge(Mage_Sales_Model_Quote $quote)</code>.</p>
-
-<p>Pour vérifier que notre merge passe bien par là on y place un log : <code>Mage::log(__METHOD__ . ':' . __LINE__);</code>.</p>
-
-<p>On se connecte, on ajoute un produit à notre panier, on se déconnecte, on ajoute un produit dans notre panier et on se connecte à nouveau : là on a un log qui apparaît.</p>
-
-<p>Nous avons trouvé sans trop de difficultés l'endroit où est fait le merge.</p>
-
-<p>On remarque dans la méthode le lancement d'un évènement intéressant :</p>
-
-<p><figure class="highlight"><pre><code class="language-php" data-lang="php">Mage::dispatchEvent(
-    $this-&gt;<em>eventPrefix . '</em>merge_before',
-    array(
-    $this-&gt;_eventObject=&gt;$this,
-        'source'=&gt;$quote
-    )
-);</code></pre></figure></p>
-
-<p>A partir de là on déduit que l'évènement est <code>sales_quote_merge_before</code> et que ces deux données sont :</p>
-
-<ol>
-<li>Le panier <code>quote</code> : panier du client</li>
-<li>Le panier <code>source</code> : panier du visiteur</li>
-</ol>
-
-
-<h2>La construction du module</h2>
-
-<ol>
-<li>Un modèle <code>Observer</code> qui <code>catch</code> notre évènement et qui vide le panier du client.</li>
-<li>Un helper <code>Data</code> qui nous permet de savoir si notre module est activé et si on peut vider le panier du client quand celui du visiteur est vide.</li>
-<li>Un fichier <code>system.xml</code> qui nous permet d'ajouter un peu de configuation (configuration utilisée dans le helper).</li>
-</ol>
-
-
-<h3>Le helper</h3>
-
-<p>Le helper n'est utilisé que pour savoir deux choses :</p>
-
-<ol>
-<li>Notre module est-il activé ? Ou plutôt, pouvons-nous supprimer le merge des paniers ? Via la méthode <code>isActive</code>.</li>
-<li>Pouvons-nous vider le panier du client si le panier du visiteur est vide ? Via la méthode <code>cleanIfEmpty</code>.</li>
-</ol>
-
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/Helper/Data.php"></script>
-
-
-<h3>Le modèle</h3>
-
-<p>Le modèle <code>catch</code> notre évènement est vide le panier du client que si les conditions suivantes sont validées&nbsp;:</p>
-
-<ol>
-<li>Notre module est actif.</li>
-<li>Le panier du visiteur a des produits OU on peut vider le panier du client si le panier du visiteur est vide.</li>
-</ol>
-
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/Model/Observer.php"></script>
-
-
-<h3>Le <code>system.xml</code></h3>
-
-<p>Le <code>system.xml</code> permet d'ajouter un peu de configuration, tout simplement.</p>
-
-<p>Nous ne nous prenons pas la tête avec les <code>ACL</code> car ils sont déjà gérés par Magento pour cette partie de la configuration.</p>
-
-<script src="http://gist-it.appspot.com/github/jacquesbh/jbh_cartmerge/raw/master/app/code/community/Jbh/CartMerge/etc/system.xml"></script>
-
-
-<h2>Conclusion</h2>
-
-<p>Il est en réalité assez simple, à présent, via le module complet, ou en suivant les étapes de cet article, de supprimer le merge des paniers du visiteur et du client lors de la connexion de notre client.</p>
-
-<p>Vous trouverez le <a href="https://github.com/jacquesbh/jbh_cartmerge">code complet du module sur github</a>.</p>
-
-<!-- more end -->
-
-
-
-        <hr />
-
-        
-        <h2 id="comments">Commentaires</h2>
-        
-
-
-  <div id="disqus_thread"></div>
-<script type="text/javascript">
-    
-    var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+<script type="text/javascript" charset="utf-8">
+// <![CDATA[
+var techno = function (nb)
+{
+    for (var i = 1; i <= 5; i++) {
+        if (i <= nb) {
+            document.write('<img src="/img/etoile_pleine.png" alt="X" />');
+        } else {
+            document.write('<img src="/img/etoile_vide.png" alt="0" />');
+        }
+    }
+}
+// ]]>
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
 
+<div id="contentWrap" class="reference">
+<p><img src="/images/references/gerantdesarl.png" title="Capture d'écran de l'application" alt="Capture d'écran de l'application" /></p>
 
-        
-    </div>
+<h1>Gérant de SARL</h1>
 
-    <div id="sideWrap">
+<blockquote><p>La Sarl DPE, éditrice du site gerantdesarl.com, est une société de presse et d’édition qui existe depuis 22 ans et qui est spécialisée, depuis sa création, dans l’information et la documentation des Gérants de Sarl et d’Eurl... exclusivement.</p></blockquote>
 
-    <h2>Quelques infos</h2>
-    <ul class="infos">
-        <li>
-            <span>Par</span>
-            <strong>Jacques Bodin-Hullin</strong>
-            
-        </li>
-        <li>
-            <span>Publié le</span>
-            <strong>21 October 2012</strong>
-        </li>
-        <li>
-            <span>Les tags</span>
-            <strong>
-                
-                <a href="/search.html#!tag=Magento">Magento</a>, 
-                
-                <a href="/search.html#!tag=Cart">Cart</a>, 
-                
-                <a href="/search.html#!tag=Customer">Customer</a>
-                
-            </strong>
-        </li>
-        
-        <li>
-            <span>Dépôt GitHub</span>
-            <strong><a href="https://github.com/jacquesbh/jbh_cartmerge">jacquesbh/jbh_cartmerge</a></strong>
-        </li>
-        
-        
-    </ul>
+<h2>La mission</h2>
 
-    <div class="social">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://jacques.sh/supprimer-le-merge-des-paniers.html" data-text="Supprimer le merge des paniers" data-via="jacquesbh">Tweet</a>
-    </div>
+<p>Réaliser une administration déconnectée du Back Office de l'application principale (<a href="http://monsieurbiz.com/">site e-commerce</a>) permettant la gestion :</p>
 
+<ul>
+<li>Des clients</li>
+<li>Des <a href="http://monsieurbiz.com/">produits (simples, packagés, virtuels, packagés virtuels...)</a></li>
+<li>Des commandes</li>
+<li>De la facturation : génération et téléchargement des factures par les clients</li>
+<li>...</li>
+</ul>
+
+
+</div>
+
+<div id="sideWrap">
+
+<h2>Plus d'infos</h2>
+<ul class="infos">
     
+    <li>
+        <span>Client</span>
+        <strong><p>Gérant de <span class="caps">SARL</span></p></strong>
+    </li>
+    
+    <li>
+        <span>Année</span>
+        <strong><p>2010</p></strong>
+    </li>
+    
+    <li>
+        <span>Mission</span>
+        <strong><p>Développement <span class="caps">PHP</span></p></strong>
+    </li>
+    
+    <li>
+        <span>Framework</span>
+        <strong><p>Zend Framework</p></strong>
+    </li>
+    
+    <li>
+        <span>Site officiel</span>
+        <strong><p><a href="http://gerantdesarl.com/">gerantdesarl.com</a></p></strong>
+    </li>
+    
+</ul>
+
+<h2>Technologies</h2>
+<div class="service">
+    <ul>
+
+<li>
+    <span>PHP</span>
+    <script type="text/javascript" charset="utf-8">techno(5);</script>
+</li>
+
+<li>
+    <span>SQL</span>
+    <script type="text/javascript" charset="utf-8">techno(5);</script>
+</li>
+
+<li>
+    <span>JS</span>
+    <script type="text/javascript" charset="utf-8">techno(2);</script>
+</li>
+
+<li>
+    <span>HTML</span>
+    <script type="text/javascript" charset="utf-8">techno(1);</script>
+</li>
+
+<li>
+    <span>CSS</span>
+    <script type="text/javascript" charset="utf-8">techno(1);</script>
+</li>
+
+    </ul>
+</div>
+
 </div>
 
 

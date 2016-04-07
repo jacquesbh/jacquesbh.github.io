@@ -380,7 +380,7 @@
             "subtitle": "",
             "keywords": "magento, snippet, vim, netbeans",
             "tags": ["Magento","Snippets","Vim","Netbeans"],
-            "categories": ["magento"],
+            "categories": ["Magento"],
             "description": "De nos jours quand on est développeur, on ne peut plus se passer de ces petits bouts de code !",
             "url": "/quelques-snippets-magento.html",
             "date": "15 July 2012"
@@ -391,7 +391,7 @@
             "subtitle": "",
             "keywords": "blog, jekyll, markdown, github",
             "tags": ["Jekyll","Markdown","GitHub"],
-            "categories": ["blog"],
+            "categories": ["Blog"],
             "description": "Il est temps pour moi d'avoir un blog, sur Jekyll et GitHub, en Markdown. Quoi de mieux ?",
             "url": "/un-debut-a-tout.html",
             "date": "15 July 2012"

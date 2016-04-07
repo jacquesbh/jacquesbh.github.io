@@ -75,8 +75,36 @@
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <li><a href="/a-propos.html"><span></span>A propos</a></li>
+            <li><a href="/a-propos"><span></span>A propos</a></li>
             
         
     
@@ -126,37 +154,9 @@
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
@@ -243,7 +243,7 @@
 
 <p>Pour ajouter une routes simple pour le front il y a un bout de XML à connaître. Rien de bien compliqué :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;frontend&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;frontend&gt;</span>
     <span class="nt">&lt;routers&gt;</span>
         <span class="nt">&lt;name_of_my_route&gt;</span>
             <span class="nt">&lt;use&gt;</span>standard<span class="nt">&lt;/use&gt;</span>
@@ -253,9 +253,7 @@
             <span class="nt">&lt;/args&gt;</span>
         <span class="nt">&lt;/name_of_my_route&gt;</span>
     <span class="nt">&lt;/routers&gt;</span>
-<span class="nt">&lt;/frontend&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/frontend&gt;</span></code></pre></figure></p>
 
 <p>Quelques explications :</p>
 
@@ -264,10 +262,8 @@
 </ul>
 
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
-<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">&#39;name_of_my_route/bar/baz&#39;</span><span class="p">);</span> <span class="c1">// =&gt; http://example.com/foo/bar/baz</span>
-</code></pre></div>
-
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">'name_of_my_route/bar/baz'</span><span class="p">);</span> <span class="o">//</span> <span class="o">=&gt;</span> <span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">foo</span><span class="o">/</span><span class="nx">bar</span><span class="o">/</span><span class="nx">baz</span></code></pre></figure></p>
 
 <ul>
 <li><code>&lt;use&gt;standard&lt;/use&gt;</code> c'est pour dire que c'est une route en front.</li>
@@ -295,33 +291,29 @@
 
 <p><code>controllers/IndexController.php</code> :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">class</span> <span class="nc">Jbh_Blog_IndexController</span> <span class="k">extends</span> <span class="nx">Mage_Core_Controller_Front_Action</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;front&#39;</span><span class="p">);</span>
+        <span class="k">exit</span><span class="p">(</span><span class="s1">'front'</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></figure></p>
 
 <p><code>controllers/Adminhtml/MagnageController.php</code> :</p>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">class</span> <span class="nc">Jbh_Blog_Adminhtml_ManageController</span> <span class="k">extends</span> <span class="nx">Mage_Adminhtml_Controller_Action</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">);</span>
+        <span class="k">exit</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<span class="p">}</span></code></pre></figure></p>
 
 <p>Maintenant regardez bien ce fichier de config :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="nt">&lt;config&gt;</span>
     <span class="nt">&lt;modules&gt;</span>
         <span class="nt">&lt;Jbh_Blog&gt;</span>
@@ -340,9 +332,7 @@
             <span class="nt">&lt;/jbh_blog&gt;</span>
         <span class="nt">&lt;/routers&gt;</span>
     <span class="nt">&lt;/admin&gt;</span>
-<span class="nt">&lt;/config&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/config&gt;</span></code></pre></figure></p>
 
 <p>Vous remarquerez que nous n'avons rien dans la balise <code>frontend</code>, que notre routeur est bien dans <code>&lt;admin/&gt;</code> et a bien une balise <code>&lt;use&gt;</code> qui vaut <code>admin</code> également.</p>
 
@@ -364,32 +354,30 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
 
 <p>Par contre voici comment éviter que nos routeurs d'admin ne soient utilisés pour afficher des contrôleurs front :</p>
 
-<div class="highlight"><pre><code class="diff"><span class="gd">--- a/config.xml</span>
-<span class="gi">+++ b/config.xml</span>
-<span class="gu">@@ -8,13 +8,13 @@</span>
-     &lt;frontend /&gt;
+<p><figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gd">--- a/config.xml
+</span><span class="gi">+++ b/config.xml
+</span><span class="gu">@@ -8,13 +8,13 @@
+</span>     &lt;frontend /&gt;
      &lt;admin&gt;
          &lt;routers&gt;
-<span class="gd">-            &lt;jbh_blog&gt;</span>
-<span class="gi">+            &lt;jbh_blog_adminhtml&gt;</span>
-                 &lt;use&gt;admin&lt;/use&gt;
+<span class="gd">-            &lt;jbh_blog&gt;
+</span><span class="gi">+            &lt;jbh_blog_adminhtml&gt;
+</span>                 &lt;use&gt;admin&lt;/use&gt;
                  &lt;args&gt;
-<span class="gd">-                    &lt;module&gt;Jbh_Blog&lt;/module&gt;</span>
-<span class="gd">-                    &lt;frontName&gt;blog&lt;/frontName&gt;</span>
-<span class="gi">+                    &lt;module&gt;Jbh_Blog_Adminhtml&lt;/module&gt;</span>
-<span class="gi">+                    &lt;frontName&gt;blog_adminhtml&lt;/frontName&gt;</span>
-                 &lt;/args&gt;
-<span class="gd">-            &lt;/jbh_blog&gt;</span>
-<span class="gi">+            &lt;/jbh_blog_adminhtml&gt;</span>
-         &lt;/routers&gt;
+<span class="gd">-                    &lt;module&gt;Jbh_Blog&lt;/module&gt;
+-                    &lt;frontName&gt;blog&lt;/frontName&gt;
+</span><span class="gi">+                    &lt;module&gt;Jbh_Blog_Adminhtml&lt;/module&gt;
++                    &lt;frontName&gt;blog_adminhtml&lt;/frontName&gt;
+</span>                 &lt;/args&gt;
+<span class="gd">-            &lt;/jbh_blog&gt;
+</span><span class="gi">+            &lt;/jbh_blog_adminhtml&gt;
+</span>         &lt;/routers&gt;
      &lt;/admin&gt;
- &lt;/config&gt;
-</code></pre></div>
-
+<span class="err"> &lt;/config&gt;</span></code></pre></figure></p>
 
 <p>Ce que ça donne :</p>
 
-<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<p><figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="nt">&lt;config&gt;</span>
     <span class="nt">&lt;modules&gt;</span>
         <span class="nt">&lt;Jbh_Blog&gt;</span>
@@ -408,9 +396,7 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
             <span class="nt">&lt;/jbh_blog_adminhtml&gt;</span>
         <span class="nt">&lt;/routers&gt;</span>
     <span class="nt">&lt;/admin&gt;</span>
-<span class="nt">&lt;/config&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/config&gt;</span></code></pre></figure></p>
 
 <blockquote><p>Tu peux nous expliquer ce que ça change ?</p></blockquote>
 
@@ -422,13 +408,11 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
 
 <h3>Exemple</h3>
 
-<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<p><figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span></p>
 
-<span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">&#39;jbh_blog_adminhtml/manage/index&#39;</span><span class="p">);</span>
-<span class="c1">// =&gt; http://example.com/blog_adminhtml/manage/index</span>
-<span class="c1">// =&gt; controller: Jbh_Blog_Adminhtml_ManageController</span>
-</code></pre></div>
-
+<p><span class="nx">Mage</span><span class="o">::</span><span class="na">getUrl</span><span class="p">(</span><span class="s1">'jbh_blog_adminhtml/manage/index'</span><span class="p">);</span>
+<span class="c1">// =&gt; http://example.com/blog_adminhtml/manage/index
+</span><span class="o">//</span> <span class="o">=&gt;</span> <span class="nx">controller</span><span class="o">:</span> <span class="nx">Jbh_Blog_Adminhtml_ManageController</span></code></pre></figure></p>
 
 <h2>Conclusion</h2>
 
@@ -459,7 +443,7 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
 
   <div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_developer = 1;
+    
     var disqus_shortname = 'jacquesbh'; // required: replace example with your forum shortname
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -580,8 +564,32 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
 
     
         
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
             
-            <a href="/credits.html">Crédits</a>
+            <a href="/credits">Crédits</a>
         
     
 
@@ -596,7 +604,7 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
     
         
             |
-            <a href="/legals.html">Informations légales</a>
+            <a href="/legals">Informations légales</a>
         
     
 
@@ -617,33 +625,9 @@ http://example.com/blog/adminhtml_manage/index =&gt; « admin »
     
 
     
-        
-    
 
     
         
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
     
 
     
